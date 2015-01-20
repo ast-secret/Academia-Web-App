@@ -1,6 +1,6 @@
 <?= $this->Form->create($gym); ?>
     <fieldset>
-        <legend><?= __('Adicionar academia') ?></legend>
+        <legend><?= __('Adicionar academia gay') ?></legend>
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('description');
