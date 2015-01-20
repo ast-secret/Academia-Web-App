@@ -1,0 +1,12 @@
+{
+  "name": "app-web-academia",
+  "version": "0.0.0",
+  "authors": [
+    "Daniel Pedro <danielfpedro@gmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "~1.11.2",
+    "bootstrap": "~3.3.1"
+  }
+}
