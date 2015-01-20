@@ -5,7 +5,7 @@
             echo $this->Form->input('name');
             echo $this->Form->input('description');
             echo $this->Form->input('address');
-            echo $this->Form->input('cover_img', ['type' => 'date']);
+            echo $this->Form->input('cover_img');
             echo $this->Form->input('logo_img');
         ?>
     </fieldset>
