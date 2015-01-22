@@ -57,7 +57,7 @@ class UsersController extends AppController
                 $this->Flash->error('The user could not be saved. Please, try again.');
             }
         }
-        $gyms = $this->Users->Gyms->find('list', ['limit' => 200]);
+        $gyms = $this->Users->Gyms->find('list',  array('conditions' => array('Gyms.id' => '1')));       
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
         $this->set(compact('user', 'gyms', 'roles'));
         $this->set('_serialize', ['user']);

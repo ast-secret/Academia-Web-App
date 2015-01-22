@@ -15,7 +15,18 @@ $items = [
 		'label' => 'Fichas',
 		'controller' => 'cards',
 		'action' => 'index',
+	],
+	[
+		'label' => 'Caixa de Sugestão',
+		'controller' => 'suggestions',
+		'action' => 'index',
+	],
+	[
+		'label' => 'Comunicados',
+		'controller' => 'releases',
+		'action' => 'index',
 	]
+
 ]
 
 ?>

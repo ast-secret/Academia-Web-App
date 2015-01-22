@@ -57,7 +57,7 @@ class ReleasesController extends AppController
                 $this->Flash->error('The release could not be saved. Please, try again.');
             }
         }
-        $users = $this->Releases->Users->find('list', ['limit' => 200]);
+        $users = $this->Releases->Users->find('list', array('conditions' => array('Users.id' => '1')));
         $this->set(compact('release', 'users'));
         $this->set('_serialize', ['release']);
     }
