@@ -22,8 +22,23 @@ $items = [
 		'action' => 'index',
 	],
 	[
-		'label' => 'Comunicados',
-		'controller' => 'releases',
+		'label' => 'Aulas',
+		'controller' => 'lessons',
+		'action' => 'index',
+	],
+	[
+		'label' => 'Sala de Aula',
+		'controller' => 'rooms',
+		'action' => 'index',
+	],
+	[
+		'label' => 'Serviço',
+		'controller' => 'services',
+		'action' => 'index',
+	],
+	[
+		'label' => 'Dias da Semana',
+		'controller' => 'weekdays',
 		'action' => 'index',
 	]
 
