@@ -20,10 +20,19 @@ class CustomersTableTest extends TestCase
         'Customers' => 'app.customers',
         'Cards' => 'app.cards',
         'Users' => 'app.users',
-        'Exercises' => 'app.exercises',
-        'CardsExercises' => 'app.cards_exercises',
+        'Gyms' => 'app.gyms',
         'Machines' => 'app.machines',
+        'CardsExercises' => 'app.cards_exercises',
+        'Exercises' => 'app.exercises',
         'ExercisesGroups' => 'app.exercises_groups',
+        'Phones' => 'app.phones',
+        'Rooms' => 'app.rooms',
+        'Lessons' => 'app.lessons',
+        'Services' => 'app.services',
+        'Weekdays' => 'app.weekdays',
+        'ServicesWeekdays' => 'app.services_weekdays',
+        'Roles' => 'app.roles',
+        'Releases' => 'app.releases',
         'Suggestions' => 'app.suggestions'
     ];
 
@@ -35,7 +44,9 @@ class CustomersTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Customers') ? [] : ['className' => 'App\Model\Table\CustomersTable'];        $this->Customers = TableRegistry::get('Customers', $config);    }
+        $config = TableRegistry::exists('Customers') ? [] : ['className' => 'App\Model\Table\CustomersTable'];
+        $this->Customers = TableRegistry::get('Customers', $config);
+    }
 
     /**
      * tearDown method

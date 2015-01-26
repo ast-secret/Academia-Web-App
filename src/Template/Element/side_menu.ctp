@@ -40,6 +40,11 @@ $items = [
 		'label' => 'Dias da Semana',
 		'controller' => 'weekdays',
 		'action' => 'index',
+	],
+	[
+		'label' => 'Comunicados',
+		'controller' => 'releases',
+		'action' => 'index',
 	]
 
 ]

@@ -25,6 +25,8 @@ class ServicesWeekdaysTableTest extends TestCase
         'Exercises' => 'app.exercises',
         'Cards' => 'app.cards',
         'Users' => 'app.users',
+        'Roles' => 'app.roles',
+        'Releases' => 'app.releases',
         'Customers' => 'app.customers',
         'Suggestions' => 'app.suggestions',
         'ExercisesGroups' => 'app.exercises_groups',
@@ -42,7 +44,9 @@ class ServicesWeekdaysTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('ServicesWeekdays') ? [] : ['className' => 'App\Model\Table\ServicesWeekdaysTable'];        $this->ServicesWeekdays = TableRegistry::get('ServicesWeekdays', $config);    }
+        $config = TableRegistry::exists('ServicesWeekdays') ? [] : ['className' => 'App\Model\Table\ServicesWeekdaysTable'];
+        $this->ServicesWeekdays = TableRegistry::get('ServicesWeekdays', $config);
+    }
 
     /**
      * tearDown method

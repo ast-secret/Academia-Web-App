@@ -48,8 +48,8 @@ class RoomsFixture extends TestFixture
             'name' => 'Lorem ipsum dolor sit amet',
             'gym_id' => 1,
             'description' => 'Lorem ipsum dolor sit amet',
-            'modified' => '2015-01-18 16:31:36',
-            'created' => '2015-01-18 16:31:36'
+            'modified' => '2015-01-26 17:29:22',
+            'created' => '2015-01-26 17:29:22'
         ],
     ];
 }

@@ -18,7 +18,22 @@ class RolesTableTest extends TestCase
      */
     public $fixtures = [
         'Roles' => 'app.roles',
-        'Users' => 'app.users'
+        'Users' => 'app.users',
+        'Gyms' => 'app.gyms',
+        'Machines' => 'app.machines',
+        'CardsExercises' => 'app.cards_exercises',
+        'Exercises' => 'app.exercises',
+        'Cards' => 'app.cards',
+        'Customers' => 'app.customers',
+        'Suggestions' => 'app.suggestions',
+        'ExercisesGroups' => 'app.exercises_groups',
+        'Phones' => 'app.phones',
+        'Rooms' => 'app.rooms',
+        'Lessons' => 'app.lessons',
+        'Services' => 'app.services',
+        'Weekdays' => 'app.weekdays',
+        'ServicesWeekdays' => 'app.services_weekdays',
+        'Releases' => 'app.releases'
     ];
 
     /**
@@ -29,7 +44,9 @@ class RolesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Roles') ? [] : ['className' => 'App\Model\Table\RolesTable'];        $this->Roles = TableRegistry::get('Roles', $config);    }
+        $config = TableRegistry::exists('Roles') ? [] : ['className' => 'App\Model\Table\RolesTable'];
+        $this->Roles = TableRegistry::get('Roles', $config);
+    }
 
     /**
      * tearDown method

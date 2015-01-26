@@ -44,8 +44,8 @@ class SuggestionsFixture extends TestFixture
         [
             'id' => 1,
             'text' => 'Lorem ipsum dolor sit amet',
-            'created' => '2015-01-18 16:31:36',
-            'modified' => '2015-01-18 16:31:36',
+            'created' => '2015-01-26 17:29:31',
+            'modified' => '2015-01-26 17:29:31',
             'customer_id' => 1
         ],
     ];

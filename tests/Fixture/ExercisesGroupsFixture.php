@@ -39,8 +39,8 @@ class ExercisesGroupsFixture extends TestFixture
         [
             'id' => 1,
             'name' => 'Lorem ipsum dolor sit amet',
-            'created' => '2015-01-18 16:31:34',
-            'modified' => '2015-01-18 16:31:34'
+            'created' => '2015-01-26 17:28:51',
+            'modified' => '2015-01-26 17:28:51'
         ],
     ];
 }

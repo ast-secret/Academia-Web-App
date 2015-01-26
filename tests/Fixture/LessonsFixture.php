@@ -49,14 +49,14 @@ class LessonsFixture extends TestFixture
     public $records = [
         [
             'id' => 1,
-            'start_time' => '16:31:34',
-            'end_time' => '16:31:34',
-            'date' => '2015-01-18',
+            'start_time' => '17:29:01',
+            'end_time' => '17:29:01',
+            'date' => '2015-01-26',
             'service_id' => 1,
             'room_id' => 1,
             'availables' => 1,
-            'created' => '2015-01-18 16:31:34',
-            'modified' => '2015-01-18 16:31:34'
+            'created' => '2015-01-26 17:29:01',
+            'modified' => '2015-01-26 17:29:01'
         ],
     ];
 }

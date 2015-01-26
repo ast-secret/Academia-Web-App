@@ -20,11 +20,20 @@ class ExercisesTableTest extends TestCase
         'Exercises' => 'app.exercises',
         'Cards' => 'app.cards',
         'Users' => 'app.users',
-        'Customers' => 'app.customers',
-        'Suggestions' => 'app.suggestions',
-        'CardsExercises' => 'app.cards_exercises',
+        'Gyms' => 'app.gyms',
         'Machines' => 'app.machines',
-        'ExercisesGroups' => 'app.exercises_groups'
+        'CardsExercises' => 'app.cards_exercises',
+        'ExercisesGroups' => 'app.exercises_groups',
+        'Phones' => 'app.phones',
+        'Rooms' => 'app.rooms',
+        'Lessons' => 'app.lessons',
+        'Services' => 'app.services',
+        'Weekdays' => 'app.weekdays',
+        'ServicesWeekdays' => 'app.services_weekdays',
+        'Roles' => 'app.roles',
+        'Releases' => 'app.releases',
+        'Customers' => 'app.customers',
+        'Suggestions' => 'app.suggestions'
     ];
 
     /**
@@ -35,7 +44,9 @@ class ExercisesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Exercises') ? [] : ['className' => 'App\Model\Table\ExercisesTable'];        $this->Exercises = TableRegistry::get('Exercises', $config);    }
+        $config = TableRegistry::exists('Exercises') ? [] : ['className' => 'App\Model\Table\ExercisesTable'];
+        $this->Exercises = TableRegistry::get('Exercises', $config);
+    }
 
     /**
      * tearDown method

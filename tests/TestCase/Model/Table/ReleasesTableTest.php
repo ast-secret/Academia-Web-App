@@ -18,7 +18,22 @@ class ReleasesTableTest extends TestCase
      */
     public $fixtures = [
         'Releases' => 'app.releases',
-        'Users' => 'app.users'
+        'Users' => 'app.users',
+        'Gyms' => 'app.gyms',
+        'Machines' => 'app.machines',
+        'CardsExercises' => 'app.cards_exercises',
+        'Exercises' => 'app.exercises',
+        'Cards' => 'app.cards',
+        'Customers' => 'app.customers',
+        'Suggestions' => 'app.suggestions',
+        'ExercisesGroups' => 'app.exercises_groups',
+        'Phones' => 'app.phones',
+        'Rooms' => 'app.rooms',
+        'Lessons' => 'app.lessons',
+        'Services' => 'app.services',
+        'Weekdays' => 'app.weekdays',
+        'ServicesWeekdays' => 'app.services_weekdays',
+        'Roles' => 'app.roles'
     ];
 
     /**
@@ -29,7 +44,9 @@ class ReleasesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Releases') ? [] : ['className' => 'App\Model\Table\ReleasesTable'];        $this->Releases = TableRegistry::get('Releases', $config);    }
+        $config = TableRegistry::exists('Releases') ? [] : ['className' => 'App\Model\Table\ReleasesTable'];
+        $this->Releases = TableRegistry::get('Releases', $config);
+    }
 
     /**
      * tearDown method

@@ -1,4 +1,3 @@
-<?= $this->Html->link('Adicionar Sugestão', ['action' => 'add'], ['class' => 'btn btn-primary'])?>
 <hr>
     <table  class="table table-striped">
     <thead>

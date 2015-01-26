@@ -24,11 +24,16 @@ class PhonesTableTest extends TestCase
         'Exercises' => 'app.exercises',
         'Cards' => 'app.cards',
         'Users' => 'app.users',
+        'Roles' => 'app.roles',
+        'Releases' => 'app.releases',
         'Customers' => 'app.customers',
         'Suggestions' => 'app.suggestions',
         'ExercisesGroups' => 'app.exercises_groups',
         'Rooms' => 'app.rooms',
-        'Services' => 'app.services'
+        'Lessons' => 'app.lessons',
+        'Services' => 'app.services',
+        'Weekdays' => 'app.weekdays',
+        'ServicesWeekdays' => 'app.services_weekdays'
     ];
 
     /**
@@ -39,7 +44,9 @@ class PhonesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Phones') ? [] : ['className' => 'App\Model\Table\PhonesTable'];        $this->Phones = TableRegistry::get('Phones', $config);    }
+        $config = TableRegistry::exists('Phones') ? [] : ['className' => 'App\Model\Table\PhonesTable'];
+        $this->Phones = TableRegistry::get('Phones', $config);
+    }
 
     /**
      * tearDown method

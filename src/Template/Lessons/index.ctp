@@ -1,15 +1,6 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Html->link(__('New Lesson'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Services'), ['controller' => 'Services', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Service'), ['controller' => 'Services', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Rooms'), ['controller' => 'Rooms', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Room'), ['controller' => 'Rooms', 'action' => 'add']) ?> </li>
-    </ul>
-</div>
-<div class="lessons index large-10 medium-9 columns">
-    <table cellpadding="0" cellspacing="0">
+<?= $this->Html->link('Adicionar Aula', ['action' => 'add'], ['class' => 'btn btn-primary'])?>
+<hr>
+<table class="table table-striped">
     <thead>
         <tr>
             <th><?= $this->Paginator->sort('id') ?></th>

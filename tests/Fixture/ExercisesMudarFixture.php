@@ -4,11 +4,18 @@ namespace App\Test\Fixture;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
- * WeekdaysFixture
+ * ExercisesMudarFixture
  *
  */
-class WeekdaysFixture extends TestFixture
+class ExercisesMudarFixture extends TestFixture
 {
+
+    /**
+     * Table name
+     *
+     * @var string
+     */
+    public $table = 'exercises_mudar';
 
     /**
      * Fields
@@ -18,12 +25,12 @@ class WeekdaysFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
-        'weekday' => ['type' => 'integer', 'length' => 4, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => 'Domingo = 1, Segunda = 2 etc...', 'precision' => null, 'autoIncrement' => null],
+        'name' => ['type' => 'string', 'length' => 45, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'weekday_UNIQUE' => ['type' => 'unique', 'columns' => ['weekday'], 'length' => []],
+            'name_UNIQUE' => ['type' => 'unique', 'columns' => ['name'], 'length' => []],
         ],
         '_options' => [
 'engine' => 'InnoDB', 'collation' => 'utf8_general_ci'
@@ -39,9 +46,9 @@ class WeekdaysFixture extends TestFixture
     public $records = [
         [
             'id' => 1,
-            'weekday' => 1,
-            'created' => '2015-01-26 17:29:37',
-            'modified' => '2015-01-26 17:29:37'
+            'name' => 'Lorem ipsum dolor sit amet',
+            'created' => '2015-01-26 17:28:54',
+            'modified' => '2015-01-26 17:28:54'
         ],
     ];
 }

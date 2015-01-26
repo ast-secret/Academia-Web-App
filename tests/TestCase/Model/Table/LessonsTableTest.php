@@ -19,7 +19,21 @@ class LessonsTableTest extends TestCase
     public $fixtures = [
         'Lessons' => 'app.lessons',
         'Services' => 'app.services',
-        'Rooms' => 'app.rooms'
+        'Gyms' => 'app.gyms',
+        'Machines' => 'app.machines',
+        'CardsExercises' => 'app.cards_exercises',
+        'Exercises' => 'app.exercises',
+        'Cards' => 'app.cards',
+        'Users' => 'app.users',
+        'Roles' => 'app.roles',
+        'Releases' => 'app.releases',
+        'Customers' => 'app.customers',
+        'Suggestions' => 'app.suggestions',
+        'ExercisesGroups' => 'app.exercises_groups',
+        'Phones' => 'app.phones',
+        'Rooms' => 'app.rooms',
+        'Weekdays' => 'app.weekdays',
+        'ServicesWeekdays' => 'app.services_weekdays'
     ];
 
     /**
@@ -30,7 +44,9 @@ class LessonsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Lessons') ? [] : ['className' => 'App\Model\Table\LessonsTable'];        $this->Lessons = TableRegistry::get('Lessons', $config);    }
+        $config = TableRegistry::exists('Lessons') ? [] : ['className' => 'App\Model\Table\LessonsTable'];
+        $this->Lessons = TableRegistry::get('Lessons', $config);
+    }
 
     /**
      * tearDown method
