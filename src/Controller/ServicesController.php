@@ -49,6 +49,7 @@ class ServicesController extends AppController
     {
         $service = $this->Services->newEntity();
         if ($this->request->is('post')) {
+             $this->request->data['gym_id'] = 1;
             $service = $this->Services->patchEntity($service, $this->request->data);
             if ($this->Services->save($service)) {
                 $this->Flash->success('The service has been saved.');

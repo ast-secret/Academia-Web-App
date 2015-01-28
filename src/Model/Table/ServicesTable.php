@@ -54,13 +54,7 @@ class ServicesTable extends Table
             ->requirePresence('name', 'create')
             ->notEmpty('name')
             ->requirePresence('description', 'create')
-            ->notEmpty('description')
-            ->add('begin_service', 'valid', ['rule' => 'time'])
-            ->requirePresence('begin_service', 'create')
-            ->notEmpty('begin_service')
-            ->add('end_service', 'valid', ['rule' => 'time'])
-            ->requirePresence('end_service', 'create')
-            ->notEmpty('end_service');
+            ->notEmpty('description');
 
         return $validator;
     }

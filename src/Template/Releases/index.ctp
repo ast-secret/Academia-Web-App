@@ -3,30 +3,26 @@
     <table class="table table-striped">
     <thead>
         <tr>
-            <th><?= $this->Paginator->sort('id') ?></th>
-            <th><?= $this->Paginator->sort('user_id') ?></th>
-            <th><?= $this->Paginator->sort('title') ?></th>
-            <th><?= $this->Paginator->sort('text') ?></th>
-            <th><?= $this->Paginator->sort('created') ?></th>
-            <th><?= $this->Paginator->sort('modified') ?></th>
-            <th class="actions"><?= __('Actions') ?></th>
+            <th><?= $this->Paginator->sort('user_id','Usuário') ?></th>
+            <th><?= $this->Paginator->sort('title','Titulo') ?></th>
+            <th><?= $this->Paginator->sort('text','Texto') ?></th>
+            <th><?= $this->Paginator->sort('created','Criado em') ?></th>
+            <th class="actions"><?= __('Ações') ?></th>
         </tr>
     </thead>
     <tbody>
     <?php foreach ($releases as $release): ?>
         <tr>
-            <td><?= $this->Number->format($release->id) ?></td>
             <td>
                 <?= $release->has('user') ? $this->Html->link($release->user->name, ['controller' => 'Users', 'action' => 'view', $release->user->id]) : '' ?>
             </td>
             <td><?= h($release->title) ?></td>
             <td><?= h($release->text) ?></td>
-            <td><?= h($release->created) ?></td>
-            <td><?= h($release->modified) ?></td>
+            <td><?= h($release->created) ?></td>            
             <td class="actions">
-                <?= $this->Html->link(__('View'), ['action' => 'view', $release->id]) ?>
-                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $release->id]) ?>
-                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $release->id], ['confirm' => __('Are you sure you want to delete # {0}?', $release->id)]) ?>
+                <?= $this->Html->link(__('Ver'), ['action' => 'view', $release->id]) ?>
+                <?= $this->Html->link(__('Editar'), ['action' => 'edit', $release->id]) ?>
+                <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $release->id], ['confirm' => __('Você tem certeza que deseja deletar?', $release->id)]) ?>
             </td>
         </tr>
 
@@ -35,9 +31,9 @@
     </table>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->next(__('Próximo') . ' >') ?>
         </ul>
         <p><?= $this->Paginator->counter() ?></p>
     </div>

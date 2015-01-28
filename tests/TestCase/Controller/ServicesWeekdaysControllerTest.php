@@ -1,13 +1,13 @@
 <?php
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\ServicesWeekdaysController;
+use App\Controller\ServicesweekdaysController;
 use Cake\TestSuite\IntegrationTestCase;
 
 /**
- * App\Controller\ServicesWeekdaysController Test Case
+ * App\Controller\ServicesweekdaysController Test Case
  */
-class ServicesWeekdaysControllerTest extends IntegrationTestCase
+class ServicesweekdaysControllerTest extends IntegrationTestCase
 {
 
     /**
@@ -16,23 +16,23 @@ class ServicesWeekdaysControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'ServicesWeekdays' => 'app.services_weekdays',
+        'Servicesweekdays' => 'app.servicesweekdays',
         'Services' => 'app.services',
         'Gyms' => 'app.gyms',
         'Machines' => 'app.machines',
-        'CardsExercises' => 'app.cards_exercises',
-        'Exercises' => 'app.exercises',
-        'Cards' => 'app.cards',
-        'Users' => 'app.users',
-        'Roles' => 'app.roles',
-        'Releases' => 'app.releases',
-        'Customers' => 'app.customers',
-        'Suggestions' => 'app.suggestions',
-        'ExercisesGroups' => 'app.exercises_groups',
         'Phones' => 'app.phones',
         'Rooms' => 'app.rooms',
         'Lessons' => 'app.lessons',
-        'Weekdays' => 'app.weekdays'
+        'Users' => 'app.users',
+        'Roles' => 'app.roles',
+        'Cards' => 'app.cards',
+        'Customers' => 'app.customers',
+        'Suggestions' => 'app.suggestions',
+        'ExercisesGroups' => 'app.exercises_groups',
+        'Exercises' => 'app.exercises',
+        'Releases' => 'app.releases',
+        'Weekdays' => 'app.weekdays',
+        'ServicesWeekdays' => 'app.services_weekdays'
     ];
 
     /**

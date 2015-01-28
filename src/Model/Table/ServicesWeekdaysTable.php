@@ -7,9 +7,9 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * ServicesWeekdays Model
+ * Servicesweekdays Model
  */
-class ServicesWeekdaysTable extends Table
+class ServicesweekdaysTable extends Table
 {
 
     /**
@@ -20,7 +20,7 @@ class ServicesWeekdaysTable extends Table
      */
     public function initialize(array $config)
     {
-        $this->table('services_weekdays');
+        $this->table('servicesweekdays');
         $this->displayField('id');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
@@ -48,7 +48,13 @@ class ServicesWeekdaysTable extends Table
             ->notEmpty('service_id')
             ->add('weekday_id', 'valid', ['rule' => 'numeric'])
             ->requirePresence('weekday_id', 'create')
-            ->notEmpty('weekday_id');
+            ->notEmpty('weekday_id')
+            ->add('start_hour', 'valid', ['rule' => 'time'])
+            ->requirePresence('start_hour', 'create')
+            ->notEmpty('start_hour')
+            ->add('duration', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('duration', 'create')
+            ->notEmpty('duration');
 
         return $validator;
     }
