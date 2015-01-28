@@ -2,7 +2,9 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Entity\ExercisesGroup;
 
+use Cake\I18n\Time;
 /**
  * Cards Controller
  *
@@ -34,7 +36,7 @@ class CardsController extends AppController
     public function view($id = null)
     {
         $card = $this->Cards->get($id, [
-            'contain' => ['Users', 'Customers', 'Exercises']
+            'contain' => ['Users', 'Customers', 'ExercisesGroups' => ['Exercises']]
         ]);
         $this->set('card', $card);
         $this->set('_serialize', ['card']);
@@ -45,22 +47,33 @@ class CardsController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($customer_id = null)
     {
+
         $card = $this->Cards->newEntity();
+
         if ($this->request->is('post')) {
-            $card = $this->Cards->patchEntity($card, $this->request->data);
-            if ($this->Cards->save($card)) {
-                $this->Flash->success('The card has been saved.');
-                return $this->redirect(['action' => 'index']);
+            
+            $this->request->data['start_date'] = Time::now();
+            $this->request->data['customer_id'] = $customer_id;
+            $this->request->data['user_id'] = 1;
+
+            if (!$this->Cards->validateExercise($this->request->data)) {
+                $this->Flash->error('Você deve adicionar ao menos um exercício a ficha.');
+
             } else {
-                $this->Flash->error('The card could not be saved. Please, try again.');
+                $card = $this->Cards->patchEntity($card, $this->request->data, ['associated' => ['ExercisesGroups.Exercises']]);
+                if ($this->Cards->save($card)) {
+                    $this->Flash->success('A ficha foi salva com sucesso!.');
+                    return $this->redirect(['action' => 'customer', $customer_id]);
+                } else {
+                    // debug($card->errors());
+                    $this->Flash->error('A ficha não foi salva');
+                }
             }
         }
-        $users = $this->Cards->Users->find('list', ['limit' => 200]);
         $customers = $this->Cards->Customers->find('list', ['limit' => 200]);
-        $exercises = $this->Cards->Exercises->find('list', ['limit' => 200]);
-        $this->set(compact('card', 'users', 'customers', 'exercises'));
+        $this->set(compact('card', 'customers'));
         $this->set('_serialize', ['card']);
     }
 
@@ -109,5 +122,20 @@ class CardsController extends AppController
             $this->Flash->error('The card could not be deleted. Please, try again.');
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Exibe a ficha atual e o historico de fichas de um cliente
+     * @param  int|null $id    Id o cliente
+     * @return void
+     */
+    public function customer($customer_id = null)
+    {
+        $cards = $this->Cards
+            ->find()
+            ->contain(['Users', 'Customers', 'ExercisesGroups'=> ['Exercises']])
+            ->order(['Cards.current' => 'desc'])
+            ->where(['Cards.customer_id' => $customer_id]);
+        $this->set(compact('cards', 'customer_id'));
     }
 }

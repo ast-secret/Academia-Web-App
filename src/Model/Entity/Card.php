@@ -9,6 +9,10 @@ use Cake\ORM\Entity;
 class Card extends Entity
 {
 
+    public function preFill(){
+        
+    }
+
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -24,6 +28,6 @@ class Card extends Entity
         'current' => true,
         'user' => true,
         'customer' => true,
-        'exercises' => true,
+        'exercises_groups' => true,
     ];
 }

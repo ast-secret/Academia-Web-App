@@ -26,12 +26,7 @@ use Cake\Controller\Controller;
  */
 class AppController extends Controller
 {
-
-
     public $layout = 'custom';
-
-    public $components = ['Gourmet/TwitterBootstrap.Flash'];
-    public $helpers = ['Gourmet/TwitterBootstrap.Form'];
 
     /**
      * Initialization hook method.
@@ -42,7 +37,19 @@ class AppController extends Controller
      */
     public function initialize()
     {
+        $bootstrapFormTemplate = [
+            'input' => '<input {{type}} {{attrs}} {{name}} class="form-control">',
+            'textarea' => '<textarea {{attrs}} {{name}} class="form-control">{{value}}</textarea>',
+            'inputContainer' => '<div class="form-group">{{content}}</div>',
+            'dateWidget' => '<div class="row">
+                    <div class="col-md-3">{{day}}</div>
+                    <div class="col-md-5">{{month}}</div>
+                    <div class="col-md-4">{{year}}</div>
+                </div>',
+            'select' => '<select {{name}} {{attrs}} class="form-control">{{content}}</select>'
+        ];
+
         $this->loadComponent('Flash');
-        $this->set('formTemplates', $this->formTemplates);
+        $this->set(compact('bootstrapFormTemplate'));
     }
 }

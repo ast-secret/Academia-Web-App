@@ -23,18 +23,46 @@ class CardsTable extends Table
         $this->table('cards');
         $this->displayField('id');
         $this->primaryKey('id');
-        $this->addBehavior('Timestamp');
+
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'created' => 'new',
+                    'modified' => 'always'
+                ]
+            ]
+        ]);
+
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id'
         ]);
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
-        $this->belongsToMany('Exercises', [
-            'foreignKey' => 'card_id',
-            'targetForeignKey' => 'exercise_id',
-            'joinTable' => 'cards_exercises'
+        $this->hasMany('ExercisesGroups', [
+            'foreignKey' => 'card_id'
         ]);
+    }
+
+    /**
+     * Garante que o card tenha ao menos um exercício adicionado
+     * Como o exercício necessariamente deve estar dentro de um grupo,
+     * Então ele deve garantir também que ao menos tenha um grupo adicionado
+     * @return [type] [description]
+     */
+    public function validateExercise($data)
+    {
+        if (isset($data['exercises_groups'])) {
+            $groups = $data['exercises_groups'];
+            foreach ($groups as $group) {
+                if (empty($group['exercises'])){
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -51,8 +79,10 @@ class CardsTable extends Table
             ->add('user_id', 'valid', ['rule' => 'numeric'])
             ->requirePresence('user_id', 'create')
             ->notEmpty('user_id')
+            ->add('start_date', 'valid', ['rule' => 'date'])
             ->requirePresence('start_date', 'create')
             ->notEmpty('start_date')
+            ->add('end_date', 'valid', ['rule' => 'date'])
             ->requirePresence('end_date', 'create')
             ->notEmpty('end_date')
             ->requirePresence('goal', 'create')

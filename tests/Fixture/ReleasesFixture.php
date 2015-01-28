@@ -47,8 +47,8 @@ class ReleasesFixture extends TestFixture
             'user_id' => 1,
             'title' => 'Lorem ipsum dolor sit amet',
             'text' => 'Lorem ipsum dolor sit amet',
-            'created' => '2015-01-18 16:31:35',
-            'modified' => '2015-01-18 16:31:35'
+            'created' => '2015-01-24 03:55:37',
+            'modified' => '2015-01-24 03:55:37'
         ],
     ];
 }

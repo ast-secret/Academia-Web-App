@@ -15,14 +15,9 @@ class CardsExercise extends Entity
      * @var array
      */
     protected $_accessible = [
-        'exercise_id' => true,
-        'card_id' => true,
         'repetition' => true,
-        'machine_id' => true,
+        'name' => true,
         'exercises_group_id' => true,
-        'exercise' => true,
         'card' => true,
-        'machine' => true,
-        'exercises_group' => true,
     ];
 }

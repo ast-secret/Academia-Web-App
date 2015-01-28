@@ -18,6 +18,5 @@ class Machine extends Entity
         'gym_id' => true,
         'name' => true,
         'gym' => true,
-        'cards_exercises' => true,
     ];
 }

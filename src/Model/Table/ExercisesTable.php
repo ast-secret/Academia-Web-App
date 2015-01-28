@@ -24,10 +24,8 @@ class ExercisesTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
-        $this->belongsToMany('Cards', [
-            'foreignKey' => 'exercise_id',
-            'targetForeignKey' => 'card_id',
-            'joinTable' => 'cards_exercises'
+        $this->belongsTo('ExercisesGroups', [
+            'foreignKey' => 'exercises_group_id'
         ]);
     }
 
@@ -42,9 +40,23 @@ class ExercisesTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create')
+            ->allowEmpty('repetition')
             ->requirePresence('name', 'create')
             ->notEmpty('name');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->existsIn(['exercises_group_id'], 'ExercisesGroups'));
+        return $rules;
     }
 }

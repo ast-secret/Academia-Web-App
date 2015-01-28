@@ -20,8 +20,20 @@ class LessonsHasUsersTableTest extends TestCase
         'LessonsHasUsers' => 'app.lessons_has_users',
         'Lessons' => 'app.lessons',
         'Services' => 'app.services',
+        'Gyms' => 'app.gyms',
+        'Machines' => 'app.machines',
+        'Phones' => 'app.phones',
         'Rooms' => 'app.rooms',
-        'Users' => 'app.users'
+        'Users' => 'app.users',
+        'Roles' => 'app.roles',
+        'Cards' => 'app.cards',
+        'Customers' => 'app.customers',
+        'Suggestions' => 'app.suggestions',
+        'ExercisesGroups' => 'app.exercises_groups',
+        'Exercises' => 'app.exercises',
+        'Releases' => 'app.releases',
+        'Weekdays' => 'app.weekdays',
+        'ServicesWeekdays' => 'app.services_weekdays'
     ];
 
     /**

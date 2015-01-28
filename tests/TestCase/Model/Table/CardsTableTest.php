@@ -19,9 +19,20 @@ class CardsTableTest extends TestCase
     public $fixtures = [
         'Cards' => 'app.cards',
         'Users' => 'app.users',
+        'Gyms' => 'app.gyms',
+        'Machines' => 'app.machines',
+        'Phones' => 'app.phones',
+        'Rooms' => 'app.rooms',
+        'Lessons' => 'app.lessons',
+        'Services' => 'app.services',
+        'Weekdays' => 'app.weekdays',
+        'ServicesWeekdays' => 'app.services_weekdays',
+        'Roles' => 'app.roles',
+        'Releases' => 'app.releases',
         'Customers' => 'app.customers',
-        'Exercises' => 'app.exercises',
-        'CardsExercises' => 'app.cards_exercises'
+        'Suggestions' => 'app.suggestions',
+        'ExercisesGroups' => 'app.exercises_groups',
+        'Exercises' => 'app.exercises'
     ];
 
     /**

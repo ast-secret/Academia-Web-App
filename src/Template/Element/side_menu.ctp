@@ -17,7 +17,6 @@ $items = [
 		'action' => 'index',
 	]
 ]
-
 ?>
 
 

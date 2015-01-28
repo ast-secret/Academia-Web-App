@@ -40,8 +40,8 @@ class WeekdaysFixture extends TestFixture
         [
             'id' => 1,
             'weekday' => 1,
-            'created' => '2015-01-18 16:31:37',
-            'modified' => '2015-01-18 16:31:37'
+            'created' => '2015-01-24 03:55:40',
+            'modified' => '2015-01-24 03:55:40'
         ],
     ];
 }

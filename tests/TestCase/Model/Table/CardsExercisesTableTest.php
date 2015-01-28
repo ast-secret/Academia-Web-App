@@ -18,12 +18,21 @@ class CardsExercisesTableTest extends TestCase
      */
     public $fixtures = [
         'CardsExercises' => 'app.cards_exercises',
-        'Exercises' => 'app.exercises',
         'Cards' => 'app.cards',
         'Users' => 'app.users',
-        'Customers' => 'app.customers',
+        'Gyms' => 'app.gyms',
         'Machines' => 'app.machines',
-        'ExercisesGroups' => 'app.exercises_groups'
+        'Phones' => 'app.phones',
+        'Rooms' => 'app.rooms',
+        'Lessons' => 'app.lessons',
+        'Services' => 'app.services',
+        'Weekdays' => 'app.weekdays',
+        'ServicesWeekdays' => 'app.services_weekdays',
+        'Roles' => 'app.roles',
+        'Releases' => 'app.releases',
+        'Customers' => 'app.customers',
+        'Suggestions' => 'app.suggestions',
+        'Exercises' => 'app.exercises'
     ];
 
     /**

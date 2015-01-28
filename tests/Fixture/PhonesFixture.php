@@ -49,8 +49,8 @@ class PhonesFixture extends TestFixture
             'gym_id' => 1,
             'name' => 'Lorem ipsum dolor sit amet',
             'phone' => 'Lorem ipsum dolor sit amet',
-            'created' => '2015-01-18 16:31:35',
-            'modified' => '2015-01-18 16:31:35'
+            'created' => '2015-01-24 03:55:37',
+            'modified' => '2015-01-24 03:55:37'
         ],
     ];
 }

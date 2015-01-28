@@ -21,8 +21,18 @@ class GymsTableTest extends TestCase
         'Machines' => 'app.machines',
         'Phones' => 'app.phones',
         'Rooms' => 'app.rooms',
+        'Lessons' => 'app.lessons',
         'Services' => 'app.services',
-        'Users' => 'app.users'
+        'Weekdays' => 'app.weekdays',
+        'ServicesWeekdays' => 'app.services_weekdays',
+        'Users' => 'app.users',
+        'Roles' => 'app.roles',
+        'Cards' => 'app.cards',
+        'Customers' => 'app.customers',
+        'Suggestions' => 'app.suggestions',
+        'ExercisesGroups' => 'app.exercises_groups',
+        'Exercises' => 'app.exercises',
+        'Releases' => 'app.releases'
     ];
 
     /**

@@ -18,13 +18,21 @@ class ExercisesGroupsTableTest extends TestCase
      */
     public $fixtures = [
         'ExercisesGroups' => 'app.exercises_groups',
-        'CardsExercises' => 'app.cards_exercises',
-        'Exercises' => 'app.exercises',
         'Cards' => 'app.cards',
         'Users' => 'app.users',
+        'Gyms' => 'app.gyms',
+        'Machines' => 'app.machines',
+        'Phones' => 'app.phones',
+        'Rooms' => 'app.rooms',
+        'Lessons' => 'app.lessons',
+        'Services' => 'app.services',
+        'Weekdays' => 'app.weekdays',
+        'ServicesWeekdays' => 'app.services_weekdays',
+        'Roles' => 'app.roles',
+        'Releases' => 'app.releases',
         'Customers' => 'app.customers',
         'Suggestions' => 'app.suggestions',
-        'Machines' => 'app.machines'
+        'Exercises' => 'app.exercises'
     ];
 
     /**
@@ -65,6 +73,16 @@ class ExercisesGroupsTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

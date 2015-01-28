@@ -10,6 +10,9 @@
 
 	<?= $this->Html->css('../lib/bootstrap/dist/css/bootstrap.min.css') ?>
 
+	<?= $this->Html->script('../lib/jquery/dist/jquery.min.js') ?>
+	<?= $this->Html->script('../lib/jquery-ui/jquery-ui.min.js') ?>
+
 	<?= $this->fetch('meta') ?>
 	<?= $this->fetch('css') ?>
 	<?= $this->fetch('script') ?>

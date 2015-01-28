@@ -20,12 +20,6 @@ class UsersTableTest extends TestCase
         'Users' => 'app.users',
         'Gyms' => 'app.gyms',
         'Machines' => 'app.machines',
-        'CardsExercises' => 'app.cards_exercises',
-        'Exercises' => 'app.exercises',
-        'Cards' => 'app.cards',
-        'Customers' => 'app.customers',
-        'Suggestions' => 'app.suggestions',
-        'ExercisesGroups' => 'app.exercises_groups',
         'Phones' => 'app.phones',
         'Rooms' => 'app.rooms',
         'Lessons' => 'app.lessons',
@@ -33,6 +27,11 @@ class UsersTableTest extends TestCase
         'Weekdays' => 'app.weekdays',
         'ServicesWeekdays' => 'app.services_weekdays',
         'Roles' => 'app.roles',
+        'Cards' => 'app.cards',
+        'Customers' => 'app.customers',
+        'Suggestions' => 'app.suggestions',
+        'ExercisesGroups' => 'app.exercises_groups',
+        'Exercises' => 'app.exercises',
         'Releases' => 'app.releases'
     ];
 

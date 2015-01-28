@@ -16,6 +16,8 @@ class ExercisesGroup extends Entity
      */
     protected $_accessible = [
         'name' => true,
-        'cards_exercises' => true,
+        'card_id' => true,
+        'card' => true,
+        'exercises' => true,
     ];
 }

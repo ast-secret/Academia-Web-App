@@ -20,15 +20,19 @@ class PhonesTableTest extends TestCase
         'Phones' => 'app.phones',
         'Gyms' => 'app.gyms',
         'Machines' => 'app.machines',
-        'CardsExercises' => 'app.cards_exercises',
-        'Exercises' => 'app.exercises',
-        'Cards' => 'app.cards',
+        'Rooms' => 'app.rooms',
+        'Lessons' => 'app.lessons',
+        'Services' => 'app.services',
+        'Weekdays' => 'app.weekdays',
+        'ServicesWeekdays' => 'app.services_weekdays',
         'Users' => 'app.users',
+        'Roles' => 'app.roles',
+        'Cards' => 'app.cards',
         'Customers' => 'app.customers',
         'Suggestions' => 'app.suggestions',
         'ExercisesGroups' => 'app.exercises_groups',
-        'Rooms' => 'app.rooms',
-        'Services' => 'app.services'
+        'Exercises' => 'app.exercises',
+        'Releases' => 'app.releases'
     ];
 
     /**

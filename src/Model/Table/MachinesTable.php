@@ -27,9 +27,6 @@ class MachinesTable extends Table
         $this->belongsTo('Gyms', [
             'foreignKey' => 'gym_id'
         ]);
-        $this->hasMany('CardsExercises', [
-            'foreignKey' => 'machine_id'
-        ]);
     }
 
     /**
