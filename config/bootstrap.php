@@ -1,4 +1,5 @@
 <?php
+// Meu nome eh Daniel sou um puto sagaz
 /**meu nome eh thiago sou uma bizinha
  * comentario novo 2.2.2.2
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
@@ -13,16 +14,13 @@
  * @since         0.10.8
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
 /**
  * Configure paths required to find CakePHP + general filepath
  * constants
  */
 require __DIR__ . '/paths.php';
-
 // Use composer to load the autoloader.
 require ROOT . DS . 'vendor' . DS . 'autoload.php';
-
 /**
  * Bootstrap CakePHP.
  *
@@ -33,12 +31,10 @@ require ROOT . DS . 'vendor' . DS . 'autoload.php';
  * - Setting the default application paths.
  */
 require CORE_PATH . 'config' . DS . 'bootstrap.php';
-
 // You can remove this if you are confident you have intl installed.
 if (!extension_loaded('intl')) {
     trigger_error('You must enable the intl extension to use CakePHP.', E_USER_ERROR);
 }
-
 use Cake\Cache\Cache;
 use Cake\Console\ConsoleErrorHandler;
 use Cake\Core\App;
@@ -53,7 +49,6 @@ use Cake\Network\Request;
 use Cake\Routing\DispatcherFactory;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
-
 /**
  * Read configuration file and inject configuration into various
  * CakePHP classes.
@@ -68,12 +63,10 @@ try {
 } catch (\Exception $e) {
     die($e->getMessage() . "\n");
 }
-
 // Load an environment local configuration file.
 // You can use a file like app_local.php to provide local overrides to your
 // shared configuration.
 //Configure::load('app_local', 'default');
-
 // When debug = false the metadata cache should last
 // for a very very long time, as we don't want
 // to refresh the cache while users are doing requests.
@@ -81,24 +74,20 @@ if (!Configure::read('debug')) {
     Configure::write('Cache._cake_model_.duration', '+99 years');
     Configure::write('Cache._cake_core_.duration', '+99 years');
 }
-
 /**
  * Set server timezone to UTC. You can change it to another timezone of your
  * choice but using UTC makes time calculations / conversions easier.
  */
 date_default_timezone_set('UTC');
-
 /**
  * Configure the mbstring extension to use the correct encoding.
  */
 mb_internal_encoding(Configure::read('App.encoding'));
-
 /**
  * Set the default locale. This controls how dates, number and currency is
  * formatted and sets the default language to use for translations.
  */
 ini_set('intl.default_locale', 'pt_BR');
-
 /**
  * Register application error and exception handlers.
  */
@@ -108,12 +97,10 @@ if ($isCli) {
 } else {
     (new ErrorHandler(Configure::consume('Error')))->register();
 }
-
 // Include the CLI bootstrap overrides.
 if ($isCli) {
     require __DIR__ . '/bootstrap_cli.php';
 }
-
 /**
  * Set the full base URL.
  * This URL is used as the base of all absolute links.
@@ -125,28 +112,24 @@ if (!Configure::read('App.fullBaseUrl')) {
     if (env('HTTPS')) {
         $s = 's';
     }
-
     $httpHost = env('HTTP_HOST');
     if (isset($httpHost)) {
         Configure::write('App.fullBaseUrl', 'http' . $s . '://' . $httpHost);
     }
     unset($httpHost, $s);
 }
-
 Cache::config(Configure::consume('Cache'));
 ConnectionManager::config(Configure::consume('Datasources'));
 Email::configTransport(Configure::consume('EmailTransport'));
 Email::config(Configure::consume('Email'));
 Log::config(Configure::consume('Log'));
 Security::salt(Configure::consume('Security.salt'));
-
 /**
  * The default crypto extension in 3.0 is OpenSSL.
  * If you are migrating from 2.x uncomment this code to
  * use a more compatible Mcrypt based implementation
  */
 // Security::engine(new \Cake\Utility\Crypto\Mcrypt());
-
 /**
  * Setup detectors for mobile and tablet.
  */
@@ -158,7 +141,6 @@ Request::addDetector('tablet', function ($request) {
     $detector = new \Detection\MobileDetect();
     return $detector->isTablet();
 });
-
 /**
  * Custom Inflector rules, can be set to correctly pluralize or singularize
  * table, model, controller names or whatever other string is passed to the
@@ -169,7 +151,6 @@ Request::addDetector('tablet', function ($request) {
  * Inflector::rules('uninflected', ['dontinflectme']);
  * Inflector::rules('transliteration', ['/å/' => 'aa']);
  */
-
 /**
  * Plugins need to be loaded manually, you can either load them one by one or all of them in a single call
  * Uncomment one of the lines below, as you need. make sure you read the documentation on Plugin to use more
@@ -179,15 +160,12 @@ Request::addDetector('tablet', function ($request) {
  * Plugin::load('Migrations'); //Loads a single plugin named Migrations
  *
  */
-
 Plugin::load('Migrations');
-
 // Only try to load DebugKit in development mode
 // Debug Kit should not be installed on a production system
 if (Configure::read('debug')) {
     Plugin::load('DebugKit', ['bootstrap' => true]);
 }
-
 /**
  * Connect middleware/dispatcher filters.
  */
