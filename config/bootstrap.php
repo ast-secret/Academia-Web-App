@@ -1,4 +1,7 @@
 <?php
+
+// Um comentario aqui para ver qual é
+
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
