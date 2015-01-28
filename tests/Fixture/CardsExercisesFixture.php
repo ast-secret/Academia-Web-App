@@ -45,9 +45,15 @@ class CardsExercisesFixture extends TestFixture
         [
             'id' => 1,
             'repetition' => 'Lorem ipsum dolor sit amet',
+<<<<<<< HEAD
             'created' => '2015-01-23 02:04:58',
             'modified' => '2015-01-23 02:04:58',
             'name' => 'Lorem ipsum dolor sit amet',
+=======
+            'created' => '2015-01-26 17:28:43',
+            'modified' => '2015-01-26 17:28:43',
+            'machine_id' => 1,
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
             'exercises_group_id' => 1
         ],
     ];

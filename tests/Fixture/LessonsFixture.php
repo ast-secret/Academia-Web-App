@@ -49,6 +49,7 @@ class LessonsFixture extends TestFixture
     public $records = [
         [
             'id' => 1,
+<<<<<<< HEAD
             'start_time' => '03:55:36',
             'end_time' => '03:55:36',
             'date' => '2015-01-24',
@@ -57,6 +58,16 @@ class LessonsFixture extends TestFixture
             'availables' => 1,
             'created' => '2015-01-24 03:55:36',
             'modified' => '2015-01-24 03:55:36'
+=======
+            'start_time' => '17:29:01',
+            'end_time' => '17:29:01',
+            'date' => '2015-01-26',
+            'service_id' => 1,
+            'room_id' => 1,
+            'availables' => 1,
+            'created' => '2015-01-26 17:29:01',
+            'modified' => '2015-01-26 17:29:01'
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
         ],
     ];
 }

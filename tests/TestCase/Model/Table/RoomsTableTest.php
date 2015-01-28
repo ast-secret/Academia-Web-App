@@ -27,12 +27,24 @@ class RoomsTableTest extends TestCase
         'ServicesWeekdays' => 'app.services_weekdays',
         'Users' => 'app.users',
         'Roles' => 'app.roles',
+<<<<<<< HEAD
         'Cards' => 'app.cards',
         'Customers' => 'app.customers',
         'Suggestions' => 'app.suggestions',
         'ExercisesGroups' => 'app.exercises_groups',
         'Exercises' => 'app.exercises',
         'Releases' => 'app.releases'
+=======
+        'Releases' => 'app.releases',
+        'Customers' => 'app.customers',
+        'Suggestions' => 'app.suggestions',
+        'ExercisesGroups' => 'app.exercises_groups',
+        'Phones' => 'app.phones',
+        'Services' => 'app.services',
+        'Lessons' => 'app.lessons',
+        'Weekdays' => 'app.weekdays',
+        'ServicesWeekdays' => 'app.services_weekdays'
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
     ];
 
     /**
@@ -43,7 +55,9 @@ class RoomsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Rooms') ? [] : ['className' => 'App\Model\Table\RoomsTable'];        $this->Rooms = TableRegistry::get('Rooms', $config);    }
+        $config = TableRegistry::exists('Rooms') ? [] : ['className' => 'App\Model\Table\RoomsTable'];
+        $this->Rooms = TableRegistry::get('Rooms', $config);
+    }
 
     /**
      * tearDown method

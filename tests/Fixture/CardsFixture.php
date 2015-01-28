@@ -33,8 +33,8 @@ class CardsFixture extends TestFixture
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'fk_card_users1' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
             'fk_cards_customers1' => ['type' => 'foreign', 'columns' => ['customer_id'], 'references' => ['customers', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'fk_card_users1' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
 'engine' => 'InnoDB', 'collation' => 'utf8_general_ci'
@@ -51,11 +51,19 @@ class CardsFixture extends TestFixture
         [
             'id' => 1,
             'user_id' => 1,
+<<<<<<< HEAD
             'start_date' => '2015-01-24',
             'end_date' => '2015-01-24',
             'goal' => 'Lorem ipsum dolor sit amet',
             'created' => '2015-01-24 03:55:34',
             'modified' => '2015-01-24 03:55:34',
+=======
+            'start_date' => '2015-01-26',
+            'end_date' => '2015-01-26',
+            'goal' => 'Lorem ipsum dolor sit amet',
+            'created' => '2015-01-26 17:28:40',
+            'modified' => '2015-01-26 17:28:40',
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
             'customer_id' => 1,
             'obs' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
             'current' => 1

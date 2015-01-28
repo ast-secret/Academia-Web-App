@@ -17,8 +17,11 @@ class WeekdaysController extends AppController
      */
     public function index()
     {
+        
+        
         $this->set('weekdays', $this->paginate($this->Weekdays));
         $this->set('_serialize', ['weekdays']);
+
     }
 
     /**
@@ -33,6 +36,8 @@ class WeekdaysController extends AppController
         $weekday = $this->Weekdays->get($id, [
             'contain' => ['Services']
         ]);
+
+       
         $this->set('weekday', $weekday);
         $this->set('_serialize', ['weekday']);
     }

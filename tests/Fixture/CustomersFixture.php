@@ -48,8 +48,13 @@ class CustomersFixture extends TestFixture
             'registration' => 'Lorem ipsum dolor sit amet',
             'password' => 'Lorem ipsum dolor sit amet',
             'access_key' => 'Lorem ipsum dolor sit amet',
+<<<<<<< HEAD
             'created' => '2015-01-24 03:55:34',
             'modified' => '2015-01-24 03:55:34'
+=======
+            'created' => '2015-01-26 17:28:46',
+            'modified' => '2015-01-26 17:28:46'
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
         ],
     ];
 }

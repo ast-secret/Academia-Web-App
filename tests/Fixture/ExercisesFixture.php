@@ -48,7 +48,12 @@ class ExercisesFixture extends TestFixture
             'created' => '2015-01-24 03:55:35',
             'modified' => '2015-01-24 03:55:35',
             'name' => 'Lorem ipsum dolor sit amet',
+<<<<<<< HEAD
             'exercises_group_id' => 1
+=======
+            'created' => '2015-01-26 17:28:49',
+            'modified' => '2015-01-26 17:28:49'
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
         ],
     ];
 }

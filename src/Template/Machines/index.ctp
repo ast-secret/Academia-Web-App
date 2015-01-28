@@ -1,15 +1,5 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Html->link(__('New Machine'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Gyms'), ['controller' => 'Gyms', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Gym'), ['controller' => 'Gyms', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Cards Exercises'), ['controller' => 'CardsExercises', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Cards Exercise'), ['controller' => 'CardsExercises', 'action' => 'add']) ?> </li>
-    </ul>
-</div>
 <div class="machines index large-10 medium-9 columns">
-    <table cellpadding="0" cellspacing="0">
+    <table class="table table-striped">
     <thead>
         <tr>
             <th><?= $this->Paginator->sort('id') ?></th>

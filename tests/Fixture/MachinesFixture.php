@@ -46,8 +46,13 @@ class MachinesFixture extends TestFixture
             'id' => 1,
             'gym_id' => 1,
             'name' => 'Lorem ipsum dolor sit amet',
+<<<<<<< HEAD
             'created' => '2015-01-24 03:55:37',
             'modified' => '2015-01-24 03:55:37'
+=======
+            'created' => '2015-01-26 17:29:09',
+            'modified' => '2015-01-26 17:29:09'
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
         ],
     ];
 }

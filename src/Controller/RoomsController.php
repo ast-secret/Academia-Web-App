@@ -57,7 +57,7 @@ class RoomsController extends AppController
                 $this->Flash->error('The room could not be saved. Please, try again.');
             }
         }
-        $gyms = $this->Rooms->Gyms->find('list', ['limit' => 200]);
+        $gyms = $this->Rooms->Gyms->find('list', array('conditions' => array('Gyms.id' => '1')));
         $this->set(compact('room', 'gyms'));
         $this->set('_serialize', ['room']);
     }

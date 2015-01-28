@@ -46,7 +46,11 @@ class LessonsHasUsersFixture extends TestFixture
             'lessons_id' => 1,
             'users_id' => 1,
             'id' => 1,
+<<<<<<< HEAD
             'created' => '2015-01-24 03:55:36'
+=======
+            'created' => '2015-01-26 17:29:06'
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
         ],
     ];
 }

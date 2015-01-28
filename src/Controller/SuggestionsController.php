@@ -57,7 +57,8 @@ class SuggestionsController extends AppController
                 $this->Flash->error('The suggestion could not be saved. Please, try again.');
             }
         }
-        $customers = $this->Suggestions->Customers->find('list', ['limit' => 200]);
+        //$customers = $this->Suggestions->Customers->find('list', ['limit' => 200]);
+        $customers = $this->Suggestions->Customers->find('list', array('conditions' => array('Customers.id' => '1')));        
         $this->set(compact('suggestion', 'customers'));
         $this->set('_serialize', ['suggestion']);
     }
@@ -106,4 +107,5 @@ class SuggestionsController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
 }

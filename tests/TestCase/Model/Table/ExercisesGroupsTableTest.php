@@ -31,8 +31,12 @@ class ExercisesGroupsTableTest extends TestCase
         'Roles' => 'app.roles',
         'Releases' => 'app.releases',
         'Customers' => 'app.customers',
+<<<<<<< HEAD
         'Suggestions' => 'app.suggestions',
         'Exercises' => 'app.exercises'
+=======
+        'Suggestions' => 'app.suggestions'
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
     ];
 
     /**
@@ -43,7 +47,9 @@ class ExercisesGroupsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('ExercisesGroups') ? [] : ['className' => 'App\Model\Table\ExercisesGroupsTable'];        $this->ExercisesGroups = TableRegistry::get('ExercisesGroups', $config);    }
+        $config = TableRegistry::exists('ExercisesGroups') ? [] : ['className' => 'App\Model\Table\ExercisesGroupsTable'];
+        $this->ExercisesGroups = TableRegistry::get('ExercisesGroups', $config);
+    }
 
     /**
      * tearDown method

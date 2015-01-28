@@ -57,7 +57,7 @@ class ServicesController extends AppController
                 $this->Flash->error('The service could not be saved. Please, try again.');
             }
         }
-        $gyms = $this->Services->Gyms->find('list', ['limit' => 200]);
+        $gyms = $this->Services->Gyms->find('list', array('conditions' => array('Gyms.id' => '1')));
         $weekdays = $this->Services->Weekdays->find('list', ['limit' => 200]);
         $this->set(compact('service', 'gyms', 'weekdays'));
         $this->set('_serialize', ['service']);

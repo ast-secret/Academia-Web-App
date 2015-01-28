@@ -21,6 +21,7 @@ class LessonsTableTest extends TestCase
         'Services' => 'app.services',
         'Gyms' => 'app.gyms',
         'Machines' => 'app.machines',
+<<<<<<< HEAD
         'Phones' => 'app.phones',
         'Rooms' => 'app.rooms',
         'Users' => 'app.users',
@@ -31,6 +32,19 @@ class LessonsTableTest extends TestCase
         'ExercisesGroups' => 'app.exercises_groups',
         'Exercises' => 'app.exercises',
         'Releases' => 'app.releases',
+=======
+        'CardsExercises' => 'app.cards_exercises',
+        'Exercises' => 'app.exercises',
+        'Cards' => 'app.cards',
+        'Users' => 'app.users',
+        'Roles' => 'app.roles',
+        'Releases' => 'app.releases',
+        'Customers' => 'app.customers',
+        'Suggestions' => 'app.suggestions',
+        'ExercisesGroups' => 'app.exercises_groups',
+        'Phones' => 'app.phones',
+        'Rooms' => 'app.rooms',
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
         'Weekdays' => 'app.weekdays',
         'ServicesWeekdays' => 'app.services_weekdays'
     ];
@@ -43,7 +57,9 @@ class LessonsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Lessons') ? [] : ['className' => 'App\Model\Table\LessonsTable'];        $this->Lessons = TableRegistry::get('Lessons', $config);    }
+        $config = TableRegistry::exists('Lessons') ? [] : ['className' => 'App\Model\Table\LessonsTable'];
+        $this->Lessons = TableRegistry::get('Lessons', $config);
+    }
 
     /**
      * tearDown method

@@ -43,7 +43,9 @@ class WeekdaysTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Weekdays') ? [] : ['className' => 'App\Model\Table\WeekdaysTable'];        $this->Weekdays = TableRegistry::get('Weekdays', $config);    }
+        $config = TableRegistry::exists('Weekdays') ? [] : ['className' => 'App\Model\Table\WeekdaysTable'];
+        $this->Weekdays = TableRegistry::get('Weekdays', $config);
+    }
 
     /**
      * tearDown method

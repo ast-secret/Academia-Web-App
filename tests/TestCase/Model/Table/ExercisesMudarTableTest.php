@@ -28,7 +28,13 @@ class ExercisesMudarTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+<<<<<<< HEAD
         $config = TableRegistry::exists('ExercisesMudar') ? [] : ['className' => 'App\Model\Table\ExercisesMudarTable'];        $this->ExercisesMudar = TableRegistry::get('ExercisesMudar', $config);    }
+=======
+        $config = TableRegistry::exists('ExercisesMudar') ? [] : ['className' => 'App\Model\Table\ExercisesMudarTable'];
+        $this->ExercisesMudar = TableRegistry::get('ExercisesMudar', $config);
+    }
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
 
     /**
      * tearDown method

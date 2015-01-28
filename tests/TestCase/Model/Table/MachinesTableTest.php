@@ -30,8 +30,14 @@ class MachinesTableTest extends TestCase
         'Cards' => 'app.cards',
         'Customers' => 'app.customers',
         'Suggestions' => 'app.suggestions',
+<<<<<<< HEAD
         'ExercisesGroups' => 'app.exercises_groups',
         'Exercises' => 'app.exercises',
+=======
+        'Exercises' => 'app.exercises',
+        'CardsExercises' => 'app.cards_exercises',
+        'ExercisesGroups' => 'app.exercises_groups',
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
         'Releases' => 'app.releases'
     ];
 
@@ -43,7 +49,9 @@ class MachinesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Machines') ? [] : ['className' => 'App\Model\Table\MachinesTable'];        $this->Machines = TableRegistry::get('Machines', $config);    }
+        $config = TableRegistry::exists('Machines') ? [] : ['className' => 'App\Model\Table\MachinesTable'];
+        $this->Machines = TableRegistry::get('Machines', $config);
+    }
 
     /**
      * tearDown method

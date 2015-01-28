@@ -21,17 +21,29 @@ class RolesTableTest extends TestCase
         'Users' => 'app.users',
         'Gyms' => 'app.gyms',
         'Machines' => 'app.machines',
+<<<<<<< HEAD
+=======
+        'CardsExercises' => 'app.cards_exercises',
+        'Exercises' => 'app.exercises',
+        'Cards' => 'app.cards',
+        'Customers' => 'app.customers',
+        'Suggestions' => 'app.suggestions',
+        'ExercisesGroups' => 'app.exercises_groups',
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
         'Phones' => 'app.phones',
         'Rooms' => 'app.rooms',
         'Lessons' => 'app.lessons',
         'Services' => 'app.services',
         'Weekdays' => 'app.weekdays',
         'ServicesWeekdays' => 'app.services_weekdays',
+<<<<<<< HEAD
         'Cards' => 'app.cards',
         'Customers' => 'app.customers',
         'Suggestions' => 'app.suggestions',
         'ExercisesGroups' => 'app.exercises_groups',
         'Exercises' => 'app.exercises',
+=======
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
         'Releases' => 'app.releases'
     ];
 
@@ -43,7 +55,9 @@ class RolesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Roles') ? [] : ['className' => 'App\Model\Table\RolesTable'];        $this->Roles = TableRegistry::get('Roles', $config);    }
+        $config = TableRegistry::exists('Roles') ? [] : ['className' => 'App\Model\Table\RolesTable'];
+        $this->Roles = TableRegistry::get('Roles', $config);
+    }
 
     /**
      * tearDown method

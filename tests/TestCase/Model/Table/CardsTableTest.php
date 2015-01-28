@@ -21,6 +21,12 @@ class CardsTableTest extends TestCase
         'Users' => 'app.users',
         'Gyms' => 'app.gyms',
         'Machines' => 'app.machines',
+<<<<<<< HEAD
+=======
+        'CardsExercises' => 'app.cards_exercises',
+        'Exercises' => 'app.exercises',
+        'ExercisesGroups' => 'app.exercises_groups',
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
         'Phones' => 'app.phones',
         'Rooms' => 'app.rooms',
         'Lessons' => 'app.lessons',
@@ -30,9 +36,13 @@ class CardsTableTest extends TestCase
         'Roles' => 'app.roles',
         'Releases' => 'app.releases',
         'Customers' => 'app.customers',
+<<<<<<< HEAD
         'Suggestions' => 'app.suggestions',
         'ExercisesGroups' => 'app.exercises_groups',
         'Exercises' => 'app.exercises'
+=======
+        'Suggestions' => 'app.suggestions'
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
     ];
 
     /**
@@ -43,7 +53,9 @@ class CardsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Cards') ? [] : ['className' => 'App\Model\Table\CardsTable'];        $this->Cards = TableRegistry::get('Cards', $config);    }
+        $config = TableRegistry::exists('Cards') ? [] : ['className' => 'App\Model\Table\CardsTable'];
+        $this->Cards = TableRegistry::get('Cards', $config);
+    }
 
     /**
      * tearDown method

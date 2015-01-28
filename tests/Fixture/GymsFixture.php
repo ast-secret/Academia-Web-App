@@ -48,8 +48,13 @@ class GymsFixture extends TestFixture
             'address' => 'Lorem ipsum dolor sit amet',
             'cover_img' => 'Lorem ipsum dolor sit amet',
             'logo_img' => 'Lorem ipsum dolor sit amet',
+<<<<<<< HEAD
             'created' => '2015-01-24 03:55:36',
             'modified' => '2015-01-24 03:55:36'
+=======
+            'created' => '2015-01-26 17:28:56',
+            'modified' => '2015-01-26 17:28:56'
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
         ],
     ];
 }

@@ -50,10 +50,17 @@ class ServicesFixture extends TestFixture
             'gym_id' => 1,
             'name' => 'Lorem ipsum dolor sit amet',
             'description' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
+<<<<<<< HEAD
             'begin_service' => '03:55:39',
             'end_service' => '03:55:39',
             'created' => '2015-01-24 03:55:39',
             'modified' => '2015-01-24 03:55:39'
+=======
+            'begin_service' => '17:29:25',
+            'end_service' => '17:29:25',
+            'created' => '2015-01-26 17:29:25',
+            'modified' => '2015-01-26 17:29:25'
+>>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
         ],
     ];
 }
