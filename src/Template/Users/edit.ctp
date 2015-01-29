@@ -1,36 +1,17 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $user->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Gyms'), ['controller' => 'Gyms', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Gym'), ['controller' => 'Gyms', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Roles'), ['controller' => 'Roles', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Role'), ['controller' => 'Roles', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Cards'), ['controller' => 'Cards', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Card'), ['controller' => 'Cards', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Releases'), ['controller' => 'Releases', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Release'), ['controller' => 'Releases', 'action' => 'add']) ?> </li>
-    </ul>
-</div>
 <div class="users form large-10 medium-9 columns">
-    <?= $this->Form->create($user); ?>
+<?= $this->Form->create($user, ['templates' => $bootstrapFormTemplate]); ?>
     <fieldset>
-        <legend><?= __('Edit User') ?></legend>
+        <legend><?= __('Editar Usuário') ?></legend>
         <?php
-            echo $this->Form->input('gym_id', ['options' => $gyms]);
-            echo $this->Form->input('role_id', ['options' => $roles]);
-            echo $this->Form->input('name');
-            echo $this->Form->input('username');
-            echo $this->Form->input('password');
-            echo $this->Form->input('role');
+            echo $this->Form->input('role_id', ['options' => $roles, ['label' => 'Role?']]);
+            echo $this->Form->input('name', ['label' => 'Nome']);
+            echo $this->Form->input('username', ['label' => 'Usuário']);
+            echo $this->Form->input('password', ['label' => 'Senha']);
+            echo $this->Form->input('role', ['label' => '']);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+       <?= $this->Form->button('Salvar', ['class' => 'btn btn-success btn-lg']) ?>
+    <?= $this->Html->link('Cancelar', ['action' => 'index'], ['class' => 'btn btn-danger']) ?>
+<?= $this->Form->end() ?>
+
 </div>

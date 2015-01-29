@@ -1,17 +1,18 @@
-<div class="">
-    <?= $this->Form->create($user, ['templates' => $formTemplates]); ?>
+<div class="users form large-10 medium-9 columns">
+    <?= $this->Form->create($user, ['templates' => $bootstrapFormTemplate]); ?>
 
         <fieldset>
             <legend><?= __('Adicionar usuário') ?></legend>
             <?php
-                echo $this->Form->input('gym_id', ['options' => $gyms]);
-                echo $this->Form->input('role_id', ['options' => $roles]);
-                echo $this->Form->input('name');
-                echo $this->Form->input('username');
-                echo $this->Form->input('password');
+                echo $this->Form->input('name',['label' => 'Nome']);
+                echo $this->Form->input('username',['label' => 'Login']);
+                echo $this->Form->input('password',['label' => 'Senha']);
+                echo $this->Form->input('password',['label' => 'Confirmar Senha']);
+                echo $this->Form->input('role_id', ['options' => $roles, 'label' => 'Acesso']);
             ?>
         </fieldset>
-        <?= $this->Html->link('Cancelar', ['action' => 'index'], ['class' => 'btn btn-danger']) ?>
-        <button type="submit" class="btn btn-success btn-lg">Salvar</button>
-    <?= $this->Form->end() ?>
+          <?= $this->Form->button('Salvar', ['class' => 'btn btn-success btn-lg']) ?>
+    <?= $this->Html->link('Cancelar', ['action' => 'index'], ['class' => 'btn btn-danger']) ?>
+<?= $this->Form->end() ?>
+
 </div>
