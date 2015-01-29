@@ -143,9 +143,18 @@
     });
 </script>
 
+<?php
+    $breadcrumb = [
+        'active' => 'Adicionar Ficha',
+        'root' => [
+            ['label' => 'Fichas', 'url' => ['action' => 'index']]
+        ]
+    ];
+    echo $this->element('common/dashboard_breadcrumb', ['breadcrumb' => $breadcrumb]);
+?>
+
 <?= $this->Form->create($card, ['templates' => $bootstrapFormTemplate]); ?>
 <fieldset>
-    <legend><?= __("Criar ficha para Daniel")  ?></legend>
     <div class="row">
         <div class="col-md-6">
             <?php
