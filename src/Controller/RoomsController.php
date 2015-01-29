@@ -49,11 +49,18 @@ class RoomsController extends AppController
     {
         $room = $this->Rooms->newEntity();
         if ($this->request->is('post')) {
+
+            $this->request->data['gym_id'] = 1;
+            
             $room = $this->Rooms->patchEntity($room, $this->request->data);
+
             if ($this->Rooms->save($room)) {
+                debug($room->errors());
                 $this->Flash->success('The room has been saved.');
                 return $this->redirect(['action' => 'index']);
             } else {
+                debug($room->errors());
+
                 $this->Flash->error('The room could not be saved. Please, try again.');
             }
         }
@@ -76,6 +83,7 @@ class RoomsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $room = $this->Rooms->patchEntity($room, $this->request->data);
+            $this->request->data['gym_id'] = 1;
             if ($this->Rooms->save($room)) {
                 $this->Flash->success('The room has been saved.');
                 return $this->redirect(['action' => 'index']);

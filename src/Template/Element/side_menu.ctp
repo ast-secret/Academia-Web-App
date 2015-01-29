@@ -1,11 +1,11 @@
 <?php
 
 $items = [
-	[
+	/*[
 		'label' => 'Academias',
 		'controller' => 'gyms',
 		'action' => 'index',
-	],
+	],*/
 	[
 		'label' => 'Usuários',
 		'controller' => 'users',
@@ -35,15 +35,20 @@ $items = [
 		'label' => 'Serviço',
 		'controller' => 'services',
 		'action' => 'index',
-	],
+	]/*,
 	[
 		'label' => 'Dias da Semana',
 		'controller' => 'weekdays',
 		'action' => 'index',
-	],
+	]*/,
 	[
 		'label' => 'Comunicados',
 		'controller' => 'releases',
+		'action' => 'index',
+	],
+	[
+		'label' => 'Horario e Dia dos Serviços',
+		'controller' => 'Servicesweekdays',
 		'action' => 'index',
 	]
 

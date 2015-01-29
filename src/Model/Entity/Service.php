@@ -18,8 +18,6 @@ class Service extends Entity
         'gym_id' => true,
         'name' => true,
         'description' => true,
-        'begin_service' => true,
-        'end_service' => true,
         'gym' => true,
         'lessons' => true,
         'weekdays' => true,

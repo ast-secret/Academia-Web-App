@@ -48,6 +48,7 @@ class ReleasesController extends AppController
     public function add()
     {
         $release = $this->Releases->newEntity();
+        $this->request->data['user_id'] = 1;
         if ($this->request->is('post')) {
             $release = $this->Releases->patchEntity($release, $this->request->data);
             if ($this->Releases->save($release)) {

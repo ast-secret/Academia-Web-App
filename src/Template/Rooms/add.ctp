@@ -1,12 +1,11 @@
-
 <div class="rooms form large-10 medium-9 columns">
-    <?= $this->Form->create($room); ?>
+    <?= $this->Form->create($room, ['templates' => $bootstrapFormTemplate]); ?>
     <fieldset>
-        <legend><?= __('Add Room') ?></legend>
+        <legend><?= __('Adicionar Sala') ?></legend>
         <?php
-            echo $this->Form->input('name');
-            echo $this->Form->input('gym_id', ['options' => $gyms]);
-            echo $this->Form->input('description');
+            echo $this->Form->input('name', ['label' => 'Nome']);
+            
+            echo $this->Form->input('description', ['label' => 'Descrição']);
         ?>
     </fieldset>
     <?= $this->Form->button('Salvar', ['class' => 'btn btn-success btn-lg']) ?>

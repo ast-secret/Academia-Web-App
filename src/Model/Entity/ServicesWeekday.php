@@ -4,9 +4,9 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * ServicesWeekday Entity.
+ * Servicesweekday Entity.
  */
-class ServicesWeekday extends Entity
+class Servicesweekday extends Entity
 {
 
     /**
@@ -17,6 +17,8 @@ class ServicesWeekday extends Entity
     protected $_accessible = [
         'service_id' => true,
         'weekday_id' => true,
+        'start_hour' => true,
+        'duration' => true,
         'service' => true,
         'weekday' => true,
     ];
