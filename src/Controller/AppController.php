@@ -38,6 +38,8 @@ class AppController extends Controller
     public function initialize()
     {
         $bootstrapFormTemplate = [
+            'errorList' => '<ul>{{content}}</ul>',
+            'errorItem' => '<li>{{text}}</li>',
             'input' => '<input {{type}} {{attrs}} {{name}} class="form-control">',
             'textarea' => '<textarea {{attrs}} {{name}} class="form-control">{{value}}</textarea>',
             'inputContainer' => '<div class="form-group">{{content}}</div>',
