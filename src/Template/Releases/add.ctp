@@ -1,10 +1,11 @@
-<?= $this->Form->create($release); ?>
+<div class="users form large-10 medium-9 columns">
+    <?= $this->Form->create($release, ['templates' => $bootstrapFormTemplate]); ?>
+
     <fieldset>
         <legend><?= __('Adicionar Comunicado') ?></legend>
-        <?php
-            echo $this->Form->input('user_id', ['options' => $users]);
-            echo $this->Form->input('title');
-            echo $this->Form->input('text');
+        <?php            
+            echo $this->Form->input('title',['label' => 'Título']);
+            echo $this->Form->input('text',['label' => 'Texto']);
         ?>
     </fieldset>
     <?= $this->Form->button('Salvar', ['class' => 'btn btn-success btn-lg']) ?>
