@@ -86,7 +86,7 @@ class CardsTable extends Table
             ->requirePresence('end_date', 'create')
             ->notEmpty('end_date')
             ->requirePresence('goal', 'create')
-            ->notEmpty('goal')
+            ->notEmpty('goal', 'O Objetivo não pode ficar em branco.')
             ->add('customer_id', 'valid', ['rule' => 'numeric'])
             ->requirePresence('customer_id', 'create')
             ->notEmpty('customer_id')
