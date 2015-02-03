@@ -18,6 +18,7 @@ class WeekdaysFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
+        'name' => ['type' => 'string', 'length' => 45, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
         'weekday' => ['type' => 'integer', 'length' => 4, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => 'Domingo = 1, Segunda = 2 etc...', 'precision' => null, 'autoIncrement' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
@@ -39,14 +40,10 @@ class WeekdaysFixture extends TestFixture
     public $records = [
         [
             'id' => 1,
+            'name' => 'Lorem ipsum dolor sit amet',
             'weekday' => 1,
-<<<<<<< HEAD
-            'created' => '2015-01-24 03:55:40',
-            'modified' => '2015-01-24 03:55:40'
-=======
-            'created' => '2015-01-26 17:29:37',
-            'modified' => '2015-01-26 17:29:37'
->>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
+            'created' => '2015-02-01 16:59:04',
+            'modified' => '2015-02-01 16:59:04'
         ],
     ];
 }

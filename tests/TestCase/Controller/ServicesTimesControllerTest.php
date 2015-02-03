@@ -1,14 +1,13 @@
 <?php
-namespace App\Test\TestCase\Model\Table;
+namespace App\Test\TestCase\Controller;
 
-use App\Model\Table\WeekdaysTable;
-use Cake\ORM\TableRegistry;
-use Cake\TestSuite\TestCase;
+use App\Controller\ServicesTimesController;
+use Cake\TestSuite\IntegrationTestCase;
 
 /**
- * App\Model\Table\WeekdaysTable Test Case
+ * App\Controller\ServicesTimesController Test Case
  */
-class WeekdaysTableTest extends TestCase
+class ServicesTimesControllerTest extends IntegrationTestCase
 {
 
     /**
@@ -17,7 +16,6 @@ class WeekdaysTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'Weekdays' => 'app.weekdays',
         'ServicesTimes' => 'app.services_times',
         'Services' => 'app.services',
         'Gyms' => 'app.gyms',
@@ -33,47 +31,56 @@ class WeekdaysTableTest extends TestCase
         'ExercisesGroups' => 'app.exercises_groups',
         'Exercises' => 'app.exercises',
         'Releases' => 'app.releases',
-        'Times' => 'app.times'
+        'Weekdays' => 'app.weekdays',
+        'ServicesWeekdays' => 'app.services_weekdays'
     ];
 
     /**
-     * setUp method
+     * Test index method
      *
      * @return void
      */
-    public function setUp()
-    {
-        parent::setUp();
-        $config = TableRegistry::exists('Weekdays') ? [] : ['className' => 'App\Model\Table\WeekdaysTable'];        $this->Weekdays = TableRegistry::get('Weekdays', $config);    }
-
-    /**
-     * tearDown method
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
-        unset($this->Weekdays);
-
-        parent::tearDown();
-    }
-
-    /**
-     * Test initialize method
-     *
-     * @return void
-     */
-    public function testInitialize()
+    public function testIndex()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
 
     /**
-     * Test validationDefault method
+     * Test view method
      *
      * @return void
      */
-    public function testValidationDefault()
+    public function testView()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test add method
+     *
+     * @return void
+     */
+    public function testAdd()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test edit method
+     *
+     * @return void
+     */
+    public function testEdit()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test delete method
+     *
+     * @return void
+     */
+    public function testDelete()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

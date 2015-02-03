@@ -1,16 +1,16 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\Service;
+use App\Model\Entity\Time;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Services Model
+ * Times Model
  */
-class ServicesTable extends Table
+class TimesTable extends Table
 {
 
     /**
@@ -21,15 +21,15 @@ class ServicesTable extends Table
      */
     public function initialize(array $config)
     {
-        $this->table('services');
-        $this->displayField('name');
+        $this->table('times');
+        $this->displayField('id');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
-        $this->belongsTo('Gyms', [
-            'foreignKey' => 'gym_id'
-        ]);
-        $this->hasMany('Times', [
+        $this->belongsTo('Services', [
             'foreignKey' => 'service_id'
+        ]);
+        $this->belongsTo('Weekdays', [
+            'foreignKey' => 'weekday_id'
         ]);
     }
 
@@ -44,13 +44,18 @@ class ServicesTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create')
-            ->add('gym_id', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('gym_id', 'create')
-            ->notEmpty('gym_id')
-            ->requirePresence('name', 'create')
-            ->notEmpty('name')
-            ->requirePresence('description', 'create')
-            ->notEmpty('description');
+            ->add('service_id', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('service_id', 'create')
+            ->notEmpty('service_id')
+            ->add('weekday_id', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('weekday_id', 'create')
+            ->notEmpty('weekday_id')
+            ->add('start_hour', 'valid', ['rule' => 'time'])
+            ->requirePresence('start_hour', 'create')
+            ->notEmpty('start_hour')
+            ->add('duration', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('duration', 'create')
+            ->notEmpty('duration');
 
         return $validator;
     }
@@ -64,7 +69,8 @@ class ServicesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['gym_id'], 'Gyms'));
+        $rules->add($rules->existsIn(['service_id'], 'Services'));
+        $rules->add($rules->existsIn(['weekday_id'], 'Weekdays'));
         return $rules;
     }
 }

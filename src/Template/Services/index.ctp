@@ -1,10 +1,11 @@
-<?= $this->Html->link('Adicionar Serviço', ['action' => 'add'], ['class' => 'btn btn-primary'])?>
+<?= $this->Html->link('Adicionar aula', ['action' => 'add'], ['class' => 'btn btn-primary'])?>
 <hr>
 <table class="table table-striped">
     <thead>
         <tr>
             <th><?= $this->Paginator->sort('name', 'Nome') ?></th>            
-            <th><?= $this->Paginator->sort('created', 'Criado em') ?></th>            
+            <th><?= $this->Paginator->sort('description', 'Descrição') ?></th>
+            <th>Horários</th>
             <th class="actions"><?= __('Ações') ?></th>
         </tr>
     </thead>
@@ -12,7 +13,14 @@
     <?php foreach ($services as $service): ?>
         <tr>
             <td><?= h($service->name) ?></td>           
-            <td><?= h($service->created) ?></td>            
+            <td><?= h($service->description) ?></td>
+            <td>
+                <?php if ($service->times): ?>
+                    <?php foreach ($service->times as $time): ?>
+                        <span class="label label-primary"><?= $time->start_hour ?></span>
+                    <?php endforeach ?>
+                <?php endif ?>
+            </td> 
             <td class="actions">
                 <?= $this->Html->link(__('Ver'), ['action' => 'view', $service->id]) ?>
                 <?= $this->Html->link(__('Editar'), ['action' => 'edit', $service->id]) ?>

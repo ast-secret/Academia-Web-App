@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Table;
 
+use App\Model\Entity\User;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -60,7 +61,10 @@ class UsersTable extends Table
             ->requirePresence('username', 'create')
             ->notEmpty('username')
             ->requirePresence('password', 'create')
-            ->notEmpty('password');
+            ->notEmpty('password')
+            ->add('stats', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('stats', 'create')
+            ->notEmpty('stats');
 
         return $validator;
     }

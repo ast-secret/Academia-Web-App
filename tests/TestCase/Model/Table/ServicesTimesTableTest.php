@@ -1,14 +1,14 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\UsersTable;
+use App\Model\Table\ServicesTimesTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\UsersTable Test Case
+ * App\Model\Table\ServicesTimesTable Test Case
  */
-class UsersTableTest extends TestCase
+class ServicesTimesTableTest extends TestCase
 {
 
     /**
@@ -17,22 +17,23 @@ class UsersTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'Users' => 'app.users',
+        'ServicesTimes' => 'app.services_times',
+        'Services' => 'app.services',
         'Gyms' => 'app.gyms',
         'Machines' => 'app.machines',
         'Phones' => 'app.phones',
         'Rooms' => 'app.rooms',
         'Lessons' => 'app.lessons',
-        'Services' => 'app.services',
-        'Weekdays' => 'app.weekdays',
-        'ServicesWeekdays' => 'app.services_weekdays',
+        'Users' => 'app.users',
         'Roles' => 'app.roles',
         'Cards' => 'app.cards',
         'Customers' => 'app.customers',
         'Suggestions' => 'app.suggestions',
         'ExercisesGroups' => 'app.exercises_groups',
         'Exercises' => 'app.exercises',
-        'Releases' => 'app.releases'
+        'Releases' => 'app.releases',
+        'Weekdays' => 'app.weekdays',
+        'ServicesWeekdays' => 'app.services_weekdays'
     ];
 
     /**
@@ -43,7 +44,7 @@ class UsersTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Users') ? [] : ['className' => 'App\Model\Table\UsersTable'];        $this->Users = TableRegistry::get('Users', $config);    }
+        $config = TableRegistry::exists('ServicesTimes') ? [] : ['className' => 'App\Model\Table\ServicesTimesTable'];        $this->ServicesTimes = TableRegistry::get('ServicesTimes', $config);    }
 
     /**
      * tearDown method
@@ -52,7 +53,7 @@ class UsersTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Users);
+        unset($this->ServicesTimes);
 
         parent::tearDown();
     }

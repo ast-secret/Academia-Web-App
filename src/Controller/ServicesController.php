@@ -18,7 +18,7 @@ class ServicesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Gyms']
+            'contain' => ['Times']
         ];
         $this->set('services', $this->paginate($this->Services));
         $this->set('_serialize', ['services']);
@@ -34,7 +34,7 @@ class ServicesController extends AppController
     public function view($id = null)
     {
         $service = $this->Services->get($id, [
-            'contain' => ['Gyms', 'Weekdays', 'Lessons']
+            'contain' => ['Gyms', 'Times']
         ]);
         $this->set('service', $service);
         $this->set('_serialize', ['service']);
@@ -49,17 +49,24 @@ class ServicesController extends AppController
     {
         $service = $this->Services->newEntity();
         if ($this->request->is('post')) {
-             $this->request->data['gym_id'] = 1;
-            $service = $this->Services->patchEntity($service, $this->request->data);
+            $this->request->data['gym_id'] = 1;
+            debug($this->request->data['times']);
+            exit();
+
+            $service = $this->Services->patchEntity($service, $this->request->data, ['associated' => ['Times']]);
+            debug($service);
+            exit();
             if ($this->Services->save($service)) {
                 $this->Flash->success('The service has been saved.');
                 return $this->redirect(['action' => 'index']);
             } else {
+                debug($service->errors());
                 $this->Flash->error('The service could not be saved. Please, try again.');
             }
         }
-        $gyms = $this->Services->Gyms->find('list', array('conditions' => array('Gyms.id' => '1')));
-        $weekdays = $this->Services->Weekdays->find('list', ['limit' => 200]);
+        $gyms = $this->Services->Gyms->find('list', ['limit' => 200]);
+        $weekdays = $this->Services->Times->weekdays->find('list', ['limit' => 200]);
+
         $this->set(compact('service', 'gyms', 'weekdays'));
         $this->set('_serialize', ['service']);
     }
@@ -74,7 +81,7 @@ class ServicesController extends AppController
     public function edit($id = null)
     {
         $service = $this->Services->get($id, [
-            'contain' => ['Weekdays']
+            'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $service = $this->Services->patchEntity($service, $this->request->data);
@@ -86,8 +93,7 @@ class ServicesController extends AppController
             }
         }
         $gyms = $this->Services->Gyms->find('list', ['limit' => 200]);
-        $weekdays = $this->Services->Weekdays->find('list', ['limit' => 200]);
-        $this->set(compact('service', 'gyms', 'weekdays'));
+        $this->set(compact('service', 'gyms'));
         $this->set('_serialize', ['service']);
     }
 
