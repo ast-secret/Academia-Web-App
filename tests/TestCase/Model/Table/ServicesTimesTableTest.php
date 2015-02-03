@@ -44,9 +44,13 @@ class ServicesTimesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+<<<<<<< HEAD
         $config = TableRegistry::exists('ServicesTimes') ? [] : ['className' => 'App\Model\Table\ServicesTimesTable'];
         $this->ServicesTimes = TableRegistry::get('ServicesTimes', $config);
     }
+=======
+        $config = TableRegistry::exists('ServicesTimes') ? [] : ['className' => 'App\Model\Table\ServicesTimesTable'];        $this->ServicesTimes = TableRegistry::get('ServicesTimes', $config);    }
+>>>>>>> 69ce5ed8e2b81535f4e5855419b588ac658d01cb
 
     /**
      * tearDown method

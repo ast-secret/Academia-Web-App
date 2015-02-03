@@ -49,11 +49,16 @@ class CardsController extends AppController
      */
     public function add($customer_id = null)
     {
+        $breadcrumb = [
+            'active' => 'Adicionar Ficha',
+            'parents' => [
+                ['label' => 'Fichas', 'url' => ['action' => 'index']]
+            ]
+        ];
 
         $card = $this->Cards->newEntity();
 
         if ($this->request->is('post')) {
-            
             $this->request->data['start_date'] = Time::now();
             $this->request->data['customer_id'] = $customer_id;
             $this->request->data['user_id'] = 1;
@@ -63,17 +68,18 @@ class CardsController extends AppController
 
             } else {
                 $card = $this->Cards->patchEntity($card, $this->request->data, ['associated' => ['ExercisesGroups.Exercises']]);
+                debug($card);
+                exit();
                 if ($this->Cards->save($card)) {
                     $this->Flash->success('A ficha foi salva com sucesso!.');
                     return $this->redirect(['action' => 'customer', $customer_id]);
                 } else {
-                    // debug($card->errors());
-                    $this->Flash->error('A ficha não foi salva');
+                    $this->set('errorsList', $this->errorsToList($card->errors()));
                 }
             }
         }
         $customers = $this->Cards->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('card', 'customers'));
+        $this->set(compact('card', 'customers', 'breadcrumb'));
         $this->set('_serialize', ['card']);
     }
 

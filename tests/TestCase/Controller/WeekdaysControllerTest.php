@@ -17,22 +17,21 @@ class WeekdaysControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'Weekdays' => 'app.weekdays',
+        'Times' => 'app.times',
         'Services' => 'app.services',
         'Gyms' => 'app.gyms',
         'Machines' => 'app.machines',
-        'CardsExercises' => 'app.cards_exercises',
-        'Exercises' => 'app.exercises',
-        'Cards' => 'app.cards',
-        'Users' => 'app.users',
-        'Roles' => 'app.roles',
-        'Releases' => 'app.releases',
-        'Customers' => 'app.customers',
-        'Suggestions' => 'app.suggestions',
-        'ExercisesGroups' => 'app.exercises_groups',
         'Phones' => 'app.phones',
         'Rooms' => 'app.rooms',
         'Lessons' => 'app.lessons',
-        'ServicesWeekdays' => 'app.services_weekdays'
+        'Users' => 'app.users',
+        'Roles' => 'app.roles',
+        'Cards' => 'app.cards',
+        'Customers' => 'app.customers',
+        'Suggestions' => 'app.suggestions',
+        'ExercisesGroups' => 'app.exercises_groups',
+        'Exercises' => 'app.exercises',
+        'Releases' => 'app.releases'
     ];
 
     /**

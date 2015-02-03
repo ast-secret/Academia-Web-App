@@ -28,6 +28,12 @@ class AppController extends Controller
 {
     public $layout = 'custom';
 
+    public $helpers = [
+        'Form' => [
+            'className' => 'Chocolate.BootstrapForm'
+        ]
+    ];
+
     /**
      * Initialization hook method.
      *
@@ -38,11 +44,14 @@ class AppController extends Controller
     public function initialize()
     {
         $bootstrapFormTemplate = [
+            'formStart' => '<form {{attrs}} novalidate>',
             'errorList' => '<ul>{{content}}</ul>',
             'errorItem' => '<li>{{text}}</li>',
             'input' => '<input {{type}} {{attrs}} {{name}} class="form-control">',
             'textarea' => '<textarea {{attrs}} {{name}} class="form-control">{{value}}</textarea>',
             'inputContainer' => '<div class="form-group">{{content}}</div>',
+            'inputContainerError' => '<div class="form-group">{{content}}</div>',
+            'formGroup' => '{{label}} {{input}}',
             'dateWidget' => '<div class="row">
                     <div class="col-md-3">{{day}}</div>
                     <div class="col-md-5">{{month}}</div>
@@ -53,5 +62,21 @@ class AppController extends Controller
 
         $this->loadComponent('Flash');
         $this->set(compact('bootstrapFormTemplate'));
+    }
+
+    public function errorsToList($fields)
+    {
+        $list = '<dl>';
+
+        foreach ($fields as $fieldKey => $field) {
+            $list .= "<dt>{$fieldKey}</dt>";
+            foreach ($field as $error) {
+                $list .= "<dd>{$error}</dd>";
+            }
+        }
+        
+        $list .= '<dl>';
+
+        return $list;
     }
 }

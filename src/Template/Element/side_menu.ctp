@@ -23,7 +23,7 @@ $items = [
 	],
 	[
 		'label' => 'Aulas',
-		'controller' => 'lessons',
+		'controller' => 'services',
 		'action' => 'index',
 	],
 	[

@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Table;
 
+use App\Model\Entity\Weekday;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -21,13 +22,11 @@ class WeekdaysTable extends Table
     public function initialize(array $config)
     {
         $this->table('weekdays');
-        $this->displayField('id');
+        $this->displayField('name');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
-        $this->belongsToMany('Services', [
-            'foreignKey' => 'weekday_id',
-            'targetForeignKey' => 'service_id',
-            'joinTable' => 'services_weekdays'
+        $this->hasMany('Times', [
+            'foreignKey' => 'weekday_id'
         ]);
     }
 
@@ -42,6 +41,8 @@ class WeekdaysTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create')
+            ->requirePresence('name', 'create')
+            ->notEmpty('name')
             ->add('weekday', 'valid', ['rule' => 'numeric'])
             ->requirePresence('weekday', 'create')
             ->notEmpty('weekday');

@@ -17,11 +17,8 @@ class WeekdaysController extends AppController
      */
     public function index()
     {
-        
-        
         $this->set('weekdays', $this->paginate($this->Weekdays));
         $this->set('_serialize', ['weekdays']);
-
     }
 
     /**
@@ -34,10 +31,8 @@ class WeekdaysController extends AppController
     public function view($id = null)
     {
         $weekday = $this->Weekdays->get($id, [
-            'contain' => ['Services']
+            'contain' => ['Times']
         ]);
-
-       
         $this->set('weekday', $weekday);
         $this->set('_serialize', ['weekday']);
     }
@@ -59,8 +54,7 @@ class WeekdaysController extends AppController
                 $this->Flash->error('The weekday could not be saved. Please, try again.');
             }
         }
-        $services = $this->Weekdays->Services->find('list', ['limit' => 200]);
-        $this->set(compact('weekday', 'services'));
+        $this->set(compact('weekday'));
         $this->set('_serialize', ['weekday']);
     }
 
@@ -74,7 +68,7 @@ class WeekdaysController extends AppController
     public function edit($id = null)
     {
         $weekday = $this->Weekdays->get($id, [
-            'contain' => ['Services']
+            'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $weekday = $this->Weekdays->patchEntity($weekday, $this->request->data);
@@ -85,8 +79,7 @@ class WeekdaysController extends AppController
                 $this->Flash->error('The weekday could not be saved. Please, try again.');
             }
         }
-        $services = $this->Weekdays->Services->find('list', ['limit' => 200]);
-        $this->set(compact('weekday', 'services'));
+        $this->set(compact('weekday'));
         $this->set('_serialize', ['weekday']);
     }
 

@@ -56,8 +56,13 @@ class UsersFixture extends TestFixture
             'name' => 'Lorem ipsum dolor sit amet',
             'username' => 'Lorem ipsum dolor sit amet',
             'password' => 'Lorem ipsum dolor sit amet',
+<<<<<<< HEAD
             'created' => '2015-02-01 14:48:06',
             'modified' => '2015-02-01 14:48:06',
+=======
+            'created' => '2015-01-01 14:40:17',
+            'modified' => '2015-01-01 14:40:17',
+>>>>>>> 69ce5ed8e2b81535f4e5855419b588ac658d01cb
             'stats' => 1
         ],
     ];

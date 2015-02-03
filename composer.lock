@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "af6bd542a3506cd8db47db7160559b43",
+    "hash": "56320fc27726893adc0ec13a3b57dedd",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -131,12 +131,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cakephp.git",
-                "reference": "868336219b84e25b6a21c6df46a0095fa1ec78fd"
+                "reference": "3548ddab804c361402c2c50dfe16603e473e8069"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/868336219b84e25b6a21c6df46a0095fa1ec78fd",
-                "reference": "868336219b84e25b6a21c6df46a0095fa1ec78fd",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/3548ddab804c361402c2c50dfe16603e473e8069",
+                "reference": "3548ddab804c361402c2c50dfe16603e473e8069",
                 "shasum": ""
             },
             "require": {
@@ -190,7 +190,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-01-27 08:03:19"
+            "time": "2015-01-29 20:43:47"
         },
         {
             "name": "cakephp/migrations",
@@ -285,6 +285,42 @@
             ],
             "description": "A composer installer for CakePHP 3.0+ plugins.",
             "time": "2015-01-23 14:25:46"
+        },
+        {
+            "name": "commercial-hippie/chocolate",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/commercial-hippie/chocolate.git",
+                "reference": "eba570fc6d4abeb309df37c6c140f3b412636d6d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/commercial-hippie/chocolate/zipball/eba570fc6d4abeb309df37c6c140f3b412636d6d",
+                "reference": "eba570fc6d4abeb309df37c6c140f3b412636d6d",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/plugin-installer": "*"
+            },
+            "require-dev": {
+                "cakephp/cakephp": "3.0.x-dev"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "installer-name": "Chocolate"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Chocolate\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Front-End Framework FormHelpers for CakePHP 3.0",
+            "time": "2014-10-01 09:04:07"
         },
         {
             "name": "gourmet/twitter_bootstrap",
@@ -830,12 +866,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/bake.git",
-                "reference": "80a45a2eff9170e4f86f06bebf7a3aa80224d534"
+                "reference": "c31e15747f090906bd6110f743c708d65786655c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/bake/zipball/80a45a2eff9170e4f86f06bebf7a3aa80224d534",
-                "reference": "80a45a2eff9170e4f86f06bebf7a3aa80224d534",
+                "url": "https://api.github.com/repos/cakephp/bake/zipball/c31e15747f090906bd6110f743c708d65786655c",
+                "reference": "c31e15747f090906bd6110f743c708d65786655c",
                 "shasum": ""
             },
             "require": {
@@ -868,7 +904,7 @@
                 "bake",
                 "cakephp"
             ],
-            "time": "2015-01-25 03:49:06"
+            "time": "2015-01-29 02:00:10"
         },
         {
             "name": "cakephp/debug_kit",
@@ -968,6 +1004,7 @@
         "cakephp/cakephp": 20,
         "cakephp/migrations": 20,
         "gourmet/twitter_bootstrap": 20,
+        "commercial-hippie/chocolate": 20,
         "cakephp/debug_kit": 20,
         "cakephp/bake": 20
     },
