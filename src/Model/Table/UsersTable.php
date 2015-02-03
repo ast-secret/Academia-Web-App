@@ -60,9 +60,23 @@ class UsersTable extends Table
             ->requirePresence('username', 'create')
             ->notEmpty('username')
             ->requirePresence('password', 'create')
-            ->notEmpty('password');
+            ->notEmpty('password')
+            ->add('stats', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('stats', 'create')
+            ->notEmpty('stats');
 
         return $validator;
+    }
+
+    public function validationUpdatePassword(Validator $validator){
+        $validator
+        ->add('id', 'valid', ['rule' => 'numeric'])
+        ->requirePresence('id')
+        // you might want to add some actual password validation here
+        ->requirePresence('password')
+        ->notEmpty('password');
+
+    return $validator;
     }
 
     /**

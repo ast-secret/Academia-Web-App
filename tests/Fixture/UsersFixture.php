@@ -25,6 +25,7 @@ class UsersFixture extends TestFixture
         'password' => ['type' => 'string', 'length' => 60, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
+        'stats' => ['type' => 'integer', 'length' => 4, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_indexes' => [
             'fk_users_gym_info1_idx' => ['type' => 'index', 'columns' => ['gym_id'], 'length' => []],
             'fk_users_roles1_idx' => ['type' => 'index', 'columns' => ['role_id'], 'length' => []],
@@ -55,13 +56,9 @@ class UsersFixture extends TestFixture
             'name' => 'Lorem ipsum dolor sit amet',
             'username' => 'Lorem ipsum dolor sit amet',
             'password' => 'Lorem ipsum dolor sit amet',
-<<<<<<< HEAD
-            'created' => '2015-01-24 03:55:39',
-            'modified' => '2015-01-24 03:55:39'
-=======
-            'created' => '2015-01-26 17:29:34',
-            'modified' => '2015-01-26 17:29:34'
->>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
+            'created' => '2015-02-01 14:48:06',
+            'modified' => '2015-02-01 14:48:06',
+            'stats' => 1
         ],
     ];
 }

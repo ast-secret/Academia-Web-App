@@ -49,17 +49,18 @@ class UsersController extends AppController
     {
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
+            $this->request->data['gym_id'] = 1;            
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
                 $this->Flash->success('The user has been saved.');
                 return $this->redirect(['action' => 'index']);
             } else {
+                debug($user->errors());
                 $this->Flash->error('The user could not be saved. Please, try again.');
             }
         }
-        $gyms = $this->Users->Gyms->find('list',  array('conditions' => array('Gyms.id' => '1')));       
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'gyms', 'roles'));
+        $this->set(compact('user', 'roles'));
         $this->set('_serialize', ['user']);
     }
 
@@ -109,7 +110,68 @@ class UsersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function change_password($id = null){
+    public function change_password(){     
 
-    }
+        // Só faz essa parada se o cara postar o form
+        if ($this->request->is('post')) {
+            // Ve se a senha nova bate com a confirmação
+            if ($this->request->data['new-password'] == '') {
+                $this->Flash->error('Você não informou a sua nova senha.');
+                // return  $this->redirect(['action' => 'change_password']);
+            } elseif($this->request->data['new-password'] != $this->request->data['confirm-password']) {
+                $this->Flash->error('Você não confirmou a sua nova senha corretamente.');
+                // return  $this->redirect(['action' => 'change_password']);
+            } else {
+                // Agora pega a senha atual do cara
+                $user_data = $this->Users
+                        ->find()
+                        ->where(['id' => 2])
+                        ->first();
+                 /*debug($user_data);
+                 exit();*/
+                if ($this->request->data['current-password'] != $user_data->password) {
+                    $this->Flash->error('A sua senha atual está incorreta');
+                    // return  $this->redirect(['action' => 'change_password']);
+                } else {
+                    // Se liga como que salva, primeira vc cria um entidade vazia!!
+                    // Fiz isso pra nao confundir valores do slect com entidade
+                    
+                    //$user = $this->Users->newEntity();
+                    
+                    // Aqui vc pega a entidade e seta os valores, agora eh a entidade preenchida
+                    $user = $this->Users->patchEntity($user_data, 
+                        [
+                        'password' => $this->request->data['new-password']                        
+                        ]);
+                    /*debug($user);
+                    exit();*/
+                    if ($this->Users->save($user)) {
+                        $this->Flash->success('A sua senha foi atualizada corretamente!');
+                    } else {
+                        $this->Flash->error('Ocorreu um erro ao salvar a sua nova senha!');
+                    }
+                }
+            }
+        }
+                     
+            // $users = $this->Users rapidin, faltou informar ao save a entidade nao??? certo? 
+            // isso que eu ia ver agora.. acho que sim
+            // CORRETO!!!
+            //         ->find()
+            //         ->select(['password'])
+            //         ->where(['Users.id' => 2]);
+
+            // debug($users->password);
+
+            // if ($this->request->is('post')){            
+            //     $user = $this->Users->patchEntity($user, $this->request->data);
+            // if ($this->Users->save($user)) {
+            //     $this->Flash->success('Senha alterada com sucesso');
+            //     return $this->redirect(['action' => 'index']);
+            // } else {
+            //     $this->Flash->error('Senha não pode ser alterada, por favor tente novamente');
+            // }      
+       
+    }   
+
 }
