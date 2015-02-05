@@ -52,21 +52,17 @@ class RoomsController extends AppController
 
             $this->request->data['gym_id'] = 1;
             
-            $room = $this->Rooms->patchEntity($room, $this->request->data);
-
+            $room = $this->Rooms->patchEntity($room, $this->request->data);                
             if ($this->Rooms->save($room)) {
-                debug($room->errors());
-                $this->Flash->success('The room has been saved.');
+                $this->Flash->success('A Sala foi salva com sucesso.');
                 return $this->redirect(['action' => 'index']);
             } else {
-                debug($room->errors());
-
-                $this->Flash->error('The room could not be saved. Please, try again.');
+                $this->Flash->error('A Sala não pode ser salva, tente de novo.');
             }
         }
-        $gyms = $this->Rooms->Gyms->find('list', array('conditions' => array('Gyms.id' => '1')));
+        /*$gyms = $this->Rooms->Gyms->find('list', array('conditions' => array('Gyms.id' => '1')));
         $this->set(compact('room', 'gyms'));
-        $this->set('_serialize', ['room']);
+        $this->set('_serialize', ['room']);*/
     }
 
     /**
@@ -91,9 +87,9 @@ class RoomsController extends AppController
                 $this->Flash->error('The room could not be saved. Please, try again.');
             }
         }
-        $gyms = $this->Rooms->Gyms->find('list', ['limit' => 200]);
+       /* $gyms = $this->Rooms->Gyms->find('list', ['limit' => 200]);
         $this->set(compact('room', 'gyms'));
-        $this->set('_serialize', ['room']);
+        $this->set('_serialize', ['room']);*/
     }
 
     /**

@@ -26,6 +26,8 @@ class UsersFixture extends TestFixture
         'created' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'stats' => ['type' => 'integer', 'length' => 4, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'mail_temp' => ['type' => 'string', 'length' => 70, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
+        'token' => ['type' => 'string', 'length' => 45, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
         '_indexes' => [
             'fk_users_gym_info1_idx' => ['type' => 'index', 'columns' => ['gym_id'], 'length' => []],
             'fk_users_roles1_idx' => ['type' => 'index', 'columns' => ['role_id'], 'length' => []],
@@ -56,14 +58,11 @@ class UsersFixture extends TestFixture
             'name' => 'Lorem ipsum dolor sit amet',
             'username' => 'Lorem ipsum dolor sit amet',
             'password' => 'Lorem ipsum dolor sit amet',
-<<<<<<< HEAD
-            'created' => '2015-02-01 14:48:06',
-            'modified' => '2015-02-01 14:48:06',
-=======
-            'created' => '2015-01-01 14:40:17',
-            'modified' => '2015-01-01 14:40:17',
->>>>>>> 69ce5ed8e2b81535f4e5855419b588ac658d01cb
-            'stats' => 1
+            'created' => '2015-02-04 01:05:20',
+            'modified' => '2015-02-04 01:05:20',
+            'stats' => 1,
+            'mail_temp' => 'Lorem ipsum dolor sit amet',
+            'token' => 'Lorem ipsum dolor sit amet'
         ],
     ];
 }

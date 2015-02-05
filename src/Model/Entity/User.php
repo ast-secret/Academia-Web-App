@@ -21,6 +21,8 @@ class User extends Entity
         'username' => true,
         'password' => true,
         'stats' => true,
+        'mail_temp' => true,
+        'token' => true,
         'gym' => true,
         'role' => true,
         'cards' => true,

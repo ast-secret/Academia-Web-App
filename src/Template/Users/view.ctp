@@ -1,21 +1,4 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Gyms'), ['controller' => 'Gyms', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Gym'), ['controller' => 'Gyms', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Roles'), ['controller' => 'Roles', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Role'), ['controller' => 'Roles', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Cards'), ['controller' => 'Cards', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Card'), ['controller' => 'Cards', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Releases'), ['controller' => 'Releases', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Release'), ['controller' => 'Releases', 'action' => 'add']) ?> </li>
-    </ul>
-</div>
-<div class="users view large-10 medium-9 columns">
+<div class="users form large-10 medium-9 columns">
     <h2><?= h($user->name) ?></h2>
     <div class="row">
         <div class="large-5 columns strings">
