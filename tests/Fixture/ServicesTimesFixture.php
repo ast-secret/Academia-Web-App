@@ -49,7 +49,11 @@ class ServicesTimesFixture extends TestFixture
             'service_id' => 1,
             'weekday_id' => 1,
             'created' => 'Lorem ipsum dolor sit amet',
+<<<<<<< HEAD
+            'start_hour' => '14:47:58',
+=======
             'start_hour' => '16:55:32',
+>>>>>>> 69ce5ed8e2b81535f4e5855419b588ac658d01cb
             'duration' => 1
         ],
     ];

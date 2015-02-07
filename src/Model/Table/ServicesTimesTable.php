@@ -1,7 +1,10 @@
 <?php
 namespace App\Model\Table;
 
+<<<<<<< HEAD
+=======
 use App\Model\Entity\ServicesTime;
+>>>>>>> 69ce5ed8e2b81535f4e5855419b588ac658d01cb
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;

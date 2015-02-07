@@ -64,7 +64,9 @@ class UsersTable extends Table
             ->notEmpty('password')
             ->add('stats', 'valid', ['rule' => 'numeric'])
             ->requirePresence('stats', 'create')
-            ->notEmpty('stats');
+            ->notEmpty('stats')
+            ->allowEmpty('mail_temp')
+            ->allowEmpty('token');
 
         return $validator;
     }

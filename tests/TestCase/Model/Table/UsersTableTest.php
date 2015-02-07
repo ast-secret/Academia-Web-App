@@ -24,8 +24,8 @@ class UsersTableTest extends TestCase
         'Rooms' => 'app.rooms',
         'Lessons' => 'app.lessons',
         'Services' => 'app.services',
+        'Times' => 'app.times',
         'Weekdays' => 'app.weekdays',
-        'ServicesWeekdays' => 'app.services_weekdays',
         'Roles' => 'app.roles',
         'Cards' => 'app.cards',
         'Customers' => 'app.customers',
@@ -43,7 +43,9 @@ class UsersTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Users') ? [] : ['className' => 'App\Model\Table\UsersTable'];        $this->Users = TableRegistry::get('Users', $config);    }
+        $config = TableRegistry::exists('Users') ? [] : ['className' => 'App\Model\Table\UsersTable'];
+        $this->Users = TableRegistry::get('Users', $config);
+    }
 
     /**
      * tearDown method
@@ -73,6 +75,16 @@ class UsersTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test validationUpdatePassword method
+     *
+     * @return void
+     */
+    public function testValidationUpdatePassword()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

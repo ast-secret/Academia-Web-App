@@ -1,5 +1,5 @@
 <div class="rooms form large-10 medium-9 columns">
-    <?= $this->Form->create($room, ['templates' => $bootstrapFormTemplate]); ?>
+    <?= $this->Form->create(); ?>
     <fieldset>
         <legend><?= __('Adicionar Sala') ?></legend>
         <?php
