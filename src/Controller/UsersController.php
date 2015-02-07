@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
 
 /**
  * Users Controller
@@ -157,6 +158,7 @@ class UsersController extends AppController
     }   
 
     public function change_mail(){
+        
         $user = $this->Users->get(1);
         $this->set('mail', $user->username);        
         
@@ -177,7 +179,8 @@ class UsersController extends AppController
                 $user = $this->Users->patchEntity($user,
                         [
                             'mail_temp' => $this->request->data['mail'],
-                            'token' => 12345
+                            'token_mail' => 12345,
+                            'token_time_exp' => date("Y-m-d H:i:s")
                         ]);
                     
                     if($this->Users->save($user)){
@@ -193,6 +196,7 @@ class UsersController extends AppController
 
 
     public function confirm_mail(){
+                       
         $mail = $this->request->query['mail'];
         $token = $this->request->query['token'];
 
@@ -200,9 +204,18 @@ class UsersController extends AppController
                         ->find()
                         ->where([
                                 'mail_temp' => $mail,
-                                'token' => $token
+                                'token_mail' => $token
                             ])
                         ->first(); 
+        
+                
+        //exit($users->token_time_exp->isWithinNext(3));
+        if($users->token_time_exp->isWithinNext(3)){
+            debug('Expired');//return true
+        }else{
+            debug('Valid');//return false
+        }                     
+       exit();                 
 
         if($users){
             $user = $this->Users->patchEntity($users,

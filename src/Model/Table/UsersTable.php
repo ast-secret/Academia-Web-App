@@ -66,7 +66,9 @@ class UsersTable extends Table
             ->requirePresence('stats', 'create')
             ->notEmpty('stats')
             ->allowEmpty('mail_temp')
-            ->allowEmpty('token');
+            ->allowEmpty('token_mail')
+            ->add('token_time_exp', 'valid', ['rule' => 'datetime'])
+            ->allowEmpty('token_time_exp');
 
         return $validator;
     }
