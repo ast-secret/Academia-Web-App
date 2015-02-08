@@ -34,6 +34,16 @@ $items = [
 ]
 ?>
 
+<div style="padding-top: 10px;padding-bottom: 10px;">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<h4 style="color: #FFF;">Konen</h4>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div style="margin-bottom: 20px; background-color: #2980b9; padding-top: 10px; padding-bottom: 10px;">
 	<div class="container-fluid">
 		<div class="row">
@@ -41,7 +51,7 @@ $items = [
 			<?= $this->Html->image('avatar.jpg',
 				['class' => 'media-object img-circle', 'width' => '40', 'style' => 'margin-right: 5px;'])
 			?>
-	<span class="media-heading" style="color: #FFF;"><strong>Brad Pitt</strong> <em><small>Professor</small></em></span>
+	<span class="" style="color: #FFF;"><strong>Brad Pitt</strong> <em><small>Professor</small></em></span>
 
 	<button data-toggle="dropdown"
 		class="dropdown-toggle  pull-right" style="color: white; margin-top: 10px; background: none; border: 0;">
