@@ -71,19 +71,21 @@ class ReleasesController extends AppController
      */
     public function edit($id = null)
     {
+
         $release = $this->Releases->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            $this->request->data['user_id'] = 1;
             $release = $this->Releases->patchEntity($release, $this->request->data);
             if ($this->Releases->save($release)) {
-                $this->Flash->success('The release has been saved.');
+                $this->Flash->success('O Comunicado foi salvo com sucesso.');
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error('The release could not be saved. Please, try again.');
+                $this->Flash->error('O Comunicado não pode ser salvo, tente novamente.');
             }
         }
-        $users = $this->Releases->Users->find('list', ['limit' => 200]);
+        //$users = $this->Releases->Users->find('list', ['limit' => 200]);
         $this->set(compact('release', 'users'));
         $this->set('_serialize', ['release']);
     }

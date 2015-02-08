@@ -73,19 +73,48 @@ class UsersController extends AppController
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
-    {
+    {       
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
+        
+        // Variavel Teste de Sessão 
+        
+        $usuarioSession = $this->request->data['id'] = 3;   
+        //Select para confirmar se o confirm_password é referente ao do usuario logado
+        $userPass = $this->Users
+                        ->find()
+                        ->where(['password'=>$this->request->data['confirm_password'],'id' => $usuarioSession])
+                        ->first();            
+
+
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->data);        
-            if ($this->Users->save($user)) {
-                $this->Flash->success('O usuário foi salvo com sucesso.');
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error('O usuário não pode ser salvo, tente novamente.');
+            //Apenas Alterar a Senha, isso exige a senha do Usuario logado
+            if($user->password!=$this->request->data['password']){
+                //Verifica se ele quer trocar a senha, se sim confirma  a senha do logado
+                if($userPass && $this->request->data['confirm_password']!=''){
+                    $user = $this->Users->patchEntity($user, $this->request->data);        
+                    if ($this->Users->save($user)) {
+                        $this->Flash->success('O usuário foi salvo com sucesso.');
+                        return $this->redirect(['action' => 'index']);
+                    } else {
+                        $this->Flash->error('O usuário não pode ser salvo, tente novamente.');
+                    }
+                }else{
+                    $this->Flash->error('Sua senha está incorreta, tente novamente.');
+                }
+            }else{
+                $user = $this->Users->patchEntity($user, $this->request->data);        
+                    if ($this->Users->save($user)) {
+                        $this->Flash->success('O usuário foi salvo com sucesso.');
+                        return $this->redirect(['action' => 'index']);
+                    } else {
+                        $this->Flash->error('O usuário não pode ser salvo, tente novamente.');
+                    }
             }
+
         }
+        
         $gyms = $this->Users->Gyms->find('list', ['limit' => 200]);
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
         $this->set(compact('user', 'gyms', 'roles'));
@@ -172,18 +201,18 @@ class UsersController extends AppController
                         ->first();                      
 
             if($users->username == $this->request->data['mail']){
+                //Se existir um email igual ele exibi esse flash
                 $this->Flash->error("Email já existe");
                 return  $this->redirect(['action' => 'change_mail']);
             }else{
-                //Salvar o Email Temporario e Adicionar o Token
+                //Salvar o Email Temporario e Adicionar o Token e Tempo para expirar
                 $user = $this->Users->patchEntity($user,
                         [
                             'mail_temp' => $this->request->data['mail'],
                             'token_mail' => 12345,
                             'token_time_exp' => date("Y-m-d H:i:s")
                         ]);
-                    
-                    if($this->Users->save($user)){
+                    if($this->Users->save($user)){                           
                         $this->Flash->success('Email salvo com sucesso, verifique seu email.');
                         return  $this->redirect(['action' => 'change_mail']);                        
                     }else{
@@ -206,29 +235,26 @@ class UsersController extends AppController
                                 'mail_temp' => $mail,
                                 'token_mail' => $token
                             ])
-                        ->first(); 
-        
-                
-        //exit($users->token_time_exp->isWithinNext(3));
-        if($users->token_time_exp->isWithinNext(3)){
-            debug('Expired');//return true
-        }else{
-            debug('Valid');//return false
-        }                     
-       exit();                 
+                        ->first();        
 
         if($users){
-            $user = $this->Users->patchEntity($users,
-                        [
-                            'username' => $mail, 
-                            'mail_temp' => "",
-                            'token' => ""                           
-                        ]);            
-            if($this->Users->save($user)){
-                $this->Flash->success('Email alterado com sucesso.');
+            if($users->token_time_exp->wasWithinLast(3)){
+                $user = $this->Users->patchEntity($users,
+                            [
+                                'username' => $mail, 
+                                'mail_temp' => "",
+                                'token_mail' => "" ,     
+                                'token_time_exp' => ""                     
+                            ]);            
+                if($this->Users->save($user)){
+                    $this->Flash->success('Email alterado com sucesso.');
+                }else{
+                    $this->Flash->error('Ocorreu um erro, tente novamente');
+                }
             }else{
-                $this->Flash->error('Ocorreu um erro, tente novamente');
-            }
+                $this->Flash->error('Sua Chave já expirou, tente gerar outra');
+                return  $this->redirect(['action' => 'change_mail']);
+            }                
         }else{
             $this->Flash->error("Não foi possível alterar seu email, tente novamente");
         }
