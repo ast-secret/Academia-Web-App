@@ -59,6 +59,7 @@ class CardsController extends AppController
         $card = $this->Cards->newEntity();
 
         if ($this->request->is('post')) {
+
             $this->request->data['start_date'] = Time::now();
             $this->request->data['customer_id'] = $customer_id;
             $this->request->data['user_id'] = 1;
@@ -68,8 +69,7 @@ class CardsController extends AppController
 
             } else {
                 $card = $this->Cards->patchEntity($card, $this->request->data, ['associated' => ['ExercisesGroups.Exercises']]);
-                debug($card);
-                exit();
+
                 if ($this->Cards->save($card)) {
                     $this->Flash->success('A ficha foi salva com sucesso!.');
                     return $this->redirect(['action' => 'customer', $customer_id]);
