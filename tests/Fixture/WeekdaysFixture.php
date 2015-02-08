@@ -42,8 +42,8 @@ class WeekdaysFixture extends TestFixture
             'id' => 1,
             'name' => 'Lorem ipsum dolor sit amet',
             'weekday' => 1,
-            'created' => '2015-02-01 16:59:04',
-            'modified' => '2015-02-01 16:59:04'
+            'created' => '2015-02-08 00:16:48',
+            'modified' => '2015-02-08 00:16:48'
         ],
     ];
 }

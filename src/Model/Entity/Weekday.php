@@ -17,6 +17,6 @@ class Weekday extends Entity
     protected $_accessible = [
         'name' => true,
         'weekday' => true,
-        'services_times' => true,
+        'times' => true,
     ];
 }

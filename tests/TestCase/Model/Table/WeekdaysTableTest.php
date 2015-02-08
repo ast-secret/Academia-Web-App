@@ -18,7 +18,7 @@ class WeekdaysTableTest extends TestCase
      */
     public $fixtures = [
         'Weekdays' => 'app.weekdays',
-        'ServicesTimes' => 'app.services_times',
+        'Times' => 'app.times',
         'Services' => 'app.services',
         'Gyms' => 'app.gyms',
         'Machines' => 'app.machines',
@@ -32,8 +32,7 @@ class WeekdaysTableTest extends TestCase
         'Suggestions' => 'app.suggestions',
         'ExercisesGroups' => 'app.exercises_groups',
         'Exercises' => 'app.exercises',
-        'Releases' => 'app.releases',
-        'Times' => 'app.times'
+        'Releases' => 'app.releases'
     ];
 
     /**

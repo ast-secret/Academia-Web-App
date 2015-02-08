@@ -30,7 +30,9 @@ class ServicesTableTest extends TestCase
         'Suggestions' => 'app.suggestions',
         'ExercisesGroups' => 'app.exercises_groups',
         'Exercises' => 'app.exercises',
-        'Releases' => 'app.releases'
+        'Releases' => 'app.releases',
+        'Times' => 'app.times',
+        'Weekdays' => 'app.weekdays'
     ];
 
     /**
