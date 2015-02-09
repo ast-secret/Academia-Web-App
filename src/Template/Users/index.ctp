@@ -17,8 +17,7 @@
         <td><?= h($user->username) ?></td>        
         <td><?= h($user->role->name) ?></td>
         <td><?= $user->stats ? '<span class="label label-success">Ativo</span>': '<span class="label label-danger">Inativo</span>' ?></td>
-        <td class="actions">    
-            <?= $this->Html->link(__('Ver'), ['action' => 'view', $user->id]) ?>
+        <td class="actions">                
             <?= $this->Html->link(__('Editar'), ['action' => 'edit', $user->id]) ?>            
         </td>
     </tr>
