@@ -64,7 +64,9 @@ $items = [
 		<li role="presentation" class="dropdown-header">brad-pitt@gmail.com</li>
 		
 		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Configurações de perfil</a></li>
-		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Configurações de conta</a></li>
+		<li role="presentation">
+			<?= $this->Html->link('Configurações de conta', ['controller' => 'users', 'action' => 'change_password'], ['role' => 'menuitem', 'tabindex' => -1]) ?>
+		</li>
 		<li role="presentation" class="divider"></li>
 		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sair</a></li>
 	</ul>		

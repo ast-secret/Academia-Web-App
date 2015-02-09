@@ -33,7 +33,7 @@
 			color: #FFF;
 		}
 		.side-menu li a:hover{
-			color: #3498db;
+			background-color: #2980b9;
 		}
 	</style>
 </head>
@@ -44,6 +44,11 @@
 	</div>
 	<div style="width: 80%;float: left; height: 100%; overflow: auto;">
 		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<?= $this->Flash->render() ?>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<?= $this->fetch('content') ?>

@@ -20,6 +20,10 @@ class ReleasesController extends AppController
         $this->paginate = [
             'contain' => ['Users']
         ];
+
+        $breadcrumb = ['active' => 'Comunicados'];
+        $this->set(compact('breadcrumb'));
+
         $this->set('releases', $this->paginate($this->Releases));
         $this->set('_serialize', ['releases']);
     }
@@ -60,6 +64,17 @@ class ReleasesController extends AppController
                 $this->Flash->error('O Comunicado não pode ser salvo, tente novamente.');
             }
         }        
+
+        $breadcrumb = [
+            'active' => 'Criar comunicado',
+            'parents' => [
+                [
+                    'label' => 'Comunicados',
+                    'url' => ['action' => 'index']
+                ]
+            ]
+        ];
+        $this->set(compact('breadcrumb'));
     }
 
     /**

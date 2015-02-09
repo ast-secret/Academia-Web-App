@@ -1,5 +1,9 @@
-<?= $this->Html->link('Adicionar Comunicado', ['action' => 'add'], ['class' => 'btn btn-primary'])?>
-<hr>
+<?= $this->element('common/dashboard_breadcrumb', ['breadcrumb' => $breadcrumb]); ?>
+
+<?= $this->Html->link('Adicionar', ['action' => 'add'], ['class' => 'btn btn-primary pull-right'])?>
+
+<br style="clear: both;">
+<br>
     <table class="table table-striped">
     <thead>
         <tr>
@@ -11,19 +15,25 @@
         </tr>
     </thead>
     <tbody>
-    <?php foreach ($releases as $release): ?>
-        <tr>
-            <td><?= h($release->user->name) ?></td>
-            <td><?= h($release->title) ?></td>
-            <td><?= $this->Text->excerpt(h($release->text),'method',50,'...');?></td>
-            <td><?= h($release->created) ?></td>            
-            <td class="actions">
-                <?= $this->Html->link(__('Ver'), ['action' => 'view', $release->id]) ?>                 
-                <?= $this->Html->link(__('Editar'), ['action' => 'edit', $release->id]) ?>                 
-            </td>
-        </tr>
+        <?php if (count($releases) > 0): ?>
+            <?php foreach ($releases as $release): ?>
+                <tr>
+                    <td><?= h($release->user->name) ?></td>
+                    <td><?= h($release->title) ?></td>
+                    <td><?= $this->Text->excerpt(h($release->text),'method',50,'...');?></td>
+                    <td><?= h($release->created) ?></td>            
+                    <td class="actions">
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $release->id]) ?>                 
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $release->id]) ?>                 
+                    </td>
+                </tr>
 
-    <?php endforeach; ?>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="10"><em>Nenhum comunicado cadastro por enquanto.</em></td>
+            </tr>
+        <?php endif; ?>
     </tbody>
     </table>
     <div class="paginator">
