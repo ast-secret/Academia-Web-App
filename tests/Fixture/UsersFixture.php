@@ -36,7 +36,6 @@ class UsersFixture extends TestFixture
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'username_UNIQUE' => ['type' => 'unique', 'columns' => ['username'], 'length' => []],
-            'name_UNIQUE' => ['type' => 'unique', 'columns' => ['name'], 'length' => []],
             'fk_users_gym_info1' => ['type' => 'foreign', 'columns' => ['gym_id'], 'references' => ['gyms', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
             'fk_users_roles1' => ['type' => 'foreign', 'columns' => ['role_id'], 'references' => ['roles', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
@@ -59,12 +58,12 @@ class UsersFixture extends TestFixture
             'name' => 'Lorem ipsum dolor sit amet',
             'username' => 'Lorem ipsum dolor sit amet',
             'password' => 'Lorem ipsum dolor sit amet',
-            'created' => '2015-02-06 02:21:46',
-            'modified' => '2015-02-06 02:21:46',
+            'created' => '2015-02-09 23:22:59',
+            'modified' => '2015-02-09 23:22:59',
             'stats' => 1,
             'mail_temp' => 'Lorem ipsum dolor sit amet',
             'token_mail' => 'Lorem ipsum dolor sit amet',
-            'token_time_exp' => '2015-02-06 02:21:46'
+            'token_time_exp' => '2015-02-09 23:22:59'
         ],
     ];
 }

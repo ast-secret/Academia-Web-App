@@ -131,12 +131,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cakephp.git",
-                "reference": "d7c9ad714c9bda5efd787bb6dd85e7db9cf08d3f"
+                "reference": "2da74bd405a7c809b964870a45b1952ae5baba77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/d7c9ad714c9bda5efd787bb6dd85e7db9cf08d3f",
-                "reference": "d7c9ad714c9bda5efd787bb6dd85e7db9cf08d3f",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/2da74bd405a7c809b964870a45b1952ae5baba77",
+                "reference": "2da74bd405a7c809b964870a45b1952ae5baba77",
                 "shasum": ""
             },
             "require": {
@@ -190,7 +190,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-02-03 19:22:05"
+            "time": "2015-02-09 04:00:35"
         },
         {
             "name": "cakephp/migrations",
@@ -198,19 +198,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/migrations.git",
-                "reference": "461cfc26a67d6750071d928a2783d659a7d2103c"
+                "reference": "0acd5acfe61591967eecadbb9cf547c8a603227e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/migrations/zipball/461cfc26a67d6750071d928a2783d659a7d2103c",
-                "reference": "461cfc26a67d6750071d928a2783d659a7d2103c",
+                "url": "https://api.github.com/repos/cakephp/migrations/zipball/0acd5acfe61591967eecadbb9cf547c8a603227e",
+                "reference": "0acd5acfe61591967eecadbb9cf547c8a603227e",
                 "shasum": ""
             },
             "require": {
                 "cakephp/cakephp": "3.0.x-dev",
-                "cakephp/plugin-installer": "*",
                 "php": ">=5.4",
-                "robmorgan/phinx": "*"
+                "robmorgan/phinx": "~0.4"
             },
             "require-dev": {
                 "cakephp/bake": "dev-master",
@@ -244,20 +243,20 @@
                 "cakephp",
                 "migrations"
             ],
-            "time": "2015-02-03 16:05:49"
+            "time": "2015-02-06 02:05:29"
         },
         {
             "name": "cakephp/plugin-installer",
-            "version": "0.0.8",
+            "version": "0.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/plugin-installer.git",
-                "reference": "439f14f774c6906a739b8f7e6dcbdf1fafd17934"
+                "reference": "87cb0b70fc642f4a4ce5b6d8006392f01e8d0260"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/plugin-installer/zipball/439f14f774c6906a739b8f7e6dcbdf1fafd17934",
-                "reference": "439f14f774c6906a739b8f7e6dcbdf1fafd17934",
+                "url": "https://api.github.com/repos/cakephp/plugin-installer/zipball/87cb0b70fc642f4a4ce5b6d8006392f01e8d0260",
+                "reference": "87cb0b70fc642f4a4ce5b6d8006392f01e8d0260",
                 "shasum": ""
             },
             "require-dev": {
@@ -270,7 +269,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Cake\\Composer\\": "src/"
+                    "Cake\\Composer\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -284,7 +283,7 @@
                 }
             ],
             "description": "A composer installer for CakePHP 3.0+ plugins.",
-            "time": "2015-01-23 14:25:46"
+            "time": "2015-02-06 02:06:07"
         },
         {
             "name": "commercial-hippie/chocolate",
@@ -292,12 +291,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/commercial-hippie/chocolate.git",
-                "reference": "eba570fc6d4abeb309df37c6c140f3b412636d6d"
+                "reference": "4af2cc713bd201363dc37b2667331d29eda1366d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/commercial-hippie/chocolate/zipball/eba570fc6d4abeb309df37c6c140f3b412636d6d",
-                "reference": "eba570fc6d4abeb309df37c6c140f3b412636d6d",
+                "url": "https://api.github.com/repos/commercial-hippie/chocolate/zipball/4af2cc713bd201363dc37b2667331d29eda1366d",
+                "reference": "4af2cc713bd201363dc37b2667331d29eda1366d",
                 "shasum": ""
             },
             "require": {
@@ -320,7 +319,7 @@
                 "MIT"
             ],
             "description": "Front-End Framework FormHelpers for CakePHP 3.0",
-            "time": "2014-10-01 09:04:07"
+            "time": "2015-02-06 01:30:27"
         },
         {
             "name": "gourmet/twitter_bootstrap",
@@ -554,21 +553,20 @@
         },
         {
             "name": "robmorgan/phinx",
-            "version": "v0.4.1",
+            "version": "v0.4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robmorgan/phinx.git",
-                "reference": "357210707c000f50edea802d84b74724ad122478"
+                "reference": "1bc1396392d4073b8b29ee5289e445889cbc12b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/357210707c000f50edea802d84b74724ad122478",
-                "reference": "357210707c000f50edea802d84b74724ad122478",
+                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/1bc1396392d4073b8b29ee5289e445889cbc12b5",
+                "reference": "1bc1396392d4073b8b29ee5289e445889cbc12b5",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "symfony/class-loader": "~2.6.0",
                 "symfony/config": "~2.6.0",
                 "symfony/console": "~2.6.0",
                 "symfony/yaml": "~2.6.0"
@@ -582,8 +580,8 @@
             ],
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Phinx": "src/"
+                "psr-4": {
+                    "Phinx\\": "src/Phinx"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -596,6 +594,12 @@
                     "email": "robbym@gmail.com",
                     "homepage": "http://robmorgan.id.au",
                     "role": "Lead Developer"
+                },
+                {
+                    "name": "Woody Gilk",
+                    "email": "woody.gilk@gmail.com",
+                    "homepage": "http://shadowhand.me",
+                    "role": "Developer"
                 }
             ],
             "description": "Phinx makes it ridiculously easy to manage the database migrations for your PHP app.",
@@ -607,57 +611,7 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2014-12-23 06:06:14"
-        },
-        {
-            "name": "symfony/class-loader",
-            "version": "v2.6.4",
-            "target-dir": "Symfony/Component/ClassLoader",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/ClassLoader.git",
-                "reference": "deac802f76910708ab50d039806cfd1866895b52"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ClassLoader/zipball/deac802f76910708ab50d039806cfd1866895b52",
-                "reference": "deac802f76910708ab50d039806cfd1866895b52",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "symfony/finder": "~2.0,>=2.0.5"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.6-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\ClassLoader\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                },
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "Symfony ClassLoader Component",
-            "homepage": "http://symfony.com",
-            "time": "2015-01-05 14:28:40"
+            "time": "2015-02-08 03:41:44"
         },
         {
             "name": "symfony/config",
@@ -912,12 +866,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/debug_kit.git",
-                "reference": "85ad8958985b8cbbaa33628a016675a22ed57888"
+                "reference": "64a1033ccd1fc0f914a08ff083e690c72d30d3d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/85ad8958985b8cbbaa33628a016675a22ed57888",
-                "reference": "85ad8958985b8cbbaa33628a016675a22ed57888",
+                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/64a1033ccd1fc0f914a08ff083e690c72d30d3d6",
+                "reference": "64a1033ccd1fc0f914a08ff083e690c72d30d3d6",
                 "shasum": ""
             },
             "require": {
@@ -961,7 +915,7 @@
                 "debug",
                 "kit"
             ],
-            "time": "2015-01-31 14:43:39"
+            "time": "2015-02-06 03:43:37"
         },
         {
             "name": "d11wtq/boris",
