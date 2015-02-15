@@ -1,4 +1,7 @@
-<?= $this->Html->link('Adicionar aula', ['action' => 'add'], ['class' => 'btn btn-primary'])?>
+<?= $this->element('Common/dashboard_breadcrumb', ['breadcrumb' => $breadcrumb]) ?>
+
+<?= $this->Html->link('Adicionar aula', ['action' => 'add'], ['class' => 'btn btn-danger pull-right'])?>
+<br style="clear: both;">
 <hr>
 <table class="table table-striped">
     <thead>

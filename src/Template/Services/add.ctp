@@ -1,6 +1,15 @@
 <script>
     $(function(){
-        var i = 0;
+
+        $('#add-time').inputmask({
+            'mask': 'h:s',
+            'clearIncomplete': true
+        });
+        $('#add-duration').inputmask({
+            'mask': '9{+}',
+            'clearIncomplete': true
+        });
+
         $('#btn-add').click(function(){
             var $weekday = $('#add-weekday'); 
             var $time = $('#add-time');
@@ -30,21 +39,24 @@
 
             $('#text-exercises-empty').hide();
 
+            // Faz isso para as index nao misturarem com a carregada pelo PHP
+            var fieldIndex = $('#list-times li').length;
+
             $itemWeekdayTime = $('<li/>')
                 .addClass('list-group-item')
                 .html('<strong>'+ timeValue + '</strong> às <strong>' + time + '</strong> com <strong>' + duration + '</strong> minutos de duração.')
                 .appendTo('#list-times');
 
             $inputHour = $('<input/>')
-                .attr({'name': "times["+i+"][start_hour]", 'type' : 'hidden'})
+                .attr({'name': "times["+fieldIndex+"][start_hour]", 'type' : 'hidden'})
                 .val(time)
                 .appendTo($itemWeekdayTime); 
             $inputWeekday = $('<input/>')
-                .attr({'name': "times["+i+"][weekday_id]", 'type' : 'hidden'})
+                .attr({'name': "times["+fieldIndex+"][weekday_id]", 'type' : 'hidden'})
                 .val(weekday)
                 .appendTo($itemWeekdayTime); 
             $inputDuration = $('<input/>')
-                .attr({'name': "times["+i+"][duration]", 'type' : 'hidden'})
+                .attr({'name': "times["+fieldIndex+"][duration]", 'type' : 'hidden'})
                 .val(duration)
                 .appendTo($itemWeekdayTime); 
 
@@ -62,7 +74,9 @@
         });
 
         $(document).on('click', '#btn-deletar', function(){
-            $(this).parent('li').fadeOut();
+            $(this).parent('li').fadeOut(function(){
+                $(this).remove();
+            });
         });
 
         $(document).on({
@@ -110,7 +124,7 @@
                     <div class="col-md-3">
                         <div class="form-group" >
                             <label for="add-duration">Duraçao</label>
-                            <input type="text" class="form-control" id="add-duration" placeholder="Em minutos">
+                            <input type="text" class="form-control" id="add-duration" placeholder="Em minutos" maxlength="4">
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -124,15 +138,44 @@
                 <div class="row">
                     <div class="col-md-12">
                         <hr>
-                        <em id="text-exercises-empty">Nenhum exercício adicionado</em>
+                        <?php if (isset($service->errors()['times'])): ?>
+                            <div class="alert alert-danger">
+                                <span class="glyphicon glyphicon-remove-sign"></span>
+                                Ocorreram erros em um ou mais horários que você inseriu.
+                            </div>
+                        <?php endif ?>
+                        
                         <ul id="list-times" class="list-group">
-
                             <?php if ($service->times): ?>
-                                <?php foreach ($service->times as $time): ?>
-                                    <li class="list-group-item">
-                                        <?= $time->start_hour ?>
-                                    </li>
+                                <?php foreach ($service->times as $key => $time): ?>
+                                    <?php if (!$time->errors()): ?>
+                                        <li class="list-group-item">
+                                            <strong><?= $this->Weekdays->getById($time->weekday_id, $weekdays) ?></strong> às <strong><?= $time->start_hour ?></strong> com <strong><?= $time->duration ?></strong> minutos de duração.
+
+                                            <?php
+                                                // Hidden Fields
+                                                echo $this->Form->hidden("times.{$key}.weekday_id",
+                                                    ['value' => $time->weekday_id]);
+                                                echo $this->Form->hidden("times.{$key}.start_hour",
+                                                    ['type' => 'text']);
+                                                echo $this->Form->hidden("times.{$key}.duration",
+                                                    ['value' => $time->duration]);
+                                            ?>
+
+                                            <button
+                                                type="button"
+                                                id="btn-deletar"
+                                                class="btn btn-default btn-xs pull-right"
+                                                style="display: none;">
+
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
+
+                                        </li>
+                                    <?php endif ?>
                                 <?php endforeach ?>
+                            <?php else: ?>
+                                <em id="text-exercises-empty">Nenhum exercício adicionado</em>
                             <?php endif; ?>
                         </ul>
                     </div>

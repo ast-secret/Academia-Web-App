@@ -14,6 +14,8 @@
 	<?= $this->Html->script('../lib/jquery-ui/jquery-ui.min.js') ?>
 	<?= $this->Html->script('../lib/bootstrap/dist/js/bootstrap.min.js') ?>
 
+	<?= $this->Html->script('../lib/jquery.inputmask/dist/jquery.inputmask.bundle.min.js') ?>
+
 	<?= $this->fetch('meta') ?>
 	<?= $this->fetch('css') ?>
 	<?= $this->fetch('script') ?>
@@ -44,6 +46,11 @@
 	</div>
 	<div style="width: 80%;float: left; height: 100%; overflow: auto;">
 		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<?= $this->Flash->render() ?>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<?= $this->Flash->render() ?>

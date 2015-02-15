@@ -44,7 +44,7 @@ class ServicesTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create')
-            ->add('gym_id', 'valid', ['rule' => 'numeric'])
+            ->add('gym_id', 'valid', ['rule' => 'numeric',])
             ->requirePresence('gym_id', 'create')
             ->notEmpty('gym_id')
             ->requirePresence('name', 'create')
@@ -67,6 +67,7 @@ class ServicesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+        $rules->add($rules->isUnique(['name']));
         $rules->add($rules->existsIn(['gym_id'], 'Gyms'));
         return $rules;
     }
