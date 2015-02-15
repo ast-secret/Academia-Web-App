@@ -50,7 +50,10 @@ class ServicesTable extends Table
             ->requirePresence('name', 'create')
             ->notEmpty('name')
             ->requirePresence('description', 'create')
-            ->notEmpty('description');
+            ->notEmpty('description')
+            ->add('stats', 'valid', ['rule' => 'boolean'])
+            ->requirePresence('stats', 'create')
+            ->notEmpty('stats');
 
         return $validator;
     }

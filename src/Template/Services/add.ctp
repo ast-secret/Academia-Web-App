@@ -76,6 +76,9 @@
 
     });
 </script>
+
+<?= $this->element('Common/dashboard_breadcrumb', ['breadcrumb' => $breadcrumb]) ?>
+
 <div class="">
     <?= $this->Form->create($service); ?>
     <fieldset>
@@ -84,6 +87,8 @@
                 <?php
                     echo $this->Form->input('name', ['label' => 'Nome']);
                     echo $this->Form->input('description', ['label' => 'Descrição']);
+                    echo $this->Form->label('Status');
+                    echo $this->Form->checkbox('stats');
                 ?>  
             </div>
             <div class="col-md-6">
@@ -93,7 +98,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <?= $this->Form->input('add-weekday', ['options' => $weekdays, 'label' => 'Dia']); ?>
                     </div>
                     <div class="col-md-3">
@@ -108,9 +113,12 @@
                             <input type="text" class="form-control" id="add-duration" placeholder="Em minutos">
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label for="">&nbsp;</label>
-                        <button type="button" class="btn btn-primary btn-block" id="btn-add">Adicionar</button>
+                        <div></div>
+                        <button type="button" class="btn btn-primary btn-sm" id="btn-add">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
                     </div>
                 </div>    
                 <div class="row">
@@ -118,6 +126,14 @@
                         <hr>
                         <em id="text-exercises-empty">Nenhum exercício adicionado</em>
                         <ul id="list-times" class="list-group">
+
+                            <?php if ($service->times): ?>
+                                <?php foreach ($service->times as $time): ?>
+                                    <li class="list-group-item">
+                                        <?= $time->start_hour ?>
+                                    </li>
+                                <?php endforeach ?>
+                            <?php endif; ?>
                         </ul>
                     </div>
                 </div>  

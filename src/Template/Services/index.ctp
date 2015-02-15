@@ -6,6 +6,7 @@
             <th><?= $this->Paginator->sort('name', 'Nome') ?></th>            
             <th><?= $this->Paginator->sort('description', 'Descrição') ?></th>
             <th>Horários</th>
+            <td>Status</td>
             <th class="actions"><?= __('Ações') ?></th>
         </tr>
     </thead>
@@ -19,15 +20,22 @@
                     <?php foreach ($service->times as $time): ?>
                         <span class="label label-primary"><?= $time->start_hour ?></span>
                     <?php endforeach ?>
+                <?php else: ?>
+                    <em>Nenhum horário cadastrado</em>
                 <?php endif ?>
-            </td> 
+            </td>
+            <td>
+                <?php if ($service->stats): ?>
+                    <span class="label label-success">Ativo</span>
+                <?php else: ?>
+                    <span class="label label-danger">Inativo</span>
+                <?php endif ?>
+            </td>
             <td class="actions">
-                <?= $this->Html->link(__('Ver'), ['action' => 'view', $service->id]) ?>
                 <?= $this->Html->link(__('Editar'), ['action' => 'edit', $service->id]) ?>
                 <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $service->id], ['confirm' => __('Você tem certeza que deseja deletar ?', $service->id)]) ?>
             </td>
         </tr>
-
     <?php endforeach; ?>
     </tbody>
     </table>

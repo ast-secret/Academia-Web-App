@@ -18,6 +18,7 @@ class Service extends Entity
         'gym_id' => true,
         'name' => true,
         'description' => true,
+        'stats' => true,
         'gym' => true,
         'times' => true,
     ];
