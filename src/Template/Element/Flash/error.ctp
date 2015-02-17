@@ -1,4 +1,6 @@
-<div class="alert alert-danger">
-	<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
-	<?= h($message) ?>
+<div class="custom-flash custom-flash-error">
+	<!-- <div class="alert alert-danger"> -->
+		<?= h($message) ?>
+		<!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+	<!-- </div> -->
 </div>

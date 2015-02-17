@@ -9,6 +9,7 @@
 	<?= $this->Html->meta('icon') ?>
 
 	<?= $this->Html->css('../lib/bootstrap/dist/css/bootstrap.min.css') ?>
+	<?= $this->Html->css('app.css') ?>
 
 	<?= $this->Html->script('../lib/jquery/dist/jquery.min.js') ?>
 	<?= $this->Html->script('../lib/jquery-ui/jquery-ui.min.js') ?>
@@ -34,28 +35,20 @@
 		.side-menu li a{
 			color: #FFF;
 		}
-		.side-menu li a:hover{
-			background-color: #2980b9;
+		.side-menu li a:hover, .side-menu li a:active{
+			background-color: #2980b9!important;
 		}
 	</style>
 </head>
 <body>
+
+	<?= $this->Flash->render() ?>
 
 	<div style="width: 20%; height: 100%; float: left; overflow: auto; background-color: #3498db;">
 		<?= $this->element('side_menu') ?>		
 	</div>
 	<div style="width: 80%;float: left; height: 100%; overflow: auto;">
 		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12">
-					<?= $this->Flash->render() ?>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<?= $this->Flash->render() ?>
-				</div>
-			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<?= $this->fetch('content') ?>

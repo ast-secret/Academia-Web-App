@@ -1,0 +1,49 @@
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 767px) {
+	.custom-flash{
+		width: 96%!important;
+		margin: 2%!important;
+		margin-bottom: 4%!important;
+	}
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}
+
+textarea {
+	resize: vertical !important;
+}
+
+.custom-flash{
+	position: absolute;
+	margin: 0 0 30px 10px;
+	bottom: 0;
+	z-index: 10;
+	color: #FFF;
+	background-color: #000;
+	padding: 20px;
+	font-size: 15px;
+}
+
+.custom-flash-error{
+	background-color: #f2dede;
+	color: #a94442;
+	border-left: 6px #e74c3c solid;
+}
+.custom-flash-success{
+	background-color: #dff0d8;
+	color: #3c763d;
+	border-left: 6px #2ecc71 solid;
+}

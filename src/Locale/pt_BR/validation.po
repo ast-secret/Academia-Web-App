@@ -1,2 +1,2 @@
-msgid "Hello yo"
-msgstr "Olá gente"
+msgid "This field cannot be left empty"
+msgstr "Teyyyyyyyy"
