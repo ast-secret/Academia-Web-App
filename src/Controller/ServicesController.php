@@ -10,6 +10,8 @@ use App\Controller\AppController;
 class ServicesController extends AppController
 {
 
+    public $helpers = ['Weekdays'];
+
     /**
      * Index method
      *
@@ -17,9 +19,15 @@ class ServicesController extends AppController
      */
     public function index()
     {
+
+        $breadcrumb = [
+            'active' => 'Aulas'
+        ];
+
         $this->paginate = [
             'contain' => ['Times']
         ];
+        $this->set(compact('breadcrumb'));
         $this->set('services', $this->paginate($this->Services));
         $this->set('_serialize', ['services']);
     }
@@ -47,7 +55,20 @@ class ServicesController extends AppController
      */
     public function add()
     {
-        $service = $this->Services->newEntity();
+        $breadcrumb = [
+            'parents' => [
+                [
+                    'label' => 'Aulas',
+                    'url' => [
+                        'action' => 'index',
+                    ]
+                ]
+            ],
+            'active' => 'Adicionar Aula'
+        ];
+
+        $service = $this->Services->newEntity(null, ['associated' => ['Times']]);
+
         if ($this->request->is('post')) {
 
             $this->request->data['gym_id'] = 1;
@@ -55,18 +76,17 @@ class ServicesController extends AppController
             $service = $this->Services->patchEntity($service, $this->request->data, ['associated' => ['Times']]);
 
             if ($this->Services->save($service)) {
-                $this->Flash->success('The service has been saved.');
+                $this->Flash->success('A aula foi salva.');
                 return $this->redirect(['action' => 'index']);
             } else {
-                debug($service->errors());
-                $this->Flash->error('The service could not be saved. Please, try again.');
+                $this->Flash->error('A aula não pode ser salva, por favor tente novamente.');    
             }
         }
         $gyms = $this->Services->Gyms->find('list', ['limit' => 200]);
         $weekdays = $this->Services->Times->weekdays->find('list', ['limit' => 200]);
 
-        $this->set(compact('service', 'gyms', 'weekdays'));
-        $this->set('_serialize', ['service']);
+        $this->set(compact('service', 'gyms', 'weekdays', 'breadcrumb'));
+        // $this->set('_serialize', ['service']);
     }
 
     /**
@@ -78,11 +98,28 @@ class ServicesController extends AppController
      */
     public function edit($id = null)
     {
+
+        $breadcrumb = [
+            'parents' => [
+                [
+                    'label' => 'Aulas',
+                    'url' => [
+                        'action' => 'index',
+                    ]
+                ]
+            ],
+            'active' => 'Editar Aula'
+        ];
+
         $service = $this->Services->get($id, [
-            'contain' => []
+            'contain' => ['Times']
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $service = $this->Services->patchEntity($service, $this->request->data);
+            $service = $this->Services->patchEntity($service, $this->request->data, ['associated' => ['Times']]);
+
+            // $service->dirty('times', true);
+            
             if ($this->Services->save($service)) {
                 $this->Flash->success('The service has been saved.');
                 return $this->redirect(['action' => 'index']);
@@ -90,8 +127,11 @@ class ServicesController extends AppController
                 $this->Flash->error('The service could not be saved. Please, try again.');
             }
         }
+
         $gyms = $this->Services->Gyms->find('list', ['limit' => 200]);
-        $this->set(compact('service', 'gyms'));
+        $weekdays = $this->Services->Times->weekdays->find('list', ['limit' => 200]);
+
+        $this->set(compact('service', 'gyms', 'breadcrumb', 'weekdays'));
         $this->set('_serialize', ['service']);
     }
 
