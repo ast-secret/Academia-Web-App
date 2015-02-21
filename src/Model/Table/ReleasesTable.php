@@ -5,6 +5,8 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Event\Event;
+use ArrayObject;
 
 /**
  * Releases Model
@@ -29,6 +31,12 @@ class ReleasesTable extends Table
         ]);
     }
 
+    public function beforeMarshal(Event $event, ArrayObject $data)
+    {
+        $data['title'] = trim($data['title']);
+        $data['text'] = trim($data['text']);
+    }
+
     /**
      * Default validation rules.
      *
@@ -40,13 +48,15 @@ class ReleasesTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create')
+
             ->add('user_id', 'valid', ['rule' => 'numeric'])
             ->requirePresence('user_id', 'create')
             ->notEmpty('user_id')
+
             ->requirePresence('title', 'create')
-            ->notEmpty('title')
+            ->notEmpty('title',"Por Favor, Preecha o campo vazio!")
             ->requirePresence('text', 'create')
-            ->notEmpty('text');
+            ->notEmpty('text',"Por Favor, Preecha o campo vazio!");
 
         return $validator;
     }

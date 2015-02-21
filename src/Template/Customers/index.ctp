@@ -1,41 +1,25 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Html->link(__('New Customer'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Cards'), ['controller' => 'Cards', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Card'), ['controller' => 'Cards', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Suggestions'), ['controller' => 'Suggestions', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Suggestion'), ['controller' => 'Suggestions', 'action' => 'add']) ?> </li>
-    </ul>
-</div>
-<div class="customers index large-10 medium-9 columns">
-    <table cellpadding="0" cellspacing="0">
+<?= $this->Html->link('Adicionar Aluno', ['action' => 'add'], ['class' => 'btn btn-primary'])?>
+<hr>
+<table class="table table-striped">
     <thead>
         <tr>
-            <th><?= $this->Paginator->sort('id') ?></th>
-            <th><?= $this->Paginator->sort('name') ?></th>
-            <th><?= $this->Paginator->sort('registration') ?></th>
-            <th><?= $this->Paginator->sort('password') ?></th>
-            <th><?= $this->Paginator->sort('access_key') ?></th>
-            <th><?= $this->Paginator->sort('created') ?></th>
-            <th><?= $this->Paginator->sort('modified') ?></th>
-            <th class="actions"><?= __('Actions') ?></th>
+            <th><?= $this->Paginator->sort('Nome') ?></th>
+            <th><?= $this->Paginator->sort('Nº de Registro') ?></th>
+            <th><?= $this->Paginator->sort('Chave de Acesso') ?></th>
+            <th><?= $this->Paginator->sort('status','Status') ?></th>            
+            <th class="actions"><?= __('Ações') ?></th>
         </tr>
     </thead>
     <tbody>
     <?php foreach ($customers as $customer): ?>
         <tr>
-            <td><?= $this->Number->format($customer->id) ?></td>
             <td><?= h($customer->name) ?></td>
             <td><?= h($customer->registration) ?></td>
-            <td><?= h($customer->password) ?></td>
             <td><?= h($customer->access_key) ?></td>
-            <td><?= h($customer->created) ?></td>
-            <td><?= h($customer->modified) ?></td>
+            <td><?= $customer->status ? '<span class="label label-success">Ativo</span>': '<span class="label label-danger">Inativo</span>' ?></td>
             <td class="actions">
-                <?= $this->Html->link(__('View'), ['action' => 'view', $customer->id]) ?>
-                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $customer->id]) ?>
-                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->id)]) ?>
+                <?= $this->Html->link(__('Ver'), ['action' => 'view', $customer->id]) ?>
+                <?= $this->Html->link(__('Editar'), ['action' => 'edit', $customer->id]) ?>
             </td>
         </tr>
 
@@ -44,9 +28,9 @@
     </table>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->next(__('Próximo') . ' >') ?>
         </ul>
         <p><?= $this->Paginator->counter() ?></p>
     </div>

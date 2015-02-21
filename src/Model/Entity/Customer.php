@@ -19,6 +19,7 @@ class Customer extends Entity
         'registration' => true,
         'password' => true,
         'access_key' => true,
+        'status' => true,
         'cards' => true,
         'suggestions' => true,
     ];

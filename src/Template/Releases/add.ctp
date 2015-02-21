@@ -1,7 +1,7 @@
 <?= $this->element('common/dashboard_breadcrumb', ['breadcrumb' => $breadcrumb]); ?>
 <div class="row">
     <div class="col-md-6 col-sm-12">
-        <?= $this->Form->create(); ?>
+        <?= $this->Form->create($release); ?>
             <?php            
                 echo $this->Form->input('title',['label' => 'Título']);
                 echo $this->Form->input('text',['label' => 'Texto']);

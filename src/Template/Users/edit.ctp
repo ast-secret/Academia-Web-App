@@ -1,5 +1,9 @@
 <div class="users form large-10 medium-9 columns">
-<?= $this->Form->create($user,['context' => ['valitador' => 'editUsers']]); ?>
+<?= $this->Form->create($user, [
+    'context' => [
+        'validator' => 'EditUser'
+    ]
+]); ?>
     <fieldset>
         <legend><?= __('Editar Usuário') ?></legend>
         <?php

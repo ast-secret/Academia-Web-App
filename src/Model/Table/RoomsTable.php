@@ -5,6 +5,8 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Event\Event;
+use ArrayObject;
 
 /**
  * Rooms Model
@@ -30,6 +32,13 @@ class RoomsTable extends Table
         $this->hasMany('Lessons', [
             'foreignKey' => 'room_id'
         ]);
+
+    }
+
+    public function beforeMarshal(Event $event, ArrayObject $data)
+    {
+        $data['name'] = trim($data['name']);
+        $data['description'] = trim($data['description']);
     }
 
     /**
@@ -43,12 +52,20 @@ class RoomsTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create')
+
             ->requirePresence('name', 'create')
-            ->notEmpty('name')
+            ->notEmpty('name','Preencha este campo.')
+
             ->add('gym_id', 'valid', ['rule' => 'numeric'])
             ->requirePresence('gym_id', 'create')
             ->notEmpty('gym_id')
-            ->allowEmpty('description');
+
+            ->add('name', [
+                'unique' => ['rule' => 'validateUnique', 'provider' => 'table','message'=>'Sala já está sendo usada.']
+            ]) 
+
+            ->requirePresence('description', 'create')
+            ->notEmpty('description','Preencha este campo.');
 
         return $validator;
     }

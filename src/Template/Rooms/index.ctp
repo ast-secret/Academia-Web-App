@@ -17,7 +17,7 @@
             <td><?= h($room->created) ?></td>
             <td class="actions">
                 <?= $this->Html->link(__('Editar'), ['action' => 'edit', $room->id]) ?>
-                <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $room->id], ['confirm' => __('Você tem certeza que deseja deletar isso ?', $room->id)]) ?>
+                <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $room->id], ['confirm' => __('Você tem certeza que deseja deletar essa Sala ?', $room->id)]) ?>
             </td>
         </tr>
 

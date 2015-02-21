@@ -1,11 +1,11 @@
 <?php
 
 $items = [
-	/*[
-		'label' => 'Academias',
-		'controller' => 'gyms',
+	[
+		'label' => 'Alunos',
+		'controller' => 'customers',
 		'action' => 'index',
-	],*/
+	],
 	[
 		'label' => 'Aulas',
 		'controller' => 'services',

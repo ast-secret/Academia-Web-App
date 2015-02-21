@@ -24,9 +24,9 @@ class CustomersFixture extends TestFixture
         'access_key' => ['type' => 'string', 'length' => 120, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
+        'status' => ['type' => 'integer', 'length' => 4, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'name_UNIQUE' => ['type' => 'unique', 'columns' => ['name'], 'length' => []],
             'registration_UNIQUE' => ['type' => 'unique', 'columns' => ['registration'], 'length' => []],
             'access_key_UNIQUE' => ['type' => 'unique', 'columns' => ['access_key'], 'length' => []],
         ],
@@ -48,13 +48,9 @@ class CustomersFixture extends TestFixture
             'registration' => 'Lorem ipsum dolor sit amet',
             'password' => 'Lorem ipsum dolor sit amet',
             'access_key' => 'Lorem ipsum dolor sit amet',
-<<<<<<< HEAD
-            'created' => '2015-01-24 03:55:34',
-            'modified' => '2015-01-24 03:55:34'
-=======
-            'created' => '2015-01-26 17:28:46',
-            'modified' => '2015-01-26 17:28:46'
->>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
+            'created' => '2015-02-13 02:26:16',
+            'modified' => '2015-02-13 02:26:16',
+            'status' => 1
         ],
     ];
 }
