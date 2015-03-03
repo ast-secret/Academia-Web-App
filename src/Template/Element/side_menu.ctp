@@ -2,7 +2,11 @@
 
 $items = [
 	[
+<<<<<<< HEAD
 		'label' => 'Clientes',
+=======
+		'label' => 'Alunos',
+>>>>>>> 0a64914aee841e1ebe137e26f52d47c52bfc84c8
 		'controller' => 'customers',
 		'action' => 'index',
 	],

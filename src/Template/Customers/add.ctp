@@ -1,24 +1,19 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Html->link(__('List Customers'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Cards'), ['controller' => 'Cards', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Card'), ['controller' => 'Cards', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Suggestions'), ['controller' => 'Suggestions', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Suggestion'), ['controller' => 'Suggestions', 'action' => 'add']) ?> </li>
-    </ul>
-</div>
 <div class="customers form large-10 medium-9 columns">
     <?= $this->Form->create($customer); ?>
     <fieldset>
-        <legend><?= __('Add Customer') ?></legend>
+        <legend><?= __('Adicionar Aluno') ?></legend>
         <?php
-            echo $this->Form->input('name');
-            echo $this->Form->input('registration');
-            echo $this->Form->input('password');
-            echo $this->Form->input('access_key');
+            echo $this->Form->input('name',['label' => 'Nome']);
+            echo $this->Form->input('registration',['label' => 'Nº de Registro']);
+            echo $this->Form->input('password',['label' => 'Senha']);
+            echo $this->Form->input('access_key',['label' => 'Chave de Acesso']);
+            echo $this->Form->Label("Status ");            
+            echo $this->Form->checkbox('status', array('value' => '1',
+                                'hiddenField' => true,
+                            ));
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+    <?= $this->Html->link('Cancelar', ['action' => 'index'], ['class' => 'btn btn-danger']) ?>
+          <?= $this->Form->button('Salvar', ['class' => 'btn btn-success btn-lg']) ?>
+<?= $this->Form->end() ?>
 </div>

@@ -61,14 +61,22 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $this->request->data['gym_id'] = 1;            
             $user = $this->Users->patchEntity($user, $this->request->data);
-            if ($this->Users->save($user)) {
-                $this->Flash->success('O usuário foi salvo com sucesso.');
-                return $this->redirect(['action' => 'index']);
-            } else {
-                debug($user->errors());
-                $this->Flash->error('O usuário não pode ser salvo, tente novamente.');
-            }
+            //if(!empty($this->request->data['confirm_password'])){
+               // if($this->request->data['confirm_password']==$this->request->data['password']){
+                    if ($this->Users->save($user)) {
+                        $this->Flash->success('O usuário foi salvo com sucesso.');
+                        return $this->redirect(['action' => 'index']);
+                    } else {                    
+                        $this->Flash->error('O usuário não pode ser salvo, tente novamente.');
+                    }
+               // }else{
+                    //$this->Flash->error('As senhas não são iguais.');
+               // }                 
+           // }else{
+               // $this->Flash->error('Campo confirmar senha não pode ficar vazio.');
+            //}
         }
+
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
         $this->set(compact('user', 'roles'));
         $this->set('_serialize', ['user']);
@@ -87,21 +95,19 @@ class UsersController extends AppController
             'contain' => []
         ]);
         
-        // Variavel Teste de Sessão 
-        
+        // Variavel Teste de Sessão         
         $usuarioSession = $this->request->data['id'] = 3;   
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
         //Select para confirmar se o confirm_password é referente ao do usuario logado
         $userPass = $this->Users
                         ->find()
-                        ->where(['password'=>$this->request->data['confirm_password'],'id' => $usuarioSession])
+                        ->where(['password'=>$this->request->data['confirm_password_user_master'],'id' => $usuarioSession])
                         ->first();            
-
-
-        if ($this->request->is(['patch', 'post', 'put'])) {
             //Apenas Alterar a Senha, isso exige a senha do Usuario logado
             if($user->password!=$this->request->data['password']){
                 //Verifica se ele quer trocar a senha, se sim confirma  a senha do logado
-                if($userPass && $this->request->data['confirm_password']!=''){
+                if($userPass && $this->request->data['confirm_password_user_master']!=''){
                     $user = $this->Users->patchEntity($user, $this->request->data);        
                     if ($this->Users->save($user)) {
                         $this->Flash->success('O usuário foi salvo com sucesso.');
@@ -110,7 +116,7 @@ class UsersController extends AppController
                         $this->Flash->error('O usuário não pode ser salvo, tente novamente.');
                     }
                 }else{
-                    $this->Flash->error('Sua senha está incorreta, tente novamente.');
+                    $this->Flash->error('Senha de Confirmação está incorreta, tente novamente.');
                 }
             }else{
                 $user = $this->Users->patchEntity($user, $this->request->data);        

@@ -70,6 +70,16 @@ class UsersTableTest extends TestCase
     }
 
     /**
+     * Test validationEditUser method
+     *
+     * @return void
+     */
+    public function testValidationEditUser()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
      * Test validationDefault method
      *
      * @return void

@@ -1,5 +1,5 @@
 <div class="users form large-10 medium-9 columns">
-<?= $this->Form->create(); ?>
+<?= $this->Form->create($user); ?>
     <fieldset>
         <legend><?= __('Mudar Senha') ?></legend>
         <?php

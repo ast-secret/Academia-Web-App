@@ -6,6 +6,8 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Event\Event;
+use ArrayObject;
 
 /**
  * Users Model
@@ -39,6 +41,72 @@ class UsersTable extends Table
         ]);
     }
 
+     public function beforeMarshal(Event $event, ArrayObject $data)
+    {
+        $data['name'] = trim($data['name']);
+        $data['username'] = trim($data['username']);
+        $data['password'] = trim($data['password']);
+        $data['confirm_password'] = trim($data['confirm_password']);
+    }
+
+
+    public function validationEditUser(Validator $validator){
+        $validator
+            ->add('id', 'valid', ['rule' => 'numeric'])
+            ->allowEmpty('id', 'create')
+
+            ->add('gym_id', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('gym_id', 'create')
+            ->notEmpty('gym_id')
+
+            ->add('role_id', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('role_id', 'create')
+            ->notEmpty('role_id')
+
+            ->requirePresence('name', 'create')
+            ->notEmpty('name',"Por Favor, Preecha o campo vazio!")
+
+            ->requirePresence('confirm_password', 'create')
+            ->notEmpty('name',"Por Favor, Preecha o campo vazio!")
+
+            ->requirePresence('username', 'create')
+            ->notEmpty('username',"Por Favor, Preecha o campo vazio!")
+
+            ->requirePresence('password', 'create')
+            ->notEmpty('password',"Por Favor, Preecha o campo vazio!")
+
+            /*->add('username', [
+                'unique' => ['rule' => 'validateUnique', 'provider' => 'table','message'=>'Login já está sendo usado.']
+            ])    */ 
+
+            ->add('stats', 'valid', ['rule' => 'boolean'])
+            ->requirePresence('stats', 'create')
+            ->notEmpty('stats')
+
+            ->allowEmpty('mail_temp')
+            ->allowEmpty('token_mail')
+
+          /*  ->add('password', [
+                    'compare' => [
+                    'rule' => ['compareWith', 'confirm_password'],
+                    'message' => 'As Senhas não conferem.'
+                ]
+            ])
+
+            ->add('confirm_password', [
+                    'compare' => [
+                    'rule' => ['compareWith', 'password'],
+                    'message' => 'As Senhas não conferem.'
+                ]
+            ])*/
+
+            ->add('token_time_exp', 'valid', ['rule' => 'datetime'])
+            ->allowEmpty('token_time_exp');
+
+        return $validator;
+    }
+
+
     /**
      * Default validation rules.
      *
@@ -50,23 +118,55 @@ class UsersTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create')
+
             ->add('gym_id', 'valid', ['rule' => 'numeric'])
             ->requirePresence('gym_id', 'create')
             ->notEmpty('gym_id')
+
             ->add('role_id', 'valid', ['rule' => 'numeric'])
             ->requirePresence('role_id', 'create')
             ->notEmpty('role_id')
+
             ->requirePresence('name', 'create')
-            ->notEmpty('name')
+            ->notEmpty('name',"Por Favor, Preecha o campo vazio!")
+
+            ->requirePresence('confirm_password', 'create')
+            ->notEmpty('name',"Por Favor, Preecha o campo vazio!")
+
             ->requirePresence('username', 'create')
-            ->notEmpty('username')
+            ->notEmpty('username',"Por Favor, Preecha o campo vazio!")
+
             ->requirePresence('password', 'create')
-            ->notEmpty('password')
-            ->add('stats', 'valid', ['rule' => 'numeric'])
+            ->notEmpty('password',"Por Favor, Preecha o campo vazio!")
+
+            ->requirePresence('confirm_password', 'create')
+            ->notEmpty('confirm_password',"Por Favor, Preecha o campo vazio!")
+
+            ->add('username', [
+                'unique' => ['rule' => 'validateUnique', 'provider' => 'table','message'=>'Login já está sendo usado.']
+            ])     
+
+            ->add('stats', 'valid', ['rule' => 'boolean'])
             ->requirePresence('stats', 'create')
             ->notEmpty('stats')
+
             ->allowEmpty('mail_temp')
             ->allowEmpty('token_mail')
+
+            ->add('password', [
+                    'compare' => [
+                    'rule' => ['compareWith', 'confirm_password'],
+                    'message' => 'As Senhas não conferem.'
+                ]
+            ])
+
+            ->add('confirm_password', [
+                    'compare' => [
+                    'rule' => ['compareWith', 'password'],
+                    'message' => 'As Senhas não conferem.'
+                ]
+            ])
+
             ->add('token_time_exp', 'valid', ['rule' => 'datetime'])
             ->allowEmpty('token_time_exp');
 

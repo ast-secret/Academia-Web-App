@@ -22,30 +22,16 @@ class CustomersTableTest extends TestCase
         'Users' => 'app.users',
         'Gyms' => 'app.gyms',
         'Machines' => 'app.machines',
-<<<<<<< HEAD
         'Phones' => 'app.phones',
         'Rooms' => 'app.rooms',
         'Lessons' => 'app.lessons',
         'Services' => 'app.services',
+        'Times' => 'app.times',
         'Weekdays' => 'app.weekdays',
-        'ServicesWeekdays' => 'app.services_weekdays',
         'Roles' => 'app.roles',
         'Releases' => 'app.releases',
         'ExercisesGroups' => 'app.exercises_groups',
         'Exercises' => 'app.exercises',
-=======
-        'CardsExercises' => 'app.cards_exercises',
-        'Exercises' => 'app.exercises',
-        'ExercisesGroups' => 'app.exercises_groups',
-        'Phones' => 'app.phones',
-        'Rooms' => 'app.rooms',
-        'Lessons' => 'app.lessons',
-        'Services' => 'app.services',
-        'Weekdays' => 'app.weekdays',
-        'ServicesWeekdays' => 'app.services_weekdays',
-        'Roles' => 'app.roles',
-        'Releases' => 'app.releases',
->>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
         'Suggestions' => 'app.suggestions'
     ];
 

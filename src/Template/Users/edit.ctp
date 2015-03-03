@@ -1,5 +1,9 @@
 <div class="users form large-10 medium-9 columns">
-<?= $this->Form->create($user); ?>
+<?= $this->Form->create($user, [
+    'context' => [
+        'validator' => 'EditUser'
+    ]
+]); ?>
     <fieldset>
         <legend><?= __('Editar Usuário') ?></legend>
         <?php
@@ -11,7 +15,7 @@
                 echo $this->Form->checkbox('stats', array('value' => '1',
                                 'hiddenField' => true,
                             ));
-            echo $this->Form->input('confirm_password',['type' => 'password','label' => 'Confirmar Senha']);    
+            echo $this->Form->input('confirm_password_user_master',['type' => 'password','label' => 'Confirmar Senha']);    
         ?>
     </fieldset>
     <?= $this->Html->link('Cancelar', ['action' => 'index'], ['class' => 'btn btn-danger']) ?>

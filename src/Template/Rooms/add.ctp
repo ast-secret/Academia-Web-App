@@ -1,10 +1,8 @@
 <div class="rooms form large-10 medium-9 columns">
-    <?= $this->Form->create(); ?>
-    <fieldset>
+    <?= $this->Form->create($room); ?>
         <legend><?= __('Adicionar Sala') ?></legend>
         <?php
-            echo $this->Form->input('name', ['label' => 'Nome']);
-            
+            echo $this->Form->input('name', ['label' => 'Nome']);            
             echo $this->Form->input('description', ['label' => 'Descrição']);
         ?>
     </fieldset>

@@ -76,7 +76,9 @@ class ReleasesController extends AppController
                 ]
             ]
         ];
+       
         $this->set(compact('breadcrumb', 'release'));
+        $this->set('_serialize', ['release']);
     }
 
     /**
