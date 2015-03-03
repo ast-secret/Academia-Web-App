@@ -20,6 +20,14 @@ $(function(){
 
         var timeValue = $( "#add-weekday option:selected" ).text();
 
+        if (weekday === ''){
+            $weekday.parent('.form-group').addClass('has-error');
+            $weekday.focus();
+            return false;
+        } else {
+            $weekday.parent('.form-group').removeClass('has-error');
+        }
+
         if (time === ''){
             $time.parent('.form-group').addClass('has-error');
             $time.focus();
@@ -61,7 +69,7 @@ $(function(){
 
         $deleteButton = $('<button/>')
             .attr({type: 'button', id: 'btn-deletar',})
-            .addClass('btn btn-danger btn-xs pull-right')
+            .addClass('btn btn-default btn-xs pull-right')
             .css('display', 'none')
             .html('<span class="glyphicon glyphicon-remove"></span>')
             .appendTo($itemWeekdayTime);
@@ -73,9 +81,15 @@ $(function(){
     });
 
     $(document).on('click', '#btn-deletar', function(){
-        $(this).parent('li').fadeOut(function(){
-            $(this).remove();
-        });
+        if (confirm('Você realmente deseja deletar este horário?')) {
+
+            var idToDelete = $(this).parent('li').find('input#timesId').val();
+            $('#timesdelete').val($('#timesdelete').val() + idToDelete + ';');
+
+            $(this).parent('li').fadeOut(function(){
+                $(this).remove();
+            });
+        }
     });
 
     $(document).on({

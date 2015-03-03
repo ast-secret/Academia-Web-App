@@ -5,11 +5,13 @@
     <div class="row">
         <div class="col-md-6">
             <?php
-                echo $update ? $this->Form->input('id', ['type' => 'text']) : '';
+                echo $update ? $this->Form->input('id') : '';
                 echo $this->Form->input('name', ['label' => 'Nome']);
                 echo $this->Form->input('description', ['label' => 'Descrição']);
                 echo $this->Form->label('Status');
                 echo $this->Form->checkbox('stats');
+
+                echo $this->Form->hidden('timesDelete');
             ?>  
         </div>
         <div class="col-md-6">
@@ -21,7 +23,7 @@
             <div class="well">
                 <div class="row">
                     <div class="col-md-4">
-                        <?= $this->Form->input('add-weekday', ['options' => $weekdays, 'label' => 'Dia']); ?>
+                        <?= $this->Form->input('add-weekday', ['options' => $weekdays, 'label' => 'Dia', 'empty' => 'Selecione:']); ?>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group" >
@@ -32,7 +34,7 @@
                     <div class="col-md-3">
                         <div class="form-group" >
                             <label for="add-duration">Duraçao</label>
-                            <input type="text" class="form-control" id="add-duration" placeholder="Em minutos" maxlength="4">
+                            <input type="text" class="form-control" id="add-duration" placeholder="Em min." maxlength="4">
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -63,10 +65,13 @@
                                             <?php
                                                 // Hidden Fields
                                                 echo $this->Form->hidden("times.{$key}.id",
-                                                    ['value' => $time->id]);
+                                                    [
+                                                        'value' => $time->id,
+                                                        'id' => 'timesId'
+                                                    ]);
                                                 echo $this->Form->hidden("times.{$key}.weekday_id",
                                                     ['value' => $time->weekday_id]);
-                                                echo $this->Form->hidden("times.{$key}.start_hour", ['value' => $time->start_hour->format('H:i')]);
+                                                echo $this->Form->hidden("times.{$key}.start_hour", ['value' => $time->start_hour]);
                                                 echo $this->Form->hidden("times.{$key}.duration",
                                                     ['value' => $time->duration]);
                                             ?>
@@ -76,7 +81,6 @@
                                                 id="btn-deletar"
                                                 class="btn btn-default btn-xs pull-right"
                                                 style="display: none;">
-
                                                 <span class="glyphicon glyphicon-remove"></span>
                                             </button>
 
@@ -95,9 +99,7 @@
 
     <div style="margin-top: 20px;">
         <hr>
-        <button type="button" class="btn btn-default">
-            Cancelar
-        </button>
+        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-default']) ?>
         <button type="submit" class="btn btn-success" style="">
             Salvar Informações
         </button>

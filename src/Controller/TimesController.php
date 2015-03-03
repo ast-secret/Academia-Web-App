@@ -72,9 +72,22 @@ class TimesController extends AppController
      */
     public function edit($id = null)
     {
+        $breadcrumb = [
+            'parents' => [
+                [
+                    'label' => 'Aulas',
+                    'url' => [
+                        'action' => 'index',
+                    ]
+                ]
+            ],
+            'active' => 'Editar Aula'
+        ];
+
         $time = $this->Times->get($id, [
             'contain' => []
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $time = $this->Times->patchEntity($time, $this->request->data);
             if ($this->Times->save($time)) {
@@ -86,7 +99,7 @@ class TimesController extends AppController
         }
         $services = $this->Times->Services->find('list', ['limit' => 200]);
         $weekdays = $this->Times->Weekdays->find('list', ['limit' => 200]);
-        $this->set(compact('time', 'services', 'weekdays'));
+        $this->set(compact('time', 'services', 'weekdays', 'breadcrumb'));
         $this->set('_serialize', ['time']);
     }
 

@@ -1,30 +1,38 @@
-<?= $this->element('common/dashboard_breadcrumb', ['breadcrumb' => $breadcrumb]); ?>
+<?= $this->element('Common/dashboard_breadcrumb', ['breadcrumb' => $breadcrumb]) ?>
 
-<?= $this->Html->link('Adicionar', ['action' => 'add'], ['class' => 'btn btn-primary pull-right'])?>
-
+<?= $this->Html->link('Criar comunicado', ['action' => 'add'], ['class' => 'btn btn-danger pull-right'])?>
 <br style="clear: both;">
-<br>
-    <table class="table table-striped">
+<hr>
+<table class="table table-hover table-condensed table-bordered">    
     <thead>
         <tr>
-            <th><?= $this->Paginator->sort('user_id','Usuário') ?></th>
-            <th><?= $this->Paginator->sort('title','Titulo') ?></th>
+            <th style="width: 250px;"><?= $this->Paginator->sort('title','Titulo') ?></th>
             <th><?= $this->Paginator->sort('text','Texto') ?></th>
-            <th><?= $this->Paginator->sort('created','Criado em') ?></th>
-            <th class="actions"><?= __('Ações') ?></th>
+            <th style="width: 150px"><?= $this->Paginator->sort('created','Dt. da publicação') ?></th>
+            <th style="width: 100px" class="text-center">Status</th>
+            <th style="width: 80px"></th>
         </tr>
     </thead>
     <tbody>
         <?php if (count($releases) > 0): ?>
             <?php foreach ($releases as $release): ?>
                 <tr>
-                    <td><?= h($release->user->name) ?></td>
                     <td><?= h($release->title) ?></td>
-                    <td><?= $this->Text->excerpt(h($release->text),'method',50,'...');?></td>
-                    <td><?= h($release->created) ?></td>            
-                    <td class="actions">
-                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $release->id]) ?>                 
-                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $release->id]) ?>                 
+                    <td><?= $this->Text->excerpt(h($release->text),'method', 50, '...');?></td>
+                    <td><?= h($release->created->format('d/m/y \à\s h:i')) ?></td>            
+                    <td class="text-center">
+                        <?= $this->TextBootstrap->labelBoolean($release->status, 'Ativo', 'Inativo') ?>
+                    </td>
+                    <td class="text-center">
+                        <?= $this->Html->link(
+                                '<span class="glyphicon glyphicon-pencil"></span>',
+                                ['action' => 'edit', $release->id],
+                                [
+                                    'escape' => false,
+                                    'class' => 'btn btn-default btn-xs',
+                                    'title' => 'Editar'
+                                ])
+                        ?>
                     </td>
                 </tr>
 

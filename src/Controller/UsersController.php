@@ -18,9 +18,18 @@ class UsersController extends AppController
      */
     public function index()
     {
+        $breadcrumb = [
+            'active' => 'Usuários'
+        ];
+
+        $this->paginate = [
+            'contain' => ['Times'],
+            'order' => ['Times.weekday_id' => 'DESC']
+        ];
         $this->paginate = [
             'contain' => ['Gyms', 'Roles']
         ];
+        $this->set(compact('breadcrumb'));
         $this->set('users', $this->paginate($this->Users));
         $this->set('_serialize', ['users']);
     }

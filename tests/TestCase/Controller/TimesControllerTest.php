@@ -31,8 +31,7 @@ class TimesControllerTest extends IntegrationTestCase
         'ExercisesGroups' => 'app.exercises_groups',
         'Exercises' => 'app.exercises',
         'Releases' => 'app.releases',
-        'Weekdays' => 'app.weekdays',
-        'ServicesTimes' => 'app.services_times'
+        'Weekdays' => 'app.weekdays'
     ];
 
     /**

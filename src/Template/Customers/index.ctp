@@ -1,52 +1,65 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Html->link(__('New Customer'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Cards'), ['controller' => 'Cards', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Card'), ['controller' => 'Cards', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Suggestions'), ['controller' => 'Suggestions', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Suggestion'), ['controller' => 'Suggestions', 'action' => 'add']) ?> </li>
-    </ul>
-</div>
-<div class="customers index large-10 medium-9 columns">
-    <table cellpadding="0" cellspacing="0">
+<?= $this->element('Common/dashboard_breadcrumb', ['breadcrumb' => $breadcrumb]) ?>
+
+<?= $this->Html->link('Adicionar cliente', ['action' => 'add'], ['class' => 'btn btn-danger pull-right'])?>
+<br style="clear: both;">
+<hr>
+<table class="table table-hover table-condensed table-bordered">
     <thead>
         <tr>
-            <th><?= $this->Paginator->sort('id') ?></th>
-            <th><?= $this->Paginator->sort('name') ?></th>
-            <th><?= $this->Paginator->sort('registration') ?></th>
-            <th><?= $this->Paginator->sort('password') ?></th>
-            <th><?= $this->Paginator->sort('access_key') ?></th>
-            <th><?= $this->Paginator->sort('created') ?></th>
-            <th><?= $this->Paginator->sort('modified') ?></th>
-            <th class="actions"><?= __('Actions') ?></th>
+            <th style="width: 100px"><?= $this->Paginator->sort('registration', 'Matrícula') ?></th>
+            <th style=""><?= $this->Paginator->sort('name', 'Nome') ?></th>
+            <th style="width: 100px" class="text-center"><?= $this->Paginator->sort('status') ?></th>
+            <th style="width: 90px" class="text-center"></th>
         </tr>
     </thead>
     <tbody>
-    <?php foreach ($customers as $customer): ?>
-        <tr>
-            <td><?= $this->Number->format($customer->id) ?></td>
-            <td><?= h($customer->name) ?></td>
-            <td><?= h($customer->registration) ?></td>
-            <td><?= h($customer->password) ?></td>
-            <td><?= h($customer->access_key) ?></td>
-            <td><?= h($customer->created) ?></td>
-            <td><?= h($customer->modified) ?></td>
-            <td class="actions">
-                <?= $this->Html->link(__('View'), ['action' => 'view', $customer->id]) ?>
-                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $customer->id]) ?>
-                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->id)]) ?>
-            </td>
-        </tr>
-
-    <?php endforeach; ?>
+        <?php foreach ($customers as $customer): ?>
+            <tr>
+                <td><?= h($customer->registration) ?></td> 
+                <td><?= h($customer->name) ?></td>     
+                <td class="text-center">
+                    <?= $customer->status ? '<span class="label label-success">Ativo</span>': '<span class="label label-danger">Inativo</span>'; ?>
+                </td>      
+                <td class="text-center">
+                    <div class="btn-group">
+                        <?= $this->Html->link(
+                                '<span class="glyphicon glyphicon-th-list"></span>',
+                                [
+                                    'controller' => 'cards',
+                                    'action' => 'customer',
+                                    $customer->id
+                                ],
+                                [
+                                    'escape' => false,
+                                    'class' => 'btn btn-default btn-xs',
+                                    'title' => 'Ver fichas'
+                                ])
+                        ?>
+                        <?= $this->Html->link(
+                                '<span class="glyphicon glyphicon-pencil"></span>',
+                                ['action' => 'edit', $customer->id],
+                                [
+                                    'escape' => false,
+                                    'class' => 'btn btn-default btn-xs',
+                                    'title' => 'Editar'
+                                ])
+                        ?>
+                    </div>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        <?php if (count($customers) == 0): ?>
+            <tr>
+                <td colspan="6">Nenhum cliente cadastrado ainda.</td>
+            </tr>
+        <?php endif ?>
     </tbody>
     </table>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->next(__('Próximo') . ' >') ?>
         </ul>
         <p><?= $this->Paginator->counter() ?></p>
     </div>

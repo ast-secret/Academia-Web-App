@@ -17,6 +17,11 @@ class CustomersController extends AppController
      */
     public function index()
     {
+        $breadcrumb = [
+            'active' => 'Clientes'
+        ];
+
+        $this->set(compact('breadcrumb'));
         $this->set('customers', $this->paginate($this->Customers));
         $this->set('_serialize', ['customers']);
     }

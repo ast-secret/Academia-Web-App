@@ -26,7 +26,7 @@ class TimesTable extends Table
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
         $this->belongsTo('Services', [
-            'foreignKey' => 'service_id'
+            'foreignKey' => 'service_id',
         ]);
         $this->belongsTo('Weekdays', [
             'foreignKey' => 'weekday_id'

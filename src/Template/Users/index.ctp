@@ -1,6 +1,9 @@
-<?= $this->Html->link('Adicionar usuário', ['action' => 'add'], ['class' => 'btn btn-primary'])?>
+<?= $this->element('Common/dashboard_breadcrumb', ['breadcrumb' => $breadcrumb]) ?>
+
+<?= $this->Html->link('Adicionar usuário', ['action' => 'add'], ['class' => 'btn btn-danger pull-right'])?>
+<br style="clear: both;">
 <hr>
-<table class="table">
+<table class="table table-hover table-condensed table-bordered">
 <thead>
     <tr>        
         <th><?= $this->Paginator->sort('name','Nome') ?></th>

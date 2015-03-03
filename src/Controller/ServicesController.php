@@ -25,9 +25,12 @@ class ServicesController extends AppController
         ];
 
         $this->paginate = [
-            'contain' => ['Times']
+            'contain' => ['Times'],
+            'order' => ['Times.weekday_id' => 'DESC']
         ];
-        $this->set(compact('breadcrumb'));
+
+        $weekdays = $this->Services->Times->Weekdays->find('list', ['limit' => 200]);
+        $this->set(compact('breadcrumb', 'weekdays'));
         $this->set('services', $this->paginate($this->Services));
         $this->set('_serialize', ['services']);
     }
@@ -76,7 +79,7 @@ class ServicesController extends AppController
             $service = $this->Services->patchEntity($service, $this->request->data, ['associated' => ['Times']]);
 
             if ($this->Services->save($service)) {
-                $this->Flash->success('A aula foi salva.');
+                $this->Flash->success('A aula foi salva com sucesso.');
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error('A aula não pode ser salva, por favor tente novamente.');    
@@ -115,21 +118,37 @@ class ServicesController extends AppController
             'contain' => ['Times']
         ]);
 
+        if ($service->times) {
+            foreach ($service->times as $key => $value) {
+                $service->times[$key]->start_hour = $value->start_hour->format('H:m');
+            }
+        }
+
         if ($this->request->is(['patch', 'post', 'put'])) {
+
             $service = $this->Services->patchEntity($service, $this->request->data, ['associated' => ['Times']]);
 
-            // $service->dirty('times', true);
-            
             if ($this->Services->save($service)) {
-                $this->Flash->success('The service has been saved.');
+
+                if ($this->request->data['timesDelete']) {
+                    $ids = explode(';', $this->request->data['timesDelete']);
+                    foreach ($ids as $id) {
+                        if (is_numeric($id)) {
+                            $timeDelete = $this->Services->Times->get($id);
+                            $this->Services->Times->delete($timeDelete);
+                        }
+                    }
+                }
+                
+                $this->Flash->success('A aula foi editada com sucesso.');
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error('The service could not be saved. Please, try again.');
+                $this->Flash->error('A aula não pode ser salva, por favor tente novamente.');
             }
         }
 
         $gyms = $this->Services->Gyms->find('list', ['limit' => 200]);
-        $weekdays = $this->Services->Times->weekdays->find('list', ['limit' => 200]);
+        $weekdays = $this->Services->Times->Weekdays->find('list', ['limit' => 200]);
 
         $this->set(compact('service', 'gyms', 'breadcrumb', 'weekdays'));
         $this->set('_serialize', ['service']);

@@ -10,6 +10,8 @@ use App\Controller\AppController;
 class ReleasesController extends AppController
 {
 
+    public $helpers = ['TextBootstrap'];
+
     /**
      * Index method
      *
@@ -74,7 +76,7 @@ class ReleasesController extends AppController
                 ]
             ]
         ];
-        $this->set(compact('breadcrumb'));
+        $this->set(compact('breadcrumb', 'release'));
     }
 
     /**
