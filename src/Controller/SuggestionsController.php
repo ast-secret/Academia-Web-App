@@ -17,9 +17,15 @@ class SuggestionsController extends AppController
      */
     public function index()
     {
+        $breadcrumb = [
+            'active' => 'Sugestões'
+        ];
+
         $this->paginate = [
             'contain' => ['Customers']
         ];
+
+        $this->set(compact('breadcrumb'));
         $this->set('suggestions', $this->paginate($this->Suggestions));
         $this->set('_serialize', ['suggestions']);
     }

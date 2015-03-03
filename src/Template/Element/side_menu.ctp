@@ -2,11 +2,7 @@
 
 $items = [
 	[
-<<<<<<< HEAD
 		'label' => 'Clientes',
-=======
-		'label' => 'Alunos',
->>>>>>> 0a64914aee841e1ebe137e26f52d47c52bfc84c8
 		'controller' => 'customers',
 		'action' => 'index',
 	],
@@ -16,8 +12,8 @@ $items = [
 		'action' => 'index',
 	],
 	[
-		'label' => 'Usuários',
-		'controller' => 'users',
+		'label' => 'Comunicados',
+		'controller' => 'releases',
 		'action' => 'index',
 	],
 	[
@@ -26,13 +22,8 @@ $items = [
 		'action' => 'index',
 	],
 	[
-		'label' => 'Salas',	
-		'controller' => 'rooms',
-		'action' => 'index',
-	],
-	[
-		'label' => 'Comunicados',
-		'controller' => 'releases',
+		'label' => 'Usuários',
+		'controller' => 'users',
 		'action' => 'index',
 	],
 ]
