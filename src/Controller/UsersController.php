@@ -57,18 +57,30 @@ class UsersController extends AppController
      */
     public function add()
     {
+        $breadcrumb = [
+            'parents' => [
+                [
+                    'label' => 'Usuário',
+                    'url' => [
+                        'action' => 'index'
+                    ]
+                    
+                ]
+            ],
+            'active' => 'Adicionar Usuário'
+        ];
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $this->request->data['gym_id'] = 1;            
             $user = $this->Users->patchEntity($user, $this->request->data);
             //if(!empty($this->request->data['confirm_password'])){
                // if($this->request->data['confirm_password']==$this->request->data['password']){
-                    if ($this->Users->save($user)) {
-                        $this->Flash->success('O usuário foi salvo com sucesso.');
-                        return $this->redirect(['action' => 'index']);
-                    } else {                    
-                        $this->Flash->error('O usuário não pode ser salvo, tente novamente.');
-                    }
+            if ($this->Users->save($user)) {
+                $this->Flash->success('O usuário foi salvo com sucesso.');
+                return $this->redirect(['action' => 'index']);
+            } else {                    
+                $this->Flash->error('O usuário não pode ser salvo, tente novamente.');
+            }
                // }else{
                     //$this->Flash->error('As senhas não são iguais.');
                // }                 
@@ -78,7 +90,7 @@ class UsersController extends AppController
         }
 
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'roles'));
+        $this->set(compact('user', 'roles', 'breadcrumb'));
         $this->set('_serialize', ['user']);
     }
 

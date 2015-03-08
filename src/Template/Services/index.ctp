@@ -10,7 +10,7 @@
             <th><?= $this->Paginator->sort('description', 'Descrição') ?></th>
             <th style="width: 350px">Horários</th>
             <th style="width: 100px" class="text-center">Status</th>
-            <th style="width: 100px" class="text-center"><?= __('Ações') ?></th>
+            <th style="width: 100px" class="text-center"></th>
         </tr>
     </thead>
     <tbody>

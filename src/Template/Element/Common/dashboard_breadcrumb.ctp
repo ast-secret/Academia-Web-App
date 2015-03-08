@@ -6,9 +6,5 @@
             <?php endforeach ?>
         <?php endif ?>
     </div>
-
     <h3><?= $breadcrumb['active'] ?></h3>
-
-	
-
 </div>

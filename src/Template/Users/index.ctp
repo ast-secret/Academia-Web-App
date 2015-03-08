@@ -5,27 +5,34 @@
 <hr>
 <table class="table table-hover table-condensed table-bordered">
 <thead>
-    <tr>        
+    <tr>
+        <th style="width: 180px;"><?= $this->Paginator->sort('username','Email') ?></th>        
         <th><?= $this->Paginator->sort('name','Nome') ?></th>
-        <th><?= $this->Paginator->sort('username','Login') ?></th>        
-        <th><?= $this->Paginator->sort('role','Função') ?></th>
-        <th><?= $this->Paginator->sort('stats','Status') ?></th>
-        <th class="actions"><?= __('Ações') ?></th>
+        <th style="width: 160px;"><?= $this->Paginator->sort('role','Função') ?></th>
+        <th style="width: 100px" class="text-center"><?= $this->Paginator->sort('stats','Status') ?></th>
+        <th style="width: 100px" class="text-center"></th>
     </tr>
 </thead>
 <tbody>
-<?php foreach ($users as $user): ?>
-    <tr>        
-        <td><?= h($user->name) ?></td>
-        <td><?= h($user->username) ?></td>        
-        <td><?= h($user->role->name) ?></td>
-        <td><?= $user->stats ? '<span class="label label-success">Ativo</span>': '<span class="label label-danger">Inativo</span>' ?></td>
-        <td class="actions">                
-            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $user->id]) ?>            
-        </td>
-    </tr>
-
-<?php endforeach; ?>
+    <?php foreach ($users as $user): ?>
+        <tr>        
+            <td><?= h($user->username) ?></td>
+            <td><?= h($user->name) ?></td>
+            <td><?= h($user->role->name) ?></td>
+            <td class="text-center">
+                <?php if ($user->stats): ?>
+                    <span class="label label-success">Ativo</span>
+                <?php else: ?>
+                    <span class="label label-danger">Inativo</span>
+                <?php endif ?>
+            </td>
+            <td class="text-center">                
+                <?= $this->Html->link('<span class="glyphicon glyphicon-pencil"></span>',
+                    ['action' => 'edit', $user->id],
+                    ['escape' => false, 'class' => 'btn btn-default btn-xs']) ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
 </tbody>
 </table>
 <div class="paginator">
