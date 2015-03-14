@@ -1,4 +1,4 @@
-<div class="text-center" style="border-bottom: #eee solid 1px; margin-bottom: 30px; margin-left: -15px; margin-right: -15px; padding: 0 15px;">
+<div class="text-center custom-breadcrumb" style="">
     <div class="pull-left">
         <?php if (isset($breadcrumb['parents'])): ?>
             <?php foreach ($breadcrumb['parents'] as $item): ?>
@@ -6,5 +6,7 @@
             <?php endforeach ?>
         <?php endif ?>
     </div>
-    <h3><?= $breadcrumb['active'] ?></h3>
+    <span class="custom-breadcrumb-active">
+    	<?= $breadcrumb['active'] ?>
+    </span>
 </div>

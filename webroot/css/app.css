@@ -1,3 +1,8 @@
+body{
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (max-width: 767px) {
 	.custom-flash{
@@ -46,4 +51,23 @@ textarea {
 	background-color: #dff0d8;
 	color: #3c763d;
 	border-left: 6px #2ecc71 solid;
+}
+
+.text-default{
+	font-size: 16px;
+	color: #555;
+	line-height: 25px;
+	font-family: 'PT Serif', serif;
+}
+
+.custom-breadcrumb{
+	border-bottom: #EEE solid 1px;
+	margin-bottom: 30px;
+	margin-left: -15px;
+	margin-right: -15px;
+	padding: 18px 15px;
+	color: #3F3F44;
+}
+.custom-breadcrumb-active{
+	font-size: 18px;
 }

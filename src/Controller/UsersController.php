@@ -10,6 +10,10 @@ use Cake\I18n\Time;
  * @property \App\Model\Table\UsersTable $Users */
 class UsersController extends AppController
 {
+    public function login()
+    {
+        $this->layout = 'login';
+    }
 
     /**
      * Index method

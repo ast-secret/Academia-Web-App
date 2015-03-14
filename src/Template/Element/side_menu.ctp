@@ -17,7 +17,7 @@ $items = [
 		'action' => 'index',
 	],
 	[
-		'label' => 'Caixa de Sugestão',
+		'label' => 'Caixa de Sugestões',
 		'controller' => 'suggestions',
 		'action' => 'index',
 	],

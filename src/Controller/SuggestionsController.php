@@ -27,7 +27,6 @@ class SuggestionsController extends AppController
 
         $this->set(compact('breadcrumb'));
         $this->set('suggestions', $this->paginate($this->Suggestions));
-        $this->set('_serialize', ['suggestions']);
     }
 
     /**
@@ -39,9 +38,23 @@ class SuggestionsController extends AppController
      */
     public function view($id = null)
     {
+
+        $breadcrumb = [
+            'parents' => [
+                [
+                    'label' => 'Sugestões',
+                    'url' => [
+                        'action' => 'index'
+                    ]
+                ]
+            ],
+            'active' => 'Sugestão'
+        ];
+
         $suggestion = $this->Suggestions->get($id, [
             'contain' => ['Customers']
         ]);
+        $this->set(compact('breadcrumb'));
         $this->set('suggestion', $suggestion);
         $this->set('_serialize', ['suggestion']);
     }
