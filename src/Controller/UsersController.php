@@ -3,16 +3,42 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\I18n\Time;
-
+use Cake\Event\Event;
 /**
  * Users Controller
  *
  * @property \App\Model\Table\UsersTable $Users */
 class UsersController extends AppController
 {
+
+    public function beforeFilter(Event $event)
+    {
+        $this->Auth->allow('add');
+    }
+
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
+    }
+
     public function login()
     {
         $this->layout = 'login';
+
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            } else {
+                $this->Flash->error(
+                    __('Username or password is incorrect'),
+                    'default',
+                    [],
+                    'auth'
+                );
+            }
+        }
     }
 
     /**
@@ -73,24 +99,20 @@ class UsersController extends AppController
             ],
             'active' => 'Adicionar Usuário'
         ];
+
         $user = $this->Users->newEntity();
+
         if ($this->request->is('post')) {
+            
             $this->request->data['gym_id'] = 1;            
             $user = $this->Users->patchEntity($user, $this->request->data);
-            //if(!empty($this->request->data['confirm_password'])){
-               // if($this->request->data['confirm_password']==$this->request->data['password']){
+
             if ($this->Users->save($user)) {
                 $this->Flash->success('O usuário foi salvo com sucesso.');
                 return $this->redirect(['action' => 'index']);
             } else {                    
                 $this->Flash->error('O usuário não pode ser salvo, tente novamente.');
             }
-               // }else{
-                    //$this->Flash->error('As senhas não são iguais.');
-               // }                 
-           // }else{
-               // $this->Flash->error('Campo confirmar senha não pode ficar vazio.');
-            //}
         }
 
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);

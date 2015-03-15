@@ -47,6 +47,12 @@
 	<div class="container">
 		<div class="row" style="margin-top: 100px;">
 			<div class="col-md-4 col-md-offset-4">
+				<div class="row">
+					<div class="col-md-12">
+						<?= $this->Flash->render(); ?>
+						<?= $this->Flash->render('auth'); ?>
+					</div>
+				</div>
 				<?= $this->fetch('content') ?>
 			</div>
 		</div>

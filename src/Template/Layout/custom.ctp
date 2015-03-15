@@ -24,6 +24,11 @@
 	<?= $this->fetch('css') ?>
 	<?= $this->fetch('script') ?>
 
+	<script>
+		$(function(){
+			$('.has-tooltip').tooltip();
+		});
+	</script>
 	<style>
 		html, body
 		{

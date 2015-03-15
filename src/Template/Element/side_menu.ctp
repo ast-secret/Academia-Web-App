@@ -63,7 +63,10 @@ $items = [
 			<?= $this->Html->link('Configurações de conta', ['controller' => 'users', 'action' => 'change_password'], ['role' => 'menuitem', 'tabindex' => -1]) ?>
 		</li>
 		<li role="presentation" class="divider"></li>
-		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sair</a></li>
+		<li role="presentation">
+			<!-- <a role="menuitem" tabindex="-1" href="#">Sair</a> -->
+			<?= $this->Html->link('Sair', ['controller' => 'users', 'action' => 'logout']) ?>
+		</li>
 	</ul>		
 			</div>
 		</div>

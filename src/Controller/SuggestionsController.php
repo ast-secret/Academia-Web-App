@@ -21,14 +21,36 @@ class SuggestionsController extends AppController
             'active' => 'Sugestões'
         ];
 
+        $filter = !isset($this->request->query['filter']) ? 1 : (int)$this->request->query['filter'];
+
+        switch ($filter) {
+            case 1:
+                $filterCondition = ['Suggestions.is_read' => 0];
+                break;
+            case 2:
+                $filterCondition = [
+                    'Suggestions.is_star' => 1
+                ];
+                break;
+            case 3:
+                $filterCondition = ['Suggestions.is_read' => 1];
+                break;
+            
+            default:
+                $filterCondition = [];
+                break;
+        }
+
         $this->paginate = [
-            'contain' => ['Customers']
+            'contain' => ['Customers'],
+            'conditions' => [
+                $filterCondition
+            ]
         ];
 
-        $this->set(compact('breadcrumb'));
+        $this->set(compact('breadcrumb', 'filter'));
         $this->set('suggestions', $this->paginate($this->Suggestions));
     }
-
     /**
      * View method
      *

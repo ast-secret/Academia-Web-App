@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 
+
 /**
  * Application Controller
  *
@@ -43,6 +44,27 @@ class AppController extends Controller
      */
     public function initialize()
     {
+
+        $this->loadComponent('Auth', [
+            'loginAction' => [
+                'controller' => 'users',
+                'action' => 'login'
+            ],
+            'loginRedirect' => [
+                'controller' => 'customers',
+                'action' => 'index'
+            ],
+            'authError' => 'Você deve fazer o login para acessar esta área.',
+            'authenticate' => [
+                'Form' => [
+                    'scope' => [
+                        'Users.is_active' => true
+                    ],
+                    'contain' => ['Roles', 'Gyms']
+                ]
+            ]
+        ]);
+
         $bootstrapFormTemplate = [
             'formStart' => '<form {{attrs}} novalidate>',
             'errorList' => '<ul>{{content}}</ul>',

@@ -5,13 +5,13 @@
 
 		<br>
 		<br>
-
-		<?= $this->Form->input('username', ['label' => false, 'placeholder' => 'Email', 'class' => '', 'autofocus' => true]) ?>
-		<?= $this->Form->input('password', ['label' => false, 'placeholder' => 'Senha', 'class' => '']) ?>
-		<button class="btn btn-primary btn-block">
-			Entrar
-		</button>
-
+		<?= $this->Form->create() ?>
+			<?= $this->Form->input('username', ['label' => false, 'placeholder' => 'Email', 'class' => '', 'autofocus' => true]) ?>
+			<?= $this->Form->input('password', ['label' => false, 'placeholder' => 'Senha', 'class' => '']) ?>
+			<button type="submit" class="btn btn-primary btn-block">
+				Entrar
+			</button>
+		<?= $this->Form->end() ?>
 		<br>
 		<hr>
 		<div class="text-center"><a href="#">Esqueceu a sua senha?</a></div>
