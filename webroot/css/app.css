@@ -71,3 +71,12 @@ textarea {
 .custom-breadcrumb-active{
 	font-size: 18px;
 }
+
+.btn-clean{
+	border: 0;
+	background: none;
+	width: auto;
+	height: auto;
+	padding: 0;
+	outline: 0!important;
+}
