@@ -9,7 +9,11 @@ use App\Controller\AppController;
  * @property \App\Model\Table\SuggestionsTable $Suggestions */
 class SuggestionsController extends AppController
 {
-
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('RequestHandler');
+    }
     /**
      * Index method
      *
@@ -21,34 +25,45 @@ class SuggestionsController extends AppController
             'active' => 'Sugestões'
         ];
 
-        $filter = !isset($this->request->query['filter']) ? 1 : (int)$this->request->query['filter'];
+        $tab = !$this->request->query('tab') ? 1 : (int)$this->request->query('tab');
 
-        switch ($filter) {
+        $conditions = [];
+        switch ($tab) {
             case 1:
-                $filterCondition = ['Suggestions.is_read' => 0];
+                $conditions[] = ['Suggestions.is_read' => 0];
                 break;
             case 2:
-                $filterCondition = [
+                $conditions[] = [
                     'Suggestions.is_star' => 1
                 ];
                 break;
             case 3:
-                $filterCondition = ['Suggestions.is_read' => 1];
+                $conditions[] = ['Suggestions.is_read' => 1];
                 break;
-            
-            default:
-                $filterCondition = [];
-                break;
+        }
+
+        $q = $this->request->query('q');
+        if ($q) {
+            $conditions[] = ['Customers.name LIKE' => "%{$q}%"];
+        }
+
+        $from = $this->request->query('from');
+        if ($from) {
+            $conditions[] = ['Suggestions.created >=' => $from];
+        }
+        $to = $this->request->query('to');
+        if ($to) {
+            $conditions[] = ['Suggestions.created <=' => $to];
         }
 
         $this->paginate = [
             'contain' => ['Customers'],
             'conditions' => [
-                $filterCondition
+                $conditions
             ]
         ];
 
-        $this->set(compact('breadcrumb', 'filter'));
+        $this->set(compact('breadcrumb', 'tab'));
         $this->set('suggestions', $this->paginate($this->Suggestions));
     }
     /**
@@ -81,6 +96,39 @@ class SuggestionsController extends AppController
         $this->set('_serialize', ['suggestion']);
     }
 
+    public function toggleIsStar()
+    {
+        $this->layout = 'ajax';
+        if (!$this->request->is('ajax')) {
+            throw new MethodNotAllowedException();
+        }
+
+        $suggestion = $this->Suggestions->get($this->request->data('id'));
+        $suggestion = $this->Suggestions->patchEntity($suggestion, ['is_star' => $this->request->data('add')]);
+
+        if ($this->Suggestions->save($suggestion)) {
+            echo json_encode(['ok']);
+        } else {
+            echo json_encode($suggestion->errors());
+        }
+    }
+
+    public function toggleIsRead()
+    {
+        $this->layout = 'ajax';
+        if (!$this->request->is('ajax')) {
+            throw new MethodNotAllowedException();
+        }
+
+        $suggestion = $this->Suggestions->get($this->request->data['id']);
+        $suggestion = $this->Suggestions->patchEntity($suggestion, ['is_read' => $this->request->data['add']]);
+
+        if ($this->Suggestions->save($suggestion)) {
+            echo json_encode(['ok']);
+        } else {
+            echo json_encode($suggestion->errors());
+        }
+    }
     /**
      * Add method
      *

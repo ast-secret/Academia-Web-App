@@ -3,6 +3,9 @@ body{
 	font-size: 15px;
 }
 
+input{
+	outline: none!!important;
+}
 /* Small devices (tablets, 768px and up) */
 @media (max-width: 767px) {
 	.custom-flash{

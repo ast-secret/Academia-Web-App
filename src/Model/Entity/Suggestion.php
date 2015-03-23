@@ -18,5 +18,7 @@ class Suggestion extends Entity
         'text' => true,
         'customer_id' => true,
         'customer' => true,
+        'is_star' => true,
+        'is_read' => true
     ];
 }
