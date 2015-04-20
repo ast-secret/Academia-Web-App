@@ -1,0 +1,1151 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2015-03-27 11:10+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/UsersController.php:35
+msgid "Username or password is incorrect"
+msgstr ""
+
+#: Template/Cards/edit.ctp:2
+#: Template/CardsExercises/add.ctp:2
+#: Template/CardsExercises/edit.ctp:2
+#: Template/CardsExercises/index.ctp:2;26
+#: Template/CardsExercises/view.ctp:2
+#: Template/Exercises/add.ctp:2
+#: Template/Exercises/edit.ctp:2
+#: Template/Exercises/index.ctp:2;17
+#: Template/Exercises/view.ctp:2;47
+#: Template/ExercisesGroups/add.ctp:2
+#: Template/ExercisesGroups/edit.ctp:2
+#: Template/ExercisesGroups/index.ctp:2;17
+#: Template/ExercisesGroups/view.ctp:2;45
+#: Template/Gyms/edit.ctp:2
+#: Template/Gyms/index.ctp:13
+#: Template/Gyms/view.ctp:2;58;92;127;164;204
+#: Template/Lessons/edit.ctp:2
+#: Template/Lessons/index.ctp:13
+#: Template/Lessons/view.ctp:2
+#: Template/LessonsHasUsers/add.ctp:2
+#: Template/LessonsHasUsers/edit.ctp:2
+#: Template/LessonsHasUsers/index.ctp:2;19
+#: Template/LessonsHasUsers/view.ctp:2
+#: Template/Machines/add.ctp:2
+#: Template/Machines/edit.ctp:2
+#: Template/Machines/index.ctp:10
+#: Template/Machines/view.ctp:2;49
+#: Template/Phones/add.ctp:2
+#: Template/Phones/edit.ctp:2
+#: Template/Phones/index.ctp:2;19
+#: Template/Phones/view.ctp:2
+#: Template/Roles/add.ctp:2
+#: Template/Roles/edit.ctp:2
+#: Template/Roles/index.ctp:2;17
+#: Template/Roles/view.ctp:2;46
+#: Template/Rooms/view.ctp:2;52
+#: Template/Services/view.ctp:2;63;99
+#: Template/Times/add.ctp:2
+#: Template/Times/index.ctp:2;21
+#: Template/Times/view.ctp:2
+#: Template/Users/view.ctp:46;85
+#: Template/Weekdays/add.ctp:2
+#: Template/Weekdays/edit.ctp:2
+#: Template/Weekdays/index.ctp:8
+#: Template/Weekdays/view.ctp:2;43
+msgid "Actions"
+msgstr ""
+
+#: Template/Cards/edit.ctp:5
+#: Template/CardsExercises/edit.ctp:5
+#: Template/CardsExercises/index.ctp:48
+#: Template/Exercises/edit.ctp:5
+#: Template/Exercises/index.ctp:30
+#: Template/Exercises/view.ctp:65
+#: Template/ExercisesGroups/edit.ctp:5
+#: Template/ExercisesGroups/index.ctp:30
+#: Template/ExercisesGroups/view.ctp:61
+#: Template/Gyms/edit.ctp:5
+#: Template/Gyms/index.ctp:29
+#: Template/Gyms/view.ctp:71;106;141;180;221
+#: Template/Lessons/edit.ctp:5
+#: Template/Lessons/index.ctp:33
+#: Template/LessonsHasUsers/edit.ctp:5
+#: Template/LessonsHasUsers/index.ctp:36
+#: Template/Machines/edit.ctp:5
+#: Template/Machines/index.ctp:26
+#: Template/Machines/view.ctp:65
+#: Template/Phones/edit.ctp:5
+#: Template/Phones/index.ctp:36
+#: Template/Roles/edit.ctp:5
+#: Template/Roles/index.ctp:30
+#: Template/Roles/view.ctp:63
+#: Template/Rooms/view.ctp:69
+#: Template/Services/view.ctp:80;111
+#: Template/Times/index.ctp:40
+#: Template/Users/view.ctp:64;99
+#: Template/Weekdays/edit.ctp:5
+#: Template/Weekdays/index.ctp:21
+#: Template/Weekdays/view.ctp:59
+msgid "Delete"
+msgstr ""
+
+#: Template/Cards/edit.ctp:7
+#: Template/CardsExercises/edit.ctp:7
+#: Template/CardsExercises/index.ctp:48
+#: Template/CardsExercises/view.ctp:5
+#: Template/Exercises/edit.ctp:7
+#: Template/Exercises/index.ctp:30
+#: Template/Exercises/view.ctp:5;65
+#: Template/ExercisesGroups/edit.ctp:7
+#: Template/ExercisesGroups/index.ctp:30
+#: Template/ExercisesGroups/view.ctp:5;61
+#: Template/Gyms/edit.ctp:7
+#: Template/Gyms/index.ctp:29
+#: Template/Gyms/view.ctp:5;71;106;141;180;221
+#: Template/Lessons/edit.ctp:7
+#: Template/Lessons/index.ctp:33
+#: Template/Lessons/view.ctp:5
+#: Template/LessonsHasUsers/edit.ctp:7
+#: Template/LessonsHasUsers/index.ctp:36
+#: Template/LessonsHasUsers/view.ctp:5
+#: Template/Machines/edit.ctp:7
+#: Template/Machines/index.ctp:26
+#: Template/Machines/view.ctp:5;65
+#: Template/Phones/edit.ctp:7
+#: Template/Phones/index.ctp:36
+#: Template/Phones/view.ctp:5
+#: Template/Roles/edit.ctp:7
+#: Template/Roles/index.ctp:30
+#: Template/Roles/view.ctp:5;63
+#: Template/Rooms/view.ctp:5;69
+#: Template/Services/view.ctp:5;80;111
+#: Template/Times/index.ctp:40
+#: Template/Times/view.ctp:5
+#: Template/Users/view.ctp:64;99
+#: Template/Weekdays/edit.ctp:7
+#: Template/Weekdays/index.ctp:21
+#: Template/Weekdays/view.ctp:5;59
+msgid "Are you sure you want to delete # {0}?"
+msgstr ""
+
+#: Template/Cards/edit.ctp:10
+#: Template/CardsExercises/add.ctp:7
+#: Template/CardsExercises/edit.ctp:13
+#: Template/CardsExercises/index.ctp:7
+#: Template/CardsExercises/view.ctp:10
+#: Template/Exercises/add.ctp:5
+#: Template/Exercises/edit.ctp:11
+#: Template/Exercises/index.ctp:5
+#: Template/Exercises/view.ctp:8
+msgid "List Cards"
+msgstr ""
+
+#: Template/Cards/edit.ctp:11
+#: Template/Gyms/edit.ctp:19
+#: Template/Gyms/view.ctp:16
+#: Template/LessonsHasUsers/add.ctp:7
+#: Template/LessonsHasUsers/edit.ctp:13
+#: Template/LessonsHasUsers/index.ctp:7
+#: Template/LessonsHasUsers/view.ctp:10
+#: Template/Roles/add.ctp:5
+#: Template/Roles/edit.ctp:11
+#: Template/Roles/index.ctp:5
+#: Template/Roles/view.ctp:8
+msgid "List Users"
+msgstr ""
+
+#: Template/Cards/edit.ctp:12
+#: Template/Gyms/edit.ctp:20
+#: Template/Gyms/view.ctp:17
+#: Template/LessonsHasUsers/add.ctp:8
+#: Template/LessonsHasUsers/edit.ctp:14
+#: Template/LessonsHasUsers/index.ctp:8
+#: Template/LessonsHasUsers/view.ctp:11
+#: Template/Roles/add.ctp:6
+#: Template/Roles/edit.ctp:12
+#: Template/Roles/index.ctp:6
+#: Template/Roles/view.ctp:9
+msgid "New User"
+msgstr ""
+
+#: Template/Cards/edit.ctp:13
+msgid "List Customers"
+msgstr ""
+
+#: Template/Cards/edit.ctp:14
+msgid "New Customer"
+msgstr ""
+
+#: Template/Cards/edit.ctp:15
+#: Template/CardsExercises/add.ctp:5
+#: Template/CardsExercises/edit.ctp:11
+#: Template/CardsExercises/index.ctp:5
+#: Template/CardsExercises/view.ctp:8
+#: Template/Exercises/add.ctp:4
+#: Template/Exercises/edit.ctp:10
+#: Template/Exercises/view.ctp:6
+msgid "List Exercises"
+msgstr ""
+
+#: Template/Cards/edit.ctp:16
+#: Template/CardsExercises/add.ctp:6
+#: Template/CardsExercises/edit.ctp:12
+#: Template/CardsExercises/index.ctp:6
+#: Template/CardsExercises/view.ctp:9
+#: Template/Exercises/index.ctp:4
+#: Template/Exercises/view.ctp:7
+msgid "New Exercise"
+msgstr ""
+
+#: Template/Cards/edit.ctp:22
+msgid "Edit Card"
+msgstr ""
+
+#: Template/Cards/edit.ctp:34
+#: Template/CardsExercises/add.ctp:27
+#: Template/CardsExercises/edit.ctp:33
+#: Template/Exercises/add.ctp:18
+#: Template/Exercises/edit.ctp:24
+#: Template/ExercisesGroups/add.ctp:17
+#: Template/ExercisesGroups/edit.ctp:23
+#: Template/Gyms/edit.ctp:35
+#: Template/Lessons/edit.ctp:30
+#: Template/LessonsHasUsers/add.ctp:20
+#: Template/LessonsHasUsers/edit.ctp:26
+#: Template/Machines/add.ctp:20
+#: Template/Machines/edit.ctp:26
+#: Template/Phones/add.ctp:19
+#: Template/Phones/edit.ctp:25
+#: Template/Roles/add.ctp:17
+#: Template/Roles/edit.ctp:23
+#: Template/Times/add.ctp:22
+#: Template/Times/edit.ctp:44
+#: Template/Weekdays/add.ctp:18
+#: Template/Weekdays/edit.ctp:24
+msgid "Submit"
+msgstr ""
+
+#: Template/Cards/index.ctp:51
+#: Template/CardsExercises/index.ctp:57
+#: Template/Exercises/index.ctp:39
+#: Template/ExercisesGroups/index.ctp:39
+#: Template/Gyms/index.ctp:38
+#: Template/Lessons/index.ctp:42
+#: Template/LessonsHasUsers/index.ctp:45
+#: Template/Machines/index.ctp:35
+#: Template/Phones/index.ctp:45
+#: Template/Roles/index.ctp:39
+#: Template/Times/index.ctp:49
+#: Template/Weekdays/index.ctp:30
+msgid "previous"
+msgstr ""
+
+#: Template/Cards/index.ctp:53
+#: Template/CardsExercises/index.ctp:59
+#: Template/Exercises/index.ctp:41
+#: Template/ExercisesGroups/index.ctp:41
+#: Template/Gyms/index.ctp:40
+#: Template/Lessons/index.ctp:44
+#: Template/LessonsHasUsers/index.ctp:47
+#: Template/Machines/index.ctp:37
+#: Template/Phones/index.ctp:47
+#: Template/Roles/index.ctp:41
+#: Template/Times/index.ctp:51
+#: Template/Weekdays/index.ctp:32
+msgid "next"
+msgstr ""
+
+#: Template/CardsExercises/add.ctp:4
+#: Template/CardsExercises/edit.ctp:10
+#: Template/CardsExercises/view.ctp:6
+#: Template/ExercisesGroups/add.ctp:5
+#: Template/ExercisesGroups/edit.ctp:11
+#: Template/ExercisesGroups/index.ctp:5
+#: Template/ExercisesGroups/view.ctp:8
+#: Template/Machines/add.ctp:7
+#: Template/Machines/edit.ctp:13
+#: Template/Machines/view.ctp:10
+msgid "List Cards Exercises"
+msgstr ""
+
+#: Template/CardsExercises/add.ctp:8
+#: Template/CardsExercises/edit.ctp:14
+#: Template/CardsExercises/index.ctp:8
+#: Template/CardsExercises/view.ctp:11
+#: Template/Exercises/add.ctp:6
+#: Template/Exercises/edit.ctp:12
+#: Template/Exercises/index.ctp:6
+#: Template/Exercises/view.ctp:9
+msgid "New Card"
+msgstr ""
+
+#: Template/CardsExercises/add.ctp:9
+#: Template/CardsExercises/edit.ctp:15
+#: Template/CardsExercises/index.ctp:9
+#: Template/CardsExercises/view.ctp:12
+#: Template/Gyms/edit.ctp:11
+#: Template/Gyms/view.ctp:8
+#: Template/Machines/add.ctp:4
+#: Template/Machines/edit.ctp:10
+#: Template/Machines/view.ctp:6
+msgid "List Machines"
+msgstr ""
+
+#: Template/CardsExercises/add.ctp:10
+#: Template/CardsExercises/edit.ctp:16
+#: Template/CardsExercises/index.ctp:10
+#: Template/CardsExercises/view.ctp:13
+#: Template/Gyms/edit.ctp:12
+#: Template/Gyms/view.ctp:9
+#: Template/Machines/view.ctp:7
+msgid "New Machine"
+msgstr ""
+
+#: Template/CardsExercises/add.ctp:11
+#: Template/CardsExercises/edit.ctp:17
+#: Template/CardsExercises/index.ctp:11
+#: Template/CardsExercises/view.ctp:14
+#: Template/ExercisesGroups/add.ctp:4
+#: Template/ExercisesGroups/edit.ctp:10
+#: Template/ExercisesGroups/view.ctp:6
+msgid "List Exercises Groups"
+msgstr ""
+
+#: Template/CardsExercises/add.ctp:12
+#: Template/CardsExercises/edit.ctp:18
+#: Template/CardsExercises/index.ctp:12
+#: Template/CardsExercises/view.ctp:15
+#: Template/ExercisesGroups/index.ctp:4
+#: Template/ExercisesGroups/view.ctp:7
+msgid "New Exercises Group"
+msgstr ""
+
+#: Template/CardsExercises/add.ctp:18
+msgid "Add Cards Exercise"
+msgstr ""
+
+#: Template/CardsExercises/edit.ctp:24
+#: Template/CardsExercises/view.ctp:4
+msgid "Edit Cards Exercise"
+msgstr ""
+
+#: Template/CardsExercises/index.ctp:4
+#: Template/CardsExercises/view.ctp:7
+#: Template/ExercisesGroups/add.ctp:6
+#: Template/ExercisesGroups/edit.ctp:12
+#: Template/ExercisesGroups/index.ctp:6
+#: Template/ExercisesGroups/view.ctp:9
+#: Template/Machines/add.ctp:8
+#: Template/Machines/edit.ctp:14
+#: Template/Machines/view.ctp:11
+msgid "New Cards Exercise"
+msgstr ""
+
+#: Template/CardsExercises/index.ctp:46
+#: Template/Exercises/index.ctp:28
+#: Template/Exercises/view.ctp:63
+#: Template/ExercisesGroups/index.ctp:28
+#: Template/ExercisesGroups/view.ctp:59
+#: Template/Gyms/index.ctp:27
+#: Template/Gyms/view.ctp:69;104;139;178;219
+#: Template/Lessons/index.ctp:31
+#: Template/LessonsHasUsers/index.ctp:34
+#: Template/Machines/index.ctp:24
+#: Template/Machines/view.ctp:63
+#: Template/Phones/index.ctp:34
+#: Template/Roles/index.ctp:28
+#: Template/Roles/view.ctp:61
+#: Template/Rooms/view.ctp:67
+#: Template/Services/view.ctp:78;109
+#: Template/Times/index.ctp:38
+#: Template/Users/view.ctp:62;97
+#: Template/Weekdays/index.ctp:19
+#: Template/Weekdays/view.ctp:57
+msgid "View"
+msgstr ""
+
+#: Template/CardsExercises/index.ctp:47
+#: Template/Exercises/index.ctp:29
+#: Template/Exercises/view.ctp:64
+#: Template/ExercisesGroups/index.ctp:29
+#: Template/ExercisesGroups/view.ctp:60
+#: Template/Gyms/index.ctp:28
+#: Template/Gyms/view.ctp:70;105;140;179;220
+#: Template/Lessons/index.ctp:32
+#: Template/LessonsHasUsers/index.ctp:35
+#: Template/Machines/index.ctp:25
+#: Template/Machines/view.ctp:64
+#: Template/Phones/index.ctp:35
+#: Template/Roles/index.ctp:29
+#: Template/Roles/view.ctp:62
+#: Template/Rooms/view.ctp:68
+#: Template/Services/view.ctp:79;110
+#: Template/Times/index.ctp:39
+#: Template/Users/view.ctp:63;98
+#: Template/Weekdays/index.ctp:20
+#: Template/Weekdays/view.ctp:58
+msgid "Edit"
+msgstr ""
+
+#: Template/CardsExercises/view.ctp:5
+msgid "Delete Cards Exercise"
+msgstr ""
+
+#: Template/CardsExercises/view.ctp:22
+msgid "Exercise"
+msgstr ""
+
+#: Template/CardsExercises/view.ctp:24
+msgid "Card"
+msgstr ""
+
+#: Template/CardsExercises/view.ctp:26
+#: Template/ExercisesGroups/view.ctp:40
+#: Template/Machines/view.ctp:44
+msgid "Repetition"
+msgstr ""
+
+#: Template/CardsExercises/view.ctp:28
+msgid "Machine"
+msgstr ""
+
+#: Template/CardsExercises/view.ctp:30
+msgid "Exercises Group"
+msgstr ""
+
+#: Template/CardsExercises/view.ctp:34
+#: Template/Exercises/view.ctp:20;37
+#: Template/ExercisesGroups/view.ctp:20;37
+#: Template/Gyms/view.ctp:36;53;86;121;156;195
+#: Template/Lessons/view.ctp:24
+#: Template/LessonsHasUsers/view.ctp:24
+#: Template/Machines/view.ctp:24;41
+#: Template/Phones/view.ctp:24
+#: Template/Roles/view.ctp:20;37
+#: Template/Rooms/view.ctp:26;43
+#: Template/Services/view.ctp:26;54;95
+#: Template/Times/view.ctp:24
+#: Template/Users/view.ctp:17;36;79
+#: Template/Weekdays/view.ctp:16;35
+msgid "Id"
+msgstr ""
+
+#: Template/CardsExercises/view.ctp:38
+#: Template/Exercises/view.ctp:24;42
+#: Template/ExercisesGroups/view.ctp:24;41
+#: Template/Gyms/view.ctp:40;56;90;126;162;202
+#: Template/Lessons/view.ctp:36
+#: Template/LessonsHasUsers/view.ctp:28
+#: Template/Machines/view.ctp:28;45
+#: Template/Phones/view.ctp:28
+#: Template/Roles/view.ctp:24;44
+#: Template/Rooms/view.ctp:32;50
+#: Template/Services/view.ctp:34;61;97
+#: Template/Times/view.ctp:30
+#: Template/Users/view.ctp:23;41;83
+#: Template/Weekdays/view.ctp:22;41
+msgid "Created"
+msgstr ""
+
+#: Template/CardsExercises/view.ctp:40
+#: Template/Exercises/view.ctp:26;43
+#: Template/ExercisesGroups/view.ctp:26;42
+#: Template/Gyms/view.ctp:42;57;91;125;163;203
+#: Template/Lessons/view.ctp:38
+#: Template/Machines/view.ctp:30;46
+#: Template/Phones/view.ctp:30
+#: Template/Roles/view.ctp:26;45
+#: Template/Rooms/view.ctp:30;51
+#: Template/Services/view.ctp:36;62;98
+#: Template/Users/view.ctp:25;42;84
+#: Template/Weekdays/view.ctp:24;42
+msgid "Modified"
+msgstr ""
+
+#: Template/Customers/add.ctp:4
+msgid "Adicionar Aluno"
+msgstr ""
+
+#: Template/Customers/edit.ctp:6
+msgid "Editar Aluno"
+msgstr ""
+
+#: Template/Customers/index.ctp:60
+#: Template/Rooms/index.ctp:29
+#: Template/Services/index.ctp:57
+#: Template/Users/index.ctp:40
+msgid "Anterior"
+msgstr ""
+
+#: Template/Customers/index.ctp:62
+#: Template/Rooms/index.ctp:31
+#: Template/Services/index.ctp:59
+#: Template/Users/index.ctp:42
+msgid "Próximo"
+msgstr ""
+
+#: Template/Customers/view.ctp:4
+msgid "Nome"
+msgstr ""
+
+#: Template/Customers/view.ctp:6
+msgid "Número de Registro"
+msgstr ""
+
+#: Template/Customers/view.ctp:8
+msgid "Chave de Acesso"
+msgstr ""
+
+#: Template/Customers/view.ctp:13
+msgid "Criado em"
+msgstr ""
+
+#: Template/Element/Releases/form.ctp:12
+#: Template/Element/Services/form.ctp:102
+msgid "Cancelar"
+msgstr ""
+
+#: Template/Element/Releases/form.ctp:13
+msgid "Salvar informações"
+msgstr ""
+
+#: Template/Exercises/add.ctp:12
+msgid "Add Exercise"
+msgstr ""
+
+#: Template/Exercises/edit.ctp:18
+#: Template/Exercises/view.ctp:4
+msgid "Edit Exercise"
+msgstr ""
+
+#: Template/Exercises/view.ctp:5
+msgid "Delete Exercise"
+msgstr ""
+
+#: Template/Exercises/view.ctp:16
+#: Template/ExercisesGroups/view.ctp:16
+#: Template/Gyms/view.ctp:24;55;88;122;158;198
+#: Template/Machines/view.ctp:20
+#: Template/Phones/view.ctp:18
+#: Template/Roles/view.ctp:16;40
+#: Template/Rooms/view.ctp:18
+#: Template/Services/view.ctp:22
+#: Template/Users/view.ctp:9
+#: Template/Weekdays/view.ctp:37
+msgid "Name"
+msgstr ""
+
+#: Template/Exercises/view.ctp:33
+#: Template/Users/view.ctp:32
+msgid "Related Cards"
+msgstr ""
+
+#: Template/Exercises/view.ctp:38
+#: Template/Users/view.ctp:37;80
+msgid "User Id"
+msgstr ""
+
+#: Template/Exercises/view.ctp:39
+#: Template/Users/view.ctp:38
+msgid "Start Date"
+msgstr ""
+
+#: Template/Exercises/view.ctp:40
+#: Template/Users/view.ctp:39
+msgid "End Date"
+msgstr ""
+
+#: Template/Exercises/view.ctp:41
+#: Template/Users/view.ctp:40
+msgid "Goal"
+msgstr ""
+
+#: Template/Exercises/view.ctp:44
+#: Template/Users/view.ctp:43
+msgid "Customer Id"
+msgstr ""
+
+#: Template/Exercises/view.ctp:45
+#: Template/Users/view.ctp:44
+msgid "Obs"
+msgstr ""
+
+#: Template/Exercises/view.ctp:46
+#: Template/Users/view.ctp:45
+msgid "Current"
+msgstr ""
+
+#: Template/ExercisesGroups/add.ctp:12
+msgid "Add Exercises Group"
+msgstr ""
+
+#: Template/ExercisesGroups/edit.ctp:18
+#: Template/ExercisesGroups/view.ctp:4
+msgid "Edit Exercises Group"
+msgstr ""
+
+#: Template/ExercisesGroups/view.ctp:5
+msgid "Delete Exercises Group"
+msgstr ""
+
+#: Template/ExercisesGroups/view.ctp:33
+#: Template/Machines/view.ctp:37
+msgid "Related CardsExercises"
+msgstr ""
+
+#: Template/ExercisesGroups/view.ctp:38
+#: Template/Machines/view.ctp:42
+msgid "Exercise Id"
+msgstr ""
+
+#: Template/ExercisesGroups/view.ctp:39
+#: Template/Machines/view.ctp:43
+msgid "Card Id"
+msgstr ""
+
+#: Template/ExercisesGroups/view.ctp:43
+#: Template/Machines/view.ctp:47
+msgid "Machine Id"
+msgstr ""
+
+#: Template/ExercisesGroups/view.ctp:44
+#: Template/Machines/view.ctp:48
+msgid "Exercises Group Id"
+msgstr ""
+
+#: Template/Gyms/add.ctp:3
+msgid "Adicionar academia"
+msgstr ""
+
+#: Template/Gyms/edit.ctp:10
+#: Template/Gyms/view.ctp:6
+#: Template/Machines/add.ctp:5
+#: Template/Machines/edit.ctp:11
+#: Template/Machines/view.ctp:8
+#: Template/Phones/add.ctp:5
+#: Template/Phones/edit.ctp:11
+#: Template/Phones/index.ctp:5
+#: Template/Phones/view.ctp:8
+#: Template/Rooms/view.ctp:8
+#: Template/Services/view.ctp:8
+msgid "List Gyms"
+msgstr ""
+
+#: Template/Gyms/edit.ctp:13
+#: Template/Gyms/view.ctp:10
+#: Template/Phones/add.ctp:4
+#: Template/Phones/edit.ctp:10
+#: Template/Phones/view.ctp:6
+msgid "List Phones"
+msgstr ""
+
+#: Template/Gyms/edit.ctp:14
+#: Template/Gyms/view.ctp:11
+#: Template/Phones/index.ctp:4
+#: Template/Phones/view.ctp:7
+msgid "New Phone"
+msgstr ""
+
+#: Template/Gyms/edit.ctp:15
+#: Template/Gyms/view.ctp:12
+#: Template/Lessons/edit.ctp:13
+#: Template/Lessons/view.ctp:10
+#: Template/Rooms/view.ctp:6
+msgid "List Rooms"
+msgstr ""
+
+#: Template/Gyms/edit.ctp:16
+#: Template/Gyms/view.ctp:13
+#: Template/Lessons/edit.ctp:14
+#: Template/Lessons/view.ctp:11
+#: Template/Rooms/view.ctp:7
+msgid "New Room"
+msgstr ""
+
+#: Template/Gyms/edit.ctp:17
+#: Template/Gyms/view.ctp:14
+#: Template/Lessons/edit.ctp:11
+#: Template/Lessons/view.ctp:8
+#: Template/Services/view.ctp:6
+#: Template/Times/add.ctp:5
+#: Template/Times/index.ctp:5
+#: Template/Times/view.ctp:8
+#: Template/Weekdays/add.ctp:5
+#: Template/Weekdays/edit.ctp:11
+#: Template/Weekdays/view.ctp:8
+msgid "List Services"
+msgstr ""
+
+#: Template/Gyms/edit.ctp:18
+#: Template/Gyms/view.ctp:15
+#: Template/Lessons/edit.ctp:12
+#: Template/Lessons/view.ctp:9
+#: Template/Services/view.ctp:7
+#: Template/Times/add.ctp:6
+#: Template/Times/index.ctp:6
+#: Template/Times/view.ctp:9
+#: Template/Weekdays/add.ctp:6
+#: Template/Weekdays/edit.ctp:12
+#: Template/Weekdays/view.ctp:9
+msgid "New Service"
+msgstr ""
+
+#: Template/Gyms/edit.ctp:26
+#: Template/Gyms/view.ctp:4
+msgid "Edit Gym"
+msgstr ""
+
+#: Template/Gyms/view.ctp:5
+msgid "Delete Gym"
+msgstr ""
+
+#: Template/Gyms/view.ctp:7
+#: Template/Machines/add.ctp:6
+#: Template/Machines/edit.ctp:12
+#: Template/Machines/view.ctp:9
+#: Template/Phones/add.ctp:6
+#: Template/Phones/edit.ctp:12
+#: Template/Phones/index.ctp:6
+#: Template/Phones/view.ctp:9
+#: Template/Rooms/view.ctp:9
+#: Template/Services/view.ctp:9
+msgid "New Gym"
+msgstr ""
+
+#: Template/Gyms/view.ctp:26;124;159
+#: Template/Rooms/view.ctp:22
+#: Template/Services/view.ctp:42
+#: Template/Weekdays/view.ctp:38
+msgid "Description"
+msgstr ""
+
+#: Template/Gyms/view.ctp:28
+msgid "Address"
+msgstr ""
+
+#: Template/Gyms/view.ctp:30
+msgid "Cover Img"
+msgstr ""
+
+#: Template/Gyms/view.ctp:32
+msgid "Logo Img"
+msgstr ""
+
+#: Template/Gyms/view.ctp:49
+msgid "Related Machines"
+msgstr ""
+
+#: Template/Gyms/view.ctp:54;87;123;157;196
+#: Template/Roles/view.ctp:38
+#: Template/Weekdays/view.ctp:36
+msgid "Gym Id"
+msgstr ""
+
+#: Template/Gyms/view.ctp:82
+msgid "Related Phones"
+msgstr ""
+
+#: Template/Gyms/view.ctp:89
+#: Template/Phones/view.ctp:20
+msgid "Phone"
+msgstr ""
+
+#: Template/Gyms/view.ctp:117
+msgid "Related Rooms"
+msgstr ""
+
+#: Template/Gyms/view.ctp:152
+#: Template/Weekdays/view.ctp:31
+msgid "Related Services"
+msgstr ""
+
+#: Template/Gyms/view.ctp:160
+#: Template/Services/view.ctp:30
+#: Template/Weekdays/view.ctp:39
+msgid "Begin Service"
+msgstr ""
+
+#: Template/Gyms/view.ctp:161
+#: Template/Services/view.ctp:32
+#: Template/Weekdays/view.ctp:40
+msgid "End Service"
+msgstr ""
+
+#: Template/Gyms/view.ctp:191
+#: Template/Roles/view.ctp:33
+msgid "Related Users"
+msgstr ""
+
+#: Template/Gyms/view.ctp:197
+#: Template/Roles/view.ctp:39
+msgid "Role Id"
+msgstr ""
+
+#: Template/Gyms/view.ctp:199
+#: Template/Roles/view.ctp:41
+#: Template/Users/view.ctp:11
+msgid "Username"
+msgstr ""
+
+#: Template/Gyms/view.ctp:200
+#: Template/Roles/view.ctp:42
+#: Template/Users/view.ctp:13
+msgid "Password"
+msgstr ""
+
+#: Template/Gyms/view.ctp:201
+#: Template/Roles/view.ctp:43
+#: Template/Users/view.ctp:7;19
+msgid "Role"
+msgstr ""
+
+#: Template/Lessons/add.ctp:3
+msgid "Adicionar Aulas"
+msgstr ""
+
+#: Template/Lessons/edit.ctp:10
+#: Template/Lessons/view.ctp:6
+#: Template/LessonsHasUsers/add.ctp:5
+#: Template/LessonsHasUsers/edit.ctp:11
+#: Template/LessonsHasUsers/index.ctp:5
+#: Template/LessonsHasUsers/view.ctp:8
+#: Template/Rooms/view.ctp:10
+#: Template/Services/view.ctp:10
+msgid "List Lessons"
+msgstr ""
+
+#: Template/Lessons/edit.ctp:20
+#: Template/Lessons/view.ctp:4
+msgid "Edit Lesson"
+msgstr ""
+
+#: Template/Lessons/view.ctp:5
+msgid "Delete Lesson"
+msgstr ""
+
+#: Template/Lessons/view.ctp:7
+#: Template/LessonsHasUsers/add.ctp:6
+#: Template/LessonsHasUsers/edit.ctp:12
+#: Template/LessonsHasUsers/index.ctp:6
+#: Template/LessonsHasUsers/view.ctp:9
+#: Template/Rooms/view.ctp:11
+#: Template/Services/view.ctp:11
+msgid "New Lesson"
+msgstr ""
+
+#: Template/Lessons/view.ctp:18
+#: Template/Times/view.ctp:18
+msgid "Service"
+msgstr ""
+
+#: Template/Lessons/view.ctp:20
+msgid "Room"
+msgstr ""
+
+#: Template/Lessons/view.ctp:26
+#: Template/Rooms/view.ctp:49
+#: Template/Services/view.ctp:60
+msgid "Availables"
+msgstr ""
+
+#: Template/Lessons/view.ctp:30
+#: Template/Rooms/view.ctp:44
+#: Template/Services/view.ctp:55
+msgid "Start Time"
+msgstr ""
+
+#: Template/Lessons/view.ctp:32
+#: Template/Rooms/view.ctp:45
+#: Template/Services/view.ctp:56
+msgid "End Time"
+msgstr ""
+
+#: Template/Lessons/view.ctp:34
+#: Template/Rooms/view.ctp:46
+#: Template/Services/view.ctp:57
+msgid "Date"
+msgstr ""
+
+#: Template/LessonsHasUsers/add.ctp:4
+#: Template/LessonsHasUsers/edit.ctp:10
+#: Template/LessonsHasUsers/view.ctp:6
+msgid "List Lessons Has Users"
+msgstr ""
+
+#: Template/LessonsHasUsers/add.ctp:14
+msgid "Add Lessons Has User"
+msgstr ""
+
+#: Template/LessonsHasUsers/edit.ctp:20
+#: Template/LessonsHasUsers/view.ctp:4
+msgid "Edit Lessons Has User"
+msgstr ""
+
+#: Template/LessonsHasUsers/index.ctp:4
+#: Template/LessonsHasUsers/view.ctp:7
+msgid "New Lessons Has User"
+msgstr ""
+
+#: Template/LessonsHasUsers/view.ctp:5
+msgid "Delete Lessons Has User"
+msgstr ""
+
+#: Template/LessonsHasUsers/view.ctp:18
+msgid "Lesson"
+msgstr ""
+
+#: Template/LessonsHasUsers/view.ctp:20
+msgid "User"
+msgstr ""
+
+#: Template/Machines/add.ctp:14
+msgid "Add Machine"
+msgstr ""
+
+#: Template/Machines/edit.ctp:20
+#: Template/Machines/view.ctp:4
+msgid "Edit Machine"
+msgstr ""
+
+#: Template/Machines/view.ctp:5
+msgid "Delete Machine"
+msgstr ""
+
+#: Template/Machines/view.ctp:18
+#: Template/Phones/view.ctp:16
+#: Template/Rooms/view.ctp:20
+#: Template/Services/view.ctp:20
+#: Template/Users/view.ctp:5
+msgid "Gym"
+msgstr ""
+
+#: Template/Phones/add.ctp:12
+msgid "Add Phone"
+msgstr ""
+
+#: Template/Phones/edit.ctp:18
+#: Template/Phones/view.ctp:4
+msgid "Edit Phone"
+msgstr ""
+
+#: Template/Phones/view.ctp:5
+msgid "Delete Phone"
+msgstr ""
+
+#: Template/Releases/edit.ctp:4
+msgid "Editar Comunicado"
+msgstr ""
+
+#: Template/Releases/view.ctp:3
+msgid "Visualizar Comunicado"
+msgstr ""
+
+#: Template/Roles/add.ctp:4
+#: Template/Roles/edit.ctp:10
+#: Template/Roles/view.ctp:6
+msgid "List Roles"
+msgstr ""
+
+#: Template/Roles/add.ctp:12
+msgid "Add Role"
+msgstr ""
+
+#: Template/Roles/edit.ctp:18
+#: Template/Roles/view.ctp:4
+msgid "Edit Role"
+msgstr ""
+
+#: Template/Roles/index.ctp:4
+#: Template/Roles/view.ctp:7
+msgid "New Role"
+msgstr ""
+
+#: Template/Roles/view.ctp:5
+msgid "Delete Role"
+msgstr ""
+
+#: Template/Rooms/add.ctp:3
+msgid "Adicionar Sala"
+msgstr ""
+
+#: Template/Rooms/edit.ctp:4
+msgid "Editar Sala de Aula"
+msgstr ""
+
+#: Template/Rooms/index.ctp:9
+msgid "Ações"
+msgstr ""
+
+#: Template/Rooms/index.ctp:19
+msgid "Editar"
+msgstr ""
+
+#: Template/Rooms/index.ctp:20
+msgid "Deletar"
+msgstr ""
+
+#: Template/Rooms/index.ctp:20
+msgid "Você tem certeza que deseja deletar essa Sala ?"
+msgstr ""
+
+#: Template/Rooms/view.ctp:4
+msgid "Edit Room"
+msgstr ""
+
+#: Template/Rooms/view.ctp:5
+msgid "Delete Room"
+msgstr ""
+
+#: Template/Rooms/view.ctp:39
+#: Template/Services/view.ctp:50
+msgid "Related Lessons"
+msgstr ""
+
+#: Template/Rooms/view.ctp:47
+#: Template/Services/view.ctp:58
+msgid "Service Id"
+msgstr ""
+
+#: Template/Rooms/view.ctp:48
+#: Template/Services/view.ctp:59
+msgid "Room Id"
+msgstr ""
+
+#: Template/Services/index.ctp:43
+msgid "Você tem certeza que deseja deletar ?"
+msgstr ""
+
+#: Template/Services/view.ctp:4
+msgid "Edit Service"
+msgstr ""
+
+#: Template/Services/view.ctp:5
+msgid "Delete Service"
+msgstr ""
+
+#: Template/Services/view.ctp:12
+#: Template/Times/add.ctp:7
+#: Template/Times/index.ctp:7
+#: Template/Times/view.ctp:10
+#: Template/Weekdays/add.ctp:4
+#: Template/Weekdays/edit.ctp:10
+#: Template/Weekdays/view.ctp:6
+msgid "List Weekdays"
+msgstr ""
+
+#: Template/Services/view.ctp:13
+#: Template/Times/add.ctp:8
+#: Template/Times/index.ctp:8
+#: Template/Times/view.ctp:11
+#: Template/Weekdays/view.ctp:7
+msgid "New Weekday"
+msgstr ""
+
+#: Template/Services/view.ctp:91
+msgid "Related Weekdays"
+msgstr ""
+
+#: Template/Services/view.ctp:96
+#: Template/Times/view.ctp:20
+#: Template/Weekdays/view.ctp:18
+msgid "Weekday"
+msgstr ""
+
+#: Template/Suggestions/index.ctp:4
+msgid "guy"
+msgstr ""
+
+#: Template/Suggestions/index.ctp:72
+msgid "Entrada"
+msgstr ""
+
+#: Template/Suggestions/index.ctp:82
+msgid "Com estrela"
+msgstr ""
+
+#: Template/Suggestions/index.ctp:92
+msgid "Arquivados"
+msgstr ""
+
+#: Template/Times/add.ctp:4
+#: Template/Times/view.ctp:6
+msgid "List Times"
+msgstr ""
+
+#: Template/Times/add.ctp:14
+msgid "Add Time"
+msgstr ""
+
+#: Template/Times/index.ctp:4
+#: Template/Times/view.ctp:7
+msgid "New Time"
+msgstr ""
+
+#: Template/Times/view.ctp:4
+msgid "Edit Time"
+msgstr ""
+
+#: Template/Times/view.ctp:5
+msgid "Delete Time"
+msgstr ""
+
+#: Template/Times/view.ctp:26
+msgid "Duration"
+msgstr ""
+
+#: Template/Times/view.ctp:32
+msgid "Start Hour"
+msgstr ""
+
+#: Template/Users/change_mail.ctp:4
+msgid "Mudar Email"
+msgstr ""
+
+#: Template/Users/change_password.ctp:4
+msgid "Mudar Senha"
+msgstr ""
+
+#: Template/Users/confirm_mail.ctp:3
+msgid "Confirmar Email"
+msgstr ""
+
+#: Template/Users/edit.ctp:8
+msgid "Editar Usuário"
+msgstr ""
+
+#: Template/Users/view.ctp:75
+msgid "Related Releases"
+msgstr ""
+
+#: Template/Users/view.ctp:81
+msgid "Title"
+msgstr ""
+
+#: Template/Users/view.ctp:82
+msgid "Text"
+msgstr ""
+
+#: Template/Weekdays/add.ctp:12
+msgid "Add Weekday"
+msgstr ""
+
+#: Template/Weekdays/edit.ctp:18
+#: Template/Weekdays/view.ctp:4
+msgid "Edit Weekday"
+msgstr ""
+
+#: Template/Weekdays/view.ctp:5
+msgid "Delete Weekday"
+msgstr ""
+

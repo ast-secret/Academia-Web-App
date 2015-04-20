@@ -1,4 +1,8 @@
-msgid "January"
-msgstr "Janeiro"
-msgid "February"
-msgstr "Fevereiro"
+msgid "guy"
+msgstr "hombre"
+
+msgid "ago"
+msgstr "atrás"
+
+msgid "week"
+msgstr "semana"

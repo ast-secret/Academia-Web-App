@@ -21,7 +21,7 @@ class User extends Entity
         'name' => true,
         'username' => true,
         'password' => true,
-        'stats' => true,
+        'is_active' => true,
         'mail_temp' => true,
         'token_mail' => true,
         'token_time_exp' => true,
@@ -35,5 +35,4 @@ class User extends Entity
 
         return (new DefaultPasswordHasher)->hash($password);
     }
-
 }

@@ -1,19 +1,20 @@
 <?= $this->Html->script('Suggestions/index', ['inline' => false]) ?>
+<?= $this->Html->script('common', ['inline' => false]) ?>
 <?= $this->element('Common/dashboard_breadcrumb', ['breadcrumb' => $breadcrumb]) ?>
 
-<?= $this->Form->create(null, ['type' => 'GET']) ?>
-<?php
-    echo $this->Form->input('tab', ['value' => $this->request->query('tab')]);
-    echo $this->Form->input('filter');
-?>
+<form method="GET">
+    <input type="hidden" value="<?= $this->request->query('tab') ?>" name="tab" id="tab">
+    <input type="hidden" value="<?= $this->request->query('filters') ?>" name="filters" id="filters">
     <div class="row">
         <div class="col-md-4">
             <div class="input-group">
-                <?= $this->Form->input('q', [
-                    'label' => false,
-                    'placeholder' => 'Pesquisar por nome ou texto...',
-                    'class' => 'form-control'
-                ]) ?>
+                <input
+                    class="form-control"
+                    id="q"
+                    name="q"
+                    placeholder="Pesquisar por nome ou texto..."
+                    type="text"
+                    value="<?= $this->request->query('q')?>">
                 <span class="input-group-btn">
                     <button
                         class="btn btn-default <?= $this->request->query('filters') ? 'active': '' ?>"
@@ -28,27 +29,38 @@
         </div>
     </div>
 
-    <div id="filters" style="margin-top: 15px; display: <?= $this->request->query('filters') ? '': 'none' ?>">
+    <div id="cont-filters" style="margin-top: 15px; display: <?= $this->request->query('filters') ? '': 'none' ?>">
         <div class="">
               <div class="form-vertical">
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
                             <label class="sr-" for="exampleInputAmount">De</label>
-                            <input type="date" class="form-control input-sm" placeholder="De" name="from" id="from">
+                            <input
+                                class="form-control input-sm"
+                                id="from"
+                                name="from"
+                                placeholder="De"
+                                type="date"
+                                value="<?= $this->request->query('from') ?>">
                         </div>        
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label class="sr-" for="exampleInputAmount">Até</label>
-                            <input type="date" class="form-control input-sm" placeholder="Até" name="to" id="to">
+                            <input
+                                class="form-control input-sm" 
+                                id="to"
+                                name="to"
+                                type="date"
+                                value="<?= $this->request->query('to') ?>">
                         </div>  
                     </div>
                 </div>
             </div> 
         </div>
     </div>
-<?= $this->form->end() ?>
+</form>
 <hr>
 
 <ul class="nav nav-tabs">
@@ -130,7 +142,14 @@
                             </button>
                         </td>
                         <td style="width: 150px;">
-                            <?= $this->Text->truncate(h($suggestion->customer->name), 20) ?>
+                            <?= $this->Html->link(
+                                    $this->Text->truncate(h($suggestion->customer->name), 20),
+                                    [
+                                        'controller' => 'customers',
+                                        'action' => 'view',
+                                        $suggestion->customer->id
+                                    ]
+                                ) ?>
                         </td>
                         <td>
                             <?= $this->Html->link(h($this->Text->truncate(__($suggestion->text), $truncatePoint)), [
@@ -143,10 +162,12 @@
                         <td class="text-center" style="width: 130px">
                             <em class="text-muted">
                                 <?= h($suggestion->created->timeAgoInWords(
-                                    [
-                                        'format' => 'dd MMM',
-                                        'accuracy' => 'week',
-                                        'end' => '+1 year'])) ?>
+                                        [
+                                            'accuracy' => 'week',
+                                            'format' => 'dd MMM',
+                                            'end' => '+1 year'
+                                        ]
+                                    )) ?>
                             </em>
                         </td>
                     </tr>

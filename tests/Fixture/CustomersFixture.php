@@ -21,14 +21,12 @@ class CustomersFixture extends TestFixture
         'name' => ['type' => 'string', 'length' => 45, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
         'registration' => ['type' => 'string', 'length' => 45, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
         'password' => ['type' => 'string', 'length' => 60, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
-        'access_key' => ['type' => 'string', 'length' => 120, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
+        'is_active' => ['type' => 'boolean', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'app_access_token' => ['type' => 'string', 'length' => 120, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
-        'status' => ['type' => 'integer', 'length' => 4, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'registration_UNIQUE' => ['type' => 'unique', 'columns' => ['registration'], 'length' => []],
-            'access_key_UNIQUE' => ['type' => 'unique', 'columns' => ['access_key'], 'length' => []],
         ],
         '_options' => [
 'engine' => 'InnoDB', 'collation' => 'utf8_general_ci'
@@ -47,10 +45,10 @@ class CustomersFixture extends TestFixture
             'name' => 'Lorem ipsum dolor sit amet',
             'registration' => 'Lorem ipsum dolor sit amet',
             'password' => 'Lorem ipsum dolor sit amet',
-            'access_key' => 'Lorem ipsum dolor sit amet',
-            'created' => '2015-02-13 02:26:16',
-            'modified' => '2015-02-13 02:26:16',
-            'status' => 1
+            'is_active' => 1,
+            'app_access_token' => 'Lorem ipsum dolor sit amet',
+            'created' => '2015-04-04 21:02:12',
+            'modified' => '2015-04-04 21:02:12'
         ],
     ];
 }

@@ -6,8 +6,6 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use ArrayObject;
 
 /**
  * Customers Model
@@ -35,14 +33,6 @@ class CustomersTable extends Table
         ]);
     }
 
-     public function beforeMarshal(Event $event, ArrayObject $data)
-    {
-        $data['name'] = trim($data['name']);
-        $data['registration'] = trim($data['registration']);
-        $data['password'] = trim($data['password']);
-        $data['access_key'] = trim($data['access_key']);
-    }
-
     /**
      * Default validation rules.
      *
@@ -54,56 +44,17 @@ class CustomersTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create')
-
             ->requirePresence('name', 'create')
-            ->notEmpty('name',"Por Favor, Preecha o campo vazio!")
-
+            ->notEmpty('name')
             ->requirePresence('registration', 'create')
-            ->notEmpty('registration',"Por Favor, Preecha o campo vazio!")
-
+            ->notEmpty('registration')
             ->requirePresence('password', 'create')
-            ->notEmpty('password',"Por Favor, Preecha o campo vazio!")
-
-            ->requirePresence('access_key', 'create')
-            ->notEmpty('access_key',"Por Favor, Preecha o campo vazio!")
-
-            ->add('status', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('status', 'create')
-            ->allowEmpty('status')
-             
-            ->add('access_key', [
-                'unique' => ['rule' => 'validateUnique', 'provider' => 'table','message'=>'Chave de Acesso já está sendo usada.']
-            ])
-
-            ->add('registration', [
-                'unique' => ['rule' => 'validateUnique', 'provider' => 'table','message'=>'O Número de Registro já está sendo usado.']
-            ]);             
+            ->notEmpty('password')
+            ->add('is_active', 'valid', ['rule' => 'boolean'])
+            ->requirePresence('is_active', 'create')
+            ->notEmpty('is_active')
+            ->allowEmpty('app_access_token');
 
         return $validator;
     }
-
-      public function validationEditCustomer(Validator $validator)
-    {
-        $validator 
-            ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create')
-
-            ->requirePresence('name', 'create')
-            ->notEmpty('name',"Por Favor, Preecha o campo vazio!")
-
-            ->requirePresence('registration', 'create')
-            ->notEmpty('registration',"Por Favor, Preecha o campo vazio!")
-
-            ->requirePresence('password', 'create')
-            ->notEmpty('password',"Por Favor, Preecha o campo vazio!")
-
-            ->requirePresence('access_key', 'create')
-            ->notEmpty('access_key',"Por Favor, Preecha o campo vazio!")
-
-            ->add('status', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('status', 'create')
-            ->allowEmpty('status');
-
-        return $validator;      
-    }   
 }

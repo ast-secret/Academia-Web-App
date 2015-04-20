@@ -7,6 +7,8 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use Cake\Event\Event;
+
+use Cake\Auth\DefaultPasswordHasher;
 use ArrayObject;
 
 /**
@@ -39,6 +41,12 @@ class UsersTable extends Table
         $this->hasMany('Releases', [
             'foreignKey' => 'user_id'
         ]);
+    }
+
+    public function beforeSave($event, $entity, $options)
+    {
+        unset($entity->user_password_confirm);
+        return $entity;
     }
 
     // public function beforeMarshal(Event $event, ArrayObject $data)
@@ -124,16 +132,41 @@ class UsersTable extends Table
 
             ->add('role_id', 'valid', ['rule' => 'numeric'])
             ->requirePresence('role_id', 'create')
-            ->notEmpty('role_id')
+            ->notEmpty('role_id', 'Por favor, selecione uma opção!')
 
             ->requirePresence('name', 'create')
             ->notEmpty('name',"Por Favor, Preecha o campo vazio!")
 
             ->requirePresence('username', 'create')
+            ->add('username', 'valid', ['rule' => 'email', 'message' => 'Por Favor, Insira um email válido!'])
             ->notEmpty('username',"Por Favor, Preecha o campo vazio!")
+            ->add('username', [
+                // Esta regra serve para validarmos que um username não pode ser repetir na mesma academia
+                // mas pode repetir em academias diferentes.
+                'isUniqueAboutThisGym' => [
+                    'rule' => function($value, $context) {
+                        $query = $this->find();
+                        
+                        $query
+                            ->select(['total' => $query->func()->count('*')])
+                            ->where(['Users.gym_id' => $context['data']['gym_id']])
+                            ->where(['Users.username' => $value])
+                            ->where(['Users.username' => $value]);
+
+                        $result = $query->first();
+
+                        if ($result->total > 0) {
+                            return false;
+                        }
+                        return true;
+                    },
+                    'message' => 'Este email já está em uso por outro usuário!'
+                ]
+            ])
 
             ->requirePresence('password', 'create')
-            ->notEmpty('password',"Por Favor, Preecha o campo vazio!")    
+            ->notEmpty('password', "Por Favor, Preecha o campo vazio!", 'create')
+
 
             ->add('password', [
                 'equalsTo' => [
@@ -144,9 +177,9 @@ class UsersTable extends Table
                 ]
             ])
 
-            ->add('stats', 'valid', ['rule' => 'boolean'])
-            ->requirePresence('stats', 'create')
-            ->notEmpty('stats')
+            ->add('is_active', 'valid', ['rule' => 'boolean'])
+            ->requirePresence('is_active', 'create')
+            ->notEmpty('is_active')
 
             ->allowEmpty('mail_temp')
             ->allowEmpty('token_mail')
@@ -166,9 +199,19 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['username']));
         $rules->add($rules->existsIn(['gym_id'], 'Gyms'));
         $rules->add($rules->existsIn(['role_id'], 'Roles'));
         return $rules;
+    }
+
+    public function checkCurrentPassword($id, $password)
+    {
+        $user = $this->get($id, ['fields' => 'password']);
+        $password = (new DefaultPasswordHasher)->hash($password);
+
+        if ($password == $user->password) {
+            return true;
+        }
+        return false;
     }
 }

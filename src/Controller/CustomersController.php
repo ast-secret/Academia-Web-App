@@ -49,6 +49,17 @@ class CustomersController extends AppController
      */
     public function add()
     {
+        $breadcrumb = [
+            'parents' => [
+                [
+                    'label' => 'Clientes',
+                    'url' => [
+                        'action' => 'index'
+                    ]
+                ]
+            ],
+            'active' => 'Adicionar Cliente'
+        ];
         $customer = $this->Customers->newEntity();
         if ($this->request->is('post')) {
             $customer = $this->Customers->patchEntity($customer, $this->request->data);
@@ -60,8 +71,7 @@ class CustomersController extends AppController
                 $this->Flash->error('O Aluno não pode ser salvo, tente novamente');
             }
         }
-        $this->set(compact('customer'));
-        $this->set('_serialize', ['customer']);
+        $this->set(compact('customer', 'breadcrumb'));
     }
 
     /**

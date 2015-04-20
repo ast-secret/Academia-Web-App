@@ -1,8 +1,4 @@
 $(function(){
-    $('button#toggle-filters').click(function(){
-        $(this).toggleClass('active');
-        $('#filters').slideToggle();
-    });
 	$('button#btn-arquivar').click(function(){
 		var $this = $(this);
 		var speed = 'fast'; 

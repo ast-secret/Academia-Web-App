@@ -34,7 +34,8 @@ class SuggestionsController extends AppController
                 break;
             case 2:
                 $conditions[] = [
-                    'Suggestions.is_star' => 1
+                    'Suggestions.is_star' => 1,
+                    'Suggestions.is_read' => 0,
                 ];
                 break;
             case 3:
@@ -44,7 +45,12 @@ class SuggestionsController extends AppController
 
         $q = $this->request->query('q');
         if ($q) {
-            $conditions[] = ['Customers.name LIKE' => "%{$q}%"];
+            $conditions[] = [
+                'OR' => [
+                    'Customers.name LIKE' => "%{$q}%",
+                    'Suggestions.text LIKE' => "%{$q}%"
+                ]
+            ];
         }
 
         $from = $this->request->query('from');

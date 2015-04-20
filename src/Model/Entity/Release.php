@@ -19,5 +19,6 @@ class Release extends Entity
         'title' => true,
         'text' => true,
         'user' => true,
+        'is_active' => true
     ];
 }

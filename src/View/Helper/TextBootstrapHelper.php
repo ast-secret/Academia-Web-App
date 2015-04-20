@@ -12,7 +12,7 @@ class TextBootstrapHelper extends Helper
 		if ($value) {
 			return '<span class="label label-success">'.$trueLabel.'</span>';
 		} else {
-			return '<span class="label label-success">'.$falseLabel.'</span>';
+			return '<span class="label label-danger">'.$falseLabel.'</span>';
 		}
 	}
 

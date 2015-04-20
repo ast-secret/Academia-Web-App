@@ -20,11 +20,7 @@
             <td><?= h($user->name) ?></td>
             <td><?= h($user->role->name) ?></td>
             <td class="text-center">
-                <?php if ($user->stats): ?>
-                    <span class="label label-success">Ativo</span>
-                <?php else: ?>
-                    <span class="label label-danger">Inativo</span>
-                <?php endif ?>
+                <?= $this->TextBootstrap->labelBoolean($user->is_active, 'Ativo', 'Inativo') ?>
             </td>
             <td class="text-center">                
                 <?= $this->Html->link('<span class="glyphicon glyphicon-pencil"></span>',
@@ -35,11 +31,5 @@
     <?php endforeach; ?>
 </tbody>
 </table>
-<div class="paginator">
-    <ul class="pagination">
-        <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
-        <?= $this->Paginator->numbers() ?>
-        <?= $this->Paginator->next(__('Próximo') . ' >') ?>
-    </ul>
-    <p><?= $this->Paginator->counter() ?></p>
-</div>
+
+<?= $this->element('Common/paginator') ?>

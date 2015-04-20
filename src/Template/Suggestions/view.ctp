@@ -6,7 +6,7 @@
 <br>
 <small>
 	<em class="text-muted">
-		<?= h($suggestion->created->timeAgoInWords(['format' => 'dd/M/Y','end' => '+1 year'])) ?>
+		<?= $suggestion->created->timeAgoInWords(['format' => 'dd/M/Y', 'accuracy' => 'day', 'end' => '+1 month']) ?>
 	</em>
 </small>
 

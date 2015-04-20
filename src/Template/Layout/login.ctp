@@ -43,7 +43,7 @@
 		}
 	</style>
 </head>
-<body style="background-color: #2980b9;">
+<body style="background-color: #000; background-image: url(../img/background1.jpg); background-position: top center; background-size: cover;">
 	<div class="container">
 		<div class="row" style="margin-top: 100px;">
 			<div class="col-md-4 col-md-offset-4">

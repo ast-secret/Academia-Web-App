@@ -19,15 +19,33 @@ class ReleasesController extends AppController
      */
     public function index()
     {
+        $conditions = [];
+
+        $q = $this->request->query('q');
+        if ($q) {
+            $conditions[] = ['Releases.text LIKE' => "%{$q}%"];
+        }
+
+        $from = $this->request->query('from');
+        if ($from) {
+            $conditions[] = ['Releases.created >=' => $from];
+        }
+
+        $to = $this->request->query('to');
+        if ($to) {
+            $conditions[] = ['Releases.created <=' => $to];
+        }
+
         $this->paginate = [
-            'contain' => ['Users']
+            'contain' => ['Users'],
+            'order' => ['Releases.created' => 'DESC'],
+            'conditions' => $conditions
         ];
 
         $breadcrumb = ['active' => 'Comunicados'];
         $this->set(compact('breadcrumb'));
 
         $this->set('releases', $this->paginate($this->Releases));
-        $this->set('_serialize', ['releases']);
     }
 
     /**
@@ -39,11 +57,19 @@ class ReleasesController extends AppController
      */
     public function view($id = null)
     {
+        $breadcrumb = [
+            'active' => 'Criar comunicado',
+            'parents' => [
+                [
+                    'label' => 'Comunicados',
+                    'url' => ['action' => 'index']
+                ]
+            ]
+        ];
         $release = $this->Releases->get($id, [
             'contain' => ['Users']
         ]);
-        $this->set('release', $release);
-        $this->set('_serialize', ['release']);
+        $this->set(compact('release', 'breadcrumb'));
     }
 
     /**
@@ -90,13 +116,24 @@ class ReleasesController extends AppController
      */
     public function edit($id = null)
     {
+        $breadcrumb = [
+            'active' => 'Editar comunicado',
+            'parents' => [
+                [
+                    'label' => 'Comunicados',
+                    'url' => ['action' => 'index']
+                ]
+            ]
+        ];
 
-        $release = $this->Releases->get($id, [
-            'contain' => []
-        ]);
+        $release = $this->Releases->get($id);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $this->request->data['user_id'] = 1;
+            
+            $this->request->data['user_id'] = $this->Auth->user('id');
+
             $release = $this->Releases->patchEntity($release, $this->request->data);
+
             if ($this->Releases->save($release)) {
                 $this->Flash->success('O Comunicado foi salvo com sucesso.');
                 return $this->redirect(['action' => 'index']);
@@ -104,9 +141,7 @@ class ReleasesController extends AppController
                 $this->Flash->error('O Comunicado não pode ser salvo, tente novamente.');
             }
         }
-        //$users = $this->Releases->Users->find('list', ['limit' => 200]);
-        $this->set(compact('release', 'users'));
-        $this->set('_serialize', ['release']);
+        $this->set(compact('release', 'breadcrumb'));
     }
 
     /**

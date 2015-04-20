@@ -23,18 +23,12 @@ class ReleasesTable extends Table
     public function initialize(array $config)
     {
         $this->table('releases');
-        $this->displayField('title');
+        $this->displayField('text');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id'
         ]);
-    }
-
-    public function beforeMarshal(Event $event, ArrayObject $data)
-    {
-        $data['title'] = trim($data['title']);
-        $data['text'] = trim($data['text']);
     }
 
     /**
@@ -53,10 +47,11 @@ class ReleasesTable extends Table
             ->requirePresence('user_id', 'create')
             ->notEmpty('user_id')
 
-            ->requirePresence('title', 'create')
-            ->notEmpty('title',"Por Favor, Preecha o campo vazio!")
             ->requirePresence('text', 'create')
-            ->notEmpty('text',"Por Favor, Preecha o campo vazio!");
+            ->notEmpty('text',"Por Favor, Preecha o campo vazio!")
+
+            ->add('is_active', 'boolean', ['rule' => 'boolean'])
+            ->allowEmpty('is_active');
 
         return $validator;
     }

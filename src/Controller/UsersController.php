@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\I18n\Time;
 use Cake\Event\Event;
+use Cake\Validation\Validation;
 /**
  * Users Controller
  *
@@ -104,9 +105,11 @@ class UsersController extends AppController
 
         if ($this->request->is('post')) {
             
-            $this->request->data['gym_id'] = 1;            
+            $this->request->data['gym_id'] = $this->Auth->user('gym_id');            
+
             $user = $this->Users->patchEntity($user, $this->request->data);
 
+            $user->accessible('id', false);
             if ($this->Users->save($user)) {
                 $this->Flash->success('O usuário foi salvo com sucesso.');
                 return $this->redirect(['action' => 'index']);
@@ -116,8 +119,8 @@ class UsersController extends AppController
         }
 
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'roles', 'breadcrumb'));
-        $this->set('_serialize', ['user']);
+        $nameLoggedinUser = $this->Auth->user('name');
+        $this->set(compact('user', 'roles', 'breadcrumb', 'nameLoggedinUser'));
     }
 
     /**
@@ -129,49 +132,37 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {       
-        $user = $this->Users->get($id, [
-            'contain' => []
-        ]);
-        
-        // Variavel Teste de Sessão         
-        $usuarioSession = $this->request->data['id'] = 3;   
+
+        $breadcrumb = [
+            'parents' => [
+                [
+                    'label' => 'Usuário',
+                    'url' => [
+                        'action' => 'index'
+                    ]
+                    
+                ]
+            ],
+            'active' => 'Editar Usuário'
+        ];
+        $user = $this->Users->get($id);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-        //Select para confirmar se o confirm_password é referente ao do usuario logado
-        $userPass = $this->Users
-                        ->find()
-                        ->where(['password'=>$this->request->data['confirm_password_user_master'],'id' => $usuarioSession])
-                        ->first();            
-            //Apenas Alterar a Senha, isso exige a senha do Usuario logado
-            if($user->password!=$this->request->data['password']){
-                //Verifica se ele quer trocar a senha, se sim confirma  a senha do logado
-                if($userPass && $this->request->data['confirm_password_user_master']!=''){
-                    $user = $this->Users->patchEntity($user, $this->request->data);        
-                    if ($this->Users->save($user)) {
-                        $this->Flash->success('O usuário foi salvo com sucesso.');
-                        return $this->redirect(['action' => 'index']);
-                    } else {
-                        $this->Flash->error('O usuário não pode ser salvo, tente novamente.');
-                    }
-                }else{
-                    $this->Flash->error('Senha de Confirmação está incorreta, tente novamente.');
-                }
-            }else{
-                $user = $this->Users->patchEntity($user, $this->request->data);        
-                    if ($this->Users->save($user)) {
-                        $this->Flash->success('O usuário foi salvo com sucesso.');
-                        return $this->redirect(['action' => 'index']);
-                    } else {
-                        $this->Flash->error('O usuário não pode ser salvo, tente novamente.');
-                    }
+            $this->request->data['gym_id'] = $this->Auth->user('gym_id');
+            $user = $this->Users->patchEntity($user, $this->request->data);
+            if ($this->Users->save($user)) {
+                $this->Flash->success('The gym has been saved.');
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error('The gym could not be saved. Please, try again.');
             }
-
+        } else {
+            unset($user->password);
         }
         
-        $gyms = $this->Users->Gyms->find('list', ['limit' => 200]);
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'gyms', 'roles'));
-        $this->set('_serialize', ['user']);
+
+        $this->set(compact('user', 'roles', 'breadcrumb'));
     }
 
     /**

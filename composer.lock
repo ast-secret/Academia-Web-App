@@ -775,16 +775,16 @@
     "packages-dev": [
         {
             "name": "cakephp/bake",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/bake.git",
-                "reference": "ad86dbce53c16a8c8af4ee30fdaa4ff41a924778"
+                "reference": "69a1460adab467284081fd07f17453d949a27c4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/bake/zipball/ad86dbce53c16a8c8af4ee30fdaa4ff41a924778",
-                "reference": "ad86dbce53c16a8c8af4ee30fdaa4ff41a924778",
+                "url": "https://api.github.com/repos/cakephp/bake/zipball/69a1460adab467284081fd07f17453d949a27c4e",
+                "reference": "69a1460adab467284081fd07f17453d949a27c4e",
                 "shasum": ""
             },
             "require": {
@@ -817,7 +817,7 @@
                 "bake",
                 "cakephp"
             ],
-            "time": "2015-03-22 18:09:12"
+            "time": "2015-03-25 08:44:28"
         },
         {
             "name": "cakephp/debug_kit",
@@ -1000,16 +1000,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v1.2.0",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "edbf162e4cf116102d95eb635608b7d310cc01c6"
+                "reference": "dba7524b3724f25b947cd26a580787c55c8a6f9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/edbf162e4cf116102d95eb635608b7d310cc01c6",
-                "reference": "edbf162e4cf116102d95eb635608b7d310cc01c6",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/dba7524b3724f25b947cd26a580787c55c8a6f9b",
+                "reference": "dba7524b3724f25b947cd26a580787c55c8a6f9b",
                 "shasum": ""
             },
             "require": {
@@ -1041,7 +1041,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2015-03-22 16:17:25"
+            "time": "2015-03-24 19:10:28"
         },
         {
             "name": "psy/psysh",
