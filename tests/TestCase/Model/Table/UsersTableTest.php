@@ -17,22 +17,22 @@ class UsersTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'Users' => 'app.users',
-        'Gyms' => 'app.gyms',
-        'Machines' => 'app.machines',
-        'Phones' => 'app.phones',
-        'Rooms' => 'app.rooms',
-        'Lessons' => 'app.lessons',
-        'Services' => 'app.services',
-        'Times' => 'app.times',
-        'Weekdays' => 'app.weekdays',
-        'Roles' => 'app.roles',
-        'Cards' => 'app.cards',
-        'Customers' => 'app.customers',
-        'Suggestions' => 'app.suggestions',
-        'ExercisesGroups' => 'app.exercises_groups',
-        'Exercises' => 'app.exercises',
-        'Releases' => 'app.releases'
+        'app.users',
+        'app.gyms',
+        'app.machines',
+        'app.phones',
+        'app.rooms',
+        'app.lessons',
+        'app.services',
+        'app.times',
+        'app.weekdays',
+        'app.suggestions',
+        'app.customers',
+        'app.cards',
+        'app.exercises_groups',
+        'app.exercises',
+        'app.roles',
+        'app.releases'
     ];
 
     /**
@@ -65,16 +65,6 @@ class UsersTableTest extends TestCase
      * @return void
      */
     public function testInitialize()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test validationEditUser method
-     *
-     * @return void
-     */
-    public function testValidationEditUser()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

@@ -29,7 +29,7 @@ class SuggestionsController extends AppController
          * Se não passar nenhuma tab por parametro entao recebe tab 1
          * @var integer
          */
-        $tab = !$this->request->query('tab') ? 1 : (int)$this->request->query('tab');
+        $tab = !(int)$this->request->query('tab') ? 1 : (int)$this->request->query('tab');
 
         $conditions = [];
         /**

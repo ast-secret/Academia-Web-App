@@ -76,3 +76,8 @@ msgstr "Novembro"
 msgid "December"
 msgstr "Dezembro"
 
+msgid "This field cannot be left empty"
+msgstr "Este campo não pode ficar em branco"
+
+msgid "The provided value is invalid"
+msgstr "O valor informado está em um formato inválido"

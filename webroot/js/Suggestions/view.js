@@ -95,7 +95,7 @@ $(function(){
 
 	$(window).on('beforeunload ',function() {
 	    if (ajaxInProgress) {
-	    	return 'Algumas ações feitas por você nesta página ainda não terminaram de ser processadas';
+	    	return 'Algumas ações feitas por você nesta página ainda não terminaram de ser processadas.';
 	    }
 	});
 

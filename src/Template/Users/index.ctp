@@ -1,15 +1,45 @@
-<?= $this->element('Common/dashboard_breadcrumb', ['breadcrumb' => $breadcrumb]) ?>
+<?= $this->assign('title', ' - Usuários') ?>
 
-<?= $this->Html->link('Adicionar usuário', ['action' => 'add'], ['class' => 'btn btn-danger pull-right'])?>
+<br>
+<?php 
+    $this->Html->addCrumb('Usuários');
+    echo $this->Html->getCrumbList();
+?>
+<br>
+
+<?= $this->Html->link('Criar usuário',
+    ['action' => 'add'],
+    ['class' => 'btn btn-danger pull-right']
+) ?>
+
 <br style="clear: both;">
-<hr>
-<table class="table table-hover table-condensed table-bordered">
+
+<ul class="nav nav-tabs">
+    <li
+        role="presentation"
+        class="<?= $tab == 'ativos' ? 'active' : '' ?>">
+        <?= $this->Html->link('Ativos', ['action' => 'index','?' => ['tab' => 'ativos']]) ?>
+    </li>
+    <li
+        role="presentation"
+        class="<?= $tab == 'inativos' ? 'active' : '' ?>">
+        <?= $this->Html->link('Inativos', [ 'action' => 'index', '?' => ['tab' => 'inativos']]) ?>
+    </li>
+</ul>
+
+<br>
+
+<table class="table table-striped">
 <thead>
     <tr>
         <th style="width: 180px;"><?= $this->Paginator->sort('username','Email') ?></th>        
         <th><?= $this->Paginator->sort('name','Nome') ?></th>
-        <th style="width: 160px;"><?= $this->Paginator->sort('role','Função') ?></th>
-        <th style="width: 100px" class="text-center"><?= $this->Paginator->sort('stats','Status') ?></th>
+        <th style="width: 160px;" class="text-center">
+            <?= $this->Paginator->sort('role','Função') ?>
+        </th>
+        <th style="width: 100px" class="text-center">
+            Status
+        </th>
         <th style="width: 100px" class="text-center"></th>
     </tr>
 </thead>
@@ -18,14 +48,27 @@
         <tr>        
             <td><?= h($user->username) ?></td>
             <td><?= h($user->name) ?></td>
-            <td><?= h($user->role->name) ?></td>
+            <td class="text-center">
+                <?= $this->Html->label(h($user->role->name), 'primary') ?>
+            </td>
             <td class="text-center">
                 <?= $this->TextBootstrap->labelBoolean($user->is_active, 'Ativo', 'Inativo') ?>
             </td>
             <td class="text-center">                
                 <?= $this->Html->link('<span class="glyphicon glyphicon-pencil"></span>',
                     ['action' => 'edit', $user->id],
-                    ['escape' => false, 'class' => 'btn btn-default btn-xs']) ?>
+                    ['escape' => false, 'class' => 'btn btn-default btn-xs']
+                ) ?>
+                <?php if ($tab == 'inativos'): ?>
+                    <?= $this->Form->postLink($this->Html->icon('remove'),
+                        ['action' => 'delete', $user->id],
+                        [
+                            'escape' => false,
+                            'class' => 'btn btn-danger btn-xs',
+                            'confirm' => 'Você realmente deseja deletar este usuário? Esta ação não poderá ser desfeita.'
+                        ]
+                    ) ?>
+                <?php endif ?>
             </td>
         </tr>
     <?php endforeach; ?>

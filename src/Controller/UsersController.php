@@ -5,6 +5,8 @@ use App\Controller\AppController;
 use Cake\I18n\Time;
 use Cake\Event\Event;
 use Cake\Validation\Validation;
+
+use Cake\Network\Exception\NotFoundException;
 /**
  * Users Controller
  *
@@ -49,20 +51,42 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $breadcrumb = [
-            'active' => 'Usuários'
-        ];
+        $conditions = [];
+
+        switch ($this->request->query('tab')) {
+            case null:
+                $tab = 'ativos';
+                break;
+            case 'ativos':
+            case 'inativos':
+                $tab = $this->request->query('tab');
+                break;
+            default:
+                throw new NotFoundException();
+                break;
+        }
+
+        if ($tab == 'ativos') {
+            $conditions[] = ['Users.is_active' => 1];
+        } elseif ($tab == 'inativos') {
+            $conditions[] = ['Users.is_active' => 0];
+        }
+
+        $conditions[] = ['Users.gym_id' => $this->Auth->user('gym_id')];
 
         $this->paginate = [
-            'contain' => ['Times'],
-            'order' => ['Times.weekday_id' => 'DESC']
+            'fields' => [
+                'id',
+                'name',
+                'username',
+                'is_active',
+                'Roles.name'
+            ],
+            'contain' => ['Roles'],
+            'conditions' => $conditions
         ];
-        $this->paginate = [
-            'contain' => ['Gyms', 'Roles']
-        ];
-        $this->set(compact('breadcrumb'));
+        $this->set(compact('tab'));
         $this->set('users', $this->paginate($this->Users));
-        $this->set('_serialize', ['users']);
     }
 
     /**
@@ -88,19 +112,6 @@ class UsersController extends AppController
      */
     public function add()
     {
-        $breadcrumb = [
-            'parents' => [
-                [
-                    'label' => 'Usuário',
-                    'url' => [
-                        'action' => 'index'
-                    ]
-                    
-                ]
-            ],
-            'active' => 'Adicionar Usuário'
-        ];
-
         $user = $this->Users->newEntity();
 
         if ($this->request->is('post')) {
@@ -108,8 +119,8 @@ class UsersController extends AppController
             $this->request->data['gym_id'] = $this->Auth->user('gym_id');            
 
             $user = $this->Users->patchEntity($user, $this->request->data);
+            $user->is_active = 1;
 
-            $user->accessible('id', false);
             if ($this->Users->save($user)) {
                 $this->Flash->success('O usuário foi salvo com sucesso.');
                 return $this->redirect(['action' => 'index']);
@@ -119,8 +130,7 @@ class UsersController extends AppController
         }
 
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
-        $nameLoggedinUser = $this->Auth->user('name');
-        $this->set(compact('user', 'roles', 'breadcrumb', 'nameLoggedinUser'));
+        $this->set(compact('user', 'roles'));
     }
 
     /**

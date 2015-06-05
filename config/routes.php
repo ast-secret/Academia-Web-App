@@ -61,6 +61,8 @@ Router::scope('/:gym_slug/caixa-de-sugestoes', function ($routes) {
 
 Router::scope('/:gym_slug/usuarios', function ($routes) {
 	$routes->connect('/', ['controller' => 'Users', 'action' => 'index']);
+	$routes->connect('/criar', ['controller' => 'Users', 'action' => 'add']);
+	$routes->connect('/editar/*', ['controller' => 'Users', 'action' => 'edit']);
 });
 
 Router::scope('/', function ($routes) {

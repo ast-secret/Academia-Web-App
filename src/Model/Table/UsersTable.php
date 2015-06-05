@@ -6,13 +6,14 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-
-use Cake\Auth\DefaultPasswordHasher;
-use ArrayObject;
 
 /**
  * Users Model
+ *
+ * @property \Cake\ORM\Association\BelongsTo $Gyms
+ * @property \Cake\ORM\Association\BelongsTo $Roles
+ * @property \Cake\ORM\Association\HasMany $Cards
+ * @property \Cake\ORM\Association\HasMany $Releases
  */
 class UsersTable extends Table
 {
@@ -30,10 +31,12 @@ class UsersTable extends Table
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
         $this->belongsTo('Gyms', [
-            'foreignKey' => 'gym_id'
+            'foreignKey' => 'gym_id',
+            'joinType' => 'INNER'
         ]);
         $this->belongsTo('Roles', [
-            'foreignKey' => 'role_id'
+            'foreignKey' => 'role_id',
+            'joinType' => 'INNER'
         ]);
         $this->hasMany('Cards', [
             'foreignKey' => 'user_id'
@@ -42,77 +45,6 @@ class UsersTable extends Table
             'foreignKey' => 'user_id'
         ]);
     }
-
-    public function beforeSave($event, $entity, $options)
-    {
-        unset($entity->user_password_confirm);
-        return $entity;
-    }
-
-    // public function beforeMarshal(Event $event, ArrayObject $data)
-    // {
-    //     $data['name'] = trim($data['name']);
-    //     $data['username'] = trim($data['username']);
-    //     $data['password'] = trim($data['password']);
-    //     $data['confirm_password'] = trim($data['confirm_password']);
-    // }
-
-    // public function validationEditUser(Validator $validator){
-    //     $validator
-    //         ->add('id', 'valid', ['rule' => 'numeric'])
-    //         ->allowEmpty('id', 'create')
-
-    //         ->add('gym_id', 'valid', ['rule' => 'numeric'])
-    //         ->requirePresence('gym_id', 'create')
-    //         ->notEmpty('gym_id')
-
-    //         ->add('role_id', 'valid', ['rule' => 'numeric'])
-    //         ->requirePresence('role_id', 'create')
-    //         ->notEmpty('role_id')
-
-    //         ->requirePresence('name', 'create')
-    //         ->notEmpty('name',"Por Favor, Preecha o campo vazio!")
-
-    //         ->requirePresence('confirm_password', 'create')
-    //         ->notEmpty('name',"Por Favor, Preecha o campo vazio!")
-
-    //         ->requirePresence('username', 'create')
-    //         ->notEmpty('username',"Por Favor, Preecha o campo vazio!")
-
-    //         ->requirePresence('password', 'create')
-    //         ->notEmpty('password',"Por Favor, Preecha o campo vazio!")
-
-    //         ->add('username', [
-    //             'unique' => ['rule' => 'validateUnique', 'provider' => 'table','message'=>'Login já está sendo usado.']
-    //         ])     
-
-    //         ->add('stats', 'valid', ['rule' => 'boolean'])
-    //         ->requirePresence('stats', 'create')
-    //         ->notEmpty('stats')
-
-    //         ->allowEmpty('mail_temp')
-    //         ->allowEmpty('token_mail')
-
-    //       /*  ->add('password', [
-    //                 'compare' => [
-    //                 'rule' => ['compareWith', 'confirm_password'],
-    //                 'message' => 'As Senhas não conferem.'
-    //             ]
-    //         ])
-
-    //         ->add('confirm_password', [
-    //                 'compare' => [
-    //                 'rule' => ['compareWith', 'password'],
-    //                 'message' => 'As Senhas não conferem.'
-    //             ]
-    //         ])*/
-
-    //         ->add('token_time_exp', 'valid', ['rule' => 'datetime'])
-    //         ->allowEmpty('token_time_exp');
-
-    //     return $validator;
-    // }
-
 
     /**
      * Default validation rules.
@@ -124,66 +56,61 @@ class UsersTable extends Table
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create')
-
-            ->add('gym_id', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('gym_id', 'create')
-            ->notEmpty('gym_id')
-
-            ->add('role_id', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('role_id', 'create')
-            ->notEmpty('role_id', 'Por favor, selecione uma opção!')
-
+            ->allowEmpty('id', 'create');
+            
+        $validator
             ->requirePresence('name', 'create')
-            ->notEmpty('name',"Por Favor, Preecha o campo vazio!")
-
+            ->notEmpty('name');
+            
+        $validator
             ->requirePresence('username', 'create')
-            ->add('username', 'valid', ['rule' => 'email', 'message' => 'Por Favor, Insira um email válido!'])
-            ->notEmpty('username',"Por Favor, Preecha o campo vazio!")
+            ->notEmpty('username')
             ->add('username', [
-                // Esta regra serve para validarmos que um username não pode ser repetir na mesma academia
-                // mas pode repetir em academias diferentes.
-                'isUniqueAboutThisGym' => [
-                    'rule' => function($value, $context) {
-                        $query = $this->find();
-                        
-                        $query
-                            ->select(['total' => $query->func()->count('*')])
-                            ->where(['Users.gym_id' => $context['data']['gym_id']])
-                            ->where(['Users.username' => $value])
-                            ->where(['Users.username' => $value]);
-
-                        $result = $query->first();
-
-                        if ($result->total > 0) {
-                            return false;
-                        }
-                        return true;
-                    },
-                    'message' => 'Este email já está em uso por outro usuário!'
+                'unique' => [
+                    'rule' => ['validateUnique', ['scope' => 'gym_id']],
+                    'message' => 'O email informado já está sendo usado por outro usuário',
+                    'provider' => 'table'
                 ]
             ])
-
+            ->add('username', 'email', ['rule' => 'email']);
+            
+        $minLength = 6;
+        $maxLength = 24;
+        $validator
             ->requirePresence('password', 'create')
-            ->notEmpty('password', "Por Favor, Preecha o campo vazio!", 'create')
-
-
-            ->add('password', [
-                'equalsTo' => [
-                    'rule' => function($value, $context) {
-                        return $value === $context['data']['confirm_password'];
-                    },
-                    'message' => 'Você não confirmou a sua senha corretamente!'
-                ]
+            ->notEmpty('password')
+            ->add('password', 'maxLength', [
+                'rule' => ['maxLength', $maxLength],
+                'message' => 'A senha deve conter no máximo '.$maxLength.' caracteres'
             ])
+            ->add('password', 'minLength', [
+                'rule' => ['minLength', $minLength],
+                'message' => 'A senha deve conter no mínimo '.$minLength.' caracteres'
+            ])
+            ->add('password', 'custom', [
+                'rule' => function($value, $context) {
+                    return $value == $context['data']['confirm_password_add'];
+                },
+                'message' => 'Você não confirmou a sua senha corretamente',
+                'on' => 'create'
+            ]);
+        
+        $validator
+            ->requirePresence('role_id', 'create')
+            ->notEmpty('role_id');
 
+        $validator
             ->add('is_active', 'valid', ['rule' => 'boolean'])
             ->requirePresence('is_active', 'create')
-            ->notEmpty('is_active')
-
-            ->allowEmpty('mail_temp')
-            ->allowEmpty('token_mail')
-
+            ->notEmpty('is_active');
+            
+        $validator
+            ->allowEmpty('mail_temp');
+            
+        $validator
+            ->allowEmpty('token_mail');
+            
+        $validator
             ->add('token_time_exp', 'valid', ['rule' => 'datetime'])
             ->allowEmpty('token_time_exp');
 
@@ -202,16 +129,5 @@ class UsersTable extends Table
         $rules->add($rules->existsIn(['gym_id'], 'Gyms'));
         $rules->add($rules->existsIn(['role_id'], 'Roles'));
         return $rules;
-    }
-
-    public function checkCurrentPassword($id, $password)
-    {
-        $user = $this->get($id, ['fields' => 'password']);
-        $password = (new DefaultPasswordHasher)->hash($password);
-
-        if ($password == $user->password) {
-            return true;
-        }
-        return false;
     }
 }
