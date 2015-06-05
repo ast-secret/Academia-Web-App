@@ -32,6 +32,15 @@ class AppController extends Controller
     public $helpers = [
         'Form' => [
             'className' => 'Chocolate.BootstrapForm'
+        ],
+        'Html' => [
+            'className' => 'Bootstrap3.BootstrapHtml'
+        ],
+        'Paginator' => [
+            'className' => 'Bootstrap3.BootstrapPaginator'
+        ],
+        'Modal' => [
+            'className' => 'Bootstrap3.BootstrapModal'
         ]
     ];
 
@@ -47,11 +56,11 @@ class AppController extends Controller
 
         $this->loadComponent('Auth', [
             'loginAction' => [
-                'controller' => 'users',
+                'controller' => 'Users',
                 'action' => 'login'
             ],
             'loginRedirect' => [
-                'controller' => 'customers',
+                'controller' => 'Customers',
                 'action' => 'index'
             ],
             'authError' => 'Você deve fazer o login para acessar esta área.',

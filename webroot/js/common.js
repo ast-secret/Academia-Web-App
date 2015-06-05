@@ -1,4 +1,5 @@
 $(function(){
+
 	$('button#toggle-filters').click(function(){
         $(this).toggleClass('active');
         $('#cont-filters').slideToggle();

@@ -3,27 +3,27 @@
 $items = [
 	[
 		'label' => 'Clientes',
-		'controller' => 'customers',
+		'controller' => 'Customers',
 		'action' => 'index',
 	],
 	[
 		'label' => 'Aulas',
-		'controller' => 'services',
+		'controller' => 'Services',
 		'action' => 'index',
 	],
 	[
 		'label' => 'Comunicados',
-		'controller' => 'releases',
+		'controller' => 'Releases',
 		'action' => 'index',
 	],
 	[
 		'label' => 'Caixa de Sugestões',
-		'controller' => 'suggestions',
+		'controller' => 'Suggestions',
 		'action' => 'index',
 	],
 	[
 		'label' => 'Usuários',
-		'controller' => 'users',
+		'controller' => 'Users',
 		'action' => 'index',
 	],
 ]

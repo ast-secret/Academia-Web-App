@@ -34,6 +34,12 @@ textarea {
 	resize: vertical !important;
 }
 
+.truncate-text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .custom-flash{
 	position: absolute;
 	margin: 0 0 30px 10px;

@@ -162,6 +162,7 @@ Request::addDetector('tablet', function ($request) {
  */
 
 Plugin::load('Chocolate');
+Plugin::load('Bootstrap3');
 Plugin::load('Migrations');
 
 // Only try to load DebugKit in development mode

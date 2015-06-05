@@ -1,6 +1,14 @@
+<?= $this->assign('title', ' - Caixa de sugestões') ?>
+
 <?= $this->Html->script('Suggestions/index', ['inline' => false]) ?>
 <?= $this->Html->script('common', ['inline' => false]) ?>
-<?= $this->element('Common/dashboard_breadcrumb', ['breadcrumb' => $breadcrumb]) ?>
+
+<br>
+<?php 
+    $this->Html->addCrumb('Sugestões', null);
+    echo $this->Html->getCrumbList();
+?>
+<br>
 
 <form method="GET">
     <input type="hidden" value="<?= $this->request->query('tab') ?>" name="tab" id="tab">
@@ -67,46 +75,34 @@
     <li
         role="presentation"
         class="<?= $tab == 1 ? 'active' : '' ?>">
-        <?=
-            $this->Html->link(__('Entrada'), [
-                'action' => 'index',
-                '?' => ['tab' => 1]
-            ])
-        ?>
+        <?= $this->Html->link(__('Entrada'), ['action' => 'index','?' => ['tab' => 1]]) ?>
     </li>
     <li
         role="presentation"
         class="<?= $tab == 2 ? 'active' : '' ?>">
-        <?=
-            $this->Html->link(__('Com estrela'), [
-                'action' => 'index',
-                '?' => ['tab' => 2]
-            ])
-        ?>
+        <?= $this->Html->link(__('Com estrela'), [ 'action' => 'index', '?' => ['tab' => 2]]) ?>
     </li>
     <li
         role="presentation"
         class="<?= $tab == 3 ? 'active' : '' ?>">
-        <?=
-            $this->Html->link(__('Arquivados'), [
-                'action' => 'index',
-                '?' => ['tab' => 3]
-            ])
-        ?>    
+        <?= $this->Html->link(__('Arquivados'), ['action' => 'index', '?' => ['tab' => 3]]) ?>    
     </li>
 </ul>
 <br>
 <div class="table-responsive">
-    <?php $urlToggleIsStar = $this->Url->build(['controller' => 'suggestions', 'action' => 'toggleIsStar']) ?>
-    <?php $urlToggleIsRead = $this->Url->build(['controller' => 'suggestions', 'action' => 'toggleIsRead']) ?>
+    <?php $urlToggleIsStar = $this->Url->build([
+        'controller' => 'Suggestions', 'action' => 'toggleIsStar', '_ext' => 'json'
+    ]) ?>
+    <?php $urlToggleIsRead = $this->Url->build([
+        'controller' => 'Suggestions', 'action' => 'toggleIsRead', '_ext' => 'json'
+    ]) ?>
     <table
         id="table"
-        class="table table-hover"
+        class="table table-striped"
         data-url-toggle-is-read="<?= $urlToggleIsRead ?>"
         data-url-toggle-is-star="<?= $urlToggleIsStar ?>">
-            <?php
-                $truncatePoint = 100;
-            ?>
+        
+        <tbody>
             <?php if (count($suggestions) > 0): ?>
                 <?php foreach ($suggestions as $suggestion): ?>
                     <tr data-id="<?=$suggestion->id?>">
@@ -115,14 +111,14 @@
                                 id="btn-star"
                                 type="button"
                                 class="btn-clean"
-                                data-has-star="<?= $suggestion->is_star ?>"
+                                data-has-star="<?= (int)$suggestion->is_star ?>"
                                 style="cursor: pointer; margin-right: 5px">
                                 <span
-                                    title="<?= $suggestion->is_star ? 'Remover estrela' : 'Adicionar estrela' ?>"
+                                    title="<?= (int)$suggestion->is_star ? 'Remover estrela' : 'Adicionar estrela' ?>"
                                     class="
                                         text-muted
                                         glyphicon
-                                        <?= $suggestion->is_star ? 'glyphicon-star' : 'glyphicon-star-empty' ?>">
+                                        <?= (int)$suggestion->is_star ? 'glyphicon-star' : 'glyphicon-star-empty' ?>">
                                 </span>
                             </button>
                             
@@ -130,44 +126,46 @@
                                 type="button"
                                 id="btn-arquivar"
                                 class="btn-clean"
-                                data-is-read="<?= $suggestion->is_read ?>"
+                                data-is-read="<?= (int)$suggestion->is_read ?>"
                                 style="cursor: pointer">
                                 <span
-                                    title="<?= $suggestion->is_read ? 'Desarquivar' : 'Arquivar' ?>"
+                                    title="<?= (int)$suggestion->is_read ? 'Desarquivar' : 'Arquivar' ?>"
                                     class="
                                         text-muted
                                         glyphicon
-                                        <?= $suggestion->is_read ? 'glyphicon-folder-close' : 'glyphicon-folder-open' ?>">
+                                        <?= (int)$suggestion->is_read ? 'glyphicon-folder-close' : 'glyphicon-folder-open' ?>">
                                 </span>
                             </button>
                         </td>
                         <td style="width: 150px;">
-                            <?= $this->Html->link(
-                                    $this->Text->truncate(h($suggestion->customer->name), 20),
-                                    [
-                                        'controller' => 'customers',
-                                        'action' => 'view',
-                                        $suggestion->customer->id
-                                    ]
-                                ) ?>
+                            <div  class="truncate-text" style="width: 149px">
+                                <?= $this->Html->link(h($suggestion->customer->name), [
+                                    'controller' => 'Customers',
+                                    'action' => 'view',
+                                    $suggestion->customer->id
+                                ]) ?>
+                            </div>
                         </td>
                         <td>
-                            <?= $this->Html->link(h($this->Text->truncate(__($suggestion->text), $truncatePoint)), [
-                                    'controller' => 'suggestions',
+                            <div
+                                id="suggestion-text"
+                                class="truncate-text"
+                                style="width: 10px;">
+
+                                <?= $this->Html->link(h($suggestion->text), [
+                                    'controller' => 'Suggestions',
                                     'action' => 'view',
                                     $suggestion->id
-                                ]
-                            ) ?>
+                                ]) ?>
+                            </div>
                         </td>
-                        <td class="text-center" style="width: 130px">
+                        <td class="text-center" style="width: 200px">
                             <em class="text-muted">
-                                <?= h($suggestion->created->timeAgoInWords(
-                                        [
-                                            'accuracy' => 'week',
-                                            'format' => 'dd MMM',
-                                            'end' => '+1 year'
-                                        ]
-                                    )) ?>
+                                <?= h($suggestion->created->timeAgoInWords([
+                                    'accuracy' => 'month',
+                                    'format' => 'dd MMM',
+                                    'end' => '+1 year'
+                                ])) ?>
                             </em>
                         </td>
                     </tr>
@@ -176,7 +174,8 @@
                 <tr>
                     <td colspan="4"><em class="text-muted">Nenhuma sugestão.</em></td>
                 </tr>
-            <?php endif ?>                
+            <?php endif ?>    
+        </tbody>            
     </table>
 </div>
 <?= $this->element('Common/paginator') ?>

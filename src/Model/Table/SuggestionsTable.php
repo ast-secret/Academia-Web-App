@@ -25,7 +25,10 @@ class SuggestionsTable extends Table
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
         $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'gym_id'
+        ]);
+        $this->belongsTo('Gyms', [
+            'foreignKey' => 'gym_id'
         ]);
     }
 
@@ -45,6 +48,10 @@ class SuggestionsTable extends Table
             ->add('customer_id', 'valid', ['rule' => 'numeric'])
             ->requirePresence('customer_id', 'create')
             ->notEmpty('customer_id');
+        $validator
+            ->add('is_read', 'boolean', ['rule' => 'boolean']);
+        $validator
+            ->add('is_star', 'boolean', ['rule' => 'boolean']);
 
         return $validator;
     }

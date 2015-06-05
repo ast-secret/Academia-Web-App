@@ -41,6 +41,28 @@ use Cake\Routing\Router;
  */
 Router::defaultRouteClass('Route');
 
+Router::addUrlFilter(function ($params, $request) {
+    if (isset($request->params['gym_slug']) && !isset($params['gym_slug'])) {
+        $params['gym_slug'] = $request->params['gym_slug'];
+    }
+    return $params;
+});
+
+Router::scope('/:gym_slug', function ($routes) {
+	$routes->connect('/login', ['controller' => 'Users', 'action' => 'login']);
+});
+Router::scope('/:gym_slug/caixa-de-sugestoes', function ($routes) {
+	$routes->connect('/', ['controller' => 'Suggestions', 'action' => 'index']);
+	$routes->connect('/sugestao/*', ['controller' => 'Suggestions', 'action' => 'view']);
+	$routes->extensions(['json']);
+	$routes->connect('/toggle-is-star', ['controller' => 'Suggestions', 'action' => 'toggleIsStar']);
+	$routes->connect('/toggle-is-read', ['controller' => 'Suggestions', 'action' => 'toggleIsRead']);
+});
+
+Router::scope('/:gym_slug/usuarios', function ($routes) {
+	$routes->connect('/', ['controller' => 'Users', 'action' => 'index']);
+});
+
 Router::scope('/', function ($routes) {
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',

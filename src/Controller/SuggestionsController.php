@@ -3,6 +3,10 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+use Cake\Network\Exception\MethodNotAllowedException;
+use Cake\Network\Exception\NotFoundException;
+use Cake\Network\Exception\RecordNotFoundException;
+use Cake\Network\Exception\BadRequestException;
 /**
  * Suggestions Controller
  *
@@ -21,13 +25,16 @@ class SuggestionsController extends AppController
      */
     public function index()
     {
-        $breadcrumb = [
-            'active' => 'Sugestões'
-        ];
-
+        /**
+         * Se não passar nenhuma tab por parametro entao recebe tab 1
+         * @var integer
+         */
         $tab = !$this->request->query('tab') ? 1 : (int)$this->request->query('tab');
 
         $conditions = [];
+        /**
+         * Filtra a tab
+         */
         switch ($tab) {
             case 1:
                 $conditions[] = ['Suggestions.is_read' => 0];
@@ -42,7 +49,10 @@ class SuggestionsController extends AppController
                 $conditions[] = ['Suggestions.is_read' => 1];
                 break;
         }
-
+        /**
+         * Filtra a busca da caixa de busca
+         * @var string
+         */
         $q = $this->request->query('q');
         if ($q) {
             $conditions[] = [
@@ -52,24 +62,40 @@ class SuggestionsController extends AppController
                 ]
             ];
         }
-
+        /**
+         * Filtra por data de inicio
+         */
         $from = $this->request->query('from');
         if ($from) {
             $conditions[] = ['Suggestions.created >=' => $from];
         }
+        /**
+         * Filtra por data de fim
+         */
         $to = $this->request->query('to');
         if ($to) {
             $conditions[] = ['Suggestions.created <=' => $to];
         }
-
+        /**
+         * Pega apenas as sugestoes da academia do usuario logado
+         */
+        $conditions[] = ['Suggestions.gym_id' => $this->Auth->user('gym_id')];
         $this->paginate = [
+            'fields' => [
+                'id',
+                'created',
+                'text',
+                'is_read',
+                'is_star',
+                'Customers.name',
+                'Customers.id'
+            ],
             'contain' => ['Customers'],
             'conditions' => [
                 $conditions
             ]
         ];
-
-        $this->set(compact('breadcrumb', 'tab'));
+        $this->set(compact('tab'));
         $this->set('suggestions', $this->paginate($this->Suggestions));
     }
     /**
@@ -110,15 +136,26 @@ class SuggestionsController extends AppController
         }
 
         $suggestion = $this->Suggestions->get($this->request->data('id'));
-        $suggestion = $this->Suggestions->patchEntity($suggestion, ['is_star' => $this->request->data('add')]);
+        /**
+         * Se o id do GYM não bater com o GYM do usuario logado entao retorna inexistente
+         */
+        if (!$suggestion || $suggestion->gym_id != $this->Auth->user('gym_id')) {
+            throw new RecordNotFoundException();
+        }
+        /**
+         * Faz o patch da entity passando o novo valor do campo, note que
+         * na SuggestionsTable já está sendo feito a validação para valores
+         * 1 ou 0
+         */
+        $suggestion = $this->Suggestions->patchEntity($suggestion,
+            ['is_star' => (int)$this->request->data['add']]);
 
         if ($this->Suggestions->save($suggestion)) {
             echo json_encode(['ok']);
         } else {
-            echo json_encode($suggestion->errors());
+            throw new BadRequestException(json_encode($suggestion->errors()));
         }
     }
-
     public function toggleIsRead()
     {
         $this->layout = 'ajax';
@@ -127,12 +164,24 @@ class SuggestionsController extends AppController
         }
 
         $suggestion = $this->Suggestions->get($this->request->data['id']);
-        $suggestion = $this->Suggestions->patchEntity($suggestion, ['is_read' => $this->request->data['add']]);
-
+        /**
+         * Se o id do GYM não bater com o GYM do usuario logado entao retorna inexistente
+         */
+        if (!$suggestion || $suggestion->gym_id != $this->Auth->user('gym_id')) {
+            throw new MethodNotAllowedException();
+        }
+        /**
+         * Faz o patch da entity passando o novo valor do campo, note que
+         * na SuggestionsTable já está sendo feito a validação para valores
+         * 1 ou 0
+         */
+        $suggestion = $this->Suggestions->patchEntity($suggestion,
+            ['is_read' => (int)$this->request->data['add']]);
         if ($this->Suggestions->save($suggestion)) {
             echo json_encode(['ok']);
         } else {
-            echo json_encode($suggestion->errors());
+            throw new BadRequestException(json_encode($suggestion->errors()));
+            
         }
     }
     /**

@@ -1,8 +1,78 @@
-msgid "guy"
-msgstr "hombre"
+#: I18n/Time.php:254
+msgid "%s ago"
+msgstr ""
 
-msgid "ago"
-msgstr "atrás"
+#: I18n/Time.php:255
+msgid "on %s"
+msgstr "em %s"
 
-msgid "week"
-msgstr "semana"
+#: I18n/Time.php:387
+msgid "{0} month"
+msgid_plural "{0} months"
+msgstr[0] "{0} mes"
+msgstr[1] "{0} meses"
+
+#: I18n/Time.php:387
+msgid "{0} week"
+msgid_plural "{0} weeks"
+msgstr[0] "{0} semana"
+msgstr[1] "{0} semanas"
+
+#: I18n/Time.php:254
+msgid "%s ago"
+msgstr "%s atrás"
+
+#: I18n/Time.php:393
+msgid "{0} day"
+msgid_plural "{0} days"
+msgstr[0] "dia"
+msgstr[1] "dias"
+
+#: View/Widget/DateTimeWidget.php:511
+msgid "January"
+msgstr "Janeiro"
+
+#: View/Widget/DateTimeWidget.php:512
+msgid "February"
+msgstr "Fevereiro"
+
+#: View/Widget/DateTimeWidget.php:513
+msgid "March"
+msgstr "Março"
+
+#: View/Widget/DateTimeWidget.php:514
+msgid "April"
+msgstr "Abril"
+
+#: View/Widget/DateTimeWidget.php:515
+msgid "May"
+msgstr "Maio"
+
+#: View/Widget/DateTimeWidget.php:516
+msgid "June"
+msgstr "Junho"
+
+#: View/Widget/DateTimeWidget.php:517
+msgid "July"
+msgstr "Julho"
+
+#: View/Widget/DateTimeWidget.php:518
+msgid "August"
+msgstr "Agosto"
+
+#: View/Widget/DateTimeWidget.php:519
+msgid "September"
+msgstr "Setembro"
+
+#: View/Widget/DateTimeWidget.php:520
+msgid "October"
+msgstr "Outubro"
+
+#: View/Widget/DateTimeWidget.php:521
+msgid "November"
+msgstr "Novembro"
+
+#: View/Widget/DateTimeWidget.php:522
+msgid "December"
+msgstr "Dezembro"
+
