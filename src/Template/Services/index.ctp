@@ -1,13 +1,47 @@
-<?= $this->element('Common/dashboard_breadcrumb', ['breadcrumb' => $breadcrumb]) ?>
+<?= $this->assign('title', ' - Aulas') ?>
+
+
+<br>
+<?php 
+    $this->Html->addCrumb('Aulas', null);
+    echo $this->Html->getCrumbList();
+?>
+<br>
 
 <?= $this->Html->link('Adicionar aula', ['action' => 'add'], ['class' => 'btn btn-danger pull-right'])?>
+
 <br style="clear: both;">
+<br>
+
+<form method="GET">
+    <input type="hidden" value="<?= $this->request->query('tab') ?>" name="tab" id="tab">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="input-group">
+                <input
+                    class="form-control"
+                    id="q"
+                    name="q"
+                    placeholder="Pesquisar por nome..."
+                    type="text"
+                    value="<?= $this->request->query('q')?>">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-danger" type="button" title="Pesquisar">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div><!-- /input-group -->  
+        </div>
+    </div>
+</form>
 <hr>
-<table class="table table-hover table-condensed table-bordered">
+
+<table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th style="width: 250px"><?= $this->Paginator->sort('name', 'Nome') ?></th>            
-            <th><?= $this->Paginator->sort('description', 'Descrição') ?></th>
+            <th>
+                <?= $this->Paginator->sort('name', 'Nome') ?> / Descrição
+            </th>            
             <th style="width: 350px">Horários</th>
             <th style="width: 100px" class="text-center">Status</th>
             <th style="width: 100px" class="text-center"></th>
@@ -16,20 +50,34 @@
     <tbody>
         <?php foreach ($services as $service): ?>
             <tr>
-                <td><?= h($service->name) ?></td>           
-                <td><?= h($service->description) ?></td>
+                <td>
+                    <h4><?= h($service->name) ?></h4>
+                    <p class="text-muted">
+                        <small><?= $service->duration ?> minutos de duração</small>
+                    </p>
+                    <?= h($service->description) ?>
+                </td>
                 <td>
                     <?php if ($service->times): ?>
+                        <?php $currentDay = -1; ?>
                         <?php foreach ($service->times as $time): ?>
-                            <?= $this->Weekdays->getById($time->weekday_id, $weekdays) ?>
-                            <span class="label label-primary"><?= $time->start_hour->format('H:i') ?></span>
+                            <?php if ($currentDay != $time->weekday): ?>
+                                <h5>
+                                    <?= $this->Weekdays->getById($time->weekday) ?>
+                                    <?php $currentDay = $time->weekday ?>
+                                </h5>
+                            <?php endif ?>
+                            <span class="label label-primary">
+                                <?= $time->start_hour->format('H:i') ?>
+                            </span>
+                            &nbsp;
                         <?php endforeach ?>
                     <?php else: ?>
                         <em>Nenhum horário cadastrado</em>
                     <?php endif ?>
                 </td>
                 <td class="text-center">
-                    <?php if ($service->stats): ?>
+                    <?php if ($service->is_active): ?>
                         <span class="label label-success">Ativo</span>
                     <?php else: ?>
                         <span class="label label-danger">Inativo</span>
@@ -51,13 +99,6 @@
             </tr>
         <?php endif ?>
     </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('Próximo') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
-    </div>
-</div>
+</table>
+
+<?= $this->element('Common/paginator') ?>

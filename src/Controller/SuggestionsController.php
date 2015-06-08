@@ -135,20 +135,18 @@ class SuggestionsController extends AppController
             throw new MethodNotAllowedException();
         }
 
-        $suggestion = $this->Suggestions->get($this->request->data('id'));
-        /**
-         * Se o id do GYM não bater com o GYM do usuario logado entao retorna inexistente
-         */
-        if (!$suggestion || $suggestion->gym_id != $this->Auth->user('gym_id')) {
-            throw new RecordNotFoundException();
+        $suggestion = $this->Suggestions->get($this->request->data('id'), [
+            'conditions' => ['Suggestions.gym_id' => $this->Auth->user('gym_id')]
+        ]);
+        if (!$suggestion) {
+            throw new NotFoundException();
         }
         /**
          * Faz o patch da entity passando o novo valor do campo, note que
          * na SuggestionsTable já está sendo feito a validação para valores
          * 1 ou 0
          */
-        $suggestion = $this->Suggestions->patchEntity($suggestion,
-            ['is_star' => (int)$this->request->data['add']]);
+        $suggestion->is_star = (int)$this->request->data['add'];
 
         if ($this->Suggestions->save($suggestion)) {
             echo json_encode(['ok']);
@@ -163,11 +161,10 @@ class SuggestionsController extends AppController
             throw new MethodNotAllowedException();
         }
 
-        $suggestion = $this->Suggestions->get($this->request->data['id']);
-        /**
-         * Se o id do GYM não bater com o GYM do usuario logado entao retorna inexistente
-         */
-        if (!$suggestion || $suggestion->gym_id != $this->Auth->user('gym_id')) {
+        $suggestion = $this->Suggestions->get($this->request->data('id'), [
+            'conditions' => ['Suggestions.gym_id' => $this->Auth->user('gym_id')]
+        ]);
+        if (!$suggestion) {
             throw new MethodNotAllowedException();
         }
         /**
@@ -175,13 +172,12 @@ class SuggestionsController extends AppController
          * na SuggestionsTable já está sendo feito a validação para valores
          * 1 ou 0
          */
-        $suggestion = $this->Suggestions->patchEntity($suggestion,
-            ['is_read' => (int)$this->request->data['add']]);
+        $suggestion->is_read = (int)$this->request->data['add'];
+
         if ($this->Suggestions->save($suggestion)) {
             echo json_encode(['ok']);
         } else {
             throw new BadRequestException(json_encode($suggestion->errors()));
-            
         }
     }
     /**

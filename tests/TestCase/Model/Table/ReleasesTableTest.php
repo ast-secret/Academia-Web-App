@@ -17,35 +17,22 @@ class ReleasesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'Releases' => 'app.releases',
-        'Users' => 'app.users',
-        'Gyms' => 'app.gyms',
-        'Machines' => 'app.machines',
-<<<<<<< HEAD
-=======
-        'CardsExercises' => 'app.cards_exercises',
-        'Exercises' => 'app.exercises',
-        'Cards' => 'app.cards',
-        'Customers' => 'app.customers',
-        'Suggestions' => 'app.suggestions',
-        'ExercisesGroups' => 'app.exercises_groups',
->>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
-        'Phones' => 'app.phones',
-        'Rooms' => 'app.rooms',
-        'Lessons' => 'app.lessons',
-        'Services' => 'app.services',
-        'Weekdays' => 'app.weekdays',
-        'ServicesWeekdays' => 'app.services_weekdays',
-<<<<<<< HEAD
-        'Roles' => 'app.roles',
-        'Cards' => 'app.cards',
-        'Customers' => 'app.customers',
-        'Suggestions' => 'app.suggestions',
-        'ExercisesGroups' => 'app.exercises_groups',
-        'Exercises' => 'app.exercises'
-=======
-        'Roles' => 'app.roles'
->>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
+        'app.releases',
+        'app.users',
+        'app.gyms',
+        'app.machines',
+        'app.phones',
+        'app.rooms',
+        'app.lessons',
+        'app.services',
+        'app.times',
+        'app.weekdays',
+        'app.suggestions',
+        'app.customers',
+        'app.cards',
+        'app.exercises_groups',
+        'app.exercises',
+        'app.roles'
     ];
 
     /**

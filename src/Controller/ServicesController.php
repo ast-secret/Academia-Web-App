@@ -19,20 +19,28 @@ class ServicesController extends AppController
      */
     public function index()
     {
-
-        $breadcrumb = [
-            'active' => 'Aulas'
-        ];
-
+        $conditions = [];
+        /**
+         * Filtra a busca da caixa de busca
+         * @var string
+         */
+        $q = $this->request->query('q');
+        if ($q) {
+            $conditions[] = ['Services.name LIKE' => "%{$q}%"];
+        }
         $this->paginate = [
-            'contain' => ['Times'],
+            'conditions' => $conditions,
+            'contain' => [
+                'Times' => [
+                    'strategy' => 'select',
+                    'queryBuilder' => function($q){
+                        return $q->order(['weekday' => 'DESC', 'start_hour' => 'ASC']);
+                    }
+                ]
+            ],
             'order' => ['Times.weekday_id' => 'DESC']
         ];
-
-        $weekdays = $this->Services->Times->Weekdays->find('list', ['limit' => 200]);
-        $this->set(compact('breadcrumb', 'weekdays'));
         $this->set('services', $this->paginate($this->Services));
-        $this->set('_serialize', ['services']);
     }
 
     /**

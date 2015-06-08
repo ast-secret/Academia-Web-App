@@ -7,49 +7,42 @@ use Cake\View\Helper;
 class WeekdaysHelper extends Helper
 {
 
-	// private $values = [
-	// 	[
-	// 		'id' => 1,
-	// 		'name' => 'Domingo',
-	// 		'short' => 'Seg'
-	// 	],
-	// 	[
-	// 		'id' => 2,
-	// 		'name' => 'Segunda-feira',
-	// 		'short' => 'Seg'
-	// 	],
-	// 	[
-	// 		'id' => 3,
-	// 		'name' => 'Terça-feira',
-	// 		'short' => 'Ter'
-	// 	],
-	// 	[
-	// 		'id' => 4,
-	// 		'name' => 'Quarta-feira',
-	// 		'short' => 'Qua'
-	// 	],
-	// 	[
-	// 		'id' => 5,
-	// 		'name' => 'Quinta-feira',
-	// 		'short' => 'Qui'
-	// 	],
-	// 	[
-	// 		'id' => 6,
-	// 		'name' => 'Sexta-feira',
-	// 		'short' => 'Sex'
-	// 	],
-	// 	[
-	// 		'id' => 7,
-	// 		'name' => 'Sabado',
-	// 		'short' => 'Sab'
-	// 	],
-	// ];
+	private $weekdays = [
+		[
+			'id' => 0,
+			'name' => 'Domingo',
+		],
+		[
+			'id' => 1,
+			'name' => 'Segunda-feira',
+		],
+		[
+			'id' => 2,
+			'name' => 'Terça-feira',
+		],
+		[
+			'id' => 3,
+			'name' => 'Quarta-feira',
+		],
+		[
+			'id' => 4,
+			'name' => 'Quinta-feira',
+		],
+		[
+			'id' => 5,
+			'name' => 'Sexta-feira',
+		],
+		[
+			'id' => 6,
+			'name' => 'Sábado',
+		],
+	];
 
-	public function getById($id, $weekdays)
+	public function getById($id)
 	{
-		foreach ($weekdays->toArray() as $key => $value) {
+		foreach ($this->weekdays as $key => $value) {
 			if ($key == $id) {
-				return $value;
+				return $value['name'];
 			}
 		}
 	}

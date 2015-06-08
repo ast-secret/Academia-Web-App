@@ -16,9 +16,8 @@ class Release extends Entity
      */
     protected $_accessible = [
         'user_id' => true,
-        'title' => true,
         'text' => true,
+        'is_active' => true,
         'user' => true,
-        'is_active' => true
     ];
 }

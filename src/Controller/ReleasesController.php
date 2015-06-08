@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+use Cake\Network\Exception\NotFoundException;
+
 /**
  * Releases Controller
  *
@@ -21,6 +23,16 @@ class ReleasesController extends AppController
     {
         $conditions = [];
 
+        $tab = (!(int)$this->request->query('tab')) ? 1 : (int)$this->request->query('tab');
+        switch ($tab) {
+            case 2:
+                $conditions[] = ['Releases.is_active' => 1];
+                break;
+            case 3:
+                $conditions[] = ['Releases.is_active' => 0];
+                break;
+        }
+
         $q = $this->request->query('q');
         if ($q) {
             $conditions[] = ['Releases.text LIKE' => "%{$q}%"];
@@ -35,43 +47,31 @@ class ReleasesController extends AppController
         if ($to) {
             $conditions[] = ['Releases.created <=' => $to];
         }
+        $conditions[] = ['Users.gym_id' => $this->Auth->user('gym_id')];
 
         $this->paginate = [
+            'fields' => [
+                'id',
+                'text',
+                'created',
+                'is_active',
+                'user_id',
+                'Users.name'
+            ],
             'contain' => ['Users'],
             'order' => ['Releases.created' => 'DESC'],
             'conditions' => $conditions
         ];
 
-        $breadcrumb = ['active' => 'Comunicados'];
-        $this->set(compact('breadcrumb'));
-
         $this->set('releases', $this->paginate($this->Releases));
-    }
+        /**
+         * Passa este id para mostrar o botao de editar no template apenas para
+         * os releases do usuario logado.
+         */
+        $this->set('me_id', $this->Auth->user('id'));
 
-    /**
-     * View method
-     *
-     * @param string|null $id Release id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $breadcrumb = [
-            'active' => 'Criar comunicado',
-            'parents' => [
-                [
-                    'label' => 'Comunicados',
-                    'url' => ['action' => 'index']
-                ]
-            ]
-        ];
-        $release = $this->Releases->get($id, [
-            'contain' => ['Users']
-        ]);
-        $this->set(compact('release', 'breadcrumb'));
+        $this->set(compact('tab'));
     }
-
     /**
      * Add method
      *
@@ -80,11 +80,13 @@ class ReleasesController extends AppController
     public function add()
     {
         $release = $this->Releases->newEntity();
-
-        $this->request->data['user_id'] = 1;
         
         if ($this->request->is('post')) {
             $release = $this->Releases->patchEntity($release, $this->request->data);
+            $release->user_id = $this->Auth->user('id');
+
+            $release->accessible('id', false);
+
             if ($this->Releases->save($release)) {            
                 $this->Flash->success('O Comunicado foi salvo com sucesso.');
                 return $this->redirect(['action' => 'index']);
@@ -93,18 +95,7 @@ class ReleasesController extends AppController
             }
         }        
 
-        $breadcrumb = [
-            'active' => 'Criar comunicado',
-            'parents' => [
-                [
-                    'label' => 'Comunicados',
-                    'url' => ['action' => 'index']
-                ]
-            ]
-        ];
-       
-        $this->set(compact('breadcrumb', 'release'));
-        $this->set('_serialize', ['release']);
+        $this->set(compact('release'));
     }
 
     /**
@@ -116,23 +107,20 @@ class ReleasesController extends AppController
      */
     public function edit($id = null)
     {
-        $breadcrumb = [
-            'active' => 'Editar comunicado',
-            'parents' => [
-                [
-                    'label' => 'Comunicados',
-                    'url' => ['action' => 'index']
-                ]
-            ]
-        ];
+        $user_id = $this->Auth->user('id');
 
-        $release = $this->Releases->get($id);
+        $release = $this->Releases->get($id, [
+            'conditions' => ['Releases.user_id' => $user_id]
+        ]);
+
+        if (!$release) {
+            throw new NotFoundException();
+        }
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            
-            $this->request->data['user_id'] = $this->Auth->user('id');
 
             $release = $this->Releases->patchEntity($release, $this->request->data);
+            $release->user_id = $user_id;
 
             if ($this->Releases->save($release)) {
                 $this->Flash->success('O Comunicado foi salvo com sucesso.');
@@ -141,7 +129,7 @@ class ReleasesController extends AppController
                 $this->Flash->error('O Comunicado não pode ser salvo, tente novamente.');
             }
         }
-        $this->set(compact('release', 'breadcrumb'));
+        $this->set(compact('release'));
     }
 
     /**
@@ -154,11 +142,19 @@ class ReleasesController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $release = $this->Releases->get($id);
+        
+        $release = $this->Releases->get($id, [
+            'conditions' => ['Releases.user_id' => $this->Auth->user('id')]
+        ]);
+
+        if (!$release) {
+            throw new NotFoundException();
+        }
+
         if ($this->Releases->delete($release)) {
-            $this->Flash->success('The release has been deleted.');
+            $this->Flash->success('O comunicado foi deletado.');
         } else {
-            $this->Flash->error('The release could not be deleted. Please, try again.');
+            $this->Flash->error('O comunicado não pode ser deletado. Por favor, tente novamente.');
         }
         return $this->redirect(['action' => 'index']);
     }

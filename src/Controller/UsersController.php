@@ -7,6 +7,9 @@ use Cake\Event\Event;
 use Cake\Validation\Validation;
 
 use Cake\Network\Exception\NotFoundException;
+
+use Cake\Auth\DefaultPasswordHasher;
+
 /**
  * Users Controller
  *
@@ -16,7 +19,12 @@ class UsersController extends AppController
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow('add');
+        $this->Auth->allow(['add','passwordGenerator']);
+    }
+    public function passwordGenerator($password)
+    {
+        echo (new DefaultPasswordHasher)->hash($password);
+        exit();
     }
 
     public function logout()
@@ -72,7 +80,10 @@ class UsersController extends AppController
             $conditions[] = ['Users.is_active' => 0];
         }
 
-        $conditions[] = ['Users.gym_id' => $this->Auth->user('gym_id')];
+        $conditions[] = [
+            'Users.gym_id' => $this->Auth->user('gym_id'),
+            'Users.deleted' => 0
+        ];
 
         $this->paginate = [
             'fields' => [
@@ -119,6 +130,8 @@ class UsersController extends AppController
             $this->request->data['gym_id'] = $this->Auth->user('gym_id');            
 
             $user = $this->Users->patchEntity($user, $this->request->data);
+            // Evitar que ele edite algum usuario
+            $user->accessible('id', false);
             $user->is_active = 1;
 
             if ($this->Users->save($user)) {
@@ -141,38 +154,33 @@ class UsersController extends AppController
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
-    {       
-
-        $breadcrumb = [
-            'parents' => [
-                [
-                    'label' => 'Usuário',
-                    'url' => [
-                        'action' => 'index'
-                    ]
-                    
-                ]
-            ],
-            'active' => 'Editar Usuário'
-        ];
-        $user = $this->Users->get($id);
+    {
+        $gym_id = $this->Auth->user('gym_id');
+        $user = $this->Users->get($id, ['conditions' => ['Users.gym_id' => $gym_id]]);
+        if (!$user) {
+            throw new NotFoundException();
+        }
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $this->request->data['gym_id'] = $this->Auth->user('gym_id');
+
+            $this->request->data['gym_id'] = $gym_id;
+
             $user = $this->Users->patchEntity($user, $this->request->data);
+            // Evita que ele passe uma senha nova pelo array e altere
+            $user->accessible('name', false);
+            $user->accessible('username', false);
+            $user->accessible('password', false);
             if ($this->Users->save($user)) {
-                $this->Flash->success('The gym has been saved.');
+                $this->Flash->success('O usuário foi salvo com sucesso.');
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error('The gym could not be saved. Please, try again.');
+                $this->Flash->error('O usuário não pode ser salvo. Por favor, tente novamente.');
             }
-        } else {
-            unset($user->password);
         }
         
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
 
-        $this->set(compact('user', 'roles', 'breadcrumb'));
+        $this->set(compact('user', 'roles'));
     }
 
     /**
@@ -185,13 +193,26 @@ class UsersController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
-            $this->Flash->success('The user has been deleted.');
-        } else {
-            $this->Flash->error('The user could not be deleted. Please, try again.');
+
+        $gym_id = $this->Auth->user('gym_id');
+
+        $user = $this->Users->get($id, ['conditions' => [
+            'Users.gym_id' => $gym_id,
+            'Users.is_active' => 0
+        ]]);
+        if (!$user) {
+            throw new NotFoundException();
         }
-        return $this->redirect(['action' => 'index']);
+
+        $user->accessible('deleted', true);
+        $user->deleted = true;
+
+        if ($this->Users->save($user)) {
+            $this->Flash->success('O usuário foi deletado com sucesso.');
+        } else {
+            $this->Flash->error('O usuário não pode ser deletado. Por favor, tente novamente.');
+        }
+        return $this->redirect($this->referer());
     }
 
     public function change_password(){     

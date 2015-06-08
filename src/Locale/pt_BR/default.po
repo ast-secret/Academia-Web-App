@@ -13,6 +13,18 @@ msgstr[0] "{0} mes"
 msgstr[1] "{0} meses"
 
 #: I18n/Time.php:387
+msgid "{0} second"
+msgid_plural "{0} seconds"
+msgstr[0] "{0} segundo"
+msgstr[1] "{0} segundos"
+
+#: I18n/Time.php:387
+msgid "{0} minute"
+msgid_plural "{0} minutes"
+msgstr[0] "{0} minuto"
+msgstr[1] "{0} minutos"
+
+#: I18n/Time.php:387
 msgid "{0} week"
 msgid_plural "{0} weeks"
 msgstr[0] "{0} semana"
@@ -25,8 +37,14 @@ msgstr "%s atrás"
 #: I18n/Time.php:393
 msgid "{0} day"
 msgid_plural "{0} days"
-msgstr[0] "dia"
-msgstr[1] "dias"
+msgstr[0] "{0} dia"
+msgstr[1] "{0} dias"
+
+#: I18n/Time.php:393
+msgid "{0} hour"
+msgid_plural "{0} hours"
+msgstr[0] "{0} hora"
+msgstr[1] "{0} horas"
 
 #: View/Widget/DateTimeWidget.php:511
 msgid "January"

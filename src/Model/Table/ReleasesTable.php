@@ -1,15 +1,16 @@
 <?php
 namespace App\Model\Table;
 
+use App\Model\Entity\Release;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use ArrayObject;
 
 /**
  * Releases Model
+ *
+ * @property \Cake\ORM\Association\BelongsTo $Users
  */
 class ReleasesTable extends Table
 {
@@ -27,7 +28,8 @@ class ReleasesTable extends Table
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
         ]);
     }
 
@@ -41,17 +43,26 @@ class ReleasesTable extends Table
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create')
-
-            ->add('user_id', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('user_id', 'create')
-            ->notEmpty('user_id')
-
+            ->allowEmpty('id', 'create');
+            
+        $minLength = 10;
+        $maxLength = 800;
+        $validator
             ->requirePresence('text', 'create')
-            ->notEmpty('text',"Por Favor, Preecha o campo vazio!")
-
-            ->add('is_active', 'boolean', ['rule' => 'boolean'])
-            ->allowEmpty('is_active');
+            ->notEmpty('text')
+            ->add('text', 'maxLength', [
+                'rule' => ['maxLength', $maxLength],
+                'message' => 'O texto deve conter no mínimo '.$maxLength.' caracteres.'
+            ])
+            ->add('text', 'minLength', [
+                'rule' => ['minLength', $minLength],
+                'message' => 'O texto deve conter no máximo '.$maxLength.' caracteres.'
+            ]);
+            
+        $validator
+            ->add('is_active', 'valid', ['rule' => 'boolean'])
+            ->requirePresence('is_active', 'create')
+            ->notEmpty('is_active');
 
         return $validator;
     }

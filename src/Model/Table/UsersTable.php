@@ -103,6 +103,10 @@ class UsersTable extends Table
             ->add('is_active', 'valid', ['rule' => 'boolean'])
             ->requirePresence('is_active', 'create')
             ->notEmpty('is_active');
+
+        $validator
+            ->add('deleted', 'valid', ['rule' => 'boolean'])
+            ->notEmpty('deleted');
             
         $validator
             ->allowEmpty('mail_temp');

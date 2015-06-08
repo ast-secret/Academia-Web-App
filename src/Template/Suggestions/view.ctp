@@ -64,8 +64,8 @@
 <br>
 
 <div class="row" style="margin-top: 15px;">
-    <div class="col-md-12 text-center">
-        <p class="text-default">
+    <div class="col-md-6 col-md-offset-3 text-center">
+        <p>
             <?= h($suggestion->text) ?>
         </p>
     </div>

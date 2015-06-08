@@ -63,6 +63,22 @@ Router::scope('/:gym_slug/usuarios', function ($routes) {
 	$routes->connect('/', ['controller' => 'Users', 'action' => 'index']);
 	$routes->connect('/criar', ['controller' => 'Users', 'action' => 'add']);
 	$routes->connect('/editar/*', ['controller' => 'Users', 'action' => 'edit']);
+	$routes->connect('/deletar/*', ['controller' => 'Users', 'action' => 'delete']);
+});
+
+Router::scope('/:gym_slug/comunicados', function ($routes) {
+    $routes->connect('/', ['controller' => 'Releases', 'action' => 'index']);
+    $routes->connect('/criar', ['controller' => 'Releases', 'action' => 'add']);
+    $routes->connect('/editar/*', ['controller' => 'Releases', 'action' => 'edit']);
+    $routes->connect('/deletar/*', ['controller' => 'Releases', 'action' => 'delete']);
+});
+
+
+Router::scope('/:gym_slug/aulas', function ($routes) {
+    $routes->connect('/', ['controller' => 'Services', 'action' => 'index']);
+    $routes->connect('/criar', ['controller' => 'Services', 'action' => 'add']);
+    $routes->connect('/editar/*', ['controller' => 'Services', 'action' => 'edit']);
+    $routes->connect('/deletar/*', ['controller' => 'Services', 'action' => 'delete']);
 });
 
 Router::scope('/', function ($routes) {
