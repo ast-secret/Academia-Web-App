@@ -1,48 +1,68 @@
-<?= $this->Html->script('Services/form') ?>
+<script>
+    $(function(){
+        $('input#add-time').inputmask('hh:mm', {
+            clearIncomplete: true,
+            onKeyDown: function (a, b, c,d ) {
+                if (a.keyCode == 13) {
+                    var $this = $(this);
 
-<?= $this->element('Common/dashboard_breadcrumb', ['breadcrumb' => $breadcrumb]) ?>
+                    var value = b.join('');
+                    var isValid = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/
+                        .test(value);
+                    if (isValid) {
+                        var time = '<span class="label label-primary" style="float: left">' + $this.val() + ' <a href="#" id="delete-tag">x</a></span>';
+                        $this
+                            .parent('div')
+                            .next('div')
+                            .children('#times-container')
+                            .append(time);
+                        $this.val('');
+                    }
+                }
+            }
+        });
+        $(document).on('click', '#delete-tag', function(){
+            $(this).parent('span').remove();
+        });
+        $('input#add-time').keypress(function(e){
+            // var $this = $(this);
+            // if(e.which == 13) {
+            //     var isValid = inputmask.isValid("23/03/1973", { alias: "dd/mm/yyyy"});
+            //     var time = '<span class="label label-primary" style="float: left">' + $this.val() + ' <a href="#" id="delete-tag">x</a></span>';
+            //     $this
+            //         .parent('div')
+            //         .next('div')
+            //         .children('#times-container')
+            //         .append(time);
+            //     $this.val('');
+            // }
+        });
+    });
+</script>
+<?php
+$this->assign('title', ' - Configuração de horários');
 
-<div class="">
-    <?= $this->Form->create($time); ?>
-         <ul id="list-times" class="list-group">
-            <?php if ($time): ?>
-                <?php foreach ($time as $key => $value): ?>
-                    <?php if (!$value->errors()): ?>
-                        <li class="list-group-item">
-                            <strong><?= $this->Weekdays->getById($value->weekday_id, $weekdays) ?></strong> às <strong><?= $value->start_hour ?></strong> com <strong><?= $value->duration ?></strong> minutos de duração.
+echo '<br>';
+$this->Html->addCrumb('Aulas', ['controller' => 'services', 'action' => 'index']);
+$this->Html->addCrumb('Configurações de hoários');
+echo $this->Html->getCrumbList();
+echo '<br>';
 
-                            <?php
-                                // Hidden Fields
-                                echo $this->Form->hidden("times.{$key}.id",
-                                    [
-                                        'value' => $value->id,
-                                        'id' => 'timesId'
-                                    ]);
-                                echo $this->Form->hidden("times.{$key}.weekday_id",
-                                    ['value' => $time->weekday_id]);
-                                echo $this->Form->hidden("times.{$key}.start_hour", ['value' => $value->start_hour]);
-                                echo $this->Form->hidden("times.{$key}.duration",
-                                    ['value' => $value->duration]);
-                            ?>
-
-                            <button
-                                type="button"
-                                id="btn-deletar"
-                                class="btn btn-default btn-xs pull-right"
-                                style="display: none;">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-
-                        </li>
-                    <?php endif ?>
-                <?php endforeach ?>
-            <?php else: ?>
-                <em id="text-exercises-empty">Nenhum exercício adicionado</em>
-            <?php endif; ?>
-        </ul>
-
-        <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-
-
+$weekdays = $this->Weekdays->getAll();
+?>
+<div class="row">
+    <?php foreach ($weekdays as $weekday): ?>
+        <div class="col-md-12">
+            <?= $weekday['name'] ?>
+            <div class="row">
+                <div class="col-md-2">
+                    <input type="text"
+                    placeholder="horário" id="add-time" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <div id="times-container"></div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach ?>
 </div>

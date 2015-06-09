@@ -7,8 +7,6 @@
         <li><?= $this->Html->link(__('New Time'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Services'), ['controller' => 'Services', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Service'), ['controller' => 'Services', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Weekdays'), ['controller' => 'Weekdays', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Weekday'), ['controller' => 'Weekdays', 'action' => 'add']) ?> </li>
     </ul>
 </div>
 <div class="times view large-10 medium-9 columns">
@@ -17,20 +15,18 @@
         <div class="large-5 columns strings">
             <h6 class="subheader"><?= __('Service') ?></h6>
             <p><?= $time->has('service') ? $this->Html->link($time->service->name, ['controller' => 'Services', 'action' => 'view', $time->service->id]) : '' ?></p>
-            <h6 class="subheader"><?= __('Weekday') ?></h6>
-            <p><?= $time->has('weekday') ? $this->Html->link($time->weekday->name, ['controller' => 'Weekdays', 'action' => 'view', $time->weekday->id]) : '' ?></p>
         </div>
         <div class="large-2 columns numbers end">
             <h6 class="subheader"><?= __('Id') ?></h6>
             <p><?= $this->Number->format($time->id) ?></p>
-            <h6 class="subheader"><?= __('Duration') ?></h6>
-            <p><?= $this->Number->format($time->duration) ?></p>
+            <h6 class="subheader"><?= __('Weekday') ?></h6>
+            <p><?= $this->Number->format($time->weekday) ?></p>
         </div>
         <div class="large-2 columns dates end">
-            <h6 class="subheader"><?= __('Created') ?></h6>
-            <p><?= h($time->created) ?></p>
             <h6 class="subheader"><?= __('Start Hour') ?></h6>
             <p><?= h($time->start_hour) ?></p>
+            <h6 class="subheader"><?= __('Created') ?></h6>
+            <p><?= h($time->created) ?></p>
         </div>
     </div>
 </div>

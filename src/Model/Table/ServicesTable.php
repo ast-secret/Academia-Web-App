@@ -9,6 +9,9 @@ use Cake\Validation\Validator;
 
 /**
  * Services Model
+ *
+ * @property \Cake\ORM\Association\BelongsTo $Gyms
+ * @property \Cake\ORM\Association\HasMany $Times
  */
 class ServicesTable extends Table
 {
@@ -26,7 +29,8 @@ class ServicesTable extends Table
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
         $this->belongsTo('Gyms', [
-            'foreignKey' => 'gym_id'
+            'foreignKey' => 'gym_id',
+            'joinType' => 'INNER'
         ]);
         $this->hasMany('Times', [
             'foreignKey' => 'service_id'
@@ -43,17 +47,42 @@ class ServicesTable extends Table
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create')
-            ->add('gym_id', 'valid', ['rule' => 'numeric',])
-            ->requirePresence('gym_id', 'create')
-            ->notEmpty('gym_id')
+            ->allowEmpty('id', 'create');
+            
+        $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name')
+            ->add('name', [
+                'unique' => [
+                    'rule' => ['validateUnique', ['scope' => 'gym_id']],
+                    'provider' => 'table',
+                    'message' => 'Já existe uma aula com este nome'
+                ]
+            ]);
+
+        $minLength = 5;
+        $maxLength = 800;            
+        $validator
             ->requirePresence('description', 'create')
             ->notEmpty('description')
-            ->add('stats', 'valid', ['rule' => 'boolean'])
-            ->requirePresence('stats', 'create')
-            ->notEmpty('stats');
+            ->add('description', 'maxLength', [
+                'rule' => ['maxLength', $maxLength],
+                'message' => 'A descrição deve conter no máximo '.$maxLength.' caracteres.'
+            ])
+            ->add('description', 'minLength', [
+                'rule' => ['minLength', $minLength],
+                'message' => 'A descrição deve conter no mínimo '.$minLength.' caracteres.'
+            ]);
+            
+        $validator
+            ->add('is_active', 'valid', ['rule' => 'boolean'])
+            ->requirePresence('is_active', 'create')
+            ->notEmpty('is_active');
+            
+        $validator
+            ->add('duration', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('duration', 'create')
+            ->notEmpty('duration');
 
         return $validator;
     }
@@ -67,7 +96,6 @@ class ServicesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['name']));
         $rules->add($rules->existsIn(['gym_id'], 'Gyms'));
         return $rules;
     }

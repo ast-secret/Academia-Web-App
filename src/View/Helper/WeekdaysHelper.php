@@ -38,6 +38,10 @@ class WeekdaysHelper extends Helper
 		],
 	];
 
+	public function getAll()
+	{
+		return $this->weekdays;
+	}
 	public function getById($id)
 	{
 		foreach ($this->weekdays as $key => $value) {

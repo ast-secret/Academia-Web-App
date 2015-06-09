@@ -17,22 +17,22 @@ class ServicesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'Services' => 'app.services',
-        'Gyms' => 'app.gyms',
-        'Machines' => 'app.machines',
-        'Phones' => 'app.phones',
-        'Rooms' => 'app.rooms',
-        'Lessons' => 'app.lessons',
-        'Users' => 'app.users',
-        'Roles' => 'app.roles',
-        'Cards' => 'app.cards',
-        'Customers' => 'app.customers',
-        'Suggestions' => 'app.suggestions',
-        'ExercisesGroups' => 'app.exercises_groups',
-        'Exercises' => 'app.exercises',
-        'Releases' => 'app.releases',
-        'Times' => 'app.times',
-        'Weekdays' => 'app.weekdays'
+        'app.services',
+        'app.gyms',
+        'app.machines',
+        'app.phones',
+        'app.rooms',
+        'app.lessons',
+        'app.users',
+        'app.roles',
+        'app.cards',
+        'app.customers',
+        'app.suggestions',
+        'app.exercises_groups',
+        'app.exercises',
+        'app.releases',
+        'app.times',
+        'app.weekdays'
     ];
 
     /**
@@ -43,7 +43,9 @@ class ServicesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Services') ? [] : ['className' => 'App\Model\Table\ServicesTable'];        $this->Services = TableRegistry::get('Services', $config);    }
+        $config = TableRegistry::exists('Services') ? [] : ['className' => 'App\Model\Table\ServicesTable'];
+        $this->Services = TableRegistry::get('Services', $config);
+    }
 
     /**
      * tearDown method

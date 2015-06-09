@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 
 /**
  * Times Model
+ *
+ * @property \Cake\ORM\Association\BelongsTo $Services
  */
 class TimesTable extends Table
 {
@@ -27,9 +29,7 @@ class TimesTable extends Table
         $this->addBehavior('Timestamp');
         $this->belongsTo('Services', [
             'foreignKey' => 'service_id',
-        ]);
-        $this->belongsTo('Weekdays', [
-            'foreignKey' => 'weekday_id'
+            'joinType' => 'INNER'
         ]);
     }
 
@@ -43,19 +43,17 @@ class TimesTable extends Table
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create')
-            ->add('service_id', 'valid', ['rule' => 'numeric'])
-            // ->requirePresence('service_id', 'create')
-            // ->notEmpty('service_id')
-            ->add('weekday_id', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('weekday_id', 'create')
-            ->notEmpty('weekday_id')
+            ->allowEmpty('id', 'create');
+            
+        $validator
+            ->add('weekday', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('weekday', 'create')
+            ->notEmpty('weekday');
+            
+        $validator
             ->add('start_hour', 'valid', ['rule' => 'time'])
             ->requirePresence('start_hour', 'create')
-            ->notEmpty('start_hour')
-            ->add('duration', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('duration', 'create')
-            ->notEmpty('duration');
+            ->notEmpty('start_hour');
 
         return $validator;
     }
@@ -70,7 +68,6 @@ class TimesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['service_id'], 'Services'));
-        $rules->add($rules->existsIn(['weekday_id'], 'Weekdays'));
         return $rules;
     }
 }

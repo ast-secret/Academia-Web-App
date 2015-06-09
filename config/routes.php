@@ -81,6 +81,10 @@ Router::scope('/:gym_slug/aulas', function ($routes) {
     $routes->connect('/deletar/*', ['controller' => 'Services', 'action' => 'delete']);
 });
 
+Router::scope('/:gym_slug/aulas/horarios', function ($routes) {
+    $routes->connect('/*', ['controller' => 'Times', 'action' => 'edit']);
+});
+
 Router::scope('/', function ($routes) {
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',

@@ -8,7 +8,7 @@
 ?>
 <br>
 
-<?= $this->Html->link('Adicionar aula', ['action' => 'add'], ['class' => 'btn btn-danger pull-right'])?>
+<?= $this->Html->link('Criar aula', ['action' => 'add'], ['class' => 'btn btn-danger pull-right'])?>
 
 <br style="clear: both;">
 <br>
@@ -36,6 +36,25 @@
 </form>
 <hr>
 
+<ul class="nav nav-tabs">
+    <li
+        role="presentation"
+        class="<?= $tab == '0' ? 'active' : '' ?>">
+        <?= $this->Html->link('Ativos', ['action' => 'index','?' => ['tab' => '0']]) ?>
+    </li>
+    <li
+        role="presentation"
+        class="<?= $tab == '1' ? 'active' : '' ?>">
+        <?= $this->Html->link('Inativos', [ 'action' => 'index', '?' => ['tab' => '1']]) ?>
+    </li>
+    <li
+        role="presentation"
+        class="<?= $tab == '2' ? 'active' : '' ?>">
+        <?= $this->Html->link('Todos', [ 'action' => 'index', '?' => ['tab' => '2']]) ?>
+    </li>
+</ul>
+<br>
+
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
@@ -43,7 +62,9 @@
                 <?= $this->Paginator->sort('name', 'Nome') ?> / Descrição
             </th>            
             <th style="width: 350px">Horários</th>
-            <th style="width: 100px" class="text-center">Status</th>
+            <th style="width: 100px" class="text-center">
+                <?= $this->Paginator->sort('is_active', 'Status') ?>
+            </th>
             <th style="width: 100px" class="text-center"></th>
         </tr>
     </thead>
@@ -58,6 +79,15 @@
                     <?= h($service->description) ?>
                 </td>
                 <td>
+                    <p class="text-center">
+                        <?= $this->Html->link('Configurar horários', [
+                            'controller' => 'Times',
+                            'action' => 'edit',
+                            $service->id
+                        ], [
+                            'class' => 'btn btn-primary btn-xs'
+                        ]) ?>
+                    </p>
                     <?php if ($service->times): ?>
                         <?php $currentDay = -1; ?>
                         <?php foreach ($service->times as $time): ?>
@@ -84,12 +114,10 @@
                     <?php endif ?>
                 </td>
                 <td class="text-center">
-                    <div class="btn-group">
-                        <?= $this->Html->link('<span class="glyphicon glyphicon-pencil"></span>',
-                            ['action' => 'edit', $service->id],
-                            ['escape' => false, 'class' => 'btn btn-default btn-xs']) ?>
-                        <?= $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', ['action' => 'delete', $service->id], ['confirm' => __('Você tem certeza que deseja deletar ?', $service->id), 'class' => 'btn btn-xs btn-danger', 'escape' => false]) ?>
-                    </div>
+                    <?= $this->Html->link('<span class="glyphicon glyphicon-pencil"></span>',
+                        ['action' => 'edit', $service->id],
+                        ['escape' => false, 'class' => 'btn btn-default btn-xs']) ?>
+                    <?= $this->Form->postLink('<span class="glyphicon glyphicon-remove"></span>', ['action' => 'delete', $service->id], ['confirm' => __('Você tem certeza que deseja deletar ?', $service->id), 'class' => 'btn btn-xs btn-danger', 'escape' => false]) ?>
                 </td>
             </tr>
         <?php endforeach; ?>

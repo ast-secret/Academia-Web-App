@@ -52,11 +52,11 @@ class ReleasesTable extends Table
             ->notEmpty('text')
             ->add('text', 'maxLength', [
                 'rule' => ['maxLength', $maxLength],
-                'message' => 'O texto deve conter no mínimo '.$maxLength.' caracteres.'
+                'message' => 'O texto deve conter no máximo '.$maxLength.' caracteres.'
             ])
             ->add('text', 'minLength', [
                 'rule' => ['minLength', $minLength],
-                'message' => 'O texto deve conter no máximo '.$maxLength.' caracteres.'
+                'message' => 'O texto deve conter no mínimo '.$minLength.' caracteres.'
             ]);
             
         $validator

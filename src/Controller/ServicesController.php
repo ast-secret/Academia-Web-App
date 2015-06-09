@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+use Cake\Network\Exeptions\NotFoundException;
+
 /**
  * Services Controller
  *
@@ -28,6 +30,18 @@ class ServicesController extends AppController
         if ($q) {
             $conditions[] = ['Services.name LIKE' => "%{$q}%"];
         }
+
+        $tab = (int)$this->request->query('tab');
+
+        switch ($tab) {
+            case 0:
+                $conditions[] = ['Services.is_active' => 1];
+                break;
+            case 1:
+                $conditions[] = ['Services.is_active' => 0];
+                break;
+        }
+
         $this->paginate = [
             'conditions' => $conditions,
             'contain' => [
@@ -41,22 +55,8 @@ class ServicesController extends AppController
             'order' => ['Times.weekday_id' => 'DESC']
         ];
         $this->set('services', $this->paginate($this->Services));
-    }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Service id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $service = $this->Services->get($id, [
-            'contain' => ['Gyms', 'Times']
-        ]);
-        $this->set('service', $service);
-        $this->set('_serialize', ['service']);
+        $this->set(compact('tab'));
     }
 
     /**
@@ -66,25 +66,16 @@ class ServicesController extends AppController
      */
     public function add()
     {
-        $breadcrumb = [
-            'parents' => [
-                [
-                    'label' => 'Aulas',
-                    'url' => [
-                        'action' => 'index',
-                    ]
-                ]
-            ],
-            'active' => 'Adicionar Aula'
-        ];
-
-        $service = $this->Services->newEntity(null, ['associated' => ['Times']]);
+        $service = $this->Services->newEntity();
 
         if ($this->request->is('post')) {
 
-            $this->request->data['gym_id'] = 1;
-
-            $service = $this->Services->patchEntity($service, $this->request->data, ['associated' => ['Times']]);
+            /**
+             * O ID deve ser inserido antes do patchEntity pois é usado na validação
+             * de nome único 
+             */
+            $this->request->data['gym_id'] = $this->Auth->user('gym_id');
+            $service = $this->Services->patchEntity($service, $this->request->data);
 
             if ($this->Services->save($service)) {
                 $this->Flash->success('A aula foi salva com sucesso.');
@@ -93,11 +84,8 @@ class ServicesController extends AppController
                 $this->Flash->error('A aula não pode ser salva, por favor tente novamente.');    
             }
         }
-        $gyms = $this->Services->Gyms->find('list', ['limit' => 200]);
-        $weekdays = $this->Services->Times->weekdays->find('list', ['limit' => 200]);
 
-        $this->set(compact('service', 'gyms', 'weekdays', 'breadcrumb'));
-        // $this->set('_serialize', ['service']);
+        $this->set(compact('service'));
     }
 
     /**
@@ -109,45 +97,17 @@ class ServicesController extends AppController
      */
     public function edit($id = null)
     {
+        $service = $this->Services->get($id);
 
-        $breadcrumb = [
-            'parents' => [
-                [
-                    'label' => 'Aulas',
-                    'url' => [
-                        'action' => 'index',
-                    ]
-                ]
-            ],
-            'active' => 'Editar Aula'
-        ];
-
-        $service = $this->Services->get($id, [
-            'contain' => ['Times']
-        ]);
-
-        if ($service->times) {
-            foreach ($service->times as $key => $value) {
-                $service->times[$key]->start_hour = $value->start_hour->format('H:m');
-            }
+        if ($service->gym_id != $this->Auth->user('gym_id')) {
+            throw new NotFoundException();
         }
 
         if ($this->request->is(['patch', 'post', 'put'])) {
+            $service = $this->Services->patchEntity($service, $this->request->data);
 
-            $service = $this->Services->patchEntity($service, $this->request->data, ['associated' => ['Times']]);
-
+            $service->accessible('gym_id', false);
             if ($this->Services->save($service)) {
-
-                if ($this->request->data['timesDelete']) {
-                    $ids = explode(';', $this->request->data['timesDelete']);
-                    foreach ($ids as $id) {
-                        if (is_numeric($id)) {
-                            $timeDelete = $this->Services->Times->get($id);
-                            $this->Services->Times->delete($timeDelete);
-                        }
-                    }
-                }
-                
                 $this->Flash->success('A aula foi editada com sucesso.');
                 return $this->redirect(['action' => 'index']);
             } else {
@@ -155,11 +115,7 @@ class ServicesController extends AppController
             }
         }
 
-        $gyms = $this->Services->Gyms->find('list', ['limit' => 200]);
-        $weekdays = $this->Services->Times->Weekdays->find('list', ['limit' => 200]);
-
-        $this->set(compact('service', 'gyms', 'breadcrumb', 'weekdays'));
-        $this->set('_serialize', ['service']);
+        $this->set(compact('service'));
     }
 
     /**

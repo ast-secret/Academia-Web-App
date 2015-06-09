@@ -15,10 +15,9 @@ class Time extends Entity
      * @var array
      */
     protected $_accessible = [
+        'weekday' => true,
         'service_id' => true,
-        'weekday_id' => true,
         'start_hour' => true,
-        'duration' => true,
         'service' => true,
         'weekday' => true,
     ];

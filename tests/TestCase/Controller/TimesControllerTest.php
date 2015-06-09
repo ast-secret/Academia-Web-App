@@ -16,22 +16,21 @@ class TimesControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'Times' => 'app.times',
-        'Services' => 'app.services',
-        'Gyms' => 'app.gyms',
-        'Machines' => 'app.machines',
-        'Phones' => 'app.phones',
-        'Rooms' => 'app.rooms',
-        'Lessons' => 'app.lessons',
-        'Users' => 'app.users',
-        'Roles' => 'app.roles',
-        'Cards' => 'app.cards',
-        'Customers' => 'app.customers',
-        'Suggestions' => 'app.suggestions',
-        'ExercisesGroups' => 'app.exercises_groups',
-        'Exercises' => 'app.exercises',
-        'Releases' => 'app.releases',
-        'Weekdays' => 'app.weekdays'
+        'app.times',
+        'app.services',
+        'app.gyms',
+        'app.machines',
+        'app.phones',
+        'app.rooms',
+        'app.lessons',
+        'app.users',
+        'app.roles',
+        'app.cards',
+        'app.customers',
+        'app.suggestions',
+        'app.exercises_groups',
+        'app.exercises',
+        'app.releases'
     ];
 
     /**

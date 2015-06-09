@@ -2,10 +2,8 @@
     <h3><?= __('Actions') ?></h3>
     <ul class="side-nav">
         <li><?= $this->Html->link(__('New Time'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Services'), ['controller' => 'Services', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Service'), ['controller' => 'Services', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Weekdays'), ['controller' => 'Weekdays', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Weekday'), ['controller' => 'Weekdays', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Services'), ['controller' => 'Services', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Service'), ['controller' => 'Services', 'action' => 'add']) ?></li>
     </ul>
 </div>
 <div class="times index large-10 medium-9 columns">
@@ -13,11 +11,10 @@
     <thead>
         <tr>
             <th><?= $this->Paginator->sort('id') ?></th>
+            <th><?= $this->Paginator->sort('weekday') ?></th>
             <th><?= $this->Paginator->sort('service_id') ?></th>
-            <th><?= $this->Paginator->sort('weekday_id') ?></th>
-            <th><?= $this->Paginator->sort('created') ?></th>
             <th><?= $this->Paginator->sort('start_hour') ?></th>
-            <th><?= $this->Paginator->sort('duration') ?></th>
+            <th><?= $this->Paginator->sort('created') ?></th>
             <th class="actions"><?= __('Actions') ?></th>
         </tr>
     </thead>
@@ -25,15 +22,12 @@
     <?php foreach ($times as $time): ?>
         <tr>
             <td><?= $this->Number->format($time->id) ?></td>
+            <td><?= $this->Number->format($time->weekday) ?></td>
             <td>
                 <?= $time->has('service') ? $this->Html->link($time->service->name, ['controller' => 'Services', 'action' => 'view', $time->service->id]) : '' ?>
             </td>
-            <td>
-                <?= $time->has('weekday') ? $this->Html->link($time->weekday->name, ['controller' => 'Weekdays', 'action' => 'view', $time->weekday->id]) : '' ?>
-            </td>
-            <td><?= h($time->created) ?></td>
             <td><?= h($time->start_hour) ?></td>
-            <td><?= $this->Number->format($time->duration) ?></td>
+            <td><?= h($time->created) ?></td>
             <td class="actions">
                 <?= $this->Html->link(__('View'), ['action' => 'view', $time->id]) ?>
                 <?= $this->Html->link(__('Edit'), ['action' => 'edit', $time->id]) ?>
