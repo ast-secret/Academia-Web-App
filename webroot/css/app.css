@@ -89,3 +89,15 @@ textarea {
 	padding: 0;
 	outline: 0!important;
 }
+
+.tag {
+	padding: 5px 10px;
+	font-size: 14px;
+	margin-right: 8px;
+	margin-bottom: 8px;
+}
+.tag .tag-remove {
+	font-size: 18px;
+	padding-left: 5px;
+	cursor: pointer;
+}

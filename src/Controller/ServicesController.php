@@ -48,7 +48,7 @@ class ServicesController extends AppController
                 'Times' => [
                     'strategy' => 'select',
                     'queryBuilder' => function($q){
-                        return $q->order(['weekday' => 'DESC', 'start_hour' => 'ASC']);
+                        return $q->order(['weekday' => 'ASC', 'start_hour' => 'ASC']);
                     }
                 ]
             ],

@@ -31,7 +31,7 @@ class AppController extends Controller
 
     public $helpers = [
         'Form' => [
-            'className' => 'Bootstrap3.BootstrapForm'
+            //'className' => 'Bootstrap3.BootstrapForm'
         ],
         'Html' => [
             'className' => 'Bootstrap3.BootstrapHtml'

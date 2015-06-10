@@ -3,6 +3,8 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 
+use Cake\Collection\Collection;
+
 /**
  * Service Entity.
  */
@@ -22,5 +24,22 @@ class Service extends Entity
         'duration' => true,
         'gym' => true,
         'times' => true,
+        'times_string' => true
     ];
+
+    protected function _getTimesString()
+    {
+        $timesCollection = new Collection($this->_properties['times']);
+        $timesCollection = $timesCollection->groupBy('weekday');
+
+        $timesString = [];
+        foreach ($timesCollection->toArray() as $weekday => $times) {
+            $string = '';
+            foreach ($times as $time) {
+                $string .= $time->start_hour->format('H:i') . ';';
+            }
+            $timesString[$weekday] = $string;
+        }
+        return $timesString;
+    }
 }

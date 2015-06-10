@@ -7,6 +7,9 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+use Cake\Event\Event;
+use App\Model\Table\ArrayObject;
+
 /**
  * Services Model
  *
@@ -33,8 +36,31 @@ class ServicesTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->hasMany('Times', [
-            'foreignKey' => 'service_id'
+            'foreignKey' => 'service_id',
+            'dependent' => true //Deleta os horários quando deleta a aula
         ]);
+    }
+
+    public function beforeMarshal(Event $event, $data)
+    {
+        if ($data['times_string']) {
+            foreach ($data['times_string'] as $weekday => $timeString) {
+                $timesArray = explode(';', $timeString);
+                foreach ($timesArray as $time) {
+                    if ($time) {
+                        $data['times'][] = [
+                            'weekday' => $weekday,
+                            'start_hour' => $time
+                        ];
+                    }
+                }
+            }
+        }
+    }
+
+    public function beforeSave(Event $event, $entity)
+    {
+        $this->Times->deleteAll(['service_id' => $entity->id]);
     }
 
     /**

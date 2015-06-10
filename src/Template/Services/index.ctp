@@ -79,15 +79,6 @@
                     <?= h($service->description) ?>
                 </td>
                 <td>
-                    <p class="text-center">
-                        <?= $this->Html->link('Configurar horários', [
-                            'controller' => 'Times',
-                            'action' => 'edit',
-                            $service->id
-                        ], [
-                            'class' => 'btn btn-primary btn-xs'
-                        ]) ?>
-                    </p>
                     <?php if ($service->times): ?>
                         <?php $currentDay = -1; ?>
                         <?php foreach ($service->times as $time): ?>
@@ -102,6 +93,18 @@
                             </span>
                             &nbsp;
                         <?php endforeach ?>
+
+                        <hr>    
+                        <p class="text-center">
+                            <?= $this->Html->link('<span class="glyphicon glyphicon-cog"></span> Configurar horários', [
+                                'controller' => 'Times',
+                                'action' => 'edit',
+                                $service->id
+                            ], [
+                                'escape' => false,
+                                'class' => 'btn btn-default btn-xs'
+                            ]) ?>
+                        </p>
                     <?php else: ?>
                         <em>Nenhum horário cadastrado</em>
                     <?php endif ?>
