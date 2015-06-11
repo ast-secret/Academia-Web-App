@@ -98,12 +98,15 @@ class ServicesController extends AppController
     public function edit($id = null)
     {
         $service = $this->Services->get($id);
+        $gym_id = $this->Auth->user('gym_id');
 
-        if ($service->gym_id != $this->Auth->user('gym_id')) {
+        if ($service->gym_id != $gym_id) {
             throw new NotFoundException();
         }
 
         if ($this->request->is(['patch', 'post', 'put'])) {
+
+            $this->request->data['gym_id'] = $gym_id;
             $service = $this->Services->patchEntity($service, $this->request->data);
 
             $service->accessible('gym_id', false);

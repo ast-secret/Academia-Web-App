@@ -85,6 +85,21 @@ Router::scope('/:gym_slug/aulas/horarios', function ($routes) {
     $routes->connect('/*', ['controller' => 'Times', 'action' => 'edit']);
 });
 
+Router::scope('/:gym_slug/clientes', function ($routes) {
+    $routes->connect('/', ['controller' => 'Customers', 'action' => 'index']);
+    $routes->connect('/criar', ['controller' => 'Customers', 'action' => 'add']);
+    // $routes->connect('/editar/*', ['controller' => 'Services', 'action' => 'edit']);
+    // $routes->connect('/deletar/*', ['controller' => 'Services', 'action' => 'delete']);
+});
+
+Router::scope('/:gym_slug/fichas-de-exercicios', function ($routes) {
+    $routes->connect('/*', ['controller' => 'Cards', 'action' => 'index']);
+    $routes->connect('/imprimir/*', ['controller' => 'Cards', 'action' => 'print']);
+    // $routes->connect('/criar', ['controller' => 'Customers', 'action' => 'add']);
+    // $routes->connect('/editar/*', ['controller' => 'Services', 'action' => 'edit']);
+    // $routes->connect('/deletar/*', ['controller' => 'Services', 'action' => 'delete']);
+});
+
 Router::scope('/', function ($routes) {
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',

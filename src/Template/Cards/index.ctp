@@ -1,56 +1,133 @@
-<?= $this->Html->link('Adicionar Ficha', ['action' => 'add'], ['class' => 'btn btn-primary'])?>
-<hr>
-<table class="table table-striped">
-<thead>
-    <tr>
-        <th><?= $this->Paginator->sort('customer.name', 'Aluno') ?></th>
-        <th><?= $this->Paginator->sort('user.name', 'Instrutor') ?></th>
-        <th>Validade</th>
-        <th class="actions"></th>
-    </tr>
-</thead>
-<tbody>
-<?php foreach ($cards as $card): ?>
-    <tr>
-        <td>
-            <?= h($card->customer->name) ?>
-        </td>
-        <td>
-            <?= $card->has('user') ? $this->Html->link($card->user->name, ['controller' => 'Users', 'action' => 'view', $card->user->id]) : '' ?>
-        </td>
-        <td>Vence em 30 Dias</td>
-        <td>
-            <?= $this->Html->link(
-                '<span class="glyphicon glyphicon-eye-open"></span>',
-                ['action' => 'view', $card->id],
-                [
-                    'escape' => false,
-                    'class' => 'btn btn-default btn-xs',
-                    'title' => 'Ver Ficha'
+<?= $this->assign('title', ' - Fichas de exercícios de '. $customer->name) ?>
 
-                ])
-            ?>
-            <?= $this->Html->link(
-                '<span class="glyphicon glyphicon-align-justify"></span>',
-                ['action' => 'view'],
-                [
-                    'escape' => false,
-                    'class' => 'btn btn-default btn-xs',
-                    'title' => 'Ver histórico de fichas'
+<br>
+<?php 
+    $this->Html->addCrumb('Fichas de exercícios de <strong>'. $customer->name.'</strong>', null);
+    echo $this->Html->getCrumbList();
+?>
+<br>
 
-                ])
-            ?>
-        </td>
-    </tr>
 
-<?php endforeach; ?>
-</tbody>
+<?= $this->Html->link('<span class="glyphicon glyphicon-plus"></span> Nova ficha', ['action' => 'add'], ['class' => 'btn btn-danger pull-right', 'escape' => false])?>
+<br style="clear: both;">
+
+<ul class="nav nav-tabs">
+    <li
+        role="presentation"
+        class="<?= $tab == '0' ? 'active' : '' ?>">
+        <?= $this->Html->link('Ativas', ['action' => 'index', $this->request->pass[0],'?' => ['tab' => '0']]) ?>
+    </li>
+    <li
+        role="presentation"
+        class="<?= $tab == '1' ? 'active' : '' ?>">
+        <?= $this->Html->link('Histórico', [ 'action' => 'index', $this->request->pass[0], '?' => ['tab' => '1']]) ?>
+    </li>
+</ul>
+<br>
+
+<table class="table table-hover table-condensed table-bordered">
+    <tbody>
+        <?php foreach ($cards as $card): ?>
+            <tr>
+                <td style="width: 420px;vertical-align: middle">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Instrutor
+                        </dt>
+                        <dd>
+                            <?= h($card->user->name) ?>
+                        </dd>
+                        <dt>
+                            Objetivo
+                        </dt>
+                        <dd>
+                            <?= h($card->goal) ?>
+                        </dd>
+                        <dt>
+                            Observação
+                        </dt>
+                        <dd>
+                            <em class="text-muted">
+                                <?= ($card->obs) ? h($card->obs) : 'Nenhuma observação' ?>
+                            </em>
+                        </dd>
+                        <dt>
+                            Validade
+                        </dt>
+                        <dd>
+                            <?php if ($card->overdue): ?>
+                                <em class="text-muted text-danger">
+                                    Vencida <?= $this->Time->timeAgoInWords($card->end_date) ?>
+                                </em>
+                            <?php else: ?>
+                                <em class="text-muted text-success">
+                                    <?= $this->Time->timeAgoInWords($card->end_date) ?>
+                                </em>
+                            <?php endif ?>
+                        </dd>
+                    </dl>
+                </td>
+                <td>
+                    <?php foreach ($card->exercises_groups as $key => $group): ?>
+                        <dl>
+                            <dt>
+                                <?= $group->name ?>
+                            </dt>
+                            <?php foreach ($group->exercises as $key => $exercise): ?>
+                                <dd><?= $exercise->name ?></dd>
+                            <?php endforeach ?>
+                        </dl>
+                    <?php endforeach ?>
+                    <?php if (!$card->exercises_groups): ?>
+                        <p class="text-muted text-center"><em>Nenhum exercício cadastrado.</em></p>
+                    <?php endif ?>
+                    <p class="text-center">
+                        <?= $this->Html->link('<span class="glyphicon glyphicon-cog"></span> Configurar exercícios', [
+                            'controller' => 'ExercisesGroups',
+                            'action' => 'edit',
+                            $card->id
+                        ], [
+                            'escape' => false,
+                            'class' => 'btn btn-default btn-xs'
+                        ]) ?>
+                    </p>
+                </td>
+                <td style="vertical-align: middle; width: 100px;" class="text-center">
+                    <?= $this->Html->link(
+                            '<span class="glyphicon glyphicon-print"></span>',
+                            [
+                                'controller' => 'Cards',
+                                'action' => 'print',
+                                $card->id
+                            ],
+                            [
+                                'escape' => false,
+                                'class' => 'btn btn-default btn-xs',
+                                'title' => 'Imprimir'
+                            ])
+                    ?>
+                    <?= $this->Html->link(
+                        '<span class="glyphicon glyphicon-pencil"></span>',
+                        [
+                            'controller' => 'Cards',
+                            'action' => 'edit',
+                            $card->id
+                        ],
+                        [
+                            'escape' => false,
+                            'class' => 'btn btn-default btn-xs',
+                            'title' => 'Editar'
+                        ])
+                    ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        <?php if (count($cards) == 0): ?>
+            <tr>
+                <td colspan="6">Nenhuma ficha cadastrada ainda.</td>
+            </tr>
+        <?php endif ?>
+    </tbody>
 </table>
-<div class="paginator">
-    <ul class="pagination">
-        <?= $this->Paginator->prev('< ' . __('previous')) ?>
-        <?= $this->Paginator->numbers() ?>
-        <?= $this->Paginator->next(__('next') . ' >') ?>
-    </ul>
-    <p><?= $this->Paginator->counter() ?></p>
-</div>
+    
+<?= $this->element('Common/paginator') ?>

@@ -93,21 +93,20 @@
                             </span>
                             &nbsp;
                         <?php endforeach ?>
-
-                        <hr>    
-                        <p class="text-center">
-                            <?= $this->Html->link('<span class="glyphicon glyphicon-cog"></span> Configurar horários', [
-                                'controller' => 'Times',
-                                'action' => 'edit',
-                                $service->id
-                            ], [
-                                'escape' => false,
-                                'class' => 'btn btn-default btn-xs'
-                            ]) ?>
-                        </p>
                     <?php else: ?>
                         <em>Nenhum horário cadastrado</em>
                     <?php endif ?>
+                    <hr>    
+                    <p class="text-center">
+                        <?= $this->Html->link('<span class="glyphicon glyphicon-cog"></span> Configurar horários', [
+                            'controller' => 'Times',
+                            'action' => 'edit',
+                            $service->id
+                        ], [
+                            'escape' => false,
+                            'class' => 'btn btn-default btn-xs'
+                        ]) ?>
+                    </p>
                 </td>
                 <td class="text-center">
                     <?php if ($service->is_active): ?>

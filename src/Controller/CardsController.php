@@ -4,6 +4,8 @@ namespace App\Controller;
 use App\Controller\AppController;
 use App\Model\Entity\ExercisesGroup;
 
+use Cake\Network\Exceptions\NotfoundException;
+
 use Cake\I18n\Time;
 /**
  * Cards Controller
@@ -17,13 +19,42 @@ class CardsController extends AppController
      *
      * @return void
      */
-    public function index()
+    public function index($customer_id = null)
     {
+        $conditions = [];
+        $gym_id = $this->Auth->user('gym_id');
+
+        $tab = (int)$this->request->query('tab');
+
+        switch ($tab) {
+            case 0:
+                $conditions[] = ['Cards.end_date >=' => Time::now()];
+                break;
+            case 1:
+                $conditions[] = ['Cards.end_date <' => Time::now()];
+                break;
+        }
+
+        $customer = $this->Cards->Customers->get($customer_id);
+
+        if ($gym_id != $customer->gym_id) {
+            throw new NotfoundException();
+        }
+
+        $conditions[] = ['Cards.customer_id' => $customer->id];
         $this->paginate = [
-            'contain' => ['Users', 'Customers']
+            'fields' => [
+                'obs',
+                'goal',
+                'end_date',
+                'Users.name'
+            ],
+            'contain' => ['Users', 'ExercisesGroups' => ['Exercises']],
+            'conditions' => $conditions
+
         ];
         $this->set('cards', $this->paginate($this->Cards));
-        $this->set('_serialize', ['cards']);
+        $this->set(compact('customer', 'tab'));
     }
 
     /**

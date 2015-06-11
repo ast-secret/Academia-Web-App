@@ -31,7 +31,7 @@ class AppController extends Controller
 
     public $helpers = [
         'Form' => [
-            //'className' => 'Bootstrap3.BootstrapForm'
+            'className' => 'Bootstrap3.BootstrapForm'
         ],
         'Html' => [
             'className' => 'Bootstrap3.BootstrapHtml'
@@ -73,31 +73,11 @@ class AppController extends Controller
                 ]
             ]
         ]);
-
-        $bootstrapFormTemplate = [
-            'formStart' => '<form {{attrs}} novalidate>',
-            'errorList' => '<ul>{{content}}</ul>',
-            'errorItem' => '<li>{{text}}</li>',
-            'input' => '<input {{type}} {{attrs}} {{name}} class="form-control">',
-            'textarea' => '<textarea {{attrs}} {{name}} class="form-control">{{value}}</textarea>',
-            'inputContainer' => '<div class="form-group">{{content}}</div>',
-            'inputContainerError' => '<div class="form-group">{{content}}</div>',
-            'formGroup' => '{{label}} {{input}}',
-            'dateWidget' => '<div class="row">
-                    <div class="col-md-3">{{day}}</div>
-                    <div class="col-md-5">{{month}}</div>
-                    <div class="col-md-4">{{year}}</div>
-                </div>',
-            'select' => '<select {{name}} {{attrs}} class="form-control">{{content}}</select>'
-        ];
-
         $this->loadComponent('Flash');
 
         if ( $this->Auth->user()) {
             $this->set('nameLoggedinUser', $this->Auth->user('name'));
         }
-
-        $this->set(compact('bootstrapFormTemplate'));
     }
 
     public function errorsToList($fields)
@@ -114,5 +94,20 @@ class AppController extends Controller
         $list .= '<dl>';
 
         return $list;
+    }
+
+    public function tabFilter($tab, $model)
+    {
+        $condition = [];
+        switch ($tab) {
+            case 0:
+                $condition = [$model . '.is_active' => 1];
+                break;
+            case 1:
+                $condition = [$model . '.is_active' => 0];
+                break;
+        }
+
+        return $condition;
     }
 }

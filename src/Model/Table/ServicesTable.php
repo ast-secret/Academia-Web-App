@@ -43,7 +43,7 @@ class ServicesTable extends Table
 
     public function beforeMarshal(Event $event, $data)
     {
-        if ($data['times_string']) {
+        if (isset($data['times_string'])) {
             foreach ($data['times_string'] as $weekday => $timeString) {
                 $timesArray = explode(';', $timeString);
                 foreach ($timesArray as $time) {

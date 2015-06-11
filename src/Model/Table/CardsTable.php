@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Table;
 
+use App\Model\Entity\Card;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -8,6 +9,10 @@ use Cake\Validation\Validator;
 
 /**
  * Cards Model
+ *
+ * @property \Cake\ORM\Association\BelongsTo $Users
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $ExercisesGroups
  */
 class CardsTable extends Table
 {
@@ -23,46 +28,18 @@ class CardsTable extends Table
         $this->table('cards');
         $this->displayField('id');
         $this->primaryKey('id');
-
-        $this->addBehavior('Timestamp', [
-            'events' => [
-                'Model.beforeSave' => [
-                    'created' => 'new',
-                    'modified' => 'always'
-                ]
-            ]
-        ]);
-
+        $this->addBehavior('Timestamp');
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
         ]);
         $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id',
+            'joinType' => 'INNER'
         ]);
         $this->hasMany('ExercisesGroups', [
             'foreignKey' => 'card_id'
         ]);
-    }
-
-    /**
-     * Garante que o card tenha ao menos um exercício adicionado
-     * Como o exercício necessariamente deve estar dentro de um grupo,
-     * Então ele deve garantir também que ao menos tenha um grupo adicionado
-     * @return [type] [description]
-     */
-    public function validateExercise($data)
-    {
-        if (isset($data['exercises_groups'])) {
-            $groups = $data['exercises_groups'];
-            foreach ($groups as $group) {
-                if (empty($group['exercises'])){
-                    return false;
-                }
-            }
-        } else {
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -75,23 +52,22 @@ class CardsTable extends Table
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create')
-            ->add('user_id', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('user_id', 'create')
-            ->notEmpty('user_id')
-            ->add('start_date', 'valid', ['rule' => 'date'])
-            ->requirePresence('start_date', 'create')
-            ->notEmpty('start_date')
+            ->allowEmpty('id', 'create');
+            
+        $validator
             ->add('end_date', 'valid', ['rule' => 'date'])
             ->requirePresence('end_date', 'create')
-            ->notEmpty('end_date')
+            ->notEmpty('end_date');
+            
+        $validator
             ->requirePresence('goal', 'create')
-            ->notEmpty('goal', 'O Objetivo não pode ficar em branco.')
-            ->add('customer_id', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('customer_id', 'create')
-            ->notEmpty('customer_id')
-            ->allowEmpty('obs')
-            ->add('current', 'valid', ['rule' => 'numeric'])
+            ->notEmpty('goal');
+            
+        $validator
+            ->allowEmpty('obs');
+            
+        $validator
+            ->add('current', 'valid', ['rule' => 'boolean'])
             ->allowEmpty('current');
 
         return $validator;

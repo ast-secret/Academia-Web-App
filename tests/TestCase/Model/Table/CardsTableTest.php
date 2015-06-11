@@ -17,32 +17,21 @@ class CardsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'Cards' => 'app.cards',
-        'Users' => 'app.users',
-        'Gyms' => 'app.gyms',
-        'Machines' => 'app.machines',
-<<<<<<< HEAD
-=======
-        'CardsExercises' => 'app.cards_exercises',
-        'Exercises' => 'app.exercises',
-        'ExercisesGroups' => 'app.exercises_groups',
->>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
-        'Phones' => 'app.phones',
-        'Rooms' => 'app.rooms',
-        'Lessons' => 'app.lessons',
-        'Services' => 'app.services',
-        'Weekdays' => 'app.weekdays',
-        'ServicesWeekdays' => 'app.services_weekdays',
-        'Roles' => 'app.roles',
-        'Releases' => 'app.releases',
-        'Customers' => 'app.customers',
-<<<<<<< HEAD
-        'Suggestions' => 'app.suggestions',
-        'ExercisesGroups' => 'app.exercises_groups',
-        'Exercises' => 'app.exercises'
-=======
-        'Suggestions' => 'app.suggestions'
->>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
+        'app.cards',
+        'app.users',
+        'app.gyms',
+        'app.machines',
+        'app.phones',
+        'app.rooms',
+        'app.lessons',
+        'app.services',
+        'app.times',
+        'app.suggestions',
+        'app.customers',
+        'app.roles',
+        'app.releases',
+        'app.exercises_groups',
+        'app.exercises'
     ];
 
     /**
@@ -75,6 +64,16 @@ class CardsTableTest extends TestCase
      * @return void
      */
     public function testInitialize()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test validateExercise method
+     *
+     * @return void
+     */
+    public function testValidateExercise()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

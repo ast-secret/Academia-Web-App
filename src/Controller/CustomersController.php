@@ -17,13 +17,34 @@ class CustomersController extends AppController
      */
     public function index()
     {
-        $breadcrumb = [
-            'active' => 'Clientes'
-        ];
+        $conditions = [];
+        $q = $this->request->query('q');
+        if ($q) {
+            $conditions[] = [
+                'or' => [
+                    'Customers.name LIKE' => "%{$q}%",
+                    'Customers.email LIKE' => "%{$q}%",
+                ]
+            ];
+        }
 
-        $this->set(compact('breadcrumb'));
+        $tab = (int) $this->request->query('tab');
+        $conditions[] = $this->tabFilter($tab, 'Customers');
+
+        $conditions[] = ['Customers.gym_id' => $this->Auth->user('gym_id')];
+
+        $this->paginate = [
+            'fields' => [
+                'name',
+                'email',
+                'registration',
+                'is_active'
+            ],
+            'conditions' => $conditions
+        ];
         $this->set('customers', $this->paginate($this->Customers));
-        $this->set('_serialize', ['customers']);
+        $this->set(compact('tab'));
+        
     }
 
     /**
@@ -49,29 +70,20 @@ class CustomersController extends AppController
      */
     public function add()
     {
-        $breadcrumb = [
-            'parents' => [
-                [
-                    'label' => 'Clientes',
-                    'url' => [
-                        'action' => 'index'
-                    ]
-                ]
-            ],
-            'active' => 'Adicionar Cliente'
-        ];
         $customer = $this->Customers->newEntity();
         if ($this->request->is('post')) {
+            
+            $this->request->data['gym_id'] = $this->Auth->user('id');
+
             $customer = $this->Customers->patchEntity($customer, $this->request->data);
             if ($this->Customers->save($customer)) {
-                $this->Flash->success('O Aluno foi salvo com sucesso.');
+                $this->Flash->success('O Cliente foi salvo com sucesso.');
                 return $this->redirect(['action' => 'index']);
             } else {
-                //debug($customer->errors());
-                $this->Flash->error('O Aluno não pode ser salvo, tente novamente');
+                $this->Flash->error('O Cliente não pode ser salvo. Pro favor, tente novamente');
             }
         }
-        $this->set(compact('customer', 'breadcrumb'));
+        $this->set(compact('customer'));
     }
 
     /**

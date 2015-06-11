@@ -9,6 +9,10 @@ use Cake\Validation\Validator;
 
 /**
  * Customers Model
+ *
+ * @property \Cake\ORM\Association\BelongsTo $Gyms
+ * @property \Cake\ORM\Association\HasMany $Cards
+ * @property \Cake\ORM\Association\HasMany $Suggestions
  */
 class CustomersTable extends Table
 {
@@ -25,6 +29,10 @@ class CustomersTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
+        $this->belongsTo('Gyms', [
+            'foreignKey' => 'gym_id',
+            'joinType' => 'INNER'
+        ]);
         $this->hasMany('Cards', [
             'foreignKey' => 'customer_id'
         ]);
@@ -43,18 +51,48 @@ class CustomersTable extends Table
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create')
+            ->allowEmpty('id', 'create');
+            
+        $validator
             ->requirePresence('name', 'create')
-            ->notEmpty('name')
+            ->notEmpty('name');
+            
+        $validator
             ->requirePresence('registration', 'create')
-            ->notEmpty('registration')
-            ->requirePresence('password', 'create')
-            ->notEmpty('password')
+            ->notEmpty('registration');
+            
+        $validator
             ->add('is_active', 'valid', ['rule' => 'boolean'])
             ->requirePresence('is_active', 'create')
-            ->notEmpty('is_active')
+            ->notEmpty('is_active');
+            
+        $validator
             ->allowEmpty('app_access_token');
+            
+        $validator
+            ->add('email', 'valid', ['rule' => 'email'])
+            ->allowEmpty('email')
+            ->add('email', [
+                'unique' => [
+                    'rule' => ['validateUnique', ['scope' => 'gym_id']],
+                    'message' => 'O email informado já está sendo usado por outro usuário',
+                    'provider' => 'table'
+                ]
+            ]);
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->existsIn(['gym_id'], 'Gyms'));
+        return $rules;
     }
 }

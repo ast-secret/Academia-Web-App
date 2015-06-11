@@ -2,16 +2,13 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\I18n\Time;
 
 /**
  * Card Entity.
  */
 class Card extends Entity
 {
-
-    public function preFill(){
-        
-    }
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -20,7 +17,6 @@ class Card extends Entity
      */
     protected $_accessible = [
         'user_id' => true,
-        'start_date' => true,
         'end_date' => true,
         'goal' => true,
         'customer_id' => true,
@@ -29,5 +25,11 @@ class Card extends Entity
         'user' => true,
         'customer' => true,
         'exercises_groups' => true,
+        'overdue' => true
     ];
+
+    public function _getOverdue()
+    {
+        return ($this->_properties['end_date'] < Time::now());
+    }
 }

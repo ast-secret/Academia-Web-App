@@ -17,8 +17,11 @@ class Customer extends Entity
     protected $_accessible = [
         'name' => true,
         'registration' => true,
-        'password' => true,
+        'password' => false,
         'is_active' => true,
+        'app_access_token' => false,
+        'gym_id' => true,
+        'email' => true,
         'cards' => true,
         'suggestions' => true,
     ];

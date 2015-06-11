@@ -30,10 +30,10 @@ class Service extends Entity
     protected function _getTimesString()
     {
         $timesCollection = new Collection($this->_properties['times']);
-        $timesCollection = $timesCollection->groupBy('weekday');
+        $timesCollection = $timesCollection->groupBy('weekday')->toArray();
 
         $timesString = [];
-        foreach ($timesCollection->toArray() as $weekday => $times) {
+        foreach ($timesCollection as $weekday => $times) {
             $string = '';
             foreach ($times as $time) {
                 $string .= $time->start_hour->format('H:i') . ';';
