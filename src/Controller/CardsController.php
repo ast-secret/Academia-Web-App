@@ -4,7 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use App\Model\Entity\ExercisesGroup;
 
-use Cake\Network\Exceptions\NotfoundException;
+use Cake\Network\Exceptions\NotFoundException;
 
 use Cake\I18n\Time;
 /**
@@ -19,8 +19,10 @@ class CardsController extends AppController
      *
      * @return void
      */
-    public function index($customer_id = null)
+    public function index()
     {
+        $customer_id = $this->request->param('customer_id');
+
         $conditions = [];
         $gym_id = $this->Auth->user('gym_id');
 
@@ -44,17 +46,27 @@ class CardsController extends AppController
         $conditions[] = ['Cards.customer_id' => $customer->id];
         $this->paginate = [
             'fields' => [
-                'obs',
+                'id',
                 'goal',
+                'obs',
                 'end_date',
-                'Users.name'
+                'user_id'
             ],
-            'contain' => ['Users', 'ExercisesGroups' => ['Exercises']],
+            'contain' => [
+                'Users' => [
+                    'fields' => [
+                        'name'
+                    ]
+                ],
+                'ExercisesGroups' => [
+                    'fields' => ['id', 'name', 'card_id'],
+                    'Exercises' => ['fields' => ['name', 'repetition', 'exercises_group_id']],
+                ], 
+            ],
             'conditions' => $conditions
-
         ];
         $this->set('cards', $this->paginate($this->Cards));
-        $this->set(compact('customer', 'tab'));
+        $this->set(compact('customer', 'tab', 'customer_id'));
     }
 
     /**
@@ -78,40 +90,30 @@ class CardsController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add($customer_id = null)
+    public function add()
     {
-        $breadcrumb = [
-            'active' => 'Adicionar Ficha',
-            'parents' => [
-                ['label' => 'Fichas', 'url' => ['action' => 'index']]
-            ]
-        ];
+        $customer_id = $this->request->param('customer_id');
+        $customer = $this->Cards->Customers->get($customer_id);
+
+        if ($customer->gym_id != $this->Auth->user('gym_id')) {
+            throw new NotFoundException();
+        }
 
         $card = $this->Cards->newEntity();
 
         if ($this->request->is('post')) {
-
-            $this->request->data['start_date'] = Time::now();
+            $this->request->data['user_id'] = $this->Auth->user('id');
             $this->request->data['customer_id'] = $customer_id;
-            $this->request->data['user_id'] = 1;
 
-            if (!$this->Cards->validateExercise($this->request->data)) {
-                $this->Flash->error('Você deve adicionar ao menos um exercício a ficha.');
-
+            $card = $this->Cards->patchEntity($card, $this->request->data);
+            if ($this->Cards->save($card)) {
+                $this->Flash->success('A ficha foi salva com sucesso.');
+                return $this->redirect(['action' => 'index', 'customer_id' => $customer_id]);
             } else {
-                $card = $this->Cards->patchEntity($card, $this->request->data, ['associated' => ['ExercisesGroups.Exercises']]);
-
-                if ($this->Cards->save($card)) {
-                    $this->Flash->success('A ficha foi salva com sucesso!.');
-                    return $this->redirect(['action' => 'customer', $customer_id]);
-                } else {
-                    $this->set('errorsList', $this->errorsToList($card->errors()));
-                }
+                $this->Flash->success('A ficha não pode ser salva. Por favor, tente novamente.');
             }
         }
-        $customers = $this->Cards->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('card', 'customers', 'breadcrumb'));
-        $this->set('_serialize', ['card']);
+        $this->set(compact('card', 'customer'));
     }
 
     /**
@@ -121,25 +123,34 @@ class CardsController extends AppController
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit()
     {
-        $card = $this->Cards->get($id, [
-            'contain' => ['Exercises']
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
+        $card_id = $this->request->param('card_id');
+
+        $card = $this->Cards->get($card_id, ['contain' => ['Customers']]);
+
+        if ($card->customer->gym_id != $this->Auth->user('gym_id')) {
+            throw new NotFoundException();
+        }
+
+        if ($this->request->is(['put', 'patch', 'post'])) {
+
+            $this->request->data['user_id'] = $this->Auth->user('id');
+
             $card = $this->Cards->patchEntity($card, $this->request->data);
+
+            $card->accessible('customer_id', false);
+            $card->accessible('user_id', false);
             if ($this->Cards->save($card)) {
-                $this->Flash->success('The card has been saved.');
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->success('A ficha foi salva com sucesso.');
+                return $this->redirect(['action' => 'index', 'customer_id' => $customer_id]);
             } else {
-                $this->Flash->error('The card could not be saved. Please, try again.');
+                $this->Flash->success('A ficha não pode ser salva. Por favor, tente novamente.');
             }
         }
-        $users = $this->Cards->Users->find('list', ['limit' => 200]);
-        $customers = $this->Cards->Customers->find('list', ['limit' => 200]);
-        $exercises = $this->Cards->Exercises->find('list', ['limit' => 200]);
-        $this->set(compact('card', 'users', 'customers', 'exercises'));
-        $this->set('_serialize', ['card']);
+
+        $customer = $card->customer;
+        $this->set(compact('card', 'customer', 'customer_id'));
     }
 
     /**
@@ -151,14 +162,47 @@ class CardsController extends AppController
      */
     public function delete($id = null)
     {
+        $id = $this->request->param('card_id');
+
         $this->request->allowMethod(['post', 'delete']);
-        $card = $this->Cards->get($id);
-        if ($this->Cards->delete($card)) {
-            $this->Flash->success('The card has been deleted.');
-        } else {
-            $this->Flash->error('The card could not be deleted. Please, try again.');
+        $card = $this->Cards->get($id, ['contain' => 'Customers']);
+
+        if ($card->customer->gym_id != $this->Auth->user('gym_id')) {
+            throw new NotFoundException();
         }
-        return $this->redirect(['action' => 'index']);
+
+        if ($this->Cards->delete($card)) {
+            $this->Flash->success('A ficha foi deletada.');
+        } else {
+            $this->Flash->error('A ficha não pode ser deletada. Por favor, tente novamente.');
+        }
+        return $this->redirect(['action' => 'index', 'customer_id' => $card->customer->id]);
+    }
+
+    public function addExercises()
+    {
+        $card_id = $this->request->param('card_id');
+        $card = $this->Cards->get($card_id, ['contain' => [
+            'Customers',
+            'ExercisesGroups' => ['Exercises']
+            ]
+        ]);
+
+        if ($this->request->is(['put', 'patch', 'post'])) {
+            //unset($this->request->data['exercises_groups']);
+            $card = $this->Cards->patchEntity($card, $this->request->data, ['associated' => ['ExercisesGroups.Exercises']]);
+            //$card->exercises_groups = $this->Cards->ExercisesGroups->newEntities([['name' => 'Tey', 'exercises' => [['name' => 'supinariaaa']]]]);
+
+            if ($this->Cards->save($card)) {
+                $this->Flash->success('Os exercícios foram salvos com sucesso.');
+                return $this->redirect(['action' => 'index', 'customer_id' => $card->customer->id]);
+            } else {
+                $this->Flash->error('Os exercícios não foram salvos. Por favor, tente novamente.');
+            }
+        }
+
+        $customer = $card->customer;
+        $this->set(compact('customer', 'card'));
     }
 
     /**

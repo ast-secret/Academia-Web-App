@@ -93,11 +93,13 @@ Router::scope('/:gym_slug/clientes', function ($routes) {
 });
 
 Router::scope('/:gym_slug/fichas-de-exercicios', function ($routes) {
-    $routes->connect('/*', ['controller' => 'Cards', 'action' => 'index']);
-    $routes->connect('/imprimir/*', ['controller' => 'Cards', 'action' => 'print']);
-    // $routes->connect('/criar', ['controller' => 'Customers', 'action' => 'add']);
-    // $routes->connect('/editar/*', ['controller' => 'Services', 'action' => 'edit']);
-    // $routes->connect('/deletar/*', ['controller' => 'Services', 'action' => 'delete']);
+    $routes->connect('/:customer_id', ['controller' => 'Cards', 'action' => 'index']);
+    $routes->connect('/imprimir/:customer_id', ['controller' => 'Cards', 'action' => 'print']);
+    $routes->connect('/criar/:customer_id', ['controller' => 'Cards', 'action' => 'add']);
+    $routes->connect('/editar/:card_id', ['controller' => 'Cards', 'action' => 'edit']);
+    $routes->connect('/deletar/:card_id', ['controller' => 'Cards', 'action' => 'delete']);
+
+    $routes->connect('/configurar/exercicios/:card_id', ['controller' => 'Cards', 'action' => 'addExercises']);
 });
 
 Router::scope('/', function ($routes) {

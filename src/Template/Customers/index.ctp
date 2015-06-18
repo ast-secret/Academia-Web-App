@@ -82,8 +82,8 @@
                             '<span class="glyphicon glyphicon-th-list"></span>',
                             [
                                 'controller' => 'Cards',
-                                'action' => 'customer',
-                                $customer->id
+                                'action' => 'index',
+                                'customer_id' => $customer->id
                             ],
                             [
                                 'escape' => false,

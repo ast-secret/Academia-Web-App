@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Table;
 
+use App\Model\Entity\ExercisesGroup;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -8,6 +9,9 @@ use Cake\Validation\Validator;
 
 /**
  * ExercisesGroups Model
+ *
+ * @property \Cake\ORM\Association\BelongsTo $Cards
+ * @property \Cake\ORM\Association\HasMany $Exercises
  */
 class ExercisesGroupsTable extends Table
 {
@@ -25,10 +29,13 @@ class ExercisesGroupsTable extends Table
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
         $this->belongsTo('Cards', [
-            'foreignKey' => 'card_id'
+            'foreignKey' => 'card_id',
+            'joinType' => 'INNER'
         ]);
         $this->hasMany('Exercises', [
-            'foreignKey' => 'exercises_group_id'
+            'foreignKey' => 'exercises_group_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
         ]);
     }
 
@@ -42,7 +49,9 @@ class ExercisesGroupsTable extends Table
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create')
+            ->allowEmpty('id', 'create');
+            
+        $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name');
 

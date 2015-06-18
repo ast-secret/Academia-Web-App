@@ -7,6 +7,8 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+use Cake\Collection\Collection;
+
 /**
  * Cards Model
  *
@@ -38,8 +40,20 @@ class CardsTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->hasMany('ExercisesGroups', [
-            'foreignKey' => 'card_id'
+            'foreignKey' => 'card_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
         ]);
+    }
+
+
+    public function beforeSave($event, $entity)
+    {
+        // $exercisesGroups = $this->ExercisesGroups->find('all', ['conditions' => ['ExercisesGroups.card_id' => $entity->id]]);
+        // foreach ($exercisesGroups as $key => $group) {
+        //     $this->ExercisesGroups->delete($group);
+        // }
+        //exit();
     }
 
     /**

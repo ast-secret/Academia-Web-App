@@ -30,7 +30,8 @@ class ExercisesGroupsFixture extends TestFixture
             'fk_exercises_groups_cards1' => ['type' => 'foreign', 'columns' => ['card_id'], 'references' => ['cards', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
-'engine' => 'InnoDB', 'collation' => 'utf8_general_ci'
+            'engine' => 'InnoDB',
+            'collation' => 'utf8_general_ci'
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -44,14 +45,9 @@ class ExercisesGroupsFixture extends TestFixture
         [
             'id' => 1,
             'name' => 'Lorem ipsum dolor sit amet',
-<<<<<<< HEAD
-            'created' => '2015-01-24 03:55:35',
-            'modified' => '2015-01-24 03:55:35',
+            'created' => '2015-06-18 02:14:17',
+            'modified' => '2015-06-18 02:14:17',
             'card_id' => 1
-=======
-            'created' => '2015-01-26 17:28:51',
-            'modified' => '2015-01-26 17:28:51'
->>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
         ],
     ];
 }

@@ -2,25 +2,33 @@
 
 <br>
 <?php 
+    $this->Html->addCrumb('Clientes', ['controller' => 'Customers', 'action' => 'index']);
     $this->Html->addCrumb('Fichas de exercícios de <strong>'. $customer->name.'</strong>', null);
     echo $this->Html->getCrumbList();
 ?>
 <br>
 
 
-<?= $this->Html->link('<span class="glyphicon glyphicon-plus"></span> Nova ficha', ['action' => 'add'], ['class' => 'btn btn-danger pull-right', 'escape' => false])?>
+<?= $this->Html->link('<span class="glyphicon glyphicon-plus"></span> Nova ficha',
+    ['action' => 'add', 'customer_id' => $customer->id],
+    ['class' => 'btn btn-danger pull-right', 'escape' => false]
+)?>
 <br style="clear: both;">
 
 <ul class="nav nav-tabs">
     <li
         role="presentation"
         class="<?= $tab == '0' ? 'active' : '' ?>">
-        <?= $this->Html->link('Ativas', ['action' => 'index', $this->request->pass[0],'?' => ['tab' => '0']]) ?>
+        <?= $this->Html->link('Ativas', ['action' => 'index', 'customer_id' => $customer_id,'?' => ['tab' => '0']]) ?>
     </li>
     <li
         role="presentation"
         class="<?= $tab == '1' ? 'active' : '' ?>">
-        <?= $this->Html->link('Histórico', [ 'action' => 'index', $this->request->pass[0], '?' => ['tab' => '1']]) ?>
+        <?= $this->Html->link('Histórico', [
+            'action' => 'index',
+            'customer_id' => $customer_id,
+            '?' => ['tab' => '1']
+        ]) ?>
     </li>
 </ul>
 <br>
@@ -83,9 +91,8 @@
                     <?php endif ?>
                     <p class="text-center">
                         <?= $this->Html->link('<span class="glyphicon glyphicon-cog"></span> Configurar exercícios', [
-                            'controller' => 'ExercisesGroups',
-                            'action' => 'edit',
-                            $card->id
+                            'action' => 'addExercises',
+                            'card_id' => $card->id
                         ], [
                             'escape' => false,
                             'class' => 'btn btn-default btn-xs'
@@ -111,9 +118,24 @@
                         [
                             'controller' => 'Cards',
                             'action' => 'edit',
-                            $card->id
+                            'card_id' => $card->id
                         ],
                         [
+                            'escape' => false,
+                            'class' => 'btn btn-default btn-xs',
+                            'title' => 'Editar'
+                        ])
+                    ?>
+                    <?= $this->Form->postLink(
+                        '<span class="glyphicon glyphicon-remove"></span>',
+                        [
+                            'controller' => 'Cards',
+                            'action' => 'delete',
+                            'card_id' => $card->id
+                        ],
+                        [
+                            'confirm' =>
+                                'Você realmente deseja deletar esta ficha? esta ação não pode ser desfeita.',
                             'escape' => false,
                             'class' => 'btn btn-default btn-xs',
                             'title' => 'Editar'

@@ -1,33 +1,50 @@
-<?= $this->Html->script('Cards/addExercises.js', ['inline' => false]) ?>
+<?php
+    $title = 'Criar ficha de exercícios para ' . $customer->name;
+    $this->assign('title', ' - ' . $title)
+?>
 
-<?= $this->element('common/dashboard_breadcrumb', ['breadcrumb' => $breadcrumb]); ?>
+<?= $this->Html->script('../lib/niceCharCounter/dist/jquery.niceCharCounter', ['inline' => false]) ?>
 
-<?= $this->Form->create($card/*['templates' => $bootstrapFormTemplate]*/); ?>
-    <fieldset>
-        <div class="row">
-            <div class="col-md-6">
-                <?php
-                    echo $this->Form->input('end_date', ['label' => 'Data de vencimento']);
-                    echo $this->Form->input('goal', ['label' => 'Objetivo']);
-                    echo $this->Form->input('obs', ['label' => 'Observação']);
-                ?>            
-            </div>
-            <div class="col-md-5 col-md-offset-1">
-                <div class="row">
-                    <div class="col-md-12">
-                        <label for="">Adicionar um grupo de exercícios</label>
-                        <input type="text" class="form-control" placeholder="Adicionar grupo" id="add-group">
-                    </div>
-                </div>
+<?php
+    $this->Html->scriptStart(['block' => true]);
+        echo "$(function(){
+            $('#obs').niceCharCounter({
+                max: 400,
+                warningPercent: 10,
+                warningColor: '#e67e22',
+                text: '{{residual}} caractere(s) restante(s).',
+                containerText: '#container-counter',
+            });
+        });";
+    $this->Html->scriptEnd();
+?>
 
-                <br>
+<br>
+<?php 
+    $this->Html->addCrumb('Clientes', ['controller' => 'Customers', 'action' => 'index']);
+    $this->Html->addCrumb('Fichas de exercícios', [
+        'controller' => 'Cards',
+        'action' => 'index',
+        'customer_id' => $customer->id
+    ]);
+    $this->Html->addCrumb($title);
+    echo $this->Html->getCrumbList();
+?>
+<br>
 
-                <div class="row" id="wrap-groups">
-                </div>            
-            </div>
-        </div>
+<?php
+    echo $this->Form->create($card, [
+        'novalidate' => true,
+        'horizontal' => true,
+        'templates' => [
+            'dateWidget' => '{{day}}{{month}}{{year}}'
+        ]]);
 
-    </fieldset>
-    <button type="submit" class="btn btn-danger btn-xs">Cancelar</button>
-    <button type="submit" class="btn btn-success">Salvar</button>
-<?= $this->Form->end() ?>
+        echo $this->Form->input('goal');
+        echo $this->Form->input('obs', ['type' => 'textarea']);
+        echo '<p id="container-counter" class="help-block"></p>';
+        echo $this->Form->input('end_date');
+        
+        echo $this->Form->submit('Criar ficha de exercícios');
+    echo $this->Form->end();
+?>  

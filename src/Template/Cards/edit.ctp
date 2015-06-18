@@ -1,36 +1,50 @@
-<div class="actions columns large-2 medium-3">
-    <h3><?= __('Actions') ?></h3>
-    <ul class="side-nav">
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $card->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $card->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Cards'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Exercises'), ['controller' => 'Exercises', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Exercise'), ['controller' => 'Exercises', 'action' => 'add']) ?> </li>
-    </ul>
-</div>
-<div class="cards form large-10 medium-9 columns">
-    <?= $this->Form->create($card); ?>
-    <fieldset>
-        <legend><?= __('Edit Card') ?></legend>
-        <?php
-            echo $this->Form->input('user_id', ['options' => $users]);
-            echo $this->Form->input('start_date');
-            echo $this->Form->input('end_date');
-            echo $this->Form->input('goal');
-            echo $this->Form->input('customer_id', ['options' => $customers]);
-            echo $this->Form->input('obs');
-            echo $this->Form->input('current');
-            echo $this->Form->input('exercises._ids', ['options' => $exercises]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+<?php
+    $title = 'Editar ficha de exercícios para ' . $customer->name;
+    $this->assign('title', ' - ' . $title)
+?>
+
+<?= $this->Html->script('../lib/niceCharCounter/dist/jquery.niceCharCounter', ['inline' => false]) ?>
+
+<?php
+    $this->Html->scriptStart(['block' => true]);
+        echo "$(function(){
+            $('#obs').niceCharCounter({
+                max: 400,
+                warningPercent: 10,
+                warningColor: '#e67e22',
+                text: '{{residual}} caractere(s) restante(s).',
+                containerText: '#container-counter',
+            });
+        });";
+    $this->Html->scriptEnd();
+?>
+
+<br>
+<?php 
+    $this->Html->addCrumb('Clientes', ['controller' => 'Customers', 'action' => 'index']);
+    $this->Html->addCrumb('Fichas de exercícios', [
+        'controller' => 'Cards',
+        'action' => 'index',
+        'customer_id' => $customer->id
+    ]);
+    $this->Html->addCrumb($title);
+    echo $this->Html->getCrumbList();
+?>
+<br>
+
+<?php
+    echo $this->Form->create($card, [
+        'novalidate' => true,
+        'horizontal' => true,
+        'templates' => [
+            'dateWidget' => '{{day}}{{month}}{{year}}'
+        ]]);
+
+        echo $this->Form->input('goal', ['label' => 'Objetivo']);
+        echo $this->Form->input('obs', ['type' => 'textarea', 'label' => 'Observação']);
+        echo '<p id="container-counter" class="help-block"></p>';
+        echo $this->Form->input('end_date', ['label' => 'Validade']);
+        
+        echo $this->Form->submit('Salvar alterações');
+    echo $this->Form->end();
+?>  

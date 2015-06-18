@@ -35,6 +35,7 @@ class CustomersController extends AppController
 
         $this->paginate = [
             'fields' => [
+                'id',
                 'name',
                 'email',
                 'registration',
