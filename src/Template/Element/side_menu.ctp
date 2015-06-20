@@ -33,7 +33,9 @@ $items = [
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<h4 style="color: #FFF;">Konen</h4>
+				<h4 style="color: #FFF;">
+					<?= ucwords(str_replace('-', ' ', $this->request->params['gym_slug'])) ?>
+				</h4>
 			</div>
 		</div>
 	</div>
@@ -42,32 +44,47 @@ $items = [
 <div style="margin-bottom: 20px; background-color: #2980b9; padding-top: 10px; padding-bottom: 10px;">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-12">
-			<?= $this->Html->image('avatar.jpg',
-				['class' => 'media-object img-circle', 'width' => '40', 'style' => 'margin-right: 5px;'])
-			?>
-	<span class="" style="color: #FFF;"><strong>Brad Pitt</strong> <em><small>Professor</small></em></span>
+			<div class="col-md-10">
+				<div class="media">
+					<div class="media-left">
+						<?= $this->Html->image('avatar.jpg',
+							['class' => 'media-object img-circle', 'width' => '40px', 'style' => 'margin-right: 5px;'])
+						?>
+					</div>
+					<div class="media-body">
+						<span class="" style="color: #FFF;">
+							<strong><?= $loggedinUser['name'] ?></strong>
+							<br>
+							<em>
+								<small>
+									<?= $loggedinUser['role']['name'] ?>
+								</small>
+							</em>
+						</span>
+					</div>
+				</div>
+			</div>	
+			<div class="col-md-2 text-center">
+				<button data-toggle="dropdown"
+					class="dropdown-toggle  pull-right" style="color: white; margin-top: 10px; background: none; border: 0;">
+					<span
+						class="glyphicon glyphicon-chevron-down">
+					</span>
+				</button>
 
-	<button data-toggle="dropdown"
-		class="dropdown-toggle  pull-right" style="color: white; margin-top: 10px; background: none; border: 0;">
-		<span
-			class="glyphicon glyphicon-chevron-down">
-		</span>
-	</button>
-
-	<ul class="dropdown-menu dropdown-menu-right" role="menu">
-		<li role="presentation" class="dropdown-header">brad-pitt@gmail.com</li>
-		
-		<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Configurações de perfil</a></li>
-		<li role="presentation">
-			<?= $this->Html->link('Configurações de conta', ['controller' => 'users', 'action' => 'change_password'], ['role' => 'menuitem', 'tabindex' => -1]) ?>
-		</li>
-		<li role="presentation" class="divider"></li>
-		<li role="presentation">
-			<!-- <a role="menuitem" tabindex="-1" href="#">Sair</a> -->
-			<?= $this->Html->link('Sair', ['controller' => 'users', 'action' => 'logout']) ?>
-		</li>
-	</ul>		
+				<ul class="dropdown-menu dropdown-menu-right" role="menu">
+					<li role="presentation" class="dropdown-header">brad-pitt@gmail.com</li>
+					
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Configurações de perfil</a></li>
+					<li role="presentation">
+						<?= $this->Html->link('Configurações de conta', ['controller' => 'users', 'action' => 'change_password'], ['role' => 'menuitem', 'tabindex' => -1]) ?>
+					</li>
+					<li role="presentation" class="divider"></li>
+					<li role="presentation">
+						<!-- <a role="menuitem" tabindex="-1" href="#">Sair</a> -->
+						<?= $this->Html->link('Sair', ['controller' => 'users', 'action' => 'logout']) ?>
+					</li>
+				</ul>		
 			</div>
 		</div>
 	</div>

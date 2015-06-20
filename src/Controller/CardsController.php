@@ -14,6 +14,20 @@ use Cake\I18n\Time;
 class CardsController extends AppController
 {
 
+    public function printCard()
+    {
+        $this->layout = 'print';
+
+        $cardId = $this->request->param('card_id');
+        $card = $this->Cards->get($cardId, ['contain' => [
+            'Customers',
+            'Users',
+            'ExercisesGroups' => ['Exercises']
+        ]]);
+
+        $this->set(compact('card'));
+    }
+
     /**
      * Index method
      *

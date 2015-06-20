@@ -33,12 +33,12 @@
 </ul>
 <br>
 
-<table class="table table-hover table-condensed table-bordered">
+<table class="table table-hover table-bordered">
     <tbody>
         <?php foreach ($cards as $card): ?>
             <tr>
-                <td style="width: 420px;vertical-align: middle">
-                    <dl class="dl-horizontal">
+                <td style="width: 420px;">
+                    <dl class="">
                         <dt>
                             Instrutor
                         </dt>
@@ -50,14 +50,6 @@
                         </dt>
                         <dd>
                             <?= h($card->goal) ?>
-                        </dd>
-                        <dt>
-                            Observação
-                        </dt>
-                        <dd>
-                            <em class="text-muted">
-                                <?= ($card->obs) ? h($card->obs) : 'Nenhuma observação' ?>
-                            </em>
                         </dd>
                         <dt>
                             Validade
@@ -76,16 +68,29 @@
                     </dl>
                 </td>
                 <td>
-                    <?php foreach ($card->exercises_groups as $key => $group): ?>
-                        <dl>
+                    <dl>
+                        <dt>
+                            Observação
+                        </dt>
+                        <dd>
+                            <em class="text-muted">
+                                <?= ($card->obs) ? h($card->obs) : 'Nenhuma observação' ?>
+                            </em>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            Exercícios
+                        </dt>
+                        <?php foreach ($card->exercises_groups as $key => $group): ?>
                             <dt>
-                                <?= $group->name ?>
+                                Grupo <?= $group->name ?>
                             </dt>
                             <?php foreach ($group->exercises as $key => $exercise): ?>
                                 <dd><?= $exercise->name ?></dd>
                             <?php endforeach ?>
-                        </dl>
-                    <?php endforeach ?>
+                        <?php endforeach ?>
+                    </dl>
                     <?php if (!$card->exercises_groups): ?>
                         <p class="text-muted text-center"><em>Nenhum exercício cadastrado.</em></p>
                     <?php endif ?>
@@ -104,10 +109,11 @@
                             '<span class="glyphicon glyphicon-print"></span>',
                             [
                                 'controller' => 'Cards',
-                                'action' => 'print',
-                                $card->id
+                                'action' => 'printCard',
+                                'card_id' => $card->id
                             ],
                             [
+                                'target' => '_blank',
                                 'escape' => false,
                                 'class' => 'btn btn-default btn-xs',
                                 'title' => 'Imprimir'

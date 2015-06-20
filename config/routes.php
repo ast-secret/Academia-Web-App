@@ -94,7 +94,7 @@ Router::scope('/:gym_slug/clientes', function ($routes) {
 
 Router::scope('/:gym_slug/fichas-de-exercicios', function ($routes) {
     $routes->connect('/:customer_id', ['controller' => 'Cards', 'action' => 'index']);
-    $routes->connect('/imprimir/:customer_id', ['controller' => 'Cards', 'action' => 'print']);
+    $routes->connect('/imprimir/:card_id', ['controller' => 'Cards', 'action' => 'printCard']);
     $routes->connect('/criar/:customer_id', ['controller' => 'Cards', 'action' => 'add']);
     $routes->connect('/editar/:card_id', ['controller' => 'Cards', 'action' => 'edit']);
     $routes->connect('/deletar/:card_id', ['controller' => 'Cards', 'action' => 'delete']);

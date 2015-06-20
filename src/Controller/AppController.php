@@ -76,7 +76,7 @@ class AppController extends Controller
         $this->loadComponent('Flash');
 
         if ( $this->Auth->user()) {
-            $this->set('nameLoggedinUser', $this->Auth->user('name'));
+            $this->set('loggedinUser', $this->Auth->user());
         }
     }
 
