@@ -21,6 +21,53 @@ class UsersController extends AppController
     {
         $this->Auth->allow(['add','passwordGenerator']);
     }
+
+    public function mySettings()
+    {
+        $tab = 1;
+
+        $gym_id = $this->Auth->user('gym_id');
+        $user = $this->Users->get($this->Auth->user('id', ['fields' => [
+            'User.id',
+            'User.name',
+            'User.username',
+            'User.password'
+        ]]));
+
+        $currentPassword = $user->password;
+        unset($user->password);
+
+        if (!$user) {
+            throw new NotFoundException();
+        }
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            $this->request->data['gym_id'] = $gym_id; //Bom tb para o scope do unique username
+
+            $user = $this->Users->patchEntity($user, $this->request->data);
+
+            $ph = new DefaultPasswordHasher();
+            $confirmPassword = $this->request->data('current_password_confirm');
+            $this->request->data['current_password_confirm'] = null;
+            if (!$ph->check($confirmPassword, $currentPassword)) {
+                $this->Flash->error('Você não confirmou a sua senha corretamente.');
+            } else {
+                // Evita que ele passe uma senha nova pelo array e altere
+                $user->accessible('password', false);
+                if ($this->Users->save($user)) {
+                    $this->Auth->session->write($this->Auth->sessionKey . '.name', $user->name);
+                    $this->Auth->session->write($this->Auth->sessionKey . '.username', $user->username);
+                    $this->Flash->success('As alterações foram salvas com sucesso.');
+                } else {
+                    $this->Flash->error('As informações não poderam ser salvas. Por favor, tente novamente.');
+                }
+            }
+        }
+
+        $this->set(compact('user', 'tab'));
+    }
+
     public function passwordGenerator($password)
     {
         echo (new DefaultPasswordHasher)->hash($password);

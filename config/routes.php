@@ -64,6 +64,7 @@ Router::scope('/:gym_slug/usuarios', function ($routes) {
 	$routes->connect('/criar', ['controller' => 'Users', 'action' => 'add']);
 	$routes->connect('/editar/*', ['controller' => 'Users', 'action' => 'edit']);
 	$routes->connect('/deletar/*', ['controller' => 'Users', 'action' => 'delete']);
+    $routes->connect('/configuracoes-de-conta', ['controller' => 'Users', 'action' => 'mySettings']);
 });
 
 Router::scope('/:gym_slug/comunicados', function ($routes) {
