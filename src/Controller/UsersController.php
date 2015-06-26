@@ -22,6 +22,24 @@ class UsersController extends AppController
         $this->Auth->allow(['add','passwordGenerator']);
     }
 
+    public function myPasswordSettings()
+    {
+        $user = $this->Users->get($this->Auth->user('id'));
+
+        if ($this->request->is(['post', 'patch', 'put'])) {
+
+            $user = $this->Users->patchEntity($user, $this->request->data);
+
+            if ($this->Users->save($user)) {
+                $this->Flash->success('A sua senha foi alterada com sucesso.');
+                $this->redirect(['controller' => 'Users', 'action' => 'myPasswordSettings']);
+            } else {
+                $this->Flash->error('Ocorreu um erro ao alterar a sua senha. Por favor, tente novamente.');
+            }
+        }
+        $this->set(compact('user'));
+    }
+
     public function mySettings()
     {
         $tab = 1;

@@ -7,6 +7,8 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+use Cake\Auth\DefaultPasswordHasher;
+
 /**
  * Users Model
  *
@@ -44,6 +46,18 @@ class UsersTable extends Table
         $this->hasMany('Releases', [
             'foreignKey' => 'user_id'
         ]);
+    }
+
+    public function afterRules($event, $entity)
+    {
+        /*
+         * Só faz isso na tela que atualiza a senha
+         */
+        if (isset($entity->new_password)) {
+            $entity->password = $entity->new_password;
+            $entity->accessible('*', false);
+            $entity->accessible('password', true);
+        }
     }
 
     /**
@@ -91,10 +105,27 @@ class UsersTable extends Table
                 'rule' => function($value, $context) {
                     return $value == $context['data']['confirm_password_add'];
                 },
-                'message' => 'Você não confirmou a sua senha corretamente',
-                'on' => 'create'
+                'message' => 'Você não confirmou a sua senha corretamente'
+            ]);
+
+        $validator
+            ->add('current_password', 'custom', [
+                'rule' => function($value, $context) {
+                    $user = $this->get($context['data']['id']);
+                    return (new DefaultPasswordHasher)->check($value, $user->password);
+                },
+                'message' => 'Você não informou a sua senha atual corretamente',
             ]);
         
+        $validator
+            ->notEmpty('new_password')
+            ->add('new_password', 'custom', [
+                'rule' => function($value, $context) {
+                    return $value == $context['data']['confirm_new_password'];
+                },
+                'message' => 'Você não confirmou a sua nova senha corretamente',
+            ]);
+
         $validator
             ->requirePresence('role_id', 'create')
             ->notEmpty('role_id');

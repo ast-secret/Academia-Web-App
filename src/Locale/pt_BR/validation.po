@@ -1,2 +1,0 @@
-msgid "This field cannot be left empty"
-msgstr "Teyyyyyyyy"

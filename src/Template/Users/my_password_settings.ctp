@@ -1,8 +1,8 @@
-<?= $this->assign('title', ' - Configurações de conta') ?>
+<?= $this->assign('title', ' - Configurações de senha') ?>
 
 <br>
 <?php 
-	$this->Html->addCrumb('Configurações de conta');
+	$this->Html->addCrumb('Configurações de senha');
 	echo $this->Html->getCrumbList();
 ?>
 
@@ -10,10 +10,10 @@
 <br style="clear: both;">
 
 <ul class="nav nav-tabs">
-    <li class="active">
+    <li>
         <?= $this->Html->link('Conta', ['action' => 'mySettings']) ?>
     </li>
-    <li>
+    <li class="active">
         <?= $this->Html->link('Senha', [
         	'action' => 'myPasswordSettings'
         ]) ?>
@@ -25,16 +25,17 @@
 
 <?php
 	echo $this->Form->create($user, ['novalidate' => true, 'horizontal' => true]);
-		echo $this->Form->input('name', ['label' => 'Nome']);
-		echo $this->Form->input('username', ['label' => 'Email']);
-
-		echo $this->Form->input('is_active', ['label' => 'Ativo', 'type' => 'checkbox']);
+		echo $this->Form->input('new_password', ['label' => 'Nova Senha', 'type' => 'password']);
+		echo $this->Form->input('confirm_new_password', [
+			'label' => 'Confirmar nova senha',
+			'type' => 'password'
+		]);
 
 		echo '<hr>';
-		echo $this->Form->input('current_password_confirm', [
+		echo $this->Form->input('current_password', [
 			'type' => 'password',
 			'label' => 'Senha',
-			'help' => 'Confirme a sua senha atual para alterar os dados acima'
+			'help' => 'Confirme a sua senha atual para alterá-la'
 		]);
 
 		echo $this->Form->submit('Salvar alterações');

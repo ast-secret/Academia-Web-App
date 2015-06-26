@@ -27,11 +27,13 @@ class User extends Entity
         'role' => true,
         'cards' => true,
         'releases' => true,
-        'confirm_password_add' => true
+        'confirm_password_add' => true,
+        'current_password' => true,
+        'new_password' => true,
+        'confirm_new_password' => true
     ];
 
     protected function _setPassword($password){
-
         return (new DefaultPasswordHasher)->hash($password);
     }
 }
