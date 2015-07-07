@@ -7,14 +7,12 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-use Cake\Collection\Collection;
-
 /**
  * Cards Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\BelongsTo $Customers
- * @property \Cake\ORM\Association\HasMany $ExercisesGroups
+ * @property \Cake\ORM\Association\HasMany $Exercises
  */
 class CardsTable extends Table
 {
@@ -39,22 +37,11 @@ class CardsTable extends Table
             'foreignKey' => 'customer_id',
             'joinType' => 'INNER'
         ]);
-        $this->hasMany('ExercisesGroups', [
-            'foreignKey' => 'card_id',
-            'dependent' => true,
-            'cascadeCallbacks' => true,
+        $this->hasMany('Exercises', [
+            'foreignKey' => 'card_id'
         ]);
     }
 
-
-    public function beforeSave($event, $entity)
-    {
-        // $exercisesGroups = $this->ExercisesGroups->find('all', ['conditions' => ['ExercisesGroups.card_id' => $entity->id]]);
-        // foreach ($exercisesGroups as $key => $group) {
-        //     $this->ExercisesGroups->delete($group);
-        // }
-        //exit();
-    }
 
     /**
      * Default validation rules.

@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Table;
 
+use App\Model\Entity\Exercise;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -8,6 +9,8 @@ use Cake\Validation\Validator;
 
 /**
  * Exercises Model
+ *
+ * @property \Cake\ORM\Association\BelongsTo $Cards
  */
 class ExercisesTable extends Table
 {
@@ -24,8 +27,9 @@ class ExercisesTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
-        $this->belongsTo('ExercisesGroups', [
-            'foreignKey' => 'exercises_group_id'
+        $this->belongsTo('Cards', [
+            'foreignKey' => 'card_id',
+            'joinType' => 'INNER'
         ]);
     }
 
@@ -39,10 +43,24 @@ class ExercisesTable extends Table
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create')
-            ->allowEmpty('repetition')
+            ->allowEmpty('id', 'create');
+            
+        $validator
+            ->allowEmpty('repetition');
+            
+        $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name');
+            
+        $validator
+            ->add('exercise_column', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('exercise_column', 'create')
+            ->notEmpty('exercise_column');
+            
+        $validator
+            ->add('exercise_order', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('exercise_order', 'create')
+            ->notEmpty('exercise_order');
 
         return $validator;
     }
@@ -56,7 +74,7 @@ class ExercisesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['exercises_group_id'], 'ExercisesGroups'));
+        $rules->add($rules->existsIn(['card_id'], 'Cards'));
         return $rules;
     }
 }

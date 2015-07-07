@@ -127,16 +127,16 @@
         },
         {
             "name": "cakephp/cakephp",
-            "version": "3.0.7",
+            "version": "3.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cakephp.git",
-                "reference": "ed3fbee900a6a2086e0a94a301bb32e0013fb87e"
+                "reference": "29ca3d120c25d554ad5143adffdab0f76bc6c9b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/ed3fbee900a6a2086e0a94a301bb32e0013fb87e",
-                "reference": "ed3fbee900a6a2086e0a94a301bb32e0013fb87e",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/29ca3d120c25d554ad5143adffdab0f76bc6c9b9",
+                "reference": "29ca3d120c25d554ad5143adffdab0f76bc6c9b9",
                 "shasum": ""
             },
             "require": {
@@ -198,7 +198,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-06-15 01:39:19"
+            "time": "2015-06-28 17:00:48"
         },
         {
             "name": "cakephp/migrations",
@@ -332,12 +332,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Holt59/cakephp3-bootstrap3-helpers.git",
-                "reference": "e4b3adef5cc2d196c12e14d6a1506ce99a733523"
+                "reference": "1f693960d28e134b9ef4188a2fb869564abce44f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Holt59/cakephp3-bootstrap3-helpers/zipball/e4b3adef5cc2d196c12e14d6a1506ce99a733523",
-                "reference": "e4b3adef5cc2d196c12e14d6a1506ce99a733523",
+                "url": "https://api.github.com/repos/Holt59/cakephp3-bootstrap3-helpers/zipball/1f693960d28e134b9ef4188a2fb869564abce44f",
+                "reference": "1f693960d28e134b9ef4188a2fb869564abce44f",
                 "shasum": ""
             },
             "require": {
@@ -361,7 +361,7 @@
                 "bootstrap",
                 "cakephp"
             ],
-            "time": "2015-06-16 17:11:34"
+            "time": "2015-07-05 21:39:23"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -407,16 +407,16 @@
         },
         {
             "name": "mobiledetect/mobiledetectlib",
-            "version": "2.8.14",
+            "version": "2.8.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/serbanghita/Mobile-Detect.git",
-                "reference": "49562cbc129e22f4f8cb4a0841f31deb3217db5f"
+                "reference": "6495567afe1486353bec82d6b2de6f98553d60a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/49562cbc129e22f4f8cb4a0841f31deb3217db5f",
-                "reference": "49562cbc129e22f4f8cb4a0841f31deb3217db5f",
+                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/6495567afe1486353bec82d6b2de6f98553d60a5",
+                "reference": "6495567afe1486353bec82d6b2de6f98553d60a5",
                 "shasum": ""
             },
             "require": {
@@ -457,7 +457,7 @@
                 "mobile detector",
                 "php mobile detect"
             ],
-            "time": "2015-06-16 16:01:51"
+            "time": "2015-06-18 09:43:23"
         },
         {
             "name": "nesbot/carbon",
@@ -814,16 +814,16 @@
     "packages-dev": [
         {
             "name": "cakephp/bake",
-            "version": "1.0.9",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/bake.git",
-                "reference": "da683a06847d695748a6d86f3699733d806d1e9e"
+                "reference": "dc76b9c768ed1003ecea4d4c53f392da3464868c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/bake/zipball/da683a06847d695748a6d86f3699733d806d1e9e",
-                "reference": "da683a06847d695748a6d86f3699733d806d1e9e",
+                "url": "https://api.github.com/repos/cakephp/bake/zipball/dc76b9c768ed1003ecea4d4c53f392da3464868c",
+                "reference": "dc76b9c768ed1003ecea4d4c53f392da3464868c",
                 "shasum": ""
             },
             "require": {
@@ -856,24 +856,24 @@
                 "bake",
                 "cakephp"
             ],
-            "time": "2015-06-01 18:53:03"
+            "time": "2015-06-25 15:52:35"
         },
         {
             "name": "cakephp/debug_kit",
-            "version": "3.1.5",
+            "version": "3.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/debug_kit.git",
-                "reference": "d638baa2c6883692737a6e53ccbe38978e3bec1e"
+                "reference": "669118b9530927235e039d15fec34baf8a7ce756"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/d638baa2c6883692737a6e53ccbe38978e3bec1e",
-                "reference": "d638baa2c6883692737a6e53ccbe38978e3bec1e",
+                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/669118b9530927235e039d15fec34baf8a7ce756",
+                "reference": "669118b9530927235e039d15fec34baf8a7ce756",
                 "shasum": ""
             },
             "require": {
-                "cakephp/cakephp": "~3.0"
+                "cakephp/cakephp": "3.0.*"
             },
             "require-dev": {
                 "cakephp/cakephp-codesniffer": "dev-master",
@@ -916,7 +916,7 @@
                 "debug",
                 "kit"
             ],
-            "time": "2015-06-07 15:17:16"
+            "time": "2015-06-30 00:50:25"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1085,24 +1085,25 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.4.4",
+            "version": "v0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "489816db71649bd95b416e3ed9062d40528ab0ac"
+                "reference": "e5a46a767928e85f1f47dda654beda8c680ddd94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/489816db71649bd95b416e3ed9062d40528ab0ac",
-                "reference": "489816db71649bd95b416e3ed9062d40528ab0ac",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/e5a46a767928e85f1f47dda654beda8c680ddd94",
+                "reference": "e5a46a767928e85f1f47dda654beda8c680ddd94",
                 "shasum": ""
             },
             "require": {
                 "dnoegel/php-xdg-base-dir": "0.1",
                 "jakub-onderka/php-console-highlighter": "0.3.*",
-                "nikic/php-parser": "~1.0",
-                "php": ">=5.3.0",
-                "symfony/console": "~2.3.10|~2.4.2|~2.5"
+                "nikic/php-parser": "^1.2.1",
+                "php": ">=5.3.9",
+                "symfony/console": "~2.3.10|^2.4.2|~3.0",
+                "symfony/var-dumper": "~2.7|~3.0"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "~1.5",
@@ -1122,7 +1123,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "0.4.x-dev"
+                    "dev-develop": "0.6.x-dev"
                 }
             },
             "autoload": {
@@ -1152,7 +1153,66 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2015-03-26 18:43:54"
+            "time": "2015-07-03 16:48:00"
+        },
+        {
+            "name": "symfony/var-dumper",
+            "version": "v2.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/var-dumper.git",
+                "reference": "c509921f260353bf07b257f84017777c8b0aa4bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/c509921f260353bf07b257f84017777c8b0aa4bc",
+                "reference": "c509921f260353bf07b257f84017777c8b0aa4bc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "suggest": {
+                "ext-symfony_debug": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "Resources/functions/dump.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Component\\VarDumper\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony mechanism for exploring and dumping PHP variables",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "debug",
+                "dump"
+            ],
+            "time": "2015-06-08 09:37:21"
         }
     ],
     "aliases": [],

@@ -24,7 +24,7 @@ class CardsFixture extends TestFixture
         'created' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'customer_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'obs' => ['type' => 'text', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
+        'obs' => ['type' => 'string', 'length' => 400, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
         'current' => ['type' => 'boolean', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
             'fk_card_users1_idx' => ['type' => 'index', 'columns' => ['user_id'], 'length' => []],
@@ -51,12 +51,12 @@ class CardsFixture extends TestFixture
         [
             'id' => 1,
             'user_id' => 1,
-            'end_date' => '2015-06-11',
+            'end_date' => '2015-07-06',
             'goal' => 'Lorem ipsum dolor sit amet',
-            'created' => '2015-06-11 20:47:48',
-            'modified' => '2015-06-11 20:47:48',
+            'created' => '2015-07-06 22:21:34',
+            'modified' => '2015-07-06 22:21:34',
             'customer_id' => 1,
-            'obs' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
+            'obs' => 'Lorem ipsum dolor sit amet',
             'current' => 1
         ],
     ];

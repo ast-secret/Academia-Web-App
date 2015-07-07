@@ -19,5 +19,6 @@ class CardsExercise extends Entity
         'name' => true,
         'exercises_group_id' => true,
         'card' => true,
+        'exercises'
     ];
 }

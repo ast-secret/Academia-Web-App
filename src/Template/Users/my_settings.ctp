@@ -31,7 +31,7 @@
 		echo $this->Form->input('is_active', ['label' => 'Ativo', 'type' => 'checkbox']);
 
 		echo '<hr>';
-		echo $this->Form->input('current_password_confirm', [
+		echo $this->Form->input('current_password', [
 			'type' => 'password',
 			'label' => 'Senha',
 			'help' => 'Confirme a sua senha atual para alterar os dados acima'

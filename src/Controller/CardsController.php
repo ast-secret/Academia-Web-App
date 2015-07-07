@@ -140,6 +140,7 @@ class CardsController extends AppController
     public function edit()
     {
         $card_id = $this->request->param('card_id');
+        $customer_id = $this->request->param('customer_id');
 
         $card = $this->Cards->get($card_id, ['contain' => ['Customers']]);
 
@@ -157,7 +158,7 @@ class CardsController extends AppController
             $card->accessible('user_id', false);
             if ($this->Cards->save($card)) {
                 $this->Flash->success('A ficha foi salva com sucesso.');
-                return $this->redirect(['action' => 'index', 'customer_id' => $customer_id]);
+                return $this->redirect(['action' => 'index', 'customer_id' => $card->customer_id]);
             } else {
                 $this->Flash->success('A ficha não pode ser salva. Por favor, tente novamente.');
             }
@@ -198,18 +199,17 @@ class CardsController extends AppController
         $card_id = $this->request->param('card_id');
         $card = $this->Cards->get($card_id, ['contain' => [
             'Customers',
-            'ExercisesGroups' => ['Exercises']
-            ]
-        ]);
+            'Exercises'
+        ]]);
 
         if ($this->request->is(['put', 'patch', 'post'])) {
-            //unset($this->request->data['exercises_groups']);
-            $card = $this->Cards->patchEntity($card, $this->request->data, ['associated' => ['ExercisesGroups.Exercises']]);
-            //$card->exercises_groups = $this->Cards->ExercisesGroups->newEntities([['name' => 'Tey', 'exercises' => [['name' => 'supinariaaa']]]]);
+            $card = $this->Cards->patchEntity($card, $this->request->data, [
+                'associated' => ['Exercises']
+            ]);
 
             if ($this->Cards->save($card)) {
                 $this->Flash->success('Os exercícios foram salvos com sucesso.');
-                return $this->redirect(['action' => 'index', 'customer_id' => $card->customer->id]);
+                //return $this->redirect(['action' => 'index', 'customer_id' => $card->customer->id]);
             } else {
                 $this->Flash->error('Os exercícios não foram salvos. Por favor, tente novamente.');
             }

@@ -1,6 +1,8 @@
 <?php
     $title = 'Configurar exercícios';
-    $this->assign('title', ' - ' . $title)
+    $this->assign('title', ' - ' . $title);
+
+    echo $this->Html->script('../lib/jquery-ui/jquery-ui.min.js', ['inline' => false]);
 ?>
 
 <br>
@@ -16,334 +18,131 @@
 ?>
 <br>
 
+<style>
+    .custom-col{
+        min-height: 400px;
+        border: 1px solid #EEE;
+    }
+    .custom-col div{
+        padding: 8px;
+        border-top: 1px solid #EEE;
+        border-bottom: 1px solid #EEE;
+    }
+    .col-selected{
+        border: 1px solid red;
+    }
+</style>
+
 <script>
     $(function(){
-
-        $(document).on('keypress', '#my-form input', function(event){
-            if (event.keyCode == 13) {
-                return false;
-            }
+        var currentCol = 1;
+        $('.custom-col').click(function(){
+            var $this = $(this);
+            $('.custom-col').removeClass('col-selected');
+            $this.addClass('col-selected');
+            currentCol = $this.data('index');
+            //$('#add-exercise').focus();
+        });
+        $('.custom-col').sortable({
+            connectWith: '.custom-col'
         });
 
-        $(document).on('click', '#btn-remove', function(){
-            var $this = $(this);
-            if (confirm('Você realmente deseja remover este exercício?')) {
-                var $row = $this.parents('tr').fadeOut('fast', function(){
-                    $(this).remove();
-                });
-            }
+        $(document).on('click', '.btn-remove', function(){
+            var $col = $(this).parent('div');
+            $col.remove();
         });
-
-        $(document).on('click', '#btn-remove-group', function(){
-            var $this = $(this);
-            
-            var $panel = $this.parents('.panel');
-            var totalExercises = $panel.find('table tbody tr').length - 1;
-            console.log(totalExercises);
-            if (confirm('Você realmente deseja remover este grupo e seu(s) '+totalExercises+' exercício(s)?')) {
-                $panel.fadeOut('fast', function() {
-                    $this.remove();
-                });
-            }
+        $(document).on('click', '.text-exercise', function(){
+            var id = $(this).data('id');
+            $('#text-exercise-' + id).hide();
+            $('.btn-remove').hide();
+            $('#input-exercise-' + id).show().focus();
         });
-
-        $(document).on('click', '#span-exercise', function(){
+        $(document).on('click', '.input-exercise', function(event){
+            return false;
+        });
+        $(document).on('blur', '.input-exercise', function(){
             var $this = $(this);
-            var $input = $this.siblings('#input-exercise');
-            $input.attr('type', 'text').focus();
+            var id = $this.data('id');
             $this.hide();
-        });
-        $(document).on('blur', '#input-exercise', function(){
-            var $this = $(this);
-            var $span = $this.siblings('#span-exercise');
-
-            $this.attr('type', 'hidden');
-            $span.text($this.val()).show();
+            $('#text-exercise-' + id).text($this.val()).show();
+            $('.btn-remove').show();
         });
 
-        $(document).on('click', '#span-group', function(){
+        $('#add-exercise').keydown(function(event) {
             var $this = $(this);
-            var $input = $this.siblings('#input-group');
-
-            $input.attr('type', 'text').focus();
-            $this.hide();
-        });
-        $(document).on('blur', '#input-group', function(){
-            var $this = $(this);
-            var $span = $this.siblings('#span-group');
-
-            $this.attr('type', 'hidden');
-            $span.text($this.val()).show();
-        });
-
-        $('input#add-group').keypress(function(event){
-            var $this = $(this);
+            var value = $this.val();
             if (event.keyCode == 13) {
-                var value = $(this).val();
 
-                if (!value) {
-                    $this.parent('.form-group').addClass('has-error');
-                    return false;
-                }
+                var totalExercises = $('.exercise').length;
+                var newId = totalExercises + 1;
 
-                var $groups = $('div#group-row');
-                var groupsTotal = $groups.length;
-                var newGroupIndex = groupsTotal + 1;
+                var $col = $("div[data-index='"+currentCol+"']");
 
-                var $row = $('<div/>').addClass('row');
-                var $col = $('<div/>').addClass('col-md-12').appendTo($row);
-                var $panel = $('<div/>').addClass('panel panel-default').appendTo($col);
-                var $panelHeading = $('<div/>')
-                    .addClass('panel-heading')
-                    .attr('id', 'group-row')
-                    .data('id', newGroupIndex)
-                    .appendTo($panel);
-
-                var $rowHeading = $('<div/>').addClass('row').appendTo($panelHeading);
-                var $colText = $('<div/>').addClass('col-md-10').appendTo($rowHeading);
-                var $colBtn = $('<div/>').addClass('col-md-2').appendTo($rowHeading);
-
-                var $spanGroup = $('<span/>')
-                    .text(value)
-                    .attr('id', 'span-group')
-                    .appendTo($colText);
-                    
-                $('#row-container-groups').append($row);
+                var $div = $('<div/>')
+                    .addClass('exercise')
+                    .appendTo($col);
 
                 var $input = $('<input/>')
-                    .attr('name', 'exercises_groups[' + newGroupIndex + '][name]')
-                    .attr('type', 'hidden')
-                    .attr('autocomplete', 'off')
-                    .attr('id', 'input-group')
-                    .addClass('form-control')
+                    .attr('id', 'input-exercise-' + newId)
+                    .data('id', newId)
+                    .attr('name', 'exercises[' + newId + '][name]')
+                    .attr('type', 'text')
+                    .css('display', 'none')
+                    .addClass('form-control input-exercise')
                     .val(value)
-                    .appendTo($colText);
-
-
-                var $btnRemoveGroup = $('<button/>')
-                    .attr('id', 'btn-remove-group')
-                    .attr('type', 'button')
-                    .addClass('btn btn-default btn-xs pull-right')
-                    .append('<span class="glyphicon glyphicon-remove">')
-                    .appendTo($colBtn);
-
-                var $table = $('<table/>')
-                    .addClass('table')
-                    .appendTo($panel);
-                var $tbody = $('<tbody/>')
-                    .appendTo($table);
-                var $tr = $('<tr/>').appendTo($tbody);
-                var $td = $('<td/>').appendTo($tr);
-
-                var $inputAddExercise = $('<input/>')
-                    .attr('id', 'add-exercise')
-                    .attr('autocomplete', 'off')
-                    .attr('placeholder', 'Adicionar exercício')
-                    .attr('colspan', 2)
+                    .appendTo($div);
+                var $inputExerciseColumn = $('<input/>')
+                    .attr('name', 'exercises[' + newId + '][exercise_column]')
+                    .attr('type', 'text')
+                    .css('display', 'none')
                     .addClass('form-control')
-                    .appendTo($td);
+                    .val(1)
+                    .appendTo($div);
+                var $inputExerciseOrder = $('<input/>')
+                    .attr('name', 'exercises[' + newId + '][exercise_order]')
+                    .attr('type', 'text')
+                    .css('display', 'none')
+                    .addClass('form-control')
+                    .val(1)
+                    .appendTo($div);
 
-                $this.val('');
-                return false;
-            } else {
-                $this.parent('.form-group').removeClass('has-error');
-            }
-        });
-
-        $(document).on('keypress', 'input#add-exercise', function(event){
-            var $this = $(this);
-            if (event.keyCode == 13) {
-                var value = $(this).val();
-
-                if (!value) {
-                    $this.parent('.form-group').addClass('has-error');
-                    return false;
-                }
-
-                var $table = $this.parents('table');
-                var $tbody = $table.children('tbody');
-                var groupIndex = $table.prev('#group-row').data('id');
-                var $trs = $tbody.find('tr');
-                var totalExercises = $trs.length - 2; // -1 pq a linha de add exercicio nao conta e o outro -1 pq quero saber a index logo começa do zero e não do 1
-                var newExerciseIndex = totalExercises + 1;
-                
-                var $tr = $('<tr/>')
-                    .attr('id', 'row-exercise')
-                    .data('exercise-id', newExerciseIndex)
-                    .appendTo($tbody);
-                var $td = $('<td/>').appendTo($tr);
-
-                var $spanExercise = $('<span/>')
-                    .attr('id', 'span-exercise')
+                var $text = $('<span/>')
+                    .attr('id', 'text-exercise-' + newId)
+                    .data('id', newId)
+                    .addClass('text-exercise')
                     .text(value)
-                    .appendTo($td);
+                    .appendTo($div);
 
-                var $inputExerciseName = $('<input/>')
-                    .attr('name', 'exercises_groups['+groupIndex+'][exercises]['+(newExerciseIndex)+'][name]').val(value)
-                    .attr('id', 'input-exercise')
-                    .attr('type', 'hidden')
-                    .addClass('form-control')
-                    .appendTo($td);
-
-                var $tdRemove = $('<td/>')
-                    .addClass('text-center')
-                    .css('width', '50px')
-                    .css('vertical-align', 'middle')
-                    .appendTo($tr);
-
-                var $btnRemove = $('<button/>')
-                    .attr('id', 'btn-remove')
+                var $btnRemove = $('<button>')
                     .attr('type', 'button')
-                    .addClass('btn btn-default btn-xs')
+                    .addClass('btn btn-default btn-remove')
                     .html('<span class="glyphicon glyphicon-remove"></span>')
-                    .appendTo($tdRemove);
+                    .appendTo($div);
 
                 $this.val('');
 
                 return false;
-            } else {
-                $this.parent('.form-group').removeClass('has-error');
             }
+            
         });
     });
 </script>
 
-<?php
-    echo $this->Form->create($card, [
-        'id' => 'my-form',
-        'novalidate' => true,
-        'templates' => [
-            'inputContainer' => '{{content}}'
-        ]
-    ]);
-?>
-<div class="row">
-    <div class="col-md-12">
-        <div class="alert alert-danger clearfix">
-            <button class="btn btn-success pull-right" type="submit">
-                Salvar alterações
-            </button>
-            <strong>
-                <span class="glyphicon glyphicon-warning-sign"></span> Atenção!
-            </strong>
-            <p>Qualquer informação alterada nesta página inclusive exclusão de exercícios e grupos só serão salvas clicando no botão ao lado.</p>
+<?= $this->Form->create($card) ?>
+    <?= $this->Form->submit('Salvar') ?>
+    <div class="row">
+        <div class="col-md-4">
+            <input type="text" class="form-control" id="add-exercise" autocomplete="off" autofocus="true">
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-7 col-md-offset-2">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group well">
-                    <?= $this->Form->input('obs', [
-                        'label' => 'Observação',
-                        'type' => 'textarea',
-                        'placeholder' => 'Texto...'
-                    ]) ?>
-                    <span class="help-block">
-                        Indique aqui como o aluno deverá usar os grupos de exercício ficha.
-                    </span>
-                </div>
-
-                <h4>Exercícios</h4>
-                <hr>
-
-                <div class="form-group well">
-                    <input
-                        type="text"
-                        class="form-control input-lg"
-                        placeholder="Adicionar grupo"
-                        id="add-group">
-                    <p class="help-block">
-                        Digite o nome do grupo e pressione "Enter" para adicionar
-                    </p>
-                </div>
+    <div class="row">
+        <div class="col-md-2 col-sm-2">
+            <div class="custom-col col-selected" data-index="1">
             </div>
         </div>
-        <br>
-        <div id="row-container-groups">
-            <?php $i = 0; ?>
-            <?php foreach ($card->exercises_groups as $keyGroup => $group): ?>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" id="group-row" data-id="<?= $i ?>">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <span id="span-group">
-                                            <?= $group->name ?>
-                                        </span>
-                                        <?= $this->Form->input('exercises_groups.'.$i.'.id', [
-                                         'value' => $group->id]) ?>
-                                        <?= $this->Form->input('exercises_groups.'.$i.'.name', [
-                                            'id' => 'input-group',
-                                            'value' => $group->name,
-                                            'type' => 'hidden'
-                                        ]) ?>  
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button
-                                            class="btn btn-default btn-xs pull-right"
-                                            type="button" id="btn-remove-group">
-                                            <span class="glyphicon glyphicon-remove"></span>
-                                        </button>  
-                                    </div>
-                                </div>
-                            </div>
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2" style="vertical-align: middle">
-                                            <div class="form-group">
-                                                <input
-                                                    id="add-exercise"
-                                                    type="text"
-                                                    placeholder="Adicionar exercício"
-                                                    autocomplete="off"
-                                                    class="form-control">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <?php $j = 0; ?>
-                                    <?php foreach ($group->exercises as $keyExercise => $exercise): ?>
-                                        <tr id="row-exercise" data-exercise-id="<?= $j ?>">
-                                            <td>
-                                                <span id="span-exercise"><?= $exercise->name ?></span>
-                                                <?= $this->Form->input('exercises_groups.'.$i.'.exercises.'.$j.'.id',
-                                                    ['value' => $exercise->id]) ?>
-                                                <?= $this->Form->input('exercises_groups.'.$i.'.exercises.'.$j.'.name',
-                                                    [
-                                                        'id' => 'input-exercise',
-                                                        'value' => $exercise->name,
-                                                        'type' => 'hidden',
-                                                        'label' => false
-                                                    ])
-                                                ?>
-                                            </td>
-                                            <td style="width: 50px;vertical-align: middle; text-align: center;">
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-default btn-xs"
-                                                    id="btn-remove">
-                                                    <span class="glyphicon glyphicon-remove"></span>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <?php $j++; ?>
-                                    <?php endforeach ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <?php $i++; ?>
-                </div>
-            <?php endforeach ?>
+        <div class="col-md-2 col-sm-2">
+            <div class="custom-col" data-index="2">
+            </div>
         </div>
     </div>
-
-</div>
-<?php
-    echo $this->Form->end();
-?>  
-
-<br>
+<?= $this->Form->end() ?>

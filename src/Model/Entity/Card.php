@@ -2,7 +2,6 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
-use Cake\I18n\Time;
 
 /**
  * Card Entity.
@@ -24,12 +23,6 @@ class Card extends Entity
         'current' => true,
         'user' => true,
         'customer' => true,
-        'exercises_groups' => true,
-        'overdue' => true
+        'exercises' => true,
     ];
-
-    public function _getOverdue()
-    {
-        return ($this->_properties['end_date'] < Time::now());
-    }
 }

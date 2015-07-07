@@ -17,27 +17,21 @@ class ExercisesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'Exercises' => 'app.exercises',
-        'ExercisesGroups' => 'app.exercises_groups',
-        'Cards' => 'app.cards',
-        'Users' => 'app.users',
-        'Gyms' => 'app.gyms',
-        'Machines' => 'app.machines',
-<<<<<<< HEAD
-=======
-        'CardsExercises' => 'app.cards_exercises',
-        'ExercisesGroups' => 'app.exercises_groups',
->>>>>>> db391e975ea2e6de5e5488bb493dc5474a6ca65a
-        'Phones' => 'app.phones',
-        'Rooms' => 'app.rooms',
-        'Lessons' => 'app.lessons',
-        'Services' => 'app.services',
-        'Weekdays' => 'app.weekdays',
-        'ServicesWeekdays' => 'app.services_weekdays',
-        'Roles' => 'app.roles',
-        'Releases' => 'app.releases',
-        'Customers' => 'app.customers',
-        'Suggestions' => 'app.suggestions'
+        'app.exercises',
+        'app.cards',
+        'app.users',
+        'app.gyms',
+        'app.machines',
+        'app.phones',
+        'app.rooms',
+        'app.lessons',
+        'app.services',
+        'app.times',
+        'app.suggestions',
+        'app.customers',
+        'app.roles',
+        'app.releases',
+        'app.exercises_groups'
     ];
 
     /**

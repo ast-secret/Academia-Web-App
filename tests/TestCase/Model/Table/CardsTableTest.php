@@ -30,7 +30,6 @@ class CardsTableTest extends TestCase
         'app.customers',
         'app.roles',
         'app.releases',
-        'app.exercises_groups',
         'app.exercises'
     ];
 
@@ -69,11 +68,11 @@ class CardsTableTest extends TestCase
     }
 
     /**
-     * Test validateExercise method
+     * Test beforeSave method
      *
      * @return void
      */
-    public function testValidateExercise()
+    public function testBeforeSave()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

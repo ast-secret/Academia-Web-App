@@ -17,7 +17,9 @@ class Exercise extends Entity
     protected $_accessible = [
         'repetition' => true,
         'name' => true,
-        'exercises_group_id' => true,
-        'exercises_group' => true,
+        'card_id' => true,
+        'exercise_column' => true,
+        'exercise_order' => true,
+        'card' => true,
     ];
 }

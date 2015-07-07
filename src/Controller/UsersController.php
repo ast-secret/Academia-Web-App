@@ -65,21 +65,14 @@ class UsersController extends AppController
 
             $user = $this->Users->patchEntity($user, $this->request->data);
 
-            $ph = new DefaultPasswordHasher();
-            $confirmPassword = $this->request->data('current_password_confirm');
-            $this->request->data['current_password_confirm'] = null;
-            if (!$ph->check($confirmPassword, $currentPassword)) {
-                $this->Flash->error('Você não confirmou a sua senha corretamente.');
+            // Evita que ele passe uma senha nova pelo array e altere
+            $user->accessible('password', false);
+            if ($this->Users->save($user)) {
+                $this->Auth->session->write($this->Auth->sessionKey . '.name', $user->name);
+                $this->Auth->session->write($this->Auth->sessionKey . '.username', $user->username);
+                $this->Flash->success('As alterações foram salvas com sucesso.');
             } else {
-                // Evita que ele passe uma senha nova pelo array e altere
-                $user->accessible('password', false);
-                if ($this->Users->save($user)) {
-                    $this->Auth->session->write($this->Auth->sessionKey . '.name', $user->name);
-                    $this->Auth->session->write($this->Auth->sessionKey . '.username', $user->username);
-                    $this->Flash->success('As alterações foram salvas com sucesso.');
-                } else {
-                    $this->Flash->error('As informações não poderam ser salvas. Por favor, tente novamente.');
-                }
+                $this->Flash->error('As informações não poderam ser salvas. Por favor, tente novamente.');
             }
         }
 
