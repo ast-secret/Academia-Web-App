@@ -31,24 +31,6 @@
 			$('.has-tooltip').tooltip();
 		});
 	</script>
-	<style>
-		html, body
-		{
-			height: 100%;
-		}
-		html{
-			height: 100%;
-		}
-		body {
-			min-height: 100%;
-		}
-		.side-menu li a{
-			color: #FFF;
-		}
-		.side-menu li a:hover, .side-menu li a:active{
-			background-color: #2980b9!important;
-		}
-	</style>
 </head>
 <body>
 

@@ -1,25 +1,24 @@
 <?php
-    $title = 'Editar ficha de exercícios para ' . $customer->name;
+    $title = 'Editar ficha de exercícios de ' . $customer->name;
     $this->assign('title', ' - ' . $title)
 ?>
 
-<?= $this->Html->script('../lib/niceCharCounter/dist/jquery.niceCharCounter', ['inline' => false]) ?>
+<?= $this->Html->script('../lib/nice-char-counter/dist/nice-char-counter', ['inline' => false]) ?>
 
 <?php
     $this->Html->scriptStart(['block' => true]);
         echo "$(function(){
             $('#obs').niceCharCounter({
-                max: 400,
+                limit: 400,
                 warningPercent: 10,
                 warningColor: '#e67e22',
-                text: '{{residual}} caractere(s) restante(s).',
-                containerText: '#container-counter',
+                text: '{{counter}} caractere(s) restante(s).',
+                counter: '#container-counter',
             });
         });";
     $this->Html->scriptEnd();
 ?>
 
-<br>
 <?php 
     $this->Html->addCrumb('Clientes', ['controller' => 'Customers', 'action' => 'index']);
     $this->Html->addCrumb('Fichas de exercícios', [
@@ -41,10 +40,16 @@
         ]]);
 
         echo $this->Form->input('goal', ['label' => 'Objetivo']);
-        echo $this->Form->input('obs', ['type' => 'textarea', 'label' => 'Observação']);
-        echo '<p id="container-counter" class="help-block"></p>';
+        echo $this->Form->input('obs', ['label' => 'Observação', 'type' => 'textarea']);
+?>
+        <div class="row" style="margin-bottom: 8px;">
+            <div class="col-md-6 col-md-offset-2">
+                <p id="container-counter" class="help-block"></p>
+            </div>
+        </div>
+<?php
         echo $this->Form->input('end_date', ['label' => 'Validade']);
-        
-        echo $this->Form->submit('Salvar alterações');
+        echo '<hr>';
+        echo $this->Form->submit('Salvar Alterações', ['bootstrap-type' => 'primary', 'class' => 'pull-right']);
     echo $this->Form->end();
 ?>  

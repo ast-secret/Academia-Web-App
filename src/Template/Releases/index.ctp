@@ -1,95 +1,73 @@
 <?= $this->assign('title', ' - Comunicados') ?>
 
-<br>
 <?php 
     $this->Html->addCrumb('Comunicados');
     echo $this->Html->getCrumbList();
 ?>
 <br>
 
-<?= $this->Html->link('Criar comunicado', ['action' => 'add'], ['class' => 'btn btn-danger pull-right'])?>
+<?= $this->Html->link($this->Html->icon('plus') . ' Criar comunicado', [
+    'action' => 'add'
+], [
+    'class' => 'btn btn-danger pull-right',
+    'escape' => false
+])?>
 <br style="clear: both;">
 
 
-<form method="GET">
-    <input type="hidden" value="<?= $this->request->query('filters') ?>" name="filters" id="filters">
-    <input type="hidden" value="<?= $this->request->query('tab') ?>" name="tab" id="tab">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="input-group">
-                <input
-                    class="form-control"
-                    id="q"
-                    name="q"
-                    placeholder="Pesquisar pelo texto..."
-                    type="text"
-                    value="<?= $this->request->query('q')?>">
-                <span class="input-group-btn">
-                    <button
-                        class="btn btn-default <?= $this->request->query('filters') ? 'active': '' ?>"
-                        type="button" title="Refinar Busca" id="toggle-filters">
-                        <span class="glyphicon glyphicon-filter"></span>
-                    </button>
-                    <button type="submit" class="btn btn-danger" type="button" title="Pesquisar">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-            </div><!-- /input-group -->  
-        </div>
+<form method="GET" class="form-inline">
+    <div class="form-group">
+        <input
+            class="form-control"
+            id="q"
+            name="q"
+            placeholder="Pesquisar pelo texto..."
+            type="text"
+            value="<?= $this->request->query('q')?>">
     </div>
-
-    <div id="cont-filters" style="margin-top: 15px; display: <?= $this->request->query('filters') ? '': 'none' ?>">
-        <div class="">
-              <div class="form-vertical">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="sr-" for="exampleInputAmount">De</label>
-                            <input
-                                class="form-control input-sm"
-                                id="from"
-                                name="from"
-                                placeholder="De"
-                                type="date"
-                                value="<?= $this->request->query('from') ?>">
-                        </div>        
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="sr-" for="exampleInputAmount">Até</label>
-                            <input
-                                class="form-control input-sm" 
-                                id="to"
-                                name="to"
-                                type="date"
-                                value="<?= $this->request->query('to') ?>">
-                        </div>  
-                    </div>
-                </div>
-            </div> 
-        </div>
+    <div class="form-group">
+        <label class="sr-" for="exampleInputAmount">De</label>
+        <input
+            class="form-control input-sm"
+            id="from"
+            name="from"
+            placeholder="De"
+            type="date"
+            value="<?= $this->request->query('from') ?>">
+    </div>
+    <div class="form-group">
+        <label class="sr-" for="exampleInputAmount">Até</label>
+        <input
+            class="form-control input-sm" 
+            id="to"
+            name="to"
+            type="date"
+            value="<?= $this->request->query('to') ?>">
+    </div>     
+    <div class="form-group">
+        <button type="submit" class="btn btn-default" type="button" title="Pesquisar">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>
     </div>
 </form>
 
 <hr>
 
-<br style="clear: both;">
-
 <ul class="nav nav-tabs">
     <li
         role="presentation"
         class="<?= $tab == '1' ? 'active' : '' ?>">
-        <?= $this->Html->link('Todos', ['action' => 'index','?' => ['tab' => '1']]) ?>
+        <?= $this->Html->link('Publicados', [ 'action' => 'index', '?' => ['tab' => '1']]) ?>
     </li>
     <li
         role="presentation"
         class="<?= $tab == '2' ? 'active' : '' ?>">
-        <?= $this->Html->link('Publicados', [ 'action' => 'index', '?' => ['tab' => '2']]) ?>
+        <?= $this->Html->link('Não publicados', [ 'action' => 'index', '?' => ['tab' => '2']]) ?>
     </li>
     <li
         role="presentation"
         class="<?= $tab == '3' ? 'active' : '' ?>">
-        <?= $this->Html->link('Não publicados', [ 'action' => 'index', '?' => ['tab' => '3']]) ?>
+        <?= $this->Html->link('Todos', ['action' => 'index','?' => ['tab' => '3']]) ?>
     </li>
 </ul>
 
@@ -146,7 +124,7 @@
                                 ['action' => 'delete', $release->id], [
                                     'escape' => false,
                                     'confirm'=> 'Você realmente deseja deletar este comunicado? Esta operação não poderá ser desfeita.',
-                                    'class' => 'btn btn-danger btn-xs',
+                                    'class' => 'btn btn-default btn-xs',
                                     'title' => 'Deletar'
                                 ])
                             ?>

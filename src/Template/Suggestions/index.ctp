@@ -3,70 +3,46 @@
 <?= $this->Html->script('Suggestions/index', ['inline' => false]) ?>
 <?= $this->Html->script('common', ['inline' => false]) ?>
 
-<br>
 <?php 
     $this->Html->addCrumb('Sugestões', null);
     echo $this->Html->getCrumbList();
 ?>
 <br>
 
-<form method="GET">
+<form method="GET" class="form-inline">
     <input type="hidden" value="<?= $this->request->query('tab') ?>" name="tab" id="tab">
-    <input type="hidden" value="<?= $this->request->query('filters') ?>" name="filters" id="filters">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="input-group">
-                <input
-                    class="form-control"
-                    id="q"
-                    name="q"
-                    placeholder="Pesquisar por nome ou texto..."
-                    type="text"
-                    value="<?= $this->request->query('q')?>">
-                <span class="input-group-btn">
-                    <button
-                        class="btn btn-default <?= $this->request->query('filters') ? 'active': '' ?>"
-                        type="button" title="Refinar Busca" id="toggle-filters">
-                        <span class="glyphicon glyphicon-filter"></span>
-                    </button>
-                    <button type="submit" class="btn btn-danger" type="button" title="Pesquisar">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-            </div><!-- /input-group -->  
-        </div>
+    <div class="form-group">
+        <input
+            class="form-control"
+            id="q"
+            name="q"
+            placeholder="Pesquisar por nome ou texto..."
+            type="text"
+            value="<?= $this->request->query('q')?>">
     </div>
-
-    <div id="cont-filters" style="margin-top: 15px; display: <?= $this->request->query('filters') ? '': 'none' ?>">
-        <div class="">
-              <div class="form-vertical">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="sr-" for="exampleInputAmount">De</label>
-                            <input
-                                class="form-control input-sm"
-                                id="from"
-                                name="from"
-                                placeholder="De"
-                                type="date"
-                                value="<?= $this->request->query('from') ?>">
-                        </div>        
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="sr-" for="exampleInputAmount">Até</label>
-                            <input
-                                class="form-control input-sm" 
-                                id="to"
-                                name="to"
-                                type="date"
-                                value="<?= $this->request->query('to') ?>">
-                        </div>  
-                    </div>
-                </div>
-            </div> 
-        </div>
+    <div class="form-group">
+        <label class="sr-" for="exampleInputAmount">De</label>
+        <input
+            class="form-control input-sm"
+            id="from"
+            name="from"
+            placeholder="De"
+            type="date"
+            value="<?= $this->request->query('from') ?>">
+    </div>
+    <div class="form-group">
+        <label class="sr-" for="exampleInputAmount">Até</label>
+        <input
+            class="form-control input-sm" 
+            id="to"
+            name="to"
+            type="date"
+            value="<?= $this->request->query('to') ?>">
+    </div>  
+    <div class="form-group">
+        <button type="submit" class="btn btn-default" type="button" title="Pesquisar">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>
     </div>
 </form>
 <hr>
@@ -139,11 +115,7 @@
                         </td>
                         <td style="width: 150px;">
                             <div  class="truncate-text" style="width: 149px">
-                                <?= $this->Html->link(h($suggestion->customer->name), [
-                                    'controller' => 'Customers',
-                                    'action' => 'view',
-                                    $suggestion->customer->id
-                                ]) ?>
+                                <?= h($suggestion->customer->name) ?>
                             </div>
                         </td>
                         <td>

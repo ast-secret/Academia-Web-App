@@ -1,6 +1,5 @@
 <?= $this->assign('title', ' - Configurações de conta') ?>
 
-<br>
 <?php 
 	$this->Html->addCrumb('Configurações de conta');
 	echo $this->Html->getCrumbList();
@@ -36,7 +35,10 @@
 			'label' => 'Senha',
 			'help' => 'Confirme a sua senha atual para alterar os dados acima'
 		]);
-
-		echo $this->Form->submit('Salvar alterações');
+		echo '<hr>';
+		echo $this->Form->submit('Salvar alterações', [
+			'bootstrap-type' => 'primary',
+			'class' => 'pull-right'
+		]);
 	echo $this->Form->end();
 ?>	

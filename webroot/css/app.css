@@ -33,6 +33,22 @@ input{
 textarea {
 	resize: vertical !important;
 }
+html, body
+{
+	height: 100%;
+}
+html{
+	height: 100%;
+}
+body {
+	min-height: 100%;
+}
+.side-menu li a{
+	color: #FFF;
+}
+.side-menu li a:hover, .side-menu li a:active, .side-menu li a:focus{
+	background-color: #2980b9!important;
+}
 
 .truncate-text {
 	white-space: nowrap;

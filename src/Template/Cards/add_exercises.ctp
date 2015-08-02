@@ -176,7 +176,7 @@
         <div class="col-md-12">
             <div class="alert alert-danger clearfix">
                 <strong><span class="glyphicon glyphicon-warning-sign"></span> Atenção!</strong>
-                Qualquer alteração de horário só será efetivada clicando no botão ao lado.
+                Qualquer alteração nos exercícios só seão efetivadas clicando no botão ao lado.
                 <button class="btn btn-primary pull-right submit-form" type="button">
                     Salvar alterações
                 </button>

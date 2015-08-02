@@ -1,4 +1,4 @@
-<?= $this->assign('title', ' - Editar aula') ?>
+<?= $this->assign('title', ' - Editar Aula') ?>
 
 <?= $this->Html->script('../lib/niceCharCounter/dist/jquery.niceCharCounter', ['inline' => false]) ?>
 
@@ -15,23 +15,31 @@
 		});";
 	$this->Html->scriptEnd();
 ?>
-
-<br>
 <?php 
 	$this->Html->addCrumb('Aulas', ['action' => 'index']);
-	$this->Html->addCrumb('Editar aula');
+	$this->Html->addCrumb('Editar Aula');
 	echo $this->Html->getCrumbList();
 ?>
 <br>
 
 <?php
 	echo $this->Form->create($service, ['novalidate' => true, 'horizontal' => true]);
-	echo $this->Form->input('name', ['label' => 'Nome']);
-	echo $this->Form->input('description', ['label' => 'Descrição', 'type' => 'textarea']);
-	echo '<p id="container-counter" class="help-block"></p>';
-	echo $this->Form->input('duration', ['label' => 'Duração', 'help' => 'Duração da aula em minutos']);
-	echo $this->Form->input('is_active', ['label' => 'Ativo']);
-	echo '<hr>';
-	echo $this->Form->submit('Salvar alterações');
+			echo $this->Form->input('name', ['label' => 'Nome']);
+		echo $this->Form->input('description', [
+			'label' => 'Descrição',
+			'type' => 'textarea'
+		]);
+		echo '<p id="container-counter" class="help-block"></p>';
+		echo $this->Form->input('duration', [
+			'label' => 'Duração',
+			'help' => 'Duração da aula em minutos'
+		]);
+		echo '<hr>';
+		echo $this->Form->input('is_active', ['label' => 'Ativo']);
+		echo $this->Form->submit('Salvar Alterações', [
+			'escape' => false,
+			'bootstrap-type' => 'primary',
+			'class' => 'pull-right'
+		]);
 	echo $this->Form->end();
 ?>	

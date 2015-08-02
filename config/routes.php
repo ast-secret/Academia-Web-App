@@ -49,7 +49,8 @@ Router::addUrlFilter(function ($params, $request) {
 });
 
 Router::scope('/:gym_slug', function ($routes) {
-	$routes->connect('/login', ['controller' => 'Users', 'action' => 'login']);
+	$routes->connect('/entrar', ['controller' => 'Users', 'action' => 'login']);
+    $routes->connect('/sair', ['controller' => 'Users', 'action' => 'logout']);
 });
 Router::scope('/:gym_slug/caixa-de-sugestoes', function ($routes) {
 	$routes->connect('/', ['controller' => 'Suggestions', 'action' => 'index']);

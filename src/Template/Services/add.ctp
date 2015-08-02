@@ -25,22 +25,22 @@
 
 <?php
 	echo $this->Form->create($service, ['novalidate' => true, 'horizontal' => true]);
-	echo $this->Form->input('name', ['label' => 'Nome']);
-	echo $this->Form->input('description', [
-		'label' => 'Descrição',
-		'type' => 'textarea'
-	]);
-	echo '<p id="container-counter" class="help-block"></p>';
-	echo $this->Form->input('duration', [
-		'label' => 'Duração',
-		'help' => 'Duração da aula em minutos'
-	]);
-	echo '<hr>';
-	echo $this->Form->input('is_active', ['label' => 'Ativo']);
-	echo $this->Form->submit('<span class=\'glyphicon glyphicon-plus\'></span> Criar aula', [
-		'escape' => false,
-		'bootstrap-type' => 'primary',
-		'class' => 'pull-right'
-	]);
+		echo $this->Form->input('name', ['label' => 'Nome']);
+		echo $this->Form->input('description', [
+			'label' => 'Descrição',
+			'type' => 'textarea'
+		]);
+		echo '<p id="container-counter" class="help-block"></p>';
+		echo $this->Form->input('duration', [
+			'label' => 'Duração',
+			'help' => 'Duração da aula em minutos'
+		]);
+		echo '<hr>';
+		echo $this->Form->input('is_active', ['label' => 'Ativo']);
+		echo $this->Form->submit('Criar aula', [
+			'escape' => false,
+			'bootstrap-type' => 'primary',
+			'class' => 'pull-right'
+		]);
 	echo $this->Form->end();
 ?>	

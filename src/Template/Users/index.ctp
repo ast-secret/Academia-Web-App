@@ -1,15 +1,19 @@
 <?= $this->assign('title', ' - Usuários') ?>
 
-<br>
 <?php 
     $this->Html->addCrumb('Usuários');
     echo $this->Html->getCrumbList();
 ?>
 <br>
 
-<?= $this->Html->link('Criar usuário',
-    ['action' => 'add'],
-    ['class' => 'btn btn-danger pull-right']
+<?= $this->Html->link($this->Html->icon('plus') . ' Criar usuário',
+    [
+        'action' => 'add'
+    ],
+    [
+        'class' => 'btn btn-danger pull-right',
+        'escape' => false
+    ]
 ) ?>
 
 <br style="clear: both;">
@@ -57,14 +61,19 @@
             <td class="text-center">                
                 <?= $this->Html->link('<span class="glyphicon glyphicon-pencil"></span>',
                     ['action' => 'edit', $user->id],
-                    ['escape' => false, 'class' => 'btn btn-default btn-xs']
+                    [
+                        'escape' => false,
+                        'class' => 'btn btn-default btn-xs',
+                        'title' => 'Editar'
+                    ]
                 ) ?>
                 <?php if ($tab == 'inativos'): ?>
                     <?= $this->Form->postLink($this->Html->icon('remove'),
                         ['action' => 'delete', $user->id],
                         [
                             'escape' => false,
-                            'class' => 'btn btn-danger btn-xs',
+                            'title' => 'Deletar',
+                            'class' => 'btn btn-default btn-xs',
                             'confirm' => 'Você realmente deseja deletar este usuário? Esta ação não poderá ser desfeita.'
                         ]
                     ) ?>

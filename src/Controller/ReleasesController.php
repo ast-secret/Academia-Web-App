@@ -25,10 +25,10 @@ class ReleasesController extends AppController
 
         $tab = (!(int)$this->request->query('tab')) ? 1 : (int)$this->request->query('tab');
         switch ($tab) {
-            case 2:
+            case 1:
                 $conditions[] = ['Releases.is_active' => 1];
                 break;
-            case 3:
+            case 2:
                 $conditions[] = ['Releases.is_active' => 0];
                 break;
         }

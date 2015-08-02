@@ -47,9 +47,7 @@ $items = [
 			<div class="col-md-10">
 				<div class="media">
 					<div class="media-left">
-						<?= $this->Html->image('avatar.jpg',
-							['class' => 'media-object img-circle', 'width' => '40px', 'style' => 'margin-right: 5px;'])
-						?>
+
 					</div>
 					<div class="media-body">
 						<span class="" style="color: #FFF;">
@@ -86,7 +84,7 @@ $items = [
 					<li role="presentation" class="divider"></li>
 					<li role="presentation">
 						<!-- <a role="menuitem" tabindex="-1" href="#">Sair</a> -->
-						<?= $this->Html->link('Sair', ['controller' => 'users', 'action' => 'logout']) ?>
+						<?= $this->Html->link('Sair', ['controller' => 'Users', 'action' => 'logout']) ?>
 					</li>
 				</ul>		
 			</div>
@@ -99,7 +97,7 @@ $items = [
 		<div class="col-md-12">
 			<ul class="side-menu nav nav-pills nav-stacked">
 				<?php foreach ($items as $item): ?>
-					<li>
+					<li class="<?= ($this->request->controller == $item['controller']) ? 'active' : '' ?>">
 						<?= $this->Html->link($item['label'], ['controller' => $item['controller'], 'action' => $item['action']]) ?>
 					</li>
 				<?php endforeach ?>

@@ -1,0 +1,40 @@
+{
+  "name": "niceCharCounter",
+  "homepage": "https://github.com/danielfpedro/char-counter",
+  "authors": [
+    "Daniel Pedro <danielfpedro@gmail.com>"
+  ],
+  "description": "Simple and flexible Jquery Plugin textarea characters counter",
+  "main": "src/jquery.nice-char-counter.js",
+  "ignore": [
+    "**/.*",
+    "demo",
+    "src",
+    "*.md",
+    "Gruntfile.js",
+    "package.json",
+    "boilerplate.jquery.json"
+  ],
+  "keywords": [
+    "jquery",
+    "plugin",
+    "nice",
+    "character",
+    "counter",
+    "textarea"
+  ],
+  "dependencies": {
+    "jquery": ">=1.6 <3.0"
+  },
+  "license": "MIT",
+  "_release": "8f3cf6e9e3",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "8f3cf6e9e37b57bbe09d220007ec2cabedda36ec"
+  },
+  "_source": "git://github.com/danielfpedro/nice-char-counter.git",
+  "_target": "*",
+  "_originalSource": "nice-char-counter",
+  "_direct": true
+}

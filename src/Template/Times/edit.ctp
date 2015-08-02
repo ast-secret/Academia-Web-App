@@ -116,10 +116,10 @@
     });
 </script>
 <?php
-$this->assign('title', ' - Configurar horários de ' . h($service->name));
+$this->assign('title', ' - Horários de ' . h($service->name));
 
 $this->Html->addCrumb('Aulas', ['controller' => 'Services', 'action' => 'index']);
-$this->Html->addCrumb('Configurar horários de <strong>' . h($service->name) . '</strong>');
+$this->Html->addCrumb('Horários de <strong>' . h($service->name) . '</strong>');
 echo $this->Html->getCrumbList();
 
 

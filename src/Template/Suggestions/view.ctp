@@ -1,6 +1,5 @@
 <?= $this->Html->script('Suggestions/view', ['inline' => false]) ?>
 
-<br>
 <?php 
 	$this->Html->addCrumb('Sugestões', ['action' => 'index']);
     $this->Html->addCrumb('Visualização de sugestão', null);
@@ -10,7 +9,7 @@
 
 <div class="row">
 	<div class="col-md-8">
-		<?= $this->Html->link(h($suggestion->customer->name), ['controller' => 'Customers', 'action' => 'view', $suggestion->customer->id]) ?>
+        <?= h($suggestion->customer->name) ?>
 		<br>
 		<small>
 			<em class="text-muted">
@@ -64,8 +63,8 @@
 <br>
 
 <div class="row" style="margin-top: 15px;">
-    <div class="col-md-6 col-md-offset-3 text-center">
-        <p>
+    <div class="col-md-7 col-md-offset-2 text-center">
+        <p style="line-height: 22px;">
             <?= h($suggestion->text) ?>
         </p>
     </div>

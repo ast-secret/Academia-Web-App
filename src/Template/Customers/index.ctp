@@ -1,41 +1,39 @@
 <?= $this->assign('title', ' - Clientes') ?>
 
-
-<br>
 <?php 
     $this->Html->addCrumb('Clientes', null);
     echo $this->Html->getCrumbList();
 ?>
 <br>
 
+<?= $this->Html->link($this->Html->icon('plus') . ' Criar Cliente', [
+    'action' => 'add'
+], [
+    'class' => 'btn btn-danger pull-right',
+    'escape' => false
+])?>
 
-<?= $this->Html->link('Criar cliente', ['action' => 'add'], ['class' => 'btn btn-danger pull-right'])?>
 <br style="clear: both;">
 
-
-<form method="GET">
+<form method="GET" class="form-inline">
     <input type="hidden" value="<?= $this->request->query('tab') ?>" name="tab" id="tab">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="input-group">
-                <input
-                    class="form-control"
-                    id="q"
-                    name="q"
-                    placeholder="Pesquisar por nome..."
-                    type="text"
-                    value="<?= $this->request->query('q')?>">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-danger" type="button" title="Pesquisar">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-            </div><!-- /input-group -->  
-        </div>
+    <div class="form-group">
+        <input
+            class="form-control"
+            id="q"
+            name="q"
+            placeholder="Pesquisar por nome..."
+            type="text"
+            value="<?= $this->request->query('q')?>">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-default" type="button" title="Pesquisar">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>
     </div>
 </form>
-<hr>
 
+<hr>
 <ul class="nav nav-tabs">
     <li
         role="presentation"
@@ -79,7 +77,7 @@
                 </td>      
                 <td class="text-center">
                     <?= $this->Html->link(
-                            '<span class="glyphicon glyphicon-th-list"></span>',
+                            '<span class="glyphicon glyphicon-list-alt"></span>',
                             [
                                 'controller' => 'Cards',
                                 'action' => 'index',

@@ -43,19 +43,15 @@
 		}
 	</style>
 </head>
-<body style="background-color: #000; background-image: url(../img/background1.jpg); background-position: top center; background-size: cover;">
-	<div class="container">
-		<div class="row" style="margin-top: 100px;">
-			<div class="col-md-4 col-md-offset-4">
-				<div class="row">
-					<div class="col-md-12">
-						<?= $this->Flash->render(); ?>
-						<?= $this->Flash->render('auth'); ?>
-					</div>
+	<body>
+		<div class="container">
+			<div class="row" style="margin-top: 100px;">
+				<div class="col-md-4 col-md-offset-4">
+					<?= $this->Flash->render(); ?>
+					<?= $this->Flash->render('auth'); ?>
+					<?= $this->fetch('content') ?>
 				</div>
-				<?= $this->fetch('content') ?>
 			</div>
 		</div>
-	</div>
-</body>
+	</body>
 </html>

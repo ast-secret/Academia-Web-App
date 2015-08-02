@@ -9,6 +9,7 @@
     "jquery": "~1.11.2",
     "bootstrap": "~3.3.1",
     "jquery-ui": "~1.11.2",
-    "jquery.inputmask": "~3.1.61"
+    "jquery.inputmask": "~3.1.61",
+    "nice-char-counter": "*"
   }
 }

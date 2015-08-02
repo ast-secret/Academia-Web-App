@@ -94,6 +94,19 @@ class UsersController extends AppController
     {
         $this->layout = 'login';
 
+        $this->loadModel('Gyms');
+
+        $gym = $this->Gyms->find('all', [
+            'conditions' => [
+                'slug' => $this->request->params['gym_slug']
+            ]
+        ])
+        ->first();
+
+        if (!$gym) {
+            throw new NotFoundException("Página não encontrada");
+        }
+
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -108,6 +121,8 @@ class UsersController extends AppController
                 );
             }
         }
+
+        $this->set('gym', $gym);
     }
 
     /**

@@ -1,19 +1,31 @@
+<?= $this->assign('title', $gym->name . ' - Entrar ') ?>
 
-<div>
-	<div style="border-radius: 10px; background-color: #FFF; padding: 20px;">
-		<h3 class="text-center">Entrar no sistema</h3>
+<div class="" style="border: 1px solid #E7E7E7; border-radius: 6px; padding: 30px;">
+	<div class="text-center" style="margin-bottom: 40px;">
+		<?= $this->Html->image('logo.jpg', ['height' => 140]) ?>
+	</div>
+	<?= $this->Form->create() ?>
+		<?= $this->Form->input('username', [
+			'label' => false,
+			'placeholder' => 'Email',
+			'class' => '',
+			'autofocus' => true
+		]) ?>
+		<?= $this->Form->input('password', [
+			'label' => false,
+			'placeholder' => 'Senha',
+			'class' => ''
+		]) ?>
+		<button type="submit" class="btn btn-default btn-block">
+			Entrar
+		</button>
+	<?= $this->Form->end() ?>
 
-		<br>
-		<br>
-		<?= $this->Form->create() ?>
-			<?= $this->Form->input('username', ['label' => false, 'placeholder' => 'Email', 'class' => '', 'autofocus' => true]) ?>
-			<?= $this->Form->input('password', ['label' => false, 'placeholder' => 'Senha', 'class' => '']) ?>
-			<button type="submit" class="btn btn-primary btn-block">
-				Entrar
-			</button>
-		<?= $this->Form->end() ?>
-		<br>
-		<hr>
-		<div class="text-center"><a href="#">Esqueceu a sua senha?</a></div>
+	<div class="text-right" style="margin-top: 30px;">
+		<small>
+			<a href="#">
+				Esqueceu a sua senha?
+			</a>
+		</small>
 	</div>
 </div>
