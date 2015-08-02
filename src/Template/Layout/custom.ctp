@@ -58,10 +58,13 @@
 		<?= $this->element('side_menu') ?>		
 	</div>
 	<div style="width: 80%;float: left; height: 100%; overflow: auto;">
+		
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
-					<?= $this->fetch('content') ?>
+					<div style="padding: 20px;">
+						<?= $this->fetch('content') ?>
+					</div>
 				</div>
 			</div>
 		</div>

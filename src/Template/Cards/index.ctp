@@ -1,6 +1,5 @@
 <?= $this->assign('title', ' - Fichas de exercícios de '. $customer->name) ?>
 
-<br>
 <?php 
     $this->Html->addCrumb('Clientes', ['controller' => 'Customers', 'action' => 'index']);
     $this->Html->addCrumb('Fichas de exercícios de <strong>'. $customer->name.'</strong>', null);
@@ -34,77 +33,58 @@
 <br>
 
 <table class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            <th style="width: 200px;">
+                Instrutor
+            </th>
+            <th style="width: 200px;">
+                Objetivo
+            </th>
+            <th>
+                Observação
+            </th>
+            <th style="width: 200px;">
+                Validade
+            </th>
+            <th style="width: 140px;"></th>
+        </tr>
+    </thead>
     <tbody>
         <?php foreach ($cards as $card): ?>
             <tr>
-                <td style="width: 420px;">
-                    <dl class="">
-                        <dt>
-                            Instrutor
-                        </dt>
-                        <dd>
-                            <?= h($card->user->name) ?>
-                        </dd>
-                        <dt>
-                            Objetivo
-                        </dt>
-                        <dd>
-                            <?= h($card->goal) ?>
-                        </dd>
-                        <dt>
-                            Validade
-                        </dt>
-                        <dd>
-                            <?php if ($card->overdue): ?>
-                                <em class="text-muted text-danger">
-                                    Vencida <?= $this->Time->timeAgoInWords($card->end_date) ?>
-                                </em>
-                            <?php else: ?>
-                                <em class="text-muted text-success">
-                                    <?= $this->Time->timeAgoInWords($card->end_date) ?>
-                                </em>
-                            <?php endif ?>
-                        </dd>
-                    </dl>
+                <td>
+                    <?= h($card->user->name) ?>
+                </td>
+
+                <td>
+                    <?= h($card->goal) ?>
                 </td>
                 <td>
-                    <dl>
-                        <dt>
-                            Observação
-                        </dt>
-                        <dd>
-                            <em class="text-muted">
-                                <?= ($card->obs) ? h($card->obs) : 'Nenhuma observação' ?>
-                            </em>
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>
-                            Exercícios
-                        </dt>
-                        <?php foreach ($card->exercises_groups as $key => $group): ?>
-                            <dt>
-                                Grupo <?= $group->name ?>
-                            </dt>
-                            <?php foreach ($group->exercises as $key => $exercise): ?>
-                                <dd><?= $exercise->name ?></dd>
-                            <?php endforeach ?>
-                        <?php endforeach ?>
-                    </dl>
-                    <?php if (!$card->exercises_groups): ?>
-                        <p class="text-muted text-center"><em>Nenhum exercício cadastrado.</em></p>
-                    <?php endif ?>
-                    <p class="text-center">
-                        <?= $this->Html->link('<span class="glyphicon glyphicon-cog"></span> Configurar exercícios', [
-                            'action' => 'addExercises',
-                            'card_id' => $card->id
-                        ], [
-                            'escape' => false,
-                            'class' => 'btn btn-default btn-xs'
-                        ]) ?>
-                    </p>
+                   <em class="text-muted">
+                        <?= ($card->obs) ? h($card->obs) : 'Nenhuma observação' ?>
+                    </em>
                 </td>
-                <td style="vertical-align: middle; width: 100px;" class="text-center">
+                <td>
+                    <?php if ($card->overdue): ?>
+                        <em class="text-muted text-danger">
+                            Vencida <?= $card->end_date_in_words ?>
+                        </em>
+                    <?php else: ?>
+                        <em class="text-muted text-success">
+                            <?= $card->end_date_in_words ?>
+                        </em>
+                    <?php endif ?>
+                </td>
+                <td style="vertical-align: middle;" class="text-center">
+                    <?= $this->Html->link('<span class="glyphicon glyphicon-fire"></span>', [
+                        'action' => 'addExercises',
+                        'card_id' => $card->id
+                    ], [
+                        'title' => 'Exercícios',
+                        'escape' => false,
+                        'class' => 'btn btn-default btn-xs'
+                    ]) ?>
                     <?= $this->Html->link(
                             '<span class="glyphicon glyphicon-print"></span>',
                             [
@@ -144,7 +124,7 @@
                                 'Você realmente deseja deletar esta ficha? esta ação não pode ser desfeita.',
                             'escape' => false,
                             'class' => 'btn btn-default btn-xs',
-                            'title' => 'Editar'
+                            'title' => 'Deletar Ficha'
                         ])
                     ?>
                 </td>

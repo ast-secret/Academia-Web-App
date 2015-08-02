@@ -16,7 +16,6 @@
 	$this->Html->scriptEnd();
 ?>
 
-<br>
 <?php 
 	$this->Html->addCrumb('Aulas', ['action' => 'index']);
 	$this->Html->addCrumb('Criar aula');
@@ -38,6 +37,10 @@
 	]);
 	echo '<hr>';
 	echo $this->Form->input('is_active', ['label' => 'Ativo']);
-	echo $this->Form->submit('Cria aula');
+	echo $this->Form->submit('<span class=\'glyphicon glyphicon-plus\'></span> Criar aula', [
+		'escape' => false,
+		'bootstrap-type' => 'primary',
+		'class' => 'pull-right'
+	]);
 	echo $this->Form->end();
 ?>	

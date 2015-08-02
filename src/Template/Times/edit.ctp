@@ -1,6 +1,14 @@
 <script>
     $(function(){
         createTagsFromTimesString();
+        $('select#hour, select#minute').change(function(){
+            var $this = $(this);
+            var value = $this.val();
+            if (value) {
+                $this.parents('.form-group').removeClass('has-error');
+            }
+        });
+
         $('button#add-time').click(function(){
             var $this = $(this);
             var weekday = $this.data('weekday');
@@ -12,16 +20,16 @@
             
             var hasError = false;
             if (!$hour.val()) {
-                $hour.parent('.form-group').addClass('has-error');
+                $hour.parents('.form-group').addClass('has-error');
                 hasError = true;
             } else {
-                $hour.parent('.form-group').removeClass('has-error');
+                $hour.parents('.form-group').removeClass('has-error');
             }
             if (!$minute.val()) {
-                $minute.parent('.form-group').addClass('has-error');
+                $minute.parents('.form-group').addClass('has-error');
                 hasError = true;
             } else {
-                $minute.parent('.form-group').removeClass('has-error');
+                $minute.parents('.form-group').removeClass('has-error');
             }
 
 
@@ -45,6 +53,7 @@
             createTagsFromTimesString();
 
             $hour.val('');
+            $hour.focus();
             $minute.val('');
             return false;
         });
@@ -107,83 +116,96 @@
     });
 </script>
 <?php
-$this->assign('title', ' - Configuração de horários');
+$this->assign('title', ' - Configurar horários de ' . h($service->name));
 
-echo '<br>';
-$this->Html->addCrumb('Aulas', ['controller' => 'services', 'action' => 'index']);
-$this->Html->addCrumb('Configurações de horários para <strong>' . h($service->name) . '</strong>');
+$this->Html->addCrumb('Aulas', ['controller' => 'Services', 'action' => 'index']);
+$this->Html->addCrumb('Configurar horários de <strong>' . h($service->name) . '</strong>');
 echo $this->Html->getCrumbList();
 
 
 $weekdays = $this->Weekdays->getAll();
 ?>
 
-<?= $this->Form->create($service) ?>
+<?= $this->Form->create($service, [
+    'templates' => [
+        'inputContainer' => '{{content}}',
+        'formGroup' => '{{label}}{{input}}'
+    ]
+]) ?>
 
 <div class="row">
     <div class="col-md-12">
         <div class="alert alert-danger clearfix">
-            <button class="btn btn-success pull-right" type="submit">
+            <strong><span class="glyphicon glyphicon-warning-sign"></span> Atenção!</strong>
+            Qualquer alteração de horário só será efetivada clicando no botão ao lado.
+            <button class="btn btn-primary pull-right" type="submit">
                 Salvar alterações
             </button>
-            <strong><span class="glyphicon glyphicon-warning-sign"></span> Atenção!</strong>
-            <p>Qualquer alteração de horário só será efetivada clicando no botão ao lado.</p>
         </div>
     </div>
 </div>
 
     <?php foreach ($weekdays as $weekday): ?>
         <div class="row">
-        <div class="col-md-12">
-            <div class="well well-sm">
-            <h5>
-                <?= $weekday['name'] ?>
-            </h5>
-            <div class="row">
-                <div class="col-md-3">
-                    <div id="times-wrap" data-weekday="<?= $weekday['id']?>" class="form-inline">
-                        <input
-                            type="hidden"
-                            id="times-string"
-                            value="<?= (isset($service->times_string[$weekday['id']])) ? $service->times_string[$weekday['id']] : '' ?>"
-                            name="times_string[<?= $weekday['id'] ?>]"
-                            data-weekday="<?= $weekday['id'] ?>">
-                        <div class="form-group">
-                            <?= $this->Form->input('hour', [
-                                'empty' => 'hor',
-                                'label' => false,
-                                'type' => 'hour',
-                                'data-weekday' => $weekday['id'],
-                                'class' => 'form-control input-sm',
-                                'templates' =>
-                                ['inputContainer' => '{{content}}']])
-                            ?>
+            <div class="col-md-12">
+                <div class="well well-sm">
+                    <h5>
+                        <?= $weekday['name'] ?>
+                    </h5>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    
+                                </div>
+                            </div>
+                            <div
+                                id="times-wrap"
+                                data-weekday="<?= $weekday['id']?>"
+                                class="form-inline">
+                                <input
+                                    type="hidden"
+                                    id="times-string"
+                                    value="<?= (isset($service->times_string[$weekday['id']])) ? $service->times_string[$weekday['id']] : '' ?>"
+                                    name="times_string[<?= $weekday['id'] ?>]"
+                                    data-weekday="<?= $weekday['id'] ?>">
+                                
+                                <div class="form-group">
+                                    <?= $this->Form->input('hour', [
+                                        'empty' => 'hor',
+                                        'label' => false,
+                                        'type' => 'hour',
+                                        'data-weekday' => $weekday['id'],
+                                        'class' => 'form-control input-sm'])
+                                    ?>
+                                </div>
+                                <div class="form-group">
+                                    :
+                                </div>
+                                <div class="form-group">
+                                    <?= $this->Form->input('minute', [
+                                        'empty' => 'min',
+                                        'label' => false,
+                                        'type' => 'minute',
+                                        'data-weekday' => $weekday['id'],
+                                        'class' => 'form-control input-sm'])
+                                    ?>
+                                </div>
+                                <div class="form-group">
+                                    <button
+                                        type="button"
+                                        class="btn btn-default btn-sm"
+                                        id="add-time" data-weekday="<?= $weekday['id'] ?>">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>:</label>
-                            <?= $this->Form->input('minute', [
-                                'empty' => 'min',
-                                'label' => false,
-                                'type' => 'minute',
-                                'data-weekday' => $weekday['id'],
-                                'class' => 'form-control input-sm',
-                                'templates' =>
-                                ['inputContainer' => '{{content}}']])
-                            ?>
-                            <button
-                                type="button"
-                                class="btn btn-success btn-sm"
-                                id="add-time" data-weekday="<?= $weekday['id'] ?>">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button>
+                        <div class="col-md-8" id="times-container" data-weekday="<?= $weekday['id'] ?>">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-9" id="times-container" data-weekday="<?= $weekday['id'] ?>">
-                </div>
             </div>
-            </div>
-        </div>
         </div>
     <?php endforeach ?>
 

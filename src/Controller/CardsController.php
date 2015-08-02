@@ -6,6 +6,8 @@ use App\Model\Entity\ExercisesGroup;
 
 use Cake\Network\Exceptions\NotFoundException;
 
+use Cake\Collection\Collection;
+
 use Cake\I18n\Time;
 /**
  * Cards Controller
@@ -22,10 +24,13 @@ class CardsController extends AppController
         $card = $this->Cards->get($cardId, ['contain' => [
             'Customers',
             'Users',
-            'ExercisesGroups' => ['Exercises']
+            'Exercises'
         ]]);
 
-        $this->set(compact('card'));
+        $collection = new Collection($card->exercises);
+        $exercisesByGroup = $collection->groupBy('exercise_column')->toArray();
+
+        $this->set(compact('card', 'exercisesByGroup'));
     }
 
     /**
@@ -72,10 +77,12 @@ class CardsController extends AppController
                         'name'
                     ]
                 ],
-                'ExercisesGroups' => [
-                    'fields' => ['id', 'name', 'card_id'],
-                    'Exercises' => ['fields' => ['name', 'repetition', 'exercises_group_id']],
-                ], 
+                'Exercises' => [
+                    'fields' => [
+                        'name',
+                        'card_id'
+                    ]
+                ]
             ],
             'conditions' => $conditions
         ];
@@ -209,7 +216,10 @@ class CardsController extends AppController
 
             if ($this->Cards->save($card)) {
                 $this->Flash->success('Os exercícios foram salvos com sucesso.');
-                //return $this->redirect(['action' => 'index', 'customer_id' => $card->customer->id]);
+                return $this->redirect([
+                    'action' => 'index',
+                    'customer_id' => $card->customer->id
+                ]);
             } else {
                 $this->Flash->error('Os exercícios não foram salvos. Por favor, tente novamente.');
             }

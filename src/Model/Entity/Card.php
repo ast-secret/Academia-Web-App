@@ -2,6 +2,8 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\I18n\Time;
+use Datetime;
 
 /**
  * Card Entity.
@@ -24,5 +26,21 @@ class Card extends Entity
         'user' => true,
         'customer' => true,
         'exercises' => true,
+        'overdue' => true,
+        'end_date_in_words'
     ];
+
+    protected function _getOverdue()
+    {
+        return ((new Datetime) > $this->_properties['end_date']);
+    }
+    protected function _getEndDateInWords()
+    {
+        $date = new Time($this->_properties['end_date']);
+        return $date->timeAgoInWords([
+            'accuracy' => 'month',
+            'end' => '+1 year'
+        ]);
+    }
 }
+

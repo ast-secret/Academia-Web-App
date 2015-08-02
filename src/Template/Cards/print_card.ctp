@@ -13,7 +13,7 @@
 	</tr>
 	<tr>
 		<td>
-			<strong>Validade: </strong> <?= $this->Time->timeAgoInWords($card->end_date) ?>
+			<strong>Validade: </strong> <?= $card->end_date_in_words ?>
 		</td>
 	</tr>
 	<tr>
@@ -30,18 +30,20 @@
 			</td>
 		</tr>
 	<?php endif ?>
-	<?php foreach ($card->exercises_groups as $group): ?>
-		<tr style="background-color: #EEE;">
-			<td>
-				<strong><?= $group->name ?></strong>
-			</td>
-		</tr>
-		<?php foreach ($group->exercises as $exercise): ?>
-			<tr>
-				<td>
-					<?= $exercise->name ?>
-				</td>
-			</tr>
-		<?php endforeach ?>
-	<?php endforeach ?>
 </table>
+	<?php $columnName = ['A', 'B', 'C', 'D', 'E', 'F'] ?>
+	
+	<div class="row">
+		<?php foreach ($exercisesByGroup as $group => $exercises): ?>
+			<div class="col-md-3" >
+				<div style="background-color: #EEE;padding: 8px;">
+					<strong>Grupo <?= $columnName[$group] ?></strong>
+				</div>
+				<?php foreach ($exercises as $exercise): ?>
+					<div style="padding: 8px;">
+						<?= $exercise->name ?>
+					</div>
+				<?php endforeach ?>
+			</div>
+		<?php endforeach ?>
+	</div>

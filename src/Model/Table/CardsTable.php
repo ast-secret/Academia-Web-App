@@ -42,6 +42,12 @@ class CardsTable extends Table
         ]);
     }
 
+    public function beforeSave($event, $entity)
+    {
+        if ($entity->exercises) {
+            $this->Exercises->deleteAll(['card_id' => $entity->id]);
+        }
+    }
 
     /**
      * Default validation rules.

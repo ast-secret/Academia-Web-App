@@ -57,10 +57,10 @@ class ExercisesTable extends Table
             ->requirePresence('exercise_column', 'create')
             ->notEmpty('exercise_column');
             
-        $validator
-            ->add('exercise_order', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('exercise_order', 'create')
-            ->notEmpty('exercise_order');
+        // $validator
+        //     ->add('exercise_order', 'valid', ['rule' => 'numeric'])
+        //     ->requirePresence('exercise_order', 'create')
+        //     ->notEmpty('exercise_order');
 
         return $validator;
     }
