@@ -53,6 +53,34 @@ class AppController extends Controller
      */
     public function initialize()
     {
+        $menuItems = [
+            [
+                'label' => 'Clientes',
+                'controller' => 'Customers',
+                'action' => 'index',
+            ],
+            [
+                'label' => 'Aulas',
+                'controller' => 'Services',
+                'action' => 'index',
+            ],
+            [
+                'label' => 'Comunicados',
+                'controller' => 'Releases',
+                'action' => 'index',
+            ],
+            [
+                'label' => 'Caixa de Sugestões',
+                'controller' => 'Suggestions',
+                'action' => 'index',
+            ],
+            [
+                'label' => 'Usuários',
+                'controller' => 'Users',
+                'action' => 'index',
+            ],
+        ];
+        $this->set(compact('menuItems'));
 
         $this->loadComponent('Auth', [
             'loginAction' => [
@@ -75,7 +103,12 @@ class AppController extends Controller
         ]);
         $this->loadComponent('Flash');
         if ( $this->Auth->user()) {
-            $this->set('loggedinUser', $this->Auth->user());
+            $loggedinUser = $this->Auth->user();
+            $shortName = explode(' ', $loggedinUser['name']);
+            $total = count($shortName);
+            $loggedinUser['short_name'] = ($total > 1) ? $shortName[0] . ' ' . $shortName[$total - 1] : $shortName[0];
+
+            $this->set(compact('loggedinUser'));
         }
     }
 

@@ -4,21 +4,21 @@
 	$this->Html->scriptStart(['block' => true]);
 		echo "$(function(){
 			$('#text').niceCharCounter({
-				limit: 800,
-				warningPercent: 98,
-				warningColor: '#e67e22',
-				text: '{{counter}} caracte[r, res] restant[e,es].',
-				counter: '#container-counter',
+                limit: 800,
+                warningPercent: 10,
+                warningColor: '#e67e22',
+                text: '{{counter}} caractere(s) restante(s).',
+                counter: '#container-counter',
 			});
 		});";
 	$this->Html->scriptEnd();
 ?>
 
-<?= $this->assign('title', ' - Criar comunicado') ?>
+<?= $this->assign('title', ' - Criar Comunicado') ?>
 
 <?php 
 	$this->Html->addCrumb('Comunicados', ['action' => 'index']);
-    $this->Html->addCrumb('Criar comunicados');
+    $this->Html->addCrumb('Criar Comunicados');
     echo $this->Html->getCrumbList();
 ?>
 <br>
@@ -33,5 +33,5 @@
     
     <?= $this->Form->input('is_active', ['label' => 'Publicar']) ?>  
     <hr>
-	<?= $this->Form->submit('Criar Comunicado', ['bootstrap-type' => 'primary', 'class' => 'pull-right']) ?>
+	<?= $this->Form->submit('Criar Comunicado') ?>
 <?= $this->Form->end() ?>

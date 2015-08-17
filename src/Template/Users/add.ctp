@@ -1,4 +1,4 @@
-<?= $this->assign('title', ' - Criar usuário') ?>
+<?= $this->assign('title', ' - Criar Usuário') ?>
 
 <?php 
 	$this->Html->addCrumb('Usuários', ['action' => 'index']);
@@ -23,8 +23,5 @@
         ]);
     ?>
     <hr>
-    <?= $this->Form->submit('Criar usuário', [
-    	'bootstrap-type' => 'primary',
-    	'class' => 'pull-right'
-    ]) ?>
+    <?= $this->Form->submit('Criar Usuário') ?>
 <?= $this->Form->end() ?>

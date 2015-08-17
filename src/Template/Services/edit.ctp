@@ -34,8 +34,9 @@
 			'label' => 'Duração',
 			'help' => 'Duração da aula em minutos'
 		]);
-		echo '<hr>';
+		
 		echo $this->Form->input('is_active', ['label' => 'Ativo']);
+		echo '<hr>';
 		echo $this->Form->submit('Salvar Alterações', [
 			'escape' => false,
 			'bootstrap-type' => 'primary',

@@ -60,6 +60,11 @@
 
 <script>
     $(function(){
+
+        $('#add-exercise').autocomplete({
+            source: '../../../autocomplete/exercicios.json'
+        });
+
         var currentCol = 0;
 
         $('.submit-form').click(function(){

@@ -49,6 +49,7 @@ Router::addUrlFilter(function ($params, $request) {
 });
 
 Router::scope('/:gym_slug', function ($routes) {
+    $routes->connect('/', ['controller' => 'Users', 'action' => 'login']);
 	$routes->connect('/entrar', ['controller' => 'Users', 'action' => 'login']);
     $routes->connect('/sair', ['controller' => 'Users', 'action' => 'logout']);
 });
@@ -58,6 +59,11 @@ Router::scope('/:gym_slug/caixa-de-sugestoes', function ($routes) {
 	$routes->extensions(['json']);
 	$routes->connect('/toggle-is-star', ['controller' => 'Suggestions', 'action' => 'toggleIsStar']);
 	$routes->connect('/toggle-is-read', ['controller' => 'Suggestions', 'action' => 'toggleIsRead']);
+});
+
+Router::scope('/:gym_slug/autocomplete', function ($routes) {
+    $routes->extensions(['json']);
+    $routes->connect('/exercicios', ['controller' => 'ExercisesSuggestions', 'action' => 'index']);
 });
 
 Router::scope('/:gym_slug/usuarios', function ($routes) {

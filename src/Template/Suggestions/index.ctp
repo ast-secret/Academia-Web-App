@@ -21,9 +21,9 @@
             value="<?= $this->request->query('q')?>">
     </div>
     <div class="form-group">
-        <label class="sr-" for="exampleInputAmount">De</label>
+        <label class="sr-" for="from">De</label>
         <input
-            class="form-control input-sm"
+            class="form-control"
             id="from"
             name="from"
             placeholder="De"
@@ -31,9 +31,9 @@
             value="<?= $this->request->query('from') ?>">
     </div>
     <div class="form-group">
-        <label class="sr-" for="exampleInputAmount">Até</label>
+        <label class="sr-" for="to">Até</label>
         <input
-            class="form-control input-sm" 
+            class="form-control" 
             id="to"
             name="to"
             type="date"

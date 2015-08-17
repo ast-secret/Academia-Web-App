@@ -37,6 +37,6 @@
 			'help' => 'Confirme a sua senha atual para alterá-la'
 		]);
 		echo '<hr>';
-		echo $this->Form->submit('Salvar alterações', ['bootstrap-type' => 'primary', 'class' => 'pull-right']);
+		echo $this->Form->submit('Salvar alterações');
 	echo $this->Form->end();
 ?>	

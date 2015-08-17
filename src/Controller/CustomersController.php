@@ -74,7 +74,7 @@ class CustomersController extends AppController
         $customer = $this->Customers->newEntity();
         if ($this->request->is('post')) {
             
-            $this->request->data['gym_id'] = $this->Auth->user('id');
+            $this->request->data['gym_id'] = $this->Auth->user('gym_id');
 
             $customer = $this->Customers->patchEntity($customer, $this->request->data);
             if ($this->Customers->save($customer)) {

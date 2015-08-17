@@ -1,34 +1,3 @@
-<?php
-
-$items = [
-	[
-		'label' => 'Clientes',
-		'controller' => 'Customers',
-		'action' => 'index',
-	],
-	[
-		'label' => 'Aulas',
-		'controller' => 'Services',
-		'action' => 'index',
-	],
-	[
-		'label' => 'Comunicados',
-		'controller' => 'Releases',
-		'action' => 'index',
-	],
-	[
-		'label' => 'Caixa de Sugestões',
-		'controller' => 'Suggestions',
-		'action' => 'index',
-	],
-	[
-		'label' => 'Usuários',
-		'controller' => 'Users',
-		'action' => 'index',
-	],
-]
-?>
-
 <div style="padding-top: 10px;padding-bottom: 10px;">
 	<div class="container-fluid">
 		<div class="row">
@@ -51,7 +20,7 @@ $items = [
 					</div>
 					<div class="media-body">
 						<span class="" style="color: #FFF;">
-							<strong><?= $loggedinUser['name'] ?></strong>
+							<strong><?= $loggedinUser['short_name'] ?></strong>
 							<br>
 							<em>
 								<small>
@@ -96,7 +65,7 @@ $items = [
 	<div class="row">
 		<div class="col-md-12">
 			<ul class="side-menu nav nav-pills nav-stacked">
-				<?php foreach ($items as $item): ?>
+				<?php foreach ($menuItems as $item): ?>
 					<li class="<?= ($this->request->controller == $item['controller']) ? 'active' : '' ?>">
 						<?= $this->Html->link($item['label'], ['controller' => $item['controller'], 'action' => $item['action']]) ?>
 					</li>

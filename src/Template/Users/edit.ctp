@@ -1,10 +1,11 @@
-<?= $this->assign('title', ' - Editar usuário') ?>
+<?= $this->assign('title', ' - Editar Usuário') ?>
 
 <?php 
 	$this->Html->addCrumb('Usuários', ['action' => 'index']);
-    $this->Html->addCrumb('Editar usuário');
+    $this->Html->addCrumb('Editar Usuário');
     echo $this->Html->getCrumbList();
 ?>
+
 <br>
 
 <?= $this->Form->create($user, ['horizontal' => true, 'novalidate' => true]); ?>
@@ -22,8 +23,5 @@
         echo $this->Form->input('is_active', ['label' => 'Ativo']);
     ?>
     <hr>
-    <?= $this->Form->submit('Salvar Alterações', [
-    	'bootstrap-type' => 'primary',
-    	'class' => 'pull-right'
-    ]) ?>
+    <?= $this->Form->submit('Salvar Alterações') ?>
 <?= $this->Form->end() ?>

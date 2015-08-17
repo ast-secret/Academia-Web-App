@@ -34,18 +34,19 @@
 </head>
 <body>
 
-	<?= $this->Flash->render() ?>
-
-	<div style="width: 20%; height: 100%; float: left; overflow: auto; background-color: #3498db;">
-		<?= $this->element('side_menu') ?>		
+	<div class="hidden-md hidden-lg">
+		<?= $this->element('top_menu') ?>
 	</div>
-	<div style="width: 80%;float: left; height: 100%; overflow: auto;">
-		
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12">
-					<div style="padding: 20px;">
-						<?= $this->fetch('content') ?>
+
+	<div class="page-wrap">
+		<div class="col-left hidden-xs hidden-sm">
+			<?= $this->element('side_menu') ?>
+		</div>
+		<div class="col-right">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<?= $this->fetch('content') ?>			
 					</div>
 				</div>
 			</div>

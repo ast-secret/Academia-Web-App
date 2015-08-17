@@ -1,11 +1,12 @@
 <?= $this->assign('title', ' - Criar cliente') ?>
 
-<br>
+
 <?php 
 	$this->Html->addCrumb('Clientes', ['action' => 'index']);
 	$this->Html->addCrumb('Criar cliente');
 	echo $this->Html->getCrumbList();
 ?>
+
 <br>
 
 <?php
@@ -15,6 +16,7 @@
 	echo $this->Form->input('email');
 	
 	echo $this->Form->input('is_active', ['label' => 'Ativo']);
-	echo $this->Form->submit('Criar cliente');
+	echo '<hr>';
+	echo $this->Form->submit('Adicionar Cliente');
 	echo $this->Form->end();
 ?>	
