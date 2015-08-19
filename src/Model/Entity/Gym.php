@@ -15,15 +15,6 @@ class Gym extends Entity
      * @var array
      */
     protected $_accessible = [
-        'name' => true,
-        'description' => true,
-        'address' => true,
-        'cover_img' => true,
-        'logo_img' => true,
-        'machines' => true,
-        'phones' => true,
-        'rooms' => true,
-        'services' => true,
-        'users' => true,
+        '*' => true
     ];
 }

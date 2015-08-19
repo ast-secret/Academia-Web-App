@@ -79,18 +79,19 @@ class SuggestionsController extends AppController
         /**
          * Pega apenas as sugestoes da academia do usuario logado
          */
-        $conditions[] = ['Suggestions.gym_id' => $this->Auth->user('gym_id')];
+        $conditions[] = ['Customers.gym_id' => $this->Auth->user('gym_id')];
         $this->paginate = [
             'fields' => [
                 'id',
-                'created',
                 'text',
                 'is_read',
                 'is_star',
-                'Customers.name',
-                'Customers.id'
+                'created'
             ],
-            'contain' => ['Customers'],
+            'contain' => ['Customers' => function($q){
+                return $q
+                    ->select(['id', 'name']);
+            }],
             'conditions' => [
                 $conditions
             ]
@@ -136,7 +137,8 @@ class SuggestionsController extends AppController
         }
 
         $suggestion = $this->Suggestions->get($this->request->data('id'), [
-            'conditions' => ['Suggestions.gym_id' => $this->Auth->user('gym_id')]
+            'contain' => ['Customers'],
+            'conditions' => ['Customers.gym_id' => $this->Auth->user('gym_id')]
         ]);
         if (!$suggestion) {
             throw new NotFoundException();
@@ -162,7 +164,8 @@ class SuggestionsController extends AppController
         }
 
         $suggestion = $this->Suggestions->get($this->request->data('id'), [
-            'conditions' => ['Suggestions.gym_id' => $this->Auth->user('gym_id')]
+            'contain' => ['Customers'],
+            'conditions' => ['Customers.gym_id' => $this->Auth->user('gym_id')]
         ]);
         if (!$suggestion) {
             throw new MethodNotAllowedException();

@@ -134,7 +134,6 @@
                         <td class="text-center" style="width: 200px">
                             <em class="text-muted">
                                 <?= h($suggestion->created->timeAgoInWords([
-                                    'accuracy' => 'month',
                                     'format' => 'dd MMM',
                                     'end' => '+1 year'
                                 ])) ?>

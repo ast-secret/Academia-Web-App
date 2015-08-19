@@ -332,12 +332,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Holt59/cakephp3-bootstrap3-helpers.git",
-                "reference": "44ec8004f556c5a45a425047d0f2ba160152f4bf"
+                "reference": "1861d6715599de08d0052a65aa64bdba87f6abaa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Holt59/cakephp3-bootstrap3-helpers/zipball/44ec8004f556c5a45a425047d0f2ba160152f4bf",
-                "reference": "44ec8004f556c5a45a425047d0f2ba160152f4bf",
+                "url": "https://api.github.com/repos/Holt59/cakephp3-bootstrap3-helpers/zipball/1861d6715599de08d0052a65aa64bdba87f6abaa",
+                "reference": "1861d6715599de08d0052a65aa64bdba87f6abaa",
                 "shasum": ""
             },
             "require": {
@@ -361,7 +361,7 @@
                 "bootstrap",
                 "cakephp"
             ],
-            "time": "2015-07-27 16:14:18"
+            "time": "2015-08-08 14:04:41"
         },
         {
             "name": "ircmaxell/password-compat",

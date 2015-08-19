@@ -11,7 +11,8 @@
 	<!-- <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'> -->
 
-	<?= $this->Html->css('../lib/bootstrap/dist/css/bootstrap.min.css') ?>
+	<?= $this->Html->css('../lib/bootstrap/dist/css/bootstrap.min') ?>
+	<?= $this->Html->css('../lib/jquery-ui/themes/ui-lightness/jquery-ui.min') ?>
 	<?= $this->Html->css('app.css') ?>
 
 	<?= $this->Html->script('../lib/jquery/dist/jquery.min.js') ?>

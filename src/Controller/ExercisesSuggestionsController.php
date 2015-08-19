@@ -27,7 +27,6 @@ class ExercisesSuggestionsController extends AppController
         $term = $this->request->query('term');
         $suggestions = $this->ExercisesSuggestions->find('all', [
             'fields' => [
-                'ExercisesSuggestions.id',
                 'ExercisesSuggestions.name'
             ],
             'conditions' => [
@@ -35,8 +34,9 @@ class ExercisesSuggestionsController extends AppController
             ],
             'limit' => 20
         ]);
-        $this->set('suggestions', $suggestions);
-        $this->set('_serialize', ['suggestions']);
+
+        echo json_encode($suggestions);
+        $this->autoRender = false;
     }
 
     /**

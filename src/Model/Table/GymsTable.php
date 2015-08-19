@@ -39,7 +39,7 @@ class GymsTable extends Table
         $this->hasMany('Users', [
             'foreignKey' => 'gym_id'
         ]);
-        $this->hasMany('Suggestions', [
+        $this->hasMany('Customers', [
             'foreignKey' => 'gym_id'
         ]);
     }

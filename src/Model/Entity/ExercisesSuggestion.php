@@ -9,6 +9,8 @@ use Cake\ORM\Entity;
 class ExercisesSuggestion extends Entity
 {
 
+    protected $_virtual = ['label', 'value'];
+
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      * Note that '*' is set to true, which allows all unspecified fields to be
@@ -19,12 +21,15 @@ class ExercisesSuggestion extends Entity
      */
     protected $_accessible = [
         '*' => true,
-        'id' => false,
-        'tey' => true
+        'id' => false
     ];
 
-    protected function _getTey()
+    protected function _getValue()
     {
-        return 'oi';
+        return $this->_properties['name'];
+    }
+    protected function _getLabel()
+    {
+        return $this->_properties['name'];
     }
 }

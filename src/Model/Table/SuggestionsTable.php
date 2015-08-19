@@ -24,12 +24,7 @@ class SuggestionsTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
-        $this->belongsTo('Customers', [
-            'foreignKey' => 'gym_id'
-        ]);
-        $this->belongsTo('Gyms', [
-            'foreignKey' => 'gym_id'
-        ]);
+        $this->belongsTo('Customers');
     }
 
     /**
