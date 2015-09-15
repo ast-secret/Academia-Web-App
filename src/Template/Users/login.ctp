@@ -2,7 +2,7 @@
 
 <div class="" style="border: 1px solid #E7E7E7; border-radius: 6px; padding: 30px;">
 	<div class="text-center" style="margin-bottom: 40px;">
-		<?= $this->Html->image('logo.jpg', ['height' => 140]) ?>
+		<?= $this->Html->image('logo.png', ['height' => 100]) ?>
 	</div>
 	<?= $this->Form->create() ?>
 		<?= $this->Form->input('username', [

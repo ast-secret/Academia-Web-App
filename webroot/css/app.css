@@ -18,7 +18,7 @@ body{
 .col-left{
 	position: fixed;
 	height: 100%;
-	background-color: #4aa3df;
+	background-color: #3F51B5;
 	width: 18%;
 	overflow: auto;
 }
@@ -76,8 +76,8 @@ textarea {
 .side-menu li a{
 	color: #FFF;
 }
-.side-menu li a:hover, .side-menu li a:active, .side-menu li a:focus{
-	background-color: #2980b9!important;
+.side-menu li.active > a, .side-menu li a:hover, .side-menu li a:active, .side-menu li a:focus{
+	background-color: #3749ac!important;
 }
 
 .truncate-text {

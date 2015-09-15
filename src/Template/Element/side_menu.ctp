@@ -10,7 +10,7 @@
 	</div>
 </div>
 
-<div style="margin-bottom: 20px; background-color: #2980b9; padding-top: 10px; padding-bottom: 10px;">
+<div style="margin-bottom: 20px; background-color: #3749ac; padding-top: 10px; padding-bottom: 10px;">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-10">
