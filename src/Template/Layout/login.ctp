@@ -43,13 +43,13 @@
 		}
 	</style>
 </head>
-	<body>
+	<body class="login-bg">
 		<div class="container">
 			<div class="row" style="margin-top: 100px;">
 				<div class="col-md-4 col-md-offset-4">
-					<?= $this->Flash->render(); ?>
-					<?= $this->Flash->render('auth'); ?>
-					<?= $this->fetch('content') ?>
+					<div class="login-box">
+						<?= $this->fetch('content') ?>
+					</div>
 				</div>
 			</div>
 		</div>

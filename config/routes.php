@@ -52,6 +52,8 @@ Router::scope('/:gym_slug', function ($routes) {
     $routes->connect('/', ['controller' => 'Users', 'action' => 'login']);
 	$routes->connect('/entrar', ['controller' => 'Users', 'action' => 'login']);
     $routes->connect('/sair', ['controller' => 'Users', 'action' => 'logout']);
+    $routes->connect('/requisitar-redefinicao-de-senha', ['controller' => 'Users', 'action' => 'requestPasswordReset']);
+    $routes->connect('/redefinicao-de-senha/:email/:token', ['controller' => 'Users', 'action' => 'passwordReset']);
 });
 Router::scope('/:gym_slug/caixa-de-sugestoes', function ($routes) {
 	$routes->connect('/', ['controller' => 'Suggestions', 'action' => 'index']);

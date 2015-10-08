@@ -16,21 +16,8 @@ class User extends Entity
      * @var array
      */
     protected $_accessible = [
-        'name' => true,
-        'gym_id' => true,
-        'role_id' => true,
-        'username' => true,
-        'password' => true,
-        'is_active' => true,
-        'deleted' => false,
-        'gym' => true,
-        'role' => true,
-        'cards' => true,
-        'releases' => true,
-        'confirm_password_add' => true,
-        'current_password' => true,
-        'new_password' => true,
-        'confirm_new_password' => true
+        '*' => true,
+        'id' => false,
     ];
 
     protected function _setPassword($password){

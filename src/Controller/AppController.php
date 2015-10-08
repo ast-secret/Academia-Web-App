@@ -15,7 +15,7 @@
 namespace App\Controller;
 
 use Cake\Controller\Controller;
-
+use Cake\Event\Event;
 
 /**
  * Application Controller
@@ -27,20 +27,19 @@ use Cake\Controller\Controller;
  */
 class AppController extends Controller
 {
-    public $layout = 'custom';
 
     public $helpers = [
         'Form' => [
-            'className' => 'Bootstrap3.BootstrapForm'
+            'className' => 'Bootstrap.BootstrapForm'
         ],
         'Html' => [
-            'className' => 'Bootstrap3.BootstrapHtml'
+            'className' => 'Bootstrap.BootstrapHtml'
         ],
         'Paginator' => [
-            'className' => 'Bootstrap3.BootstrapPaginator'
+            'className' => 'Bootstrap.BootstrapPaginator'
         ],
         'Modal' => [
-            'className' => 'Bootstrap3.BootstrapModal'
+            'className' => 'Bootstrap.BootstrapModal'
         ]
     ];
 
@@ -53,6 +52,9 @@ class AppController extends Controller
      */
     public function initialize()
     {
+
+        $this->viewBuilder()->layout('custom');
+
         $menuItems = [
             [
                 'label' => 'Clientes',
@@ -101,14 +103,32 @@ class AppController extends Controller
                 ]
             ]
         ]);
+
         $this->loadComponent('Flash');
-        if ( $this->Auth->user()) {
+
+
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        if ($this->Auth->user()) {
+            if ($this->Auth->user('gym.slug') != $this->request->params['gym_slug']) {
+                return $this->redirect(['controller' => 'Site', 'action' => 'home']);
+            }
+
             $loggedinUser = $this->Auth->user();
             $shortName = explode(' ', $loggedinUser['name']);
             $total = count($shortName);
             $loggedinUser['short_name'] = ($total > 1) ? $shortName[0] . ' ' . $shortName[$total - 1] : $shortName[0];
 
             $this->set(compact('loggedinUser'));
+        }
+        // Evita que ele vá para a tela de login já logado
+        if (
+            $this->request->controller == 'Users' &&
+            $this->request->action == 'login' &&
+            $this->Auth->user()) {
+            return $this->redirect(['controller' => 'Customers']);
         }
     }
 

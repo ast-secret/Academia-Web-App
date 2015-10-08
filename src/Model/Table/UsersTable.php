@@ -55,7 +55,6 @@ class UsersTable extends Table
          */
         if (isset($entity->new_password)) {
             $entity->password = $entity->new_password;
-            $entity->accessible('*', false);
             $entity->accessible('password', true);
         }
     }
@@ -124,6 +123,14 @@ class UsersTable extends Table
                     return $value == $context['data']['confirm_new_password'];
                 },
                 'message' => 'Você não confirmou a sua nova senha corretamente',
+            ])
+            ->add('new_password', 'maxLength', [
+                'rule' => ['maxLength', $maxLength],
+                'message' => 'A senha deve conter no máximo '.$maxLength.' caracteres'
+            ])
+            ->add('new_password', 'minLength', [
+                'rule' => ['minLength', $minLength],
+                'message' => 'A senha deve conter no mínimo '.$minLength.' caracteres'
             ]);
 
         $validator

@@ -5,10 +5,33 @@ body {
   min-height: 100%;
 }
 body{
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Roboto', sans-serif!important;
 	font-size: 15px;
 	padding: 0!important;
 	margin: 0;
+}
+/*Mudança de cores dos botões*/
+.btn{
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border: 0;
+}
+.btn-primary{
+	background-color: #3498db;
+}
+.btn-danger{
+	background-color: #e74c3c;
+}
+.btn-lg{
+	font-size: 17px;
+}
+.btn-default{
+	color: #000;
+	border: #bdc3c7 solid 1px;
+}
+.btn-default:hover{
+	background-color: #F3F3F3;
 }
 
 .page-wrap{
@@ -148,4 +171,20 @@ textarea {
 	font-size: 18px;
 	padding-left: 5px;
 	cursor: pointer;
+}
+
+/*LOGIN*/
+.login-bg{
+	background-color: #EEE;
+}
+.login-box{
+	background-color: #FFF;
+	border: 1px solid #DDD;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	padding: 30px;
+}
+.login-box input{
+	font-size: 15px;
 }

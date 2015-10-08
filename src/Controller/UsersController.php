@@ -19,7 +19,13 @@ class UsersController extends AppController
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['add','passwordGenerator']);
+        parent::beforeFilter($event);
+        $this->Auth->allow([
+            'add',
+            'passwordGenerator',
+            'requestPasswordReset',
+            'passwordReset'
+        ]);
     }
 
     public function myPasswordSettings()
@@ -92,7 +98,7 @@ class UsersController extends AppController
 
     public function login()
     {
-        $this->layout = 'login';
+        $this->viewBuilder()->layout('login');
 
         $this->loadModel('Gyms');
 
@@ -113,16 +119,14 @@ class UsersController extends AppController
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
-                $this->Flash->error(
-                    __('Username or password is incorrect'),
-                    'default',
-                    [],
-                    'auth'
-                );
+                $this->Flash->auth('Combinção login/senha incorreta.');
             }
         }
 
-        $this->set('gym', $gym);
+        $this->set([
+            'gym' => $gym,
+            'logoPath' => '../files/img/' . $gym->img_folder . '/logo_login.png'
+        ]);
     }
 
     /**
@@ -408,5 +412,160 @@ class UsersController extends AppController
         }
     }
 
+    public function requestPasswordReset()
+    {
+        $this->viewBuilder()->layout('login');
+
+        $this->loadModel('Gyms');
+
+        $gym = $this->Gyms->find('all', [
+            'conditions' => [
+                'slug' => $this->request->params['gym_slug']
+            ]
+        ])
+        ->first();
+
+        if (!$gym) {
+            throw new NotFoundException("Página não encontrada");
+        }
+
+        if ($this->request->is('post')) {
+            $email = $this->request->data('email');
+            $token = md5($this->_generateStrongPassword(20, false, 'lud'));
+            $token_exp = (new Time('+1 days'))->format('Y-m-d H:i:s');
+
+            $user = $this->Users->find('all', [
+                'conditions' => [
+                    'Users.username' => $email,
+                    'Users.deleted' => 0,
+                    'Users.gym_id' => $gym->id
+                ]
+            ])
+            ->first();
+            if (!$user) {
+                $this->Flash->error('Email não cadastrado.');
+            } else {
+                $user = $this->Users->patchEntity($user, [
+                    'token_password' => $token,
+                    'token_password_exp' => $token_exp
+                ]);
+                if ($this->Users->save($user)) {
+                    $this->Flash->success("Informações de redefinição de senha enviadas para o endereço " .h($email) . ".");
+                    $this->request->data['email'] = null;
+                } else {
+                    $this->Flash->error('Ocorreu um erro, por favor, tente novamente.');
+                }
+            }
+
+        }
+
+        $this->set([
+            'logoPath' => '../files/img/' . $gym->img_folder . '/logo_login.png'
+        ]);
+    }
+
+    public function passwordReset()
+    {
+        $this->viewBuilder()->layout('login');
+
+        $this->loadModel('Gyms');
+
+        $email = $this->request->params['email'];
+        $token = $this->request->params['token'];
+
+        $gym = $this->Gyms->find('all', [
+            'conditions' => [
+                'slug' => $this->request->params['gym_slug']
+            ]
+        ])
+        ->first();
+
+        if (!$gym) {
+            throw new NotFoundException("Página não encontrada");
+        }
+
+        $user = $this->Users->newEntity();
+
+        if ($this->request->is(['post', 'put'])) {
+
+            $user = $this->Users->find('all', [
+                'conditions' => [
+                    'Users.username' => $email,
+                    'Users.deleted' => 0,
+                    'Users.gym_id' => $gym->id
+                ]
+            ])
+            ->first();
+
+            if (!$user) {
+                $this->Flash->error('Email não cadastrado.');
+            } else {
+                if ($token != $user->token_password) {
+                    $this->Flash->error('O token informado é inválido.');
+                } else {
+
+                    if (Time::now() > $user->token_password_exp) {
+                        $this->Flash->error('A requisição para redefinição de senha expirou, você deve requisitar novamente.');
+                    } else {
+                        $user->accessible('*', false);
+                        $user->accessible('password', true);
+                        $user->accessible('new_password', true);
+                        $user->accessible('confirm_new_password', true);
+                        $user->accessible('token_password', true);
+                        $user->accessible('token_password_exp', true);
+                        $this->request->data['token_password'] = null;
+                        $this->request->data['token_password_exp'] = null;
+                        $user = $this->Users->patchEntity($user, $this->request->data);
+                        if ($this->Users->save($user)) {
+                            $this->Flash->success("A sua senha foi redefinida corretamente.");
+                            return $this->redirect(['action' => 'login']);
+                        } else {
+                            $this->Flash->error('Ocorreu um erro, por favor, tente novamente.');
+                        }
+                    }
+                }
+            }
+        }
+
+        $this->set([
+            'user' => $user,
+            'logoPath' => '../files/img/' . $gym->img_folder . '/logo_login.png'
+        ]);
+    }
+
+    function _generateStrongPassword($length = 9, $add_dashes = false, $available_sets = 'luds')
+    {
+        $sets = array();
+        if(strpos($available_sets, 'l') !== false)
+            $sets[] = 'abcdefghjkmnpqrstuvwxyz';
+        if(strpos($available_sets, 'u') !== false)
+            $sets[] = 'ABCDEFGHJKMNPQRSTUVWXYZ';
+        if(strpos($available_sets, 'd') !== false)
+            $sets[] = '23456789';
+        if(strpos($available_sets, 's') !== false)
+            $sets[] = '!@#$%&*?';
+        $all = '';
+        $password = '';
+        foreach($sets as $set)
+        {
+            $password .= $set[array_rand(str_split($set))];
+            $all .= $set;
+        }
+        $all = str_split($all);
+        for($i = 0; $i < $length - count($sets); $i++)
+            $password .= $all[array_rand($all)];
+        $password = str_shuffle($password);
+        if(!$add_dashes)
+            return $password;
+        $dash_len = floor(sqrt($length));
+        $dash_str = '';
+        while(strlen($password) > $dash_len)
+        {
+            $dash_str .= substr($password, 0, $dash_len) . '-';
+            $password = substr($password, $dash_len);
+        }
+        $dash_str .= $password;
+        return $dash_str;
+    }
 }
     
