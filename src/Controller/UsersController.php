@@ -119,7 +119,7 @@ class UsersController extends AppController
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
-                $this->Flash->auth('Combinção login/senha incorreta.');
+                $this->Flash->auth('Combinação login/senha incorreta.');
             }
         }
 
@@ -159,6 +159,7 @@ class UsersController extends AppController
 
         $conditions[] = [
             'Users.gym_id' => $this->Auth->user('gym_id'),
+            'Users.id !=' => $this->Auth->user('id'),
             'Users.deleted' => 0
         ];
 
@@ -203,8 +204,12 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
 
         if ($this->request->is('post')) {
-            
+            /**
+             * Se possuir um usuario com o mesmo email porem deletado ele não irá falar 
+             * que o email já existe
+             */
             $this->request->data['gym_id'] = $this->Auth->user('gym_id');            
+            $this->request->data['deleted_test'] = 0;            
 
             $user = $this->Users->patchEntity($user, $this->request->data);
             // Evitar que ele edite algum usuario
@@ -255,7 +260,7 @@ class UsersController extends AppController
             }
         }
         
-        $roles = $this->Users->Roles->find('list', ['limit' => 200]);
+        $roles = $this->Users->Roles->find('list', ['order' => 'Roles.ordenation', 'limit' => 200]);
 
         $this->set(compact('user', 'roles'));
     }
@@ -489,6 +494,11 @@ class UsersController extends AppController
         if ($this->request->is(['post', 'put'])) {
 
             $user = $this->Users->find('all', [
+                'fields' => [
+                    'Users.id',
+                    'Users.token_password',
+                    'Users.token_password_exp',
+                ],
                 'conditions' => [
                     'Users.username' => $email,
                     'Users.deleted' => 0,

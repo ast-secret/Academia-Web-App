@@ -13,7 +13,10 @@
 
 	<?= $this->Html->css('../lib/bootstrap/dist/css/bootstrap.min') ?>
 	<?= $this->Html->css('../lib/jquery-ui/themes/ui-lightness/jquery-ui.min') ?>
+	
+	<?= $this->Html->css('animate.css') ?>
 	<?= $this->Html->css('app.css') ?>
+
 
 	<?= $this->Html->script('../lib/jquery/dist/jquery.min.js') ?>
 	<?= $this->Html->script('../lib/jquery-ui/jquery-ui.min.js') ?>
@@ -34,6 +37,8 @@
 	</script>
 </head>
 <body>
+
+	<?= $this->Flash->render() ?>
 
 	<div class="hidden-md hidden-lg">
 		<?= $this->element('top_menu') ?>

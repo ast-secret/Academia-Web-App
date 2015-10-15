@@ -97,7 +97,8 @@ class AppController extends Controller
             'authenticate' => [
                 'Form' => [
                     'scope' => [
-                        'Users.is_active' => true
+                        'Users.is_active' => true,
+                        'Users.deleted' => false
                     ],
                     'contain' => ['Roles', 'Gyms']
                 ]

@@ -78,12 +78,18 @@ class UsersTable extends Table
         $validator
             ->requirePresence('username', 'create')
             ->notEmpty('username')
-            ->add('username', [
-                'unique' => [
-                    'rule' => ['validateUnique', ['scope' => 'gym_id']],
-                    'message' => 'O email informado já está sendo usado por outro usuário',
-                    'provider' => 'table'
-                ]
+            ->add('username', 'custom', [
+                'rule' => function($value, $context) {
+                    $user = $this->find('all', [
+                        'conditions' => [
+                            'Users.username' => $context['data']['username'],
+                            'Users.deleted' => 0,
+                        ]
+                    ]);
+
+                    return $user->isEmpty();
+                },
+                'message' => 'O email informado já está sendo usado por outro usuário',
             ])
             ->add('username', 'email', ['rule' => 'email']);
             

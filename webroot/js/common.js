@@ -12,4 +12,9 @@ $(function(){
         }
         $('#filters').val(value);
     });
+
+    window.setTimeout(function(){
+        $('.custom-flash').addClass('fadeOutUp');    
+    }, 3000);
+
 });

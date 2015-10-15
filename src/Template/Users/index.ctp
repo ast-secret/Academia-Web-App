@@ -83,6 +83,13 @@
                     </td>
                 </tr>
             <?php endforeach; ?>
+            <?php if ($users->isEmpty()): ?>
+                <tr>
+                    <td colspan="5">
+                        Nenhum usuário para exibir.
+                    </td>
+                </tr>
+            <?php endif ?>
         </tbody>
     </table>
 </div>
