@@ -27,8 +27,6 @@
 		echo $this->Form->input('name', ['label' => 'Nome']);
 		echo $this->Form->input('username', ['label' => 'Email']);
 
-		echo $this->Form->input('is_active', ['label' => 'Ativo', 'type' => 'checkbox']);
-
 		echo '<hr>';
 		echo $this->Form->input('current_password', [
 			'type' => 'password',

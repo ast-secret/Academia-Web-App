@@ -9,7 +9,7 @@ msgstr "em %s"
 #: I18n/Time.php:387
 msgid "{0} month"
 msgid_plural "{0} months"
-msgstr[0] "{0} mes"
+msgstr[0] "{0} mês"
 msgstr[1] "{0} meses"
 
 #: I18n/Time.php:387

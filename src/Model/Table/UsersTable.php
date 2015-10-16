@@ -80,11 +80,22 @@ class UsersTable extends Table
             ->notEmpty('username')
             ->add('username', 'custom', [
                 'rule' => function($value, $context) {
+                    $conditions = [];
+                    /**
+                     * Se for no add não terá current username entao nao
+                     * entra no condition porém nao tem importancia afinal como ele
+                     * nao tem current nao precisa de comparar
+                     */
+                    if (isset($context['data']['current_username'])) {
+                        $conditions[] = ['Users.username !=' => $context['data']['current_username']];
+                    }
+                    $conditions[] = [
+                        'Users.username' => $context['data']['username'],
+                        'Users.gym_id' => $context['data']['gym_id'],
+                        'Users.deleted' => 0,
+                    ];
                     $user = $this->find('all', [
-                        'conditions' => [
-                            'Users.username' => $context['data']['username'],
-                            'Users.deleted' => 0,
-                        ]
+                        'conditions' => $conditions
                     ]);
 
                     return $user->isEmpty();

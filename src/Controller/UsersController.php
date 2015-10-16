@@ -34,6 +34,9 @@ class UsersController extends AppController
 
         if ($this->request->is(['post', 'patch', 'put'])) {
 
+            $user->accessible('*', false);
+            $user->accessible('new_password', true);
+
             $user = $this->Users->patchEntity($user, $this->request->data);
 
             if ($this->Users->save($user)) {
@@ -51,6 +54,7 @@ class UsersController extends AppController
         $tab = 1;
 
         $gym_id = $this->Auth->user('gym_id');
+        $currentUsername = $this->Auth->user('username');
         $user = $this->Users->get($this->Auth->user('id', ['fields' => [
             'User.id',
             'User.name',
@@ -67,7 +71,8 @@ class UsersController extends AppController
 
         if ($this->request->is(['patch', 'post', 'put'])) {
 
-            $this->request->data['gym_id'] = $gym_id; //Bom tb para o scope do unique username
+            $this->request->data['gym_id'] = $gym_id; //Validar Unique emails
+            $this->request->data['current_username'] = $currentUsername; //Validar unique email
 
             $user = $this->Users->patchEntity($user, $this->request->data);
 
@@ -77,6 +82,7 @@ class UsersController extends AppController
                 $this->Auth->session->write($this->Auth->sessionKey . '.name', $user->name);
                 $this->Auth->session->write($this->Auth->sessionKey . '.username', $user->username);
                 $this->Flash->success('As alterações foram salvas com sucesso.');
+                return $this->redirect(['action' => 'mySettings']);
             } else {
                 $this->Flash->error('As informações não poderam ser salvas. Por favor, tente novamente.');
             }
@@ -209,7 +215,6 @@ class UsersController extends AppController
              * que o email já existe
              */
             $this->request->data['gym_id'] = $this->Auth->user('gym_id');            
-            $this->request->data['deleted_test'] = 0;            
 
             $user = $this->Users->patchEntity($user, $this->request->data);
             // Evitar que ele edite algum usuario
@@ -247,11 +252,11 @@ class UsersController extends AppController
 
             $this->request->data['gym_id'] = $gym_id;
 
+            $user->accessible('*', false);
+            $user->accessible('role_id', true);
+            $user->accessible('is_active', true);
             $user = $this->Users->patchEntity($user, $this->request->data);
-            // Evita que ele passe uma senha nova pelo array e altere
-            $user->accessible('name', false);
-            $user->accessible('username', false);
-            $user->accessible('password', false);
+            
             if ($this->Users->save($user)) {
                 $this->Flash->success('O usuário foi salvo com sucesso.');
                 return $this->redirect(['action' => 'index']);
@@ -286,7 +291,6 @@ class UsersController extends AppController
             throw new NotFoundException();
         }
 
-        $user->accessible('deleted', true);
         $user->deleted = true;
 
         if ($this->Users->save($user)) {
@@ -523,8 +527,10 @@ class UsersController extends AppController
                         $user->accessible('confirm_new_password', true);
                         $user->accessible('token_password', true);
                         $user->accessible('token_password_exp', true);
+
                         $this->request->data['token_password'] = null;
                         $this->request->data['token_password_exp'] = null;
+                        
                         $user = $this->Users->patchEntity($user, $this->request->data);
                         if ($this->Users->save($user)) {
                             $this->Flash->success("A sua senha foi redefinida corretamente.");
