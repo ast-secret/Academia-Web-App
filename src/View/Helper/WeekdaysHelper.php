@@ -9,10 +9,6 @@ class WeekdaysHelper extends Helper
 
 	private $weekdays = [
 		[
-			'id' => 0,
-			'name' => 'Domingo',
-		],
-		[
 			'id' => 1,
 			'name' => 'Segunda-feira',
 		],
@@ -35,6 +31,10 @@ class WeekdaysHelper extends Helper
 		[
 			'id' => 6,
 			'name' => 'Sábado',
+		],
+		[
+			'id' => 7,
+			'name' => 'Domingo',
 		],
 	];
 

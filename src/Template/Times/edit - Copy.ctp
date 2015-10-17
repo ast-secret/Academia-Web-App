@@ -132,82 +132,16 @@ echo $this->Html->getCrumbList();
 ]) ?>
 
 <div class="row">
-    <div class="col-md-12 text-right">
-        <!-- <div class="alert custom-flash-error clearfix">
+    <div class="col-md-12">
+        <div class="alert custom-flash-error clearfix">
             <strong><span class="glyphicon glyphicon-warning-sign"></span> Atenção!</strong>
             Qualquer alteração de horário só será efetivada clicando no botão ao lado.
             <button class="btn btn-default pull-right" type="submit">
                 Salvar alterações
             </button>
-        </div> -->
-        <button class="btn btn-default" type="submit">
-            Salvar alterações
-        </button>
-        <p style="margin: 10px 0 20px 0;" class="text-muted">
-            <?= $this->Html->icon('warning-sign') ?> Qualquer alteração de horário só será efetivada clicando no botão acima.
-        </p>
+        </div>
     </div>
 </div>
-
-<?= $this->Form->create($service, [
-]) ?>
-    <div class="row">
-<?php foreach ($this->Weekdays->getAll() as $weekday): ?>
-
-        <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading"><?= $weekday['name'] ?></div>
-            <div class="panel-body">
-                <div class="row form-inline">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <select class="form-control">
-                                <option value="">
-                                    Hor.
-                                </option>
-                                <?php for($i = 0; $i <=23; $i++): ?>
-                                    <option value="<?= $i?>">
-                                        <?= str_pad($i, 2, '0', STR_PAD_LEFT); ?>
-                                    </option>
-                                <?php endfor ?>
-                            </select>
-                            :
-                            <select class="form-control">
-                                <option value="">
-                                    Min.
-                                </option>
-                                <?php for($i = 0; $i <= 59; $i++): ?>
-                                    <option value="<?= $i?>">
-                                        <?= str_pad($i, 2, '0', STR_PAD_LEFT); ?>
-                                    </option>
-                                <?php endfor ?>
-                            </select>
-                        </div>
-                        <?= $this->Form->button($this->Html->icon('plus'), [
-                            'class' => 'btn-sm'
-                        ]) ?>
-                    </div>
-                    <div class="col-md-9">
-                        <div style="margin-top: 10px;">
-                            <small>
-                                <em
-                                    class="text-muted">
-                                    Nenhum horário cadastrado <strong><?= $weekday['name'] ?></strong>.
-                                </em>
-                            </small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- <ul class="list-group">
-                <li class="list-group-item">10:00</li>
-            </ul> -->
-        </div>
-        </div>
-    
-<?php endforeach ?>
-</div>
-<?= $this->Form->end() ?>
 
 <?php foreach ($this->Weekdays->getAll() as $weekday): ?>
     <div class="row">
@@ -218,6 +152,11 @@ echo $this->Html->getCrumbList();
                 </h5>
                 <div class="row">
                     <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                
+                            </div>
+                        </div>
                         <div
                             id="times-wrap"
                             data-weekday="<?= $weekday['id']?>"
@@ -251,15 +190,12 @@ echo $this->Html->getCrumbList();
                                 ?>
                             </div>
                             <div class="form-group">
-                                <!-- <button
+                                <button
                                     type="button"
                                     class="btn btn-default btn-sm"
                                     id="add-time" data-weekday="<?= $weekday['id'] ?>">
                                     <span class="glyphicon glyphicon-plus"></span>
-                                </button> -->
-                                <?= $this->Form->button($this->Html->icon('plus'), [
-                                    'class' => 'btn-sm'
-                                ]) ?>
+                                </button>
                             </div>
                         </div>
                     </div>

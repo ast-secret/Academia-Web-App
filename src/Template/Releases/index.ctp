@@ -91,14 +91,15 @@
                         <td>
                             <?= $this->Html->link(
                                 h($release->user->name),
-                                    [
-                                        'controller' => 'users',
-                                        'action' => 'view',
-                                        $release->user_id],
-                                    [
-                                        'escape' => true,
-                                        'title' => $release->user->name
-                                    ])
+                                [
+                                    'controller' => 'Users',
+                                    'action' => 'index',
+                                    '?' => ['q' => h($release->user->name)]
+                                ],
+                                [
+                                    'escape' => true,
+                                    'title' => $release->user->name
+                                ])
                             ?>
                             <br>
                             <em class="text-muted">
@@ -110,6 +111,7 @@
                                     ]
                                 ) ?>
                             </em>
+                            <h4><?= h($release->title) ?></h4>
                             <p class="text-align: justify; text-justify: inter-word;">
                                 <?= h($release->text) ?>
                             </p>
@@ -140,7 +142,7 @@
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="10"><em>Nenhum comunicado criado por enquanto.</em></td>
+                    <td colspan="10"><em>Nenhum comunicado para exibir.</em></td>
                 </tr>
             <?php endif; ?>
         </tbody>

@@ -44,7 +44,14 @@ class ReleasesTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-            
+        $maxLength = 120;
+        $validator
+            ->requirepresence('title', 'create')
+            ->notEmpty('title')
+            ->add('text', 'maxLength', [
+                'rule' => ['maxLength', $maxLength],
+                'message' => 'O título deve conter no máximo '.$maxLength.' caracteres.'
+            ]);
         $minLength = 10;
         $maxLength = 800;
         $validator

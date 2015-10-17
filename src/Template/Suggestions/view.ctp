@@ -8,7 +8,7 @@
 <br>
 
 <div class="row">
-	<div class="col-md-8">
+	<div class="col-md-6">
         <?= h($suggestion->customer->name) ?>
 		<br>
 		<small>
@@ -24,7 +24,7 @@
     	'controller' => 'Suggestions', 'action' => 'toggleIsRead', '_ext' => 'json'
     ]) ?>
 	<div
-		class="col-md-4 text-right"
+		class="col-md-2 text-right"
 		data-suggestion-id="<?= $suggestion->id ?>"
 		data-url-toggle-is-read="<?= $urlToggleIsRead ?>"
 		data-url-toggle-is-star="<?= $urlToggleIsStar ?>">
@@ -63,7 +63,7 @@
 <br>
 
 <div class="row" style="margin-top: 15px;">
-    <div class="col-md-7 col-md-offset-2 text-center">
+    <div class="col-md-7">
         <p style="line-height: 22px;">
             <?= h($suggestion->text) ?>
         </p>

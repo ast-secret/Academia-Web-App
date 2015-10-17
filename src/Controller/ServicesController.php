@@ -42,17 +42,20 @@ class ServicesController extends AppController
                 break;
         }
 
+        $conditions[] = ['Services.gym_id' => $this->Auth->user('gym_id')];
+        
         $this->paginate = [
             'conditions' => $conditions,
-            'contain' => [
-                'Times' => [
-                    'strategy' => 'select',
-                    'queryBuilder' => function($q){
-                        return $q->order(['weekday' => 'ASC', 'start_hour' => 'ASC']);
-                    }
-                ]
-            ],
-            'order' => ['Times.weekday_id' => 'DESC']
+            // 'contain' => [
+            //     'Times' => [
+            //         'strategy' => 'select',
+            //         'queryBuilder' => function($q){
+            //             return $q->order(['weekday' => 'ASC', 'start_hour' => 'ASC']);
+            //         }
+            //     ]
+            // ],
+            // 'order' => ['Times.weekday_id' => 'DESC'],
+            'order' => ['Services.description' => 'DESC']
         ];
         $this->set('services', $this->paginate($this->Services));
 

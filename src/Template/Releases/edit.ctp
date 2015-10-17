@@ -24,7 +24,15 @@
 <br>
 
 <?= $this->Form->create($release, ['novalidate' => true, 'horizontal' => true]); ?>
-    <?= $this->Form->input('text',['label' => 'Texto', 'type' => 'textarea', 'rows' => 8, 'maxlength' => false]) ?>  
+    <?= $this->Form->input('title', [
+        'label' => 'Título'
+    ]) ?>
+    <?= $this->Form->input('text', [
+        'label' => 'Texto',
+        'type' => 'textarea',
+        'rows' => 8,
+        'maxlength' => false
+    ]) ?>  
     <div class="row">
     	<div class="col-md-6 col-md-offset-2">
     		<p id="container-counter" class="help-block"></p>		

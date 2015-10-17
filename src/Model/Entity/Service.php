@@ -17,14 +17,8 @@ class Service extends Entity
      * @var array
      */
     protected $_accessible = [
-        'gym_id' => true,
-        'name' => true,
-        'description' => true,
-        'is_active' => true,
-        'duration' => true,
-        'gym' => true,
-        'times' => true,
-        'times_string' => true
+        '*' => true,
+        'id' => false
     ];
 
     protected function _getTimesString()

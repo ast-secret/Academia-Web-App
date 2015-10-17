@@ -13,6 +13,7 @@
     <input type="hidden" value="<?= $this->request->query('tab') ?>" name="tab" id="tab">
     <div class="form-group">
         <input
+            autocomplete="off"
             class="form-control"
             id="q"
             name="q"
@@ -115,7 +116,11 @@
                         </td>
                         <td style="width: 150px;">
                             <div  class="truncate-text" style="width: 149px">
-                                <?= h($suggestion->customer->name) ?>
+                                <?= $this->Html->link(h($suggestion->customer->name), [
+                                    'controller' => 'Customers',
+                                    'action' => 'index',
+                                    '?' => ['q' => h($suggestion->customer->name)]
+                                ]) ?>
                             </div>
                         </td>
                         <td>

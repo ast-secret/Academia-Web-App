@@ -1,4 +1,4 @@
-<?= $this->assign('title', ' - Editar Aula') ?>
+<?= $this->assign('title', ' - Criar aula') ?>
 
 <?= $this->Html->script('../lib/niceCharCounter/dist/jquery.niceCharCounter', ['inline' => false]) ?>
 
@@ -15,16 +15,17 @@
 		});";
 	$this->Html->scriptEnd();
 ?>
+
 <?php 
 	$this->Html->addCrumb('Aulas', ['action' => 'index']);
-	$this->Html->addCrumb('Editar Aula');
+	$this->Html->addCrumb('Editar aula');
 	echo $this->Html->getCrumbList();
 ?>
 <br>
 
 <?php
 	echo $this->Form->create($service, ['novalidate' => true, 'horizontal' => true]);
-			echo $this->Form->input('name', ['label' => 'Nome']);
+		echo $this->Form->input('name', ['label' => 'Nome']);
 		echo $this->Form->input('description', [
 			'label' => 'Descrição',
 			'type' => 'textarea'
@@ -34,13 +35,12 @@
 			'label' => 'Duração',
 			'help' => 'Duração da aula em minutos'
 		]);
-		
+		echo $this->Form->input('gasto_calorico', [
+			'label' => 'Gasto Calórico',
+			'append' => 'kcal'
+		]);
 		echo $this->Form->input('is_active', ['label' => 'Ativo']);
 		echo '<hr>';
-		echo $this->Form->submit('Salvar Alterações', [
-			'escape' => false,
-			'bootstrap-type' => 'primary',
-			'class' => 'pull-right'
-		]);
+		echo $this->Form->submit('Salvar Alterações');
 	echo $this->Form->end();
 ?>	

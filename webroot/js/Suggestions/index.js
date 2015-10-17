@@ -25,7 +25,9 @@ $(function(){
 			ajaxInProgress = true;
 			$.post(urlToggleIsRead, {id: suggestionId, add: value}, function(){
 			},'json')
-			.fail(function(){
+			.fail(function(err){
+				console.log('tey');
+				console.log(err);
 				$this.parents('tr').fadeIn(speed, function(){
 					alert('Ocorreu um erro ao tentar arquivar a sugestão, por favor tente novamente.');	
 					location.reload();
@@ -53,7 +55,8 @@ $(function(){
 		$.post(urlToggleIsStar, {id: suggestionId, add: value}, function(){
 			$this.data({'has-star': value});
 		},'json')
-		.fail(function(){
+		.fail(function(err){
+			console.log(err);
 			starSetIcon(value, $this);
 			alert('Ocorreu um erro ao tentar salvar a sua estrela, por favor tente novamente.');
 			location.reload();

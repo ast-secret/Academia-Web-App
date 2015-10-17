@@ -35,7 +35,10 @@
 			'label' => 'Duração',
 			'help' => 'Duração da aula em minutos'
 		]);
-		
+		echo $this->Form->input('gasto_calorico', [
+			'label' => 'Gasto Calórico',
+			'append' => 'kcal'
+		]);
 		echo $this->Form->input('is_active', ['label' => 'Ativo']);
 		echo '<hr>';
 		echo $this->Form->submit('Criar Aula');

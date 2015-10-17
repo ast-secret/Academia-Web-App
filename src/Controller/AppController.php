@@ -17,6 +17,8 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 
+use Cake\Controller\Component\RequestHandlerComponent;
+
 /**
  * Application Controller
  *
@@ -54,6 +56,8 @@ class AppController extends Controller
     {
 
         $this->viewBuilder()->layout('custom');
+        
+        $this->loadComponent('RequestHandler');
 
         $menuItems = [
             [

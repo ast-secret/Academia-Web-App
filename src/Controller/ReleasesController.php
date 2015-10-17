@@ -52,6 +52,7 @@ class ReleasesController extends AppController
         $this->paginate = [
             'fields' => [
                 'id',
+                'title',
                 'text',
                 'created',
                 'is_active',
@@ -82,10 +83,8 @@ class ReleasesController extends AppController
         $release = $this->Releases->newEntity();
         
         if ($this->request->is('post')) {
+            $this->request->data['user_id'] = $this->Auth->user('id');
             $release = $this->Releases->patchEntity($release, $this->request->data);
-            $release->user_id = $this->Auth->user('id');
-
-            $release->accessible('id', false);
 
             if ($this->Releases->save($release)) {            
                 $this->Flash->success('O Comunicado foi salvo com sucesso.');
@@ -144,7 +143,8 @@ class ReleasesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         
         $release = $this->Releases->get($id, [
-            'conditions' => ['Releases.user_id' => $this->Auth->user('id')]
+            'contain' => ['Users'],
+            'conditions' => ['Users.gym_id' => $this->Auth->user('gym_id')]
         ]);
 
         if (!$release) {

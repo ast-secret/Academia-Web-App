@@ -13,11 +13,6 @@ use Cake\Network\Exception\BadRequestException;
  * @property \App\Model\Table\SuggestionsTable $Suggestions */
 class SuggestionsController extends AppController
 {
-    public function initialize()
-    {
-        parent::initialize();
-        $this->loadComponent('RequestHandler');
-    }
     /**
      * Index method
      *
@@ -131,7 +126,7 @@ class SuggestionsController extends AppController
 
     public function toggleIsStar()
     {
-        $this->layout = 'ajax';
+
         if (!$this->request->is('ajax')) {
             throw new MethodNotAllowedException();
         }
@@ -143,22 +138,17 @@ class SuggestionsController extends AppController
         if (!$suggestion) {
             throw new NotFoundException();
         }
-        /**
-         * Faz o patch da entity passando o novo valor do campo, note que
-         * na SuggestionsTable já está sendo feito a validação para valores
-         * 1 ou 0
-         */
-        $suggestion->is_star = (int)$this->request->data['add'];
 
-        if ($this->Suggestions->save($suggestion)) {
-            echo json_encode(['ok']);
-        } else {
+        $suggestion->is_star = ((int)$this->request->data['add']) ? true : false;
+
+        if (!$this->Suggestions->save($suggestion)) {
             throw new BadRequestException(json_encode($suggestion->errors()));
         }
+        $this->set('data', 'ok');
+        $this->set('_serialize', 'data');
     }
     public function toggleIsRead()
     {
-        $this->layout = 'ajax';
         if (!$this->request->is('ajax')) {
             throw new MethodNotAllowedException();
         }
@@ -177,11 +167,11 @@ class SuggestionsController extends AppController
          */
         $suggestion->is_read = (int)$this->request->data['add'];
 
-        if ($this->Suggestions->save($suggestion)) {
-            echo json_encode(['ok']);
-        } else {
+        if (!$this->Suggestions->save($suggestion)) {
             throw new BadRequestException(json_encode($suggestion->errors()));
         }
+        $this->set('data', 'ok');
+        $this->set('_serialize', 'data');
     }
     /**
      * Add method

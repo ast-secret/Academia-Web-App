@@ -7,7 +7,7 @@
 
 <div class="row row-add-button">
     <div class="col-md-12">
-        <?= $this->Html->link($this->Html->icon('plus') . ' Criar Aula',
+        <?= $this->Html->link('Criar Aula',
             [
                 'action' => 'add'
             ],
@@ -81,7 +81,7 @@
                     <td>
                         <h4><?= h($service->name) ?></h4>
                         <p class="text-muted">
-                            <small><?= $service->duration ?> minutos de duração</small>
+                            <small><strong><?= $service->duration ?> minutos</strong> de duração, gasto calórico de <strong><?= $service->gasto_calorico ?> kcal</strong></small>
                         </p>
                         <?= h($service->description) ?>
                     </td>
@@ -123,7 +123,7 @@
             <?php endforeach; ?>
             <?php if (count($services) == 0): ?>
                 <tr>
-                    <td colspan="6">Nenhuma aula cadastrada ainda.</td>
+                    <td colspan="6">Nenhuma aula para exibir.</td>
                 </tr>
             <?php endif ?>
         </tbody>
