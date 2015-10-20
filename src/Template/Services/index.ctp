@@ -81,7 +81,7 @@
                     <td>
                         <h4><?= h($service->name) ?></h4>
                         <p class="text-muted">
-                            <small><strong><?= $service->duration ?> minutos</strong> de duração, gasto calórico de <strong><?= $service->gasto_calorico ?> kcal</strong></small>
+                            <strong><?= $service->duration ?> minutos</strong> de duração, gasto calórico de <strong><?= $service->gasto_calorico ?> kcal</strong>
                         </p>
                         <?= h($service->description) ?>
                     </td>
@@ -93,11 +93,11 @@
                         <?php endif ?>
                     </td>
                     <td class="text-center" style="vertical-align: middle">
-                        <?= $this->Html->link('<span class="glyphicon glyphicon-time"></span>',
+                        <?= $this->Html->link($this->Html->icon('time'),
                             [
-                                'controller' => 'Times',
-                                'action' => 'edit',
-                                $service->id
+                                'controller' => 'Services',
+                                'action' => 'times',
+                                'service_id' => $service->id
                             ],
                             [
                                 'escape' => false,

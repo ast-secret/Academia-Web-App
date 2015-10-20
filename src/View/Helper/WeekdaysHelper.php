@@ -45,7 +45,7 @@ class WeekdaysHelper extends Helper
 	public function getById($id)
 	{
 		foreach ($this->weekdays as $key => $value) {
-			if ($key == $id) {
+			if ($value['id'] == $id) {
 				return $value['name'];
 			}
 		}

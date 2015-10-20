@@ -94,14 +94,15 @@
                 });
             });
         }
-        $(document).on('click', '.tag-remove', function(){
+        $(document).on('click', 'span.tag-remove', function(){
+            console.log('tey');
+            return false;
             var $this = $(this);
-        
-            var weekday = $this.parents('#times-container').data('weekday');
             
-            var value = $this.parent().data('value');
+            var value = $this.text('value');
+            console.log(value);
 
-            var $timesString = $('input#times-string[data-weekday="'+weekday+'"]');
+            var $timesString = $('input#times-string');
 
             var timesArray = $timesString.val().split(';');
             console.log(timesArray);

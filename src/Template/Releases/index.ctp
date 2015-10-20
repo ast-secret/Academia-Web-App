@@ -7,7 +7,7 @@
 
 <div class="row row-add-button">
     <div class="col-md-12">
-        <?= $this->Html->link($this->Html->icon('plus') . ' Criar Comunicado', [
+        <?= $this->Html->link('Criar Comunicado', [
             'action' => 'add'
         ], [
             'class' => 'btn btn-danger pull-right',

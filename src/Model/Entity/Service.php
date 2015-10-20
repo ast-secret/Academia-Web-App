@@ -23,17 +23,15 @@ class Service extends Entity
 
     protected function _getTimesString()
     {
-        $timesCollection = new Collection($this->_properties['times']);
-        $timesCollection = $timesCollection->groupBy('weekday')->toArray();
-
         $timesString = [];
-        foreach ($timesCollection as $weekday => $times) {
-            $string = '';
-            foreach ($times as $time) {
-                $string .= $time->start_hour->format('H:i') . ';';
+        if (isset($this->_properties['times'])) {
+            foreach ($this->_properties['times'] as $value) {
+                if (is_object($value['start_hour'])) {
+                    $timesString[] = $value['start_hour']->format('H:i');
+                }
             }
-            $timesString[$weekday] = $string;
         }
+        $timesString = join($timesString, ';');
         return $timesString;
     }
 }

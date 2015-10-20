@@ -122,6 +122,7 @@ class AppController extends Controller
             }
 
             $loggedinUser = $this->Auth->user();
+
             $shortName = explode(' ', $loggedinUser['name']);
             $total = count($shortName);
             $loggedinUser['short_name'] = ($total > 1) ? $shortName[0] . ' ' . $shortName[$total - 1] : $shortName[0];

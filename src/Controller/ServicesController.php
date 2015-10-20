@@ -3,7 +3,8 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-use Cake\Network\Exeptions\NotFoundException;
+use Cake\Network\Exception\NotFoundException;
+use Cake\Collection\Collection;
 
 /**
  * Services Controller
@@ -141,5 +142,75 @@ class ServicesController extends AppController
             $this->Flash->error('The service could not be deleted. Please, try again.');
         }
         return $this->redirect(['action' => 'index']);
+    }
+    public function times()
+    {
+        $id = $this->request->service_id;
+        if (!$id) {
+            throw new NotFoundException("Aula não informada");
+        }
+        $service = $this->Services->get($id, [
+            'contain' => ['Times' => function($q){
+                return $q->order(['start_hour']);
+            }],
+            'conditions' => [
+                'gym_id' => $this->Auth->user('gym_id')
+            ],
+        ]);
+
+        if (!$service) {
+            throw new NotFoundException("Aula não encontrada");
+        }
+        
+        $times = new Collection($service->times);
+        $timesById = $times->groupBy('weekday');
+
+        $this->set(compact('service', 'timesById'));
+        $this->set(['timesById' => $timesById->toArray()]);
+    }
+    public function timesEdit()
+    {
+        $service_id = $this->request->service_id;
+        $weekday = $this->request->weekday;
+        if (!$service_id) {
+            throw new NotFoundException("Aula não informada");
+        }
+        if ($weekday < 1 || $weekday > 7) {
+            throw new NotFoundException("Dia da semana inválido.");
+        }
+        $service = $this->Services->get($service_id, [
+            'contain' => ['Times' => function($q){
+                return $q->where(['Times.weekday' => $this->request->weekday]);
+            }],
+            'conditions' => [
+                'gym_id' => $this->Auth->user('gym_id')
+            ]
+        ]);
+
+        if (!$service) {
+            throw new NotFoundException("Aula não encontrada");
+        }
+
+        if ($this->request->is(['put', 'post'])) {
+            $this->request->data['weekday'] = $weekday;
+            
+            $service->accessible('*', false);
+            $service->accessible('times', true);
+            /** 
+             * Precisa liberar pois é usado no deleteall
+             */
+            $service->accessible('weekday', true);
+
+            $service = $this->Services->patchEntity($service, $this->request->data);
+
+            if ($this->Services->save($service)) {
+                $this->Flash->success('Horários salvos com sucesso.');
+                return $this->redirect(['action' => 'times', 'service_id' => $service_id]);
+            } else {
+                $this->Flash->error('Ocorreu um erro ao salvar os seus horários. Por favor, tente novamente.');
+            }
+        }
+
+        $this->set(['service' => $service]);
     }
 }

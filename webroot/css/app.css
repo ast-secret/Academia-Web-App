@@ -104,7 +104,7 @@ textarea {
 	margin-bottom: 20px;
 }
 .side-menu li a{
-	color: #FFF;
+	color: red;
 }
 .side-menu li.active > a, .side-menu li a:hover, .side-menu li a:active, .side-menu li a:focus{
 	background-color: #3749ac!important;

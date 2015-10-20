@@ -15,6 +15,10 @@ class Gym extends Entity
      * @var array
      */
     protected $_accessible = [
-        '*' => true
+        '*' => true,
+        'id' => false
     ];
+    protected function _getLogoPath(){
+        return '../files/gyms/' . $this->_properties['folder_name'] . '/logo_login.png';
+    }
 }

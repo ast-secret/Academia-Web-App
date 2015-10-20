@@ -44,15 +44,13 @@ class ServicesTable extends Table
     public function beforeMarshal(Event $event, $data)
     {
         if (isset($data['times_string'])) {
-            foreach ($data['times_string'] as $weekday => $timeString) {
-                $timesArray = explode(';', $timeString);
-                foreach ($timesArray as $time) {
-                    if ($time) {
-                        $data['times'][] = [
-                            'weekday' => $weekday,
-                            'start_hour' => $time
-                        ];
-                    }
+            $timesArray = explode(';', $data['times_string']);
+            foreach ($timesArray as $time) {
+                if ($time) {
+                    $data['times'][] = [
+                        'weekday' => $data['weekday'],
+                        'start_hour' => $time
+                    ];
                 }
             }
         }
@@ -60,7 +58,7 @@ class ServicesTable extends Table
 
     public function beforeSave(Event $event, $entity)
     {
-        $this->Times->deleteAll(['service_id' => $entity->id]);
+        $this->Times->deleteAll(['service_id' => $entity->id, 'weekday' => $entity->weekday]);
     }
 
     /**

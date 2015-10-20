@@ -90,10 +90,8 @@ Router::scope('/:gym_slug/aulas', function ($routes) {
     $routes->connect('/criar', ['controller' => 'Services', 'action' => 'add']);
     $routes->connect('/editar/*', ['controller' => 'Services', 'action' => 'edit']);
     $routes->connect('/deletar/*', ['controller' => 'Services', 'action' => 'delete']);
-});
-
-Router::scope('/:gym_slug/aulas/horarios', function ($routes) {
-    $routes->connect('/*', ['controller' => 'Times', 'action' => 'edit']);
+    $routes->connect('/horarios/:service_id', ['controller' => 'Services', 'action' => 'times']);
+    $routes->connect('/horarios/editar/:service_id/:weekday', ['controller' => 'Services', 'action' => 'timesEdit']);
 });
 
 Router::scope('/:gym_slug/clientes', function ($routes) {

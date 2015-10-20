@@ -7,7 +7,7 @@
 
 <div class="row row-add-button">
     <div class="col-md-12">
-        <?= $this->Html->link($this->Html->icon('plus') . ' Criar Cliente', [
+        <?= $this->Html->link('Criar Cliente', [
             'action' => 'add'
         ], [
             'class' => 'btn btn-danger pull-right',

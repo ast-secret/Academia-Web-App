@@ -1,0 +1,14 @@
+.sidemenu-brand, .side-menu li a{
+	color: #FFF;
+}
+.col-left{
+	background-color: #e74c3c;
+}
+.side-menu li.active > a, .side-menu li a:hover, .side-menu li a:active, .side-menu li a:focus{
+	background-color: #E2311D!important;
+	color: #FFF;
+}
+.sidemenu-name-display{
+	background-color: #E2311D;
+	color: #FFF;
+}

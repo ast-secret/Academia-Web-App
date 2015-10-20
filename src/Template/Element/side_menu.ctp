@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<h4 style="color: #FFF;">
+				<h4 class="sidemenu-brand">
 					<?= ucwords(str_replace('-', ' ', $this->request->params['gym_slug'])) ?>
 				</h4>
 			</div>
@@ -10,7 +10,7 @@
 	</div>
 </div>
 
-<div style="margin-bottom: 20px; background-color: #3749ac; padding-top: 10px; padding-bottom: 10px;">
+<div class="sidemenu-name-display" style="margin-bottom: 20px;padding-top: 10px; padding-bottom: 10px;">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-10">
@@ -19,7 +19,7 @@
 
 					</div>
 					<div class="media-body">
-						<span class="" style="color: #FFF;">
+						<span>
 							<strong><?= $loggedinUser['short_name'] ?></strong>
 							<br>
 							<em>
@@ -33,7 +33,7 @@
 			</div>	
 			<div class="col-md-2 text-center">
 				<button data-toggle="dropdown"
-					class="dropdown-toggle  pull-right" style="color: white; margin-top: 10px; background: none; border: 0;">
+					class="dropdown-toggle  pull-right" style="margin-top: 10px; background: none; border: 0;">
 					<span
 						class="glyphicon glyphicon-chevron-down">
 					</span>

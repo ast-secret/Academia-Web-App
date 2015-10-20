@@ -130,8 +130,7 @@ class UsersController extends AppController
         }
 
         $this->set([
-            'gym' => $gym,
-            'logoPath' => '../files/img/' . $gym->img_folder . '/logo_login.png'
+            'gym' => $gym
         ]);
     }
 
@@ -468,9 +467,7 @@ class UsersController extends AppController
 
         }
 
-        $this->set([
-            'logoPath' => '../files/img/' . $gym->img_folder . '/logo_login.png'
-        ]);
+        $this->set(compact('gym'));
     }
 
     public function passwordReset()
@@ -545,7 +542,7 @@ class UsersController extends AppController
 
         $this->set([
             'user' => $user,
-            'logoPath' => '../files/img/' . $gym->img_folder . '/logo_login.png'
+            'gym' => $gym
         ]);
     }
 

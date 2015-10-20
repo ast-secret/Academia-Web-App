@@ -16,6 +16,7 @@
 	
 	<?= $this->Html->css('animate.css') ?>
 	<?= $this->Html->css('app.css') ?>
+	<?= $this->Html->css('../files/gyms/' . $loggedinUser['gym']['folder_name'] . '/theme.css') ?>
 
 
 	<?= $this->Html->script('../lib/jquery/dist/jquery.min.js') ?>
@@ -37,7 +38,6 @@
 	</script>
 </head>
 <body>
-
 	<?= $this->Flash->render() ?>
 
 	<div class="hidden-md hidden-lg">

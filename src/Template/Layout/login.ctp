@@ -48,6 +48,20 @@
 			<div class="row" style="margin-top: 100px;">
 				<div class="col-md-4 col-md-offset-4">
 					<div class="login-box">
+						<div class="text-center" style="margin-bottom: 40px;">
+							<?= $this->Html->image($gym->logo_path, [
+								'url' => ['action' => 'login'],
+								'width' => '70%'
+							]) ?>
+						</div>
+
+						<br>
+
+						<div class="row">
+							<div class="col-md-12">
+								<?= $this->Flash->render(); ?>
+							</div>
+						</div>
 						<?= $this->fetch('content') ?>
 					</div>
 				</div>
