@@ -1,14 +1,16 @@
-.sidemenu-brand, .side-menu li a{
-	color: #FFF;
+.sidemenu-brand{
+	color: #e74c3c;
 }
-.col-left{
-	background-color: #e74c3c;
+/*.sidemenu-brand, .side-menu li a, .sidemenu-name-display{
+	color: #FFF;
+}*/
+/*.col-left{
+	background-color: #c0392b;
 }
 .side-menu li.active > a, .side-menu li a:hover, .side-menu li a:active, .side-menu li a:focus{
-	background-color: #E2311D!important;
-	color: #FFF;
+	background-color: #B83729!important;
+	color: #FFF!important;
 }
 .sidemenu-name-display{
-	background-color: #E2311D;
-	color: #FFF;
-}
+	background-color: #c0392b;
+}*/

@@ -6,7 +6,7 @@
 		'placeholder' => 'Email',
 		'class' => 'input-lg',
 		'autofocus' => true,
-		'prepend' => '@'
+		'prepend' =>  $this->Html->icon('user')
 	]) ?>
 	<?= $this->Form->input('password', [
 		'label' => false,
@@ -14,7 +14,7 @@
 		'placeholder' => 'Senha',
 		'prepend' => $this->Html->icon('lock')
 	]) ?>
-	<button type="submit" class="btn btn-primary btn-block btn-lg">
+	<button type="submit" class="btn btn-primary btn-block btn-lg btn-logar">
 		Entrar
 	</button>
 <?= $this->Form->end() ?>

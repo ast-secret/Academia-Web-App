@@ -10,13 +10,6 @@ body{
 	padding: 0!important;
 	margin: 0;
 }
-/*FLASH MESSAGE*/
-@keyframes fadeOut {
-    0%   {opacity: 1;}
-    70%  {opacity: 1;}
-    90% {opacity: 1;-webkit-transform: translateY(0px);}
-    100% {opacity: 0;-webkit-transform: translateY(-30px);}
-}
 /*Mudança de cores dos botões*/
 .btn{
 	border-radius: 2px;
@@ -48,7 +41,7 @@ body{
 .col-left{
 	position: fixed;
 	height: 100%;
-	background-color: #3F51B5;
+	background-color: #F5F5F5;
 	width: 18%;
 	overflow: auto;
 }
@@ -103,11 +96,18 @@ textarea {
 .side-menu{
 	margin-bottom: 20px;
 }
-.side-menu li a{
-	color: red;
+.sidemenu-brand{
+	font-weight: bold;
+}
+.sidemenu-brand, .side-menu li a{
+	color: #444;
+}
+.sidemenu-name-display{
+	background-color: #EEE;
 }
 .side-menu li.active > a, .side-menu li a:hover, .side-menu li a:active, .side-menu li a:focus{
-	background-color: #3749ac!important;
+	background-color: #EEE!important;
+	color: #444!important;
 }
 
 .truncate-text {
@@ -198,12 +198,13 @@ textarea {
 	background-color: #EEE;
 }
 .login-box{
+	text-align: center;
 	background-color: #FFF;
-	border: 1px solid #DDD;
+	border: 1px solid #E7E7E7;
 	border-radius: 4px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	padding: 30px;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	padding: 20px;
 }
 .login-box input{
 	font-size: 15px;

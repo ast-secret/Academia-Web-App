@@ -1,10 +1,22 @@
+<?php
+
+if ($this->request->action == 'add') {
+    $title = 'Criar Comunicado';
+    $btnLabel = 'Criar Comunicado';
+} else {
+    $title = 'Editar Comunicado';
+    $btnLabel = 'Salvar Alterações';
+}
+
+?>
+<?= $this->assign('title', ' - ' . $title) ?>
+
 <?= $this->Html->script('../lib/nice-char-counter/dist/nice-char-counter', ['inline' => false]) ?>
 <?= $this->Html->script('releases/form.js', ['inline' => false]) ?>
-<?= $this->assign('title', ' - Editar Comunicado') ?>
 
-<?php 
+<?php
 	$this->Html->addCrumb('Comunicados', ['action' => 'index']);
-    $this->Html->addCrumb('Editar Comunicados');
+    $this->Html->addCrumb($title);
     echo $this->Html->getCrumbList();
 ?>
 
@@ -42,9 +54,9 @@
 
     <div id="container-destaque" style="<?= (!$release->destaque) ? 'display: none' : '' ?>">
         <div class="row">
-            <div class="col-md-9 col-md-offset-2">
+            <div class="col-md-6 col-md-offset-2">
                 <p class="help-block">
-                    <?= $this->Html->icon('warning-sign') ?> Horários de início e término do destque não são obrigatórios, caso não sejam preenchidos o comunicado ficará como destaque até que a opção seja desmarcada.
+                    <?= $this->Html->icon('warning-sign') ?> Caso os períodos do destaque não sejam preenchidos o comunicado ficará como destaque até que a opção seja desmarcada.
                 </p>       
             </div>
         </div>

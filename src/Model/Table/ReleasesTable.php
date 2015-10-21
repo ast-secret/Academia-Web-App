@@ -71,6 +71,11 @@ class ReleasesTable extends Table
             ->requirePresence('is_active', 'create')
             ->notEmpty('is_active');
 
+        $validator
+            ->add('destaque', 'valid', ['rule' => 'boolean'])
+            ->requirePresence('destaque', 'create')
+            ->notEmpty('destaque');
+
         return $validator;
     }
 

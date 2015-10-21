@@ -13,6 +13,7 @@
 
 	<?= $this->Html->css('../lib/bootstrap/dist/css/bootstrap.min.css') ?>
 	<?= $this->Html->css('app.css') ?>
+	<?= $this->Html->css('../files/gyms/' . $gym->folder_name . '/theme.css') ?>
 
 	<?= $this->Html->script('../lib/jquery/dist/jquery.min.js') ?>
 	<?= $this->Html->script('../lib/jquery-ui/jquery-ui.min.js') ?>
@@ -45,18 +46,16 @@
 </head>
 	<body class="login-bg">
 		<div class="container">
-			<div class="row" style="margin-top: 100px;">
+			<div class="row" style="margin-top: 70px;">
 				<div class="col-md-4 col-md-offset-4">
 					<div class="login-box">
-						<div class="text-center" style="margin-bottom: 40px;">
+						<div class="text-center" style="padding: 15px 0 15px 0;">
 							<?= $this->Html->image($gym->logo_path, [
 								'url' => ['action' => 'login'],
-								'width' => '70%'
+								'width' => '60%'
 							]) ?>
 						</div>
-
 						<br>
-
 						<div class="row">
 							<div class="col-md-12">
 								<?= $this->Flash->render(); ?>

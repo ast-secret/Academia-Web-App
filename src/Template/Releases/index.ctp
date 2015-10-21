@@ -65,6 +65,11 @@
     </li>
     <li
         role="presentation"
+        class="<?= $tab == '4' ? 'active' : '' ?>">
+        <?= $this->Html->link('Destaques', [ 'action' => 'index', '?' => ['tab' => '4']]) ?>
+    </li>
+    <li
+        role="presentation"
         class="<?= $tab == '2' ? 'active' : '' ?>">
         <?= $this->Html->link('Não publicados', [ 'action' => 'index', '?' => ['tab' => '2']]) ?>
     </li>
@@ -77,31 +82,26 @@
 
 <br>
 <div class="table-responsive">
-    <table class="table table-striped">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Comunicado</th>
+                <th style="width: 260px;" class="text-center">
+                    Destaque
+                </th>
+                <th style="width: 80px;">
+                    
+                </th>
+            </tr>
+        </thead>
         <tbody>
             <?php if (count($releases) > 0): ?>
                 <?php foreach ($releases as $release): ?>
                     <tr>
-                        <td class="text-center" style="width: 120px;">
-                            <?= $this->TextBootstrap->labelBoolean($release->is_active,
-                                'Publicado',
-                                'Não Publicado'
-                            ) ?>
-                        </td>
                         <td>
-                            <?= $this->Html->link(
-                                h($release->user->name),
-                                [
-                                    'controller' => 'Users',
-                                    'action' => 'index',
-                                    '?' => ['q' => h($release->user->name)]
-                                ],
-                                [
-                                    'escape' => true,
-                                    'title' => $release->user->name
-                                ])
-                            ?>
-                            <br>
+                            <h4>
+                                <?= h($release->title) ?>
+                            </h4>
                             <em class="text-muted">
                                 <?= $this->Time->timeAgoInWords(
                                     $release->created,
@@ -111,12 +111,28 @@
                                     ]
                                 ) ?>
                             </em>
-                            <h4><?= h($release->title) ?></h4>
+                            <?= $this->TextBootstrap->labelBoolean($release->is_active,
+                                'Publicado',
+                                'Não Publicado'
+                            ) ?>
+                            <br>
+                            <br>
                             <p class="text-align: justify; text-justify: inter-word;">
                                 <?= h($release->text) ?>
                             </p>
                         </td>
-                        <td class="text-center" style="width: 80px;">
+                        <td class="text-center" style="vertical-align: middle">
+                            <?php if ($release->destaque): ?>
+                                <?php
+                                    $dtInicioDestaque = ($release->dt_inicio_destaque) ? $release->dt_inicio_destaque->format('d/m H:i') : 'agora';
+                                    $dtFimDestaque = ($release->dt_fim_destaque) ? $release->dt_fim_destaque->format('d/m H:i') : 'sempre';
+                                ?>
+                                De <span class="label label-danger"><?= $dtInicioDestaque ?></span> até <span class="label label-danger"><?= $dtFimDestaque ?></span>
+                            <?php else: ?>
+                                -
+                            <?php endif ?>
+                        </td>
+                        <td class="text-center" style="vertical-align: middle;">
                             <?php if ($me_id == $release->user_id): ?>
                                 <?= $this->Html->link(
                                     '<span class="glyphicon glyphicon-pencil"></span>',

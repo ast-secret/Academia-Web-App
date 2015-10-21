@@ -31,6 +31,9 @@ class ReleasesController extends AppController
             case 2:
                 $conditions[] = ['Releases.is_active' => 0];
                 break;
+            case 4:
+                $conditions[] = ['Releases.destaque' => 1];
+                break;
         }
 
         $q = $this->request->query('q');
@@ -57,6 +60,9 @@ class ReleasesController extends AppController
                 'created',
                 'is_active',
                 'user_id',
+                'destaque',
+                'dt_inicio_destaque',
+                'dt_fim_destaque',
                 'Users.name'
             ],
             'contain' => ['Users'],
@@ -80,6 +86,7 @@ class ReleasesController extends AppController
      */
     public function add()
     {
+        $this->viewBuilder()->template('form');
         $release = $this->Releases->newEntity();
         
         if ($this->request->is('post')) {
@@ -106,6 +113,8 @@ class ReleasesController extends AppController
      */
     public function edit($id = null)
     {
+        $this->viewBuilder()->template('form');
+        
         $user_id = $this->Auth->user('id');
 
         $release = $this->Releases->get($id, [
