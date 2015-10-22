@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  * Customers Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Gyms
+ * @property \Cake\ORM\Association\BelongsTo $PushRegs
  * @property \Cake\ORM\Association\HasMany $Cards
  * @property \Cake\ORM\Association\HasMany $Suggestions
  */
@@ -25,10 +26,14 @@ class CustomersTable extends Table
      */
     public function initialize(array $config)
     {
+        parent::initialize($config);
+
         $this->table('customers');
         $this->displayField('name');
         $this->primaryKey('id');
+
         $this->addBehavior('Timestamp');
+
         $this->belongsTo('Gyms', [
             'foreignKey' => 'gym_id',
             'joinType' => 'INNER'
@@ -52,26 +57,51 @@ class CustomersTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-            
+
         $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name');
-            
+
         $validator
             ->requirePresence('registration', 'create')
-            ->notEmpty('registration');
-            
+            ->notEmpty('registration')
+            ->add('registration', [
+                'unique' => [
+                    'rule' => ['validateUnique', ['scope' => 'gym_id']],
+                    'message' => 'Já existe um usuário com esta matrícula cadastrado no sistema.',
+                    'provider' => 'table'
+                ]
+            ]);            
+
+        $minLength = 6;
+        $maxLength = 24;
+        $validator
+            ->requirePresence('password', 'create')
+            ->notEmpty('password')
+            ->add('password', 'maxLength', [
+                'rule' => ['maxLength', $maxLength],
+                'message' => 'A senha deve conter no máximo '.$maxLength.' caracteres'
+            ])
+            ->add('password', 'minLength', [
+                'rule' => ['minLength', $minLength],
+                'message' => 'A senha deve conter no mínimo '.$minLength.' caracteres'
+            ])
+            ->add('password', 'custom', [
+                'rule' => function($value, $context) {
+                    return $value == $context['data']['confirm_password'];
+                },
+                'message' => 'Você não confirmou a sua senha corretamente'
+            ]);
+
         $validator
             ->add('is_active', 'valid', ['rule' => 'boolean'])
             ->requirePresence('is_active', 'create')
             ->notEmpty('is_active');
-            
-        $validator
-            ->allowEmpty('app_access_token');
-            
+
         $validator
             ->add('email', 'valid', ['rule' => 'email'])
-            ->allowEmpty('email')
+            ->requirePresence('email', 'create')
+            ->notEmpty('email')
             ->add('email', [
                 'unique' => [
                     'rule' => ['validateUnique', ['scope' => 'gym_id']],

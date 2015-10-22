@@ -100,24 +100,18 @@ class AppController extends Controller
             'authError' => 'Você deve fazer o login para acessar esta área.',
             'authenticate' => [
                 'Form' => [
-                    'scope' => [
-                        'Users.is_active' => true,
-                        'Users.deleted' => false
-                    ],
-                    'contain' => ['Roles', 'Gyms']
+                    'finder' => 'auth',
                 ]
             ]
         ]);
 
         $this->loadComponent('Flash');
-
-
     }
 
     public function beforeFilter(Event $event)
     {
         if ($this->Auth->user()) {
-            if ($this->Auth->user('gym.slug') != $this->request->params['gym_slug']) {
+            if ($this->Auth->user('gym.slug') != $this->request->params['gym_slug'] && $this->request->action != 'login') {
                 return $this->redirect(['controller' => 'Site', 'action' => 'home']);
             }
 
@@ -133,7 +127,8 @@ class AppController extends Controller
         if (
             $this->request->controller == 'Users' &&
             $this->request->action == 'login' &&
-            $this->Auth->user()) {
+            $this->Auth->user() &&
+            $this->Auth->user('gym.slug') == $this->request->params['gym_slug']) {
             return $this->redirect(['controller' => 'Customers']);
         }
     }

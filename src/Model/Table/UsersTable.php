@@ -48,6 +48,27 @@ class UsersTable extends Table
         ]);
     }
 
+    public function findAuth(Query $query, array $options)
+    {
+        $query
+            ->select([
+                'Users.id',
+                'Users.name',
+                'Users.username',
+                'Users.password',
+                'Users.gym_id',
+                'Users.role_id',
+                'Gyms.name',
+                'Gyms.slug',
+                'Gyms.folder_name',
+                'Roles.name',
+            ])
+            ->contain(['Gyms', 'Roles'])
+            ->where(['Users.is_active' => true]);
+
+        return $query;
+    }
+
     public function afterRules($event, $entity)
     {
         /*

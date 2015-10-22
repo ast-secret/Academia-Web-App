@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Network\Exceptions\NotFoundException;
 
 /**
  * Customers Controller
@@ -96,48 +97,36 @@ class CustomersController extends AppController
      */
     public function edit($id = null)
     {
-        $this->loadModel('Users');
+        if (!$id) {
+            throw new NotFoundException("Página não encontrada");
+        }
 
         $customer = $this->Customers->get($id, [
-            'contain' => []
+            'conditions' => [
+                'Customers.gym_id' => $this->Auth->user('gym_id')
+            ]
         ]);
-        // Variavel Teste de Sessão         
-        $usuarioSession = $this->request->data['id'] = 3;   
 
-        if ($this->request->is(['patch', 'post', 'put'])) {
-        //Select para confirmar se o confirm_password é referente ao do usuario logado
-        $userPass = $this->Users
-                        ->find()
-                        ->where(['password'=>$this->request->data['confirm_password'],'id' => $usuarioSession])
-                        ->first();            
-            //Apenas Alterar a Senha, isso exige a senha do Usuario logado
-            if($customer->password!=$this->request->data['password']){
-                //Verifica se ele quer trocar a senha, se sim confirma  a senha do logado
-                if($userPass && $this->request->data['confirm_password']!=''){
-                    $customer = $this->Customers->patchEntity($customer, $this->request->data);        
-                    if ($this->Customers->save($customer)) {
-                        $this->Flash->success('O Aluno foi salvo com sucesso.');
-                        return $this->redirect(['action' => 'index']);
-                    } else {
-                        $this->Flash->error('O Aluno não pode ser salvo, tente novamente.');
-                    }
-                }else{
-                    $this->Flash->error('Senha do Administrador está incorreta, tente novamente.');
-                }
-            }else{
-                $customer = $this->Customers->patchEntity($customer, $this->request->data);         
-                    if ($this->Customers->save($customer)) {
-                        $this->Flash->success('O Aluno foi salvo com sucesso.');
-                        return $this->redirect(['action' => 'index']);
-                    } else {
-                        $this->Flash->error('O Aluno não pode ser salvo, tente novamente.');
-                    }
+        if (!$customer) {
+            throw new NotFoundException("Página não encontrada");
+        }
+
+        if ($this->request->is(['post', 'put'])) {
+            
+            $this->request->data['gym_id'] = $this->Auth->user('gym_id');
+
+            $customer->accessible('password', false);
+
+            $customer = $this->Customers->patchEntity($customer, $this->request->data);
+            if ($this->Customers->save($customer)) {
+                $this->Flash->success('As alterações foram feitas com sucesso.');
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error('As alterações não foram salvar. Por favor, tente novamente');
             }
+        }
 
-        }       
-        
         $this->set(compact('customer'));
-        $this->set('_serialize', ['customer']);
     }
 
     /**

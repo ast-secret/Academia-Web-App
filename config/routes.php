@@ -97,8 +97,8 @@ Router::scope('/:gym_slug/aulas', function ($routes) {
 Router::scope('/:gym_slug/clientes', function ($routes) {
     $routes->connect('/', ['controller' => 'Customers', 'action' => 'index']);
     $routes->connect('/criar', ['controller' => 'Customers', 'action' => 'add']);
-    // $routes->connect('/editar/*', ['controller' => 'Services', 'action' => 'edit']);
-    // $routes->connect('/deletar/*', ['controller' => 'Services', 'action' => 'delete']);
+    $routes->connect('/editar/*', ['controller' => 'Customers', 'action' => 'edit']);
+    $routes->connect('/deletar/*', ['controller' => 'Customers', 'action' => 'delete']);
 });
 
 Router::scope('/:gym_slug/fichas-de-exercicios', function ($routes) {
