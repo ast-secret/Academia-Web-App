@@ -15,6 +15,9 @@ use Cake\Validation\Validator;
 class ExercisesTable extends Table
 {
 
+
+    public $columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+
     /**
      * Initialize method
      *
@@ -45,8 +48,8 @@ class ExercisesTable extends Table
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
             
-        $validator
-            ->allowEmpty('repetition');
+        // $validator
+        //     ->allowEmpty('repetition');
             
         $validator
             ->requirePresence('name', 'create')
@@ -56,11 +59,6 @@ class ExercisesTable extends Table
             ->add('exercise_column', 'valid', ['rule' => 'numeric'])
             ->requirePresence('exercise_column', 'create')
             ->notEmpty('exercise_column');
-            
-        // $validator
-        //     ->add('exercise_order', 'valid', ['rule' => 'numeric'])
-        //     ->requirePresence('exercise_order', 'create')
-        //     ->notEmpty('exercise_order');
 
         return $validator;
     }

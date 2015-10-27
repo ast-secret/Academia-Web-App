@@ -19,7 +19,7 @@
 <div class="row">
     <div class="col-md-12">
         <form method="GET" class="form-inline">
-            <input type="hidden" value="<?= $this->request->query('tab') ?>" name="tab" id="tab">
+            <input type="hidden" value="<?= (int)$this->request->query('tab') ?>" name="tab" id="tab">
             <div class="form-group">
                 <input
                     class="form-control"
@@ -71,37 +71,37 @@
         <tbody>
             <?php foreach ($customers as $customer): ?>
                 <tr>
-                    <td><?= h($customer->registration) ?></td> 
-                    <td>
+                    <td style="vertical-align: middle;"><?= h($customer->registration) ?></td> 
+                    <td style="vertical-align: middle;">
                         <?= h($customer->name) ?>
                         <br>
                         <?= h($customer->email) ?>
                     </td>     
-                    <td class="text-center">
+                    <td class="text-center" style="vertical-align: middle;">
                         <?= $customer->is_active ? '<span class="label label-success">Ativo</span>': '<span class="label label-danger">Inativo</span>'; ?>
                     </td>      
-                    <td class="text-center">
+                    <td class="text-center" style="vertical-align: middle;">
                         <?= $this->Html->link(
-                                '<span class="glyphicon glyphicon-list-alt"></span>',
-                                [
-                                    'controller' => 'Cards',
-                                    'action' => 'index',
-                                    'customer_id' => $customer->id
-                                ],
-                                [
-                                    'escape' => false,
-                                    'class' => 'btn btn-default btn-xs',
-                                    'title' => 'Ver fichas'
-                                ])
+                            '<span class="glyphicon glyphicon-list-alt"></span>',
+                            [
+                                'controller' => 'Cards',
+                                'action' => 'index',
+                                'customer_id' => $customer->id
+                            ],
+                            [
+                                'escape' => false,
+                                'class' => 'btn btn-default btn-xs',
+                                'title' => 'Ver fichas'
+                            ])
                         ?>
                         <?= $this->Html->link(
-                                '<span class="glyphicon glyphicon-pencil"></span>',
-                                ['action' => 'edit', $customer->id],
-                                [
-                                    'escape' => false,
-                                    'class' => 'btn btn-default btn-xs',
-                                    'title' => 'Editar'
-                                ])
+                            '<span class="glyphicon glyphicon-pencil"></span>',
+                            ['action' => 'edit', $customer->id],
+                            [
+                                'escape' => false,
+                                'class' => 'btn btn-default btn-xs',
+                                'title' => 'Editar'
+                            ])
                         ?>
                     </td>
                 </tr>

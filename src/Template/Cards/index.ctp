@@ -8,10 +8,9 @@
 <br>
 
 
-<?= $this->Html->link('<span class="glyphicon glyphicon-plus"></span> Nova ficha',
+<?= $this->Html->link('Nova Ficha',
     ['action' => 'add', 'customer_id' => $customer->id],
-    ['class' => 'btn btn-danger pull-right', 'escape' => false]
-)?>
+    ['class' => 'btn btn-danger pull-right', 'escape' => false]) ?>
 <br style="clear: both;">
 
 <ul class="nav nav-tabs">
@@ -47,7 +46,7 @@
             <th style="width: 200px;">
                 Validade
             </th>
-            <th style="width: 140px;"></th>
+            <th style="width: 170px;"></th>
         </tr>
     </thead>
     <tbody>
@@ -72,33 +71,20 @@
                         </em>
                     <?php else: ?>
                         <em class="text-muted text-success">
-                            <?= $card->end_date_in_words ?>
+                            Vence em <?= $card->end_date_in_words ?>
                         </em>
                     <?php endif ?>
                 </td>
                 <td style="vertical-align: middle;" class="text-center">
-                    <?= $this->Html->link('<span class="glyphicon glyphicon-fire"></span>', [
-                        'action' => 'addExercises',
-                        'card_id' => $card->id
+                    <?= $this->Html->link($this->Html->icon('fire'), [
+                        'action' => 'exercises',
+                        'card_id' => $card->id,
+                        'customer_id' => $customer->id
                     ], [
                         'title' => 'Exercícios',
                         'escape' => false,
                         'class' => 'btn btn-default btn-xs'
                     ]) ?>
-                    <?= $this->Html->link(
-                            '<span class="glyphicon glyphicon-print"></span>',
-                            [
-                                'controller' => 'Cards',
-                                'action' => 'printCard',
-                                'card_id' => $card->id
-                            ],
-                            [
-                                'target' => '_blank',
-                                'escape' => false,
-                                'class' => 'btn btn-default btn-xs',
-                                'title' => 'Imprimir'
-                            ])
-                    ?>
                     <?= $this->Html->link(
                         '<span class="glyphicon glyphicon-pencil"></span>',
                         [
@@ -112,6 +98,19 @@
                             'title' => 'Editar'
                         ])
                     ?>
+                    <?= $this->Html->link(
+                        '<span class="glyphicon glyphicon-print"></span>',
+                        [
+                            'controller' => 'Cards',
+                            'action' => 'printCard',
+                            'card_id' => $card->id
+                        ],
+                        [
+                            'target' => '_blank',
+                            'escape' => false,
+                            'class' => 'btn btn-default btn-xs',
+                            'title' => 'Imprimir'
+                        ]) ?>
                     <?= $this->Form->postLink(
                         '<span class="glyphicon glyphicon-remove"></span>',
                         [

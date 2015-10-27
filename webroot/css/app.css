@@ -209,3 +209,42 @@ textarea {
 .login-box input{
 	font-size: 15px;
 }
+
+/*ADD EXERCISE*/
+.wrap-sortable{
+    min-height: 300px;
+    position: relative;
+}
+.btn-remove-exercise{
+    position:absolute; right:0; top: 0; display: none; margin-right: 15px;
+    float: right;
+}
+.custom-col{
+    position: relative;
+    height: 100%;
+    border: 1px solid #DDDDDD;
+    cursor: pointer;
+}
+.custom-col:hover{
+    outline: 1px solid #3498db;
+}
+.custom-col div.group{
+    background-color: #ecf0f1;
+    padding: 8px;
+    border-bottom: 1px solid #DDDDDD;
+}
+.custom-col div.exercise, .custom-col div.group{
+    padding: 8px;
+    background-color: #FFF;
+}
+.custom-col div.exercise{
+    padding: 8px;
+    border-bottom: 1px solid #DDDDDD;
+}
+.custom-col div.group{
+    text-align: center;
+    font-weight: bold;
+}
+.col-selected{
+    outline: 1px solid #e74c3c;
+}

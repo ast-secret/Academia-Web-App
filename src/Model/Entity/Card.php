@@ -17,28 +17,21 @@ class Card extends Entity
      * @var array
      */
     protected $_accessible = [
-        'user_id' => true,
-        'end_date' => true,
-        'goal' => true,
-        'customer_id' => true,
-        'obs' => true,
-        'current' => true,
-        'user' => true,
-        'customer' => true,
-        'exercises' => true,
-        'overdue' => true,
-        'end_date_in_words'
+        '*' => true,
+        'id' => false
     ];
 
     protected function _getOverdue()
     {
-        return ((new Datetime) > $this->_properties['end_date']);
+        $format = 'Y-m-d H:i:s';
+        return ((new Datetime)->format($format) > $this->_properties['end_date']->format($format));
     }
     protected function _getEndDateInWords()
     {
         $date = new Time($this->_properties['end_date']);
+        // debug($date);
         return $date->timeAgoInWords([
-            'accuracy' => 'month',
+            'accuracy' => ['day' => 'day'],
             'end' => '+1 year'
         ]);
     }

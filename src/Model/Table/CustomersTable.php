@@ -110,6 +110,20 @@ class CustomersTable extends Table
                 ]
             ]);
 
+        $validator
+            ->add('birthdate', 'valid', ['rule' => 'date'])
+            ->allowEmpty('end_date');
+        
+        $validator
+            ->add('gender', 'valid', [
+                'rule' => function($value, $context){
+                    return (in_array($value, [1, 2]));
+                },
+                'message' => 'Sexo inválido.'
+            ])
+            ->requirePresence('gender', 'create')
+            ->notEmpty('gender');
+
         return $validator;
     }
 

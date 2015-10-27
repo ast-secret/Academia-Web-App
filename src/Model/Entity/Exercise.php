@@ -15,11 +15,7 @@ class Exercise extends Entity
      * @var array
      */
     protected $_accessible = [
-        'repetition' => true,
-        'name' => true,
-        'card_id' => true,
-        'exercise_column' => true,
-        'exercise_order' => true,
-        'card' => true,
+        '*' => true,
+        'id' => false
     ];
 }

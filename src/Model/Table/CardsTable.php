@@ -74,7 +74,7 @@ class CardsTable extends Table
             ->allowEmpty('obs');
             
         $validator
-            ->add('current', 'valid', ['rule' => 'boolean'])
+            ->add('current', 'boolean', ['rule' => 'boolean'])
             ->allowEmpty('current');
 
         return $validator;

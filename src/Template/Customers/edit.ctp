@@ -14,6 +14,16 @@
     echo $this->Form->input('registration', ['label' => 'Matrícula']);
     echo $this->Form->input('name', ['label' => 'Nome']);
     echo $this->Form->input('email');
+
+    echo $this->Form->input('birthdate', [
+        'label' => 'Dt. Nascimento',
+        'maxYear' => (new Datetime)->format('Y'),
+        'minYear' => (new Datetime)->format('Y') - 100,
+        'templates' => [
+            'dateWidget' => '{{day}}{{month}}{{year}}'
+        ]
+    ]);
+    echo $this->Form->input('gender', ['label' => 'Sexo', 'type' => 'radio', 'options' => ['1' => 'Masculino', '2' => 'Feminino']]);
     
     echo $this->Form->input('is_active', ['label' => 'Ativo']);
     echo '<hr>';

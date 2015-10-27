@@ -1,5 +1,5 @@
 <?php
-    $title = 'Editar ficha de exercícios de ' . $customer->name;
+    $title = 'Editar ficha de exercícios de <strong>' . $customer->name . '</strong>';
     $this->assign('title', ' - ' . $title)
 ?>
 
@@ -50,6 +50,6 @@
 <?php
         echo $this->Form->input('end_date', ['label' => 'Validade']);
         echo '<hr>';
-        echo $this->Form->submit('Salvar Alterações', ['bootstrap-type' => 'primary', 'class' => 'pull-right']);
+        echo $this->Form->submit('Salvar Alterações');
     echo $this->Form->end();
 ?>  

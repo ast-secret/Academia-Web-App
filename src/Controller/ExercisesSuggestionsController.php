@@ -30,6 +30,7 @@ class ExercisesSuggestionsController extends AppController
                 'ExercisesSuggestions.name'
             ],
             'conditions' => [
+                'ExercisesSuggestions.is_active' => true,
                 'ExercisesSuggestions.name LIKE' => '%'.$term.'%'
             ],
             'limit' => 20

@@ -4,11 +4,14 @@ namespace App\Controller;
 use App\Controller\AppController;
 use App\Model\Entity\ExercisesGroup;
 
-use Cake\Network\Exceptions\NotFoundException;
+use Cake\Network\Exception\NotFoundException;
 
 use Cake\Collection\Collection;
 
 use Cake\I18n\Time;
+
+use Datetime;
+
 /**
  * Cards Controller
  *
@@ -18,7 +21,7 @@ class CardsController extends AppController
 
     public function printCard()
     {
-        $this->layout = 'print';
+        $this->viewBuilder()->layout('print');
 
         $cardId = $this->request->param('card_id');
         $card = $this->Cards->get($cardId, ['contain' => [
@@ -31,6 +34,55 @@ class CardsController extends AppController
         $exercisesByGroup = $collection->groupBy('exercise_column')->toArray();
 
         $this->set(compact('card', 'exercisesByGroup'));
+    }
+
+    public function exercises(){
+        $card_id = $this->request['card_id'];
+
+        $card = $this->Cards->find('all', [
+            'contain' => ['Exercises', 'Customers'],
+            'conditions' => [
+                'Cards.id' => $card_id
+            ]
+        ])->first();
+
+        if ($card->customer->gym_id != $this->Auth->user('gym_id')) {
+            throw new NotFoundException("Página não encontrada");
+        }
+
+        $exercises = new Collection($card->exercises);
+        $exercisesByColumn = $exercises->groupBy('exercise_column');
+
+        $columns = $this->Cards->Exercises->columns;
+
+        $exercisesByColumn = $exercisesByColumn->toArray();
+        $this->set(compact('columns', 'exercisesByColumn', 'card'));
+    }
+
+    public function exercisesEdit()
+    {
+
+        $columns = $this->Cards->Exercises->columns;
+
+        $card = $this->Cards->find('all', [
+            'contain' => [
+                'Customers',
+                'Exercises' => function($q){
+                    return $q
+                        ->where(['exercise_column' => $this->request['column']]);
+                }
+            ],
+            'conditions' => [
+                'Cards.id' => $this->request['card_id']
+            ]
+        ])
+        ->first();
+
+        if ($card->customer->gym_id != $this->Auth->user('gym_id')) {
+            throw new NotFoundException("Página não encontrada");
+        }
+
+        $this->set(compact('columns', 'card'));
     }
 
     /**
@@ -49,10 +101,10 @@ class CardsController extends AppController
 
         switch ($tab) {
             case 0:
-                $conditions[] = ['Cards.end_date >=' => Time::now()];
+                $conditions[] = ['Cards.end_date >' => (new Datetime)->format('Y-m-d')];
                 break;
             case 1:
-                $conditions[] = ['Cards.end_date <' => Time::now()];
+                $conditions[] = ['Cards.end_date <=' => (new Datetime)->format('Y-m-d')];
                 break;
         }
 
@@ -89,23 +141,6 @@ class CardsController extends AppController
         $this->set('cards', $this->paginate($this->Cards));
         $this->set(compact('customer', 'tab', 'customer_id'));
     }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Card id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $card = $this->Cards->get($id, [
-            'contain' => ['Users', 'Customers', 'ExercisesGroups' => ['Exercises']]
-        ]);
-        $this->set('card', $card);
-        $this->set('_serialize', ['card']);
-    }
-
     /**
      * Add method
      *
@@ -189,6 +224,11 @@ class CardsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $card = $this->Cards->get($id, ['contain' => 'Customers']);
 
+        /**
+         * Desse jeito fica mais leve... ele pega a Entity apenas pelo
+         * ID, e aqui com um simples IF eu vejo se aquele card realmente pertence 
+         * a academia do usuario logado, não preciso filtrar no SQL.
+         */
         if ($card->customer->gym_id != $this->Auth->user('gym_id')) {
             throw new NotFoundException();
         }
@@ -209,6 +249,10 @@ class CardsController extends AppController
             'Exercises'
         ]]);
 
+        if ($card->customer->gym_id != $this->Auth->user('gym_id')) {
+            throw new NotFoundException();
+        }
+
         if ($this->request->is(['put', 'patch', 'post'])) {
             $card = $this->Cards->patchEntity($card, $this->request->data, [
                 'associated' => ['Exercises']
@@ -225,8 +269,11 @@ class CardsController extends AppController
             }
         }
 
+        $columns = $this->Cards->Exercises->columns;
+
         $customer = $card->customer;
-        $this->set(compact('customer', 'card'));
+
+        $this->set(compact('customer', 'card', 'columns'));
     }
 
     /**
@@ -236,11 +283,11 @@ class CardsController extends AppController
      */
     public function customer($customer_id = null)
     {
-        $cards = $this->Cards
-            ->find()
-            ->contain(['Users', 'Customers', 'ExercisesGroups'=> ['Exercises']])
-            ->order(['Cards.current' => 'desc'])
-            ->where(['Cards.customer_id' => $customer_id]);
-        $this->set(compact('cards', 'customer_id'));
+        // $cards = $this->Cards
+        //     ->find()
+        //     ->contain(['Users', 'Customers', 'ExercisesGroups'=> ['Exercises']])
+        //     ->order(['Cards.current' => 'desc'])
+        //     ->where(['Cards.customer_id' => $customer_id]);
+        // $this->set(compact('cards', 'customer_id'));
     }
 }
