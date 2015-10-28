@@ -2,7 +2,8 @@
 
 <?php 
     $this->Html->addCrumb("Clientes", ['controller' => 'Customers', 'action' => 'index']);
-    $this->Html->addCrumb("Fichas de Exercícios de <strong>{$card->customer->name}</strong>", [
+    $this->Html->addCrumb($card->customer->name, null);
+    $this->Html->addCrumb("Fichas", [
         'action' => 'index',
         'customer_id' => $this->request['customer_id']
     ], [

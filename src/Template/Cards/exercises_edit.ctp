@@ -1,63 +1,118 @@
 <?= $this->assign('title', ' - Editar Exercícios') ?>
-
+<?= $this->Html->script('../lib/jquery-ui/jquery-ui.min.js', ['inline' => false]) ?>
 <script>
 	$(function(){
-		
-        //createTagsFromTimesString();
+		var $exercise = $('#exercise');
+        var $repetition = $('#repetition');
+        
+        var $panelExercisesUl = $('.panel-exercises ul');
 
-		$('#btn-add').click(function(){
-			var $this = $(this);
+        $('.panel-exercises ul').sortable({
+            axis: 'y',
+            containment: '.panel-exercises-containment'
+        });
+
+        var autocompleteUrl = $('input#exercise').data('autocomplete-url');
+        $('input#exercise').autocomplete({
+            source: autocompleteUrl
+        });
+
+        createTagsFromString();
+        $('input#exercise, input#repetition').keydown(function(event){
+            if(event.keyCode == 13) {
+                addExercise();
+                event.preventDefault();
+                return false;
+            }
+        });
+        $('#btn-add').click(function(){
+            addExercise();
+        });
+
+        $(document).on({
+            mouseenter: function () {
+                //stuff to do on mouse enter
+                $(this).find('button.btn-remove').stop().fadeIn('fast');
+            },
+            mouseleave: function () {
+                //stuff to do on mouse leave
+                $(this).find('button.btn-remove').stop().fadeOut('fast');
+            }
+        }, 'div.panel-exercises ul li');
+
+		function addExercise(fromAutocomplete) {
+
+            fromAutocomplete = (typeof fromAutocomplete == 'undefined') ? false : true;
+            console.log(fromAutocomplete);
 
             var $exercise = $('input#exercise');
+            var $repetition = $('input#repetition');
+
+            var exercise = $exercise.val();
+
+            var repetition = $repetition.val();
+            // var completeValue = exercise + '|#|' + repetition;
+            var completeValue = exercise;
             
             var hasError = false;
-            if (!$exercise.val()) {
-                $exercise.parent().addClass('has-error');
-                hasError = true;
-            } else {
-                $exercise.parent().removeClass('has-error');
+            if (!fromAutocomplete) {
+                if (!exercise) {
+                    $exercise.parent().addClass('has-error');
+                    hasError = true;
+                } else {
+                    $exercise.parent().removeClass('has-error');
+                }
+
+                // if(!repetition) {
+                //     $repetition.parent().addClass('has-error');
+                //     hasError = true;
+                // } else {
+                //     $repetition.parent().removeClass('has-error');
+                // }
             }
             
             var $exercisesString = $('input#exercises-string');
-            var timesArray = $timesString.val().split(';');
+            var exercisesArray = $exercisesString.val().split(';');
 
-            if ($.inArray(time, timesArray) >= 0) {
-            	$hour.parent().addClass('has-error');
-            	$minute.parent().addClass('has-error');
-            	console.log('tou');
+            if ($.inArray(completeValue.trim(), exercisesArray) >= 0) {
+            	$exercise.parent().addClass('has-error');
                 hasError = true;
             }
 
             if (hasError) {
+                if (!exercise) {
+                    $exercise.focus();    
+                } else if (!repetition) {
+                    $repetition.focus();
+                }
                 return false;
             }
 
-            timesArray.push(time);
-            timesArray.sort();
-            $timesString.val(timesArray.join(';'));
+            exercisesArray.push(completeValue);
+            //exercisesArray.sort();
+            $exercisesString.val(exercisesArray.join(';'));
 
-            createTagsFromTimesString();
+            createTagsFromString();
 
-            $hour.val('');
-            $hour.focus();
-            $minute.val('');
-		});
-        function createTagsFromTimesString()
+            $exercise.val('');
+            $exercise.focus();
+		}
+        function createTagsFromString()
         {
-            var value = $('input#times-string').val();
-            var timesArray = value.split(';');
+            var value = $('input#exercises-string').val();
+            var exercisesArray = value.split(';');
 
-            var $timesContainer = $('div#times-container');
+            $('#empty').html('');
+            $panelExercisesUl.html('');
 
-            $timesContainer.html('');
         	if (value.length <= 1) {
-            	$('div#times-container').html(getEmptyText());
+                $panelExercisesUl.parent().hide();
+            	$('#empty').html(getEmptyText());
             }
 
-            $.each(timesArray, function(index, val) {
+            $.each(exercisesArray, function(index, val) {
                 if (val) {
-                    addTag(val, $timesContainer);
-                    console.log(val);
+                    addItem(val);
                 }
                  
             });
@@ -66,44 +121,68 @@
         {
 			return '<div style="margin-top: 8px;"><em>Nenhum exercício para mostrar.</em></div>';
         }
-        function addTag(value, $timesContainer)
+        function addItem(value)
         {
-            $tag = getTagElement(value);
-            $timesContainer.append($tag);
+            $tag = getItemElement(value);
+            $panelExercisesUl.parent().show();
+            $panelExercisesUl.append($tag);
+            $tag.fadeIn('fast')   ; 
         }
-        function getTagElement(value){
-            $close = $('<span/>').html('&times;').addClass('tag-remove');
-            $element = $('<span/>')
-                .addClass('label label-primary tag pull-left clearfix')
-                .data({'value': value})
-                .text(value)
+        function getItemElement(value){
+            // var valueEscaped = value.replace('|#|', ' ');
+            var valueEscaped = value;
+            $close = $('<button/>')
+                .attr('type', 'button')
+                .css('display', 'none')
+                .html('<span class="glyphicon glyphicon-remove"></span>')
+                .addClass('btn btn-default btn-xs btn-remove pull-right');
+            $element = $('<li/>')
+                .addClass("list-group-item")
+                .css('display', 'none')
+                .data({'value': valueEscaped})
+                .text(valueEscaped)
                 .append($close);
             return $element;
         }
-        $('select#hour, select#minute').change(function(){
-            var $this = $(this);
-            var value = $this.val();
-            if (value) {
-                $this.parent().removeClass('has-error');
-            }
-        });
-		$(document).on('click', 'span.tag-remove', function(){
+        // function addTag(value, $exercisesContainer)
+        // {
+        //     $tag = getTagElement(value);
+        //     $exercisesContainer.append($tag);
+        // }
+        // function getTagElement(value){
+        //     var valueEscaped = value.replace('|#|', ' ');
+        //     $close = $('<button/>')
+        //         .html('<span class="glyphicon glyphicon-remove"')
+        //         .addClass('btn btn-default btn-xs');
+        //     $element = $('<div/>')
+        //         .addClass('label label-primary tag pull-left clearfix')
+        //         .css('display', 'none')
+        //         .data({'value': valueEscaped})
+        //         .text(valueEscaped)
+        //         .append($close);
+        //     return $element;
+        // }
+		$(document).on('click', 'button.btn-remove', function(){
             var $this = $(this);
             
             var value = $this.parent().data('value');
 
-            var $timesString = $('input#times-string');
+            var $exercisesString = $('input#exercises-string');
 
-            var timesArray = $timesString.val().split(';');
-            var index = timesArray.indexOf(value);
-            timesArray.splice(index, 1);
+            var exercisesArray = $exercisesString.val().split(';');
+            var index = exercisesArray.indexOf(value);
+            exercisesArray.splice(index, 1);
 
-            $timesString.val(timesArray.join(';'));
+            $exercisesString.val(exercisesArray.join(';'));
 
-            $this.parent().remove();
-            if (timesArray.length <= 1) {
-            	if (timesArray.length === 0 || timesArray[0] === "") {
-            		$('div#times-container').html(getEmptyText());	
+            $this.parent().fadeOut('fast', function(){
+                $(this).remove();
+            });
+            if (exercisesArray.length <= 1) {
+            	if (exercisesArray.length === 0 || exercisesArray[0] === "") {
+                    $panelExercisesUl.parent().fadeOut('fast', function(){
+                        $('#empty').html(getEmptyText());    
+                    });
             	}
             }
         });
@@ -112,7 +191,8 @@
 
 <?php 
     $this->Html->addCrumb("Clientes", ['controller' => 'Customers', 'action' => 'index']);
-    $this->Html->addCrumb("Fichas de Exercícios de <strong>{$card->customer->name}</strong>", [
+    $this->Html->addCrumb($card->customer->name, null);
+    $this->Html->addCrumb("Fichas", [
         'action' => 'index',
         'customer_id' => $this->request['customer_id']
     ], [
@@ -123,7 +203,7 @@
         'customer_id' => $this->request['customer_id'],
         'card_id' => $this->request['card_id']
     ]);
-    $this->Html->addCrumb("Exercícios da coluna <strong>{$columns[$this->request['column']]}</strong>",
+    $this->Html->addCrumb("Editar exercícios da coluna <strong>{$columns[$this->request['column']]}</strong>",
      null,
      [
         'escape' => false
@@ -131,12 +211,12 @@
     echo $this->Html->getCrumbList();
 ?>
 
-<hr>
+<br>
 
 <?php
 	echo $this->Form->create($card, ['novalidate' => true, 'horizontal' => true]);
-		echo $this->Form->input('exercises_string', ['type' => 'text']);
-        echo $this->Form->input('column', ['type' => 'text', 'value' => $this->request['column']]);
+		echo $this->Form->input('exercises_string', ['type' => 'hidden']);
+        echo $this->Form->input('column', ['type' => 'hidden', 'value' => $this->request['column']]);
 ?>
 	<div class="form-group">
 		<div class="row">
@@ -145,14 +225,28 @@
 			</div>
 			<div class="col-md-6">
 				<div class="form-inline">
-                    <input
-                        id="exercise"
-                        type="text"
-                        placeholder="Exercício"
-                        class="form-control">
-	                <button type="button" id="btn-add" class="btn btn-primary">
-	                	Adicionar
-	                </button>
+                    <!-- Span para aplicar a calsse has error nos campos individuais -->
+                    <span>
+                        <input
+                            autocomplete="off"
+                            data-autocomplete-url="<?= $this->Url->build(['controller' => 'ExercisesSuggestions','action' => 'index']) ?>"
+                            id="exercise"
+                            type="text"
+                            placeholder="Exercício"
+                            class="form-control">
+                    </span>
+                    <!-- Span para aplicar a calsse has error nos campos individuais -->
+                    <!-- <span>
+                        <input
+                            autocomplete="off"
+                            id="repetition"
+                            type="text"
+                            placeholder="Repetição"
+                            class="form-control">
+                    </span> -->
+    	                <button type="button" id="btn-add" class="btn btn-primary">
+    	                	Adicionar
+    	                </button>
 	            </div>
 			</div>
 		</div>
@@ -160,18 +254,22 @@
 	<div class="form-group">
 		<div class="row">
 			<div class="col-md-2 text-right">
-				<label class="control-label">Exercícios</label>
+				<!-- <label class="control-label">Exercícios</label> -->
 			</div>
 			<div class="col-md-6">
-	        	<div id="times-container" style="margin-top: 4px;"></div>
+                <div id="empty"></div>
+                <!-- Este .panel-exercises-containment serve para funcionar o drag quando tem apenas
+                dois itens -->
+                <div class="panel-exercises-containment" style="overflow: hidden;position: relative;">
+                    <div class="panel panel-default panel-exercises" style="margin-top: 10px; margin-bottom: 10px!important;">
+                        <div class="panel-heading">
+                            Exercícios
+                        </div>                    
+                        <ul class="list-group"></ul>
+                    </div>            
+                </div>
 			</div>
-			
 		</div>
-<!-- 		<div class="row">
-			<div class="col-md-6 col-md-offset-2">
-	        	<p class="help-block">Horário de início das aulas</p>
-			</div>
-		</div> -->
 	</div>
 	<hr>
 <?php

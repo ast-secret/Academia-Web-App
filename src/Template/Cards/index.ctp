@@ -2,16 +2,22 @@
 
 <?php 
     $this->Html->addCrumb('Clientes', ['controller' => 'Customers', 'action' => 'index']);
-    $this->Html->addCrumb('Fichas de exercícios de <strong>'. $customer->name.'</strong>', null);
+    $this->Html->addCrumb($customer->name, null);
+    $this->Html->addCrumb('Fichas', null);
     echo $this->Html->getCrumbList();
 ?>
-<br>
 
 
 <?= $this->Html->link('Nova Ficha',
     ['action' => 'add', 'customer_id' => $customer->id],
     ['class' => 'btn btn-danger pull-right', 'escape' => false]) ?>
+
+<!-- <h3><?= $customer->name ?></h3>
+<hr> -->
+
 <br style="clear: both;">
+
+<br>
 
 <ul class="nav nav-tabs">
     <li

@@ -35,5 +35,18 @@ class Card extends Entity
             'end' => '+1 year'
         ]);
     }
+
+    protected function _getExercisesString()
+    {
+        $exercisesString = [];
+        if (isset($this->_properties['exercises'])) {
+            foreach ($this->_properties['exercises'] as $value) {
+                $exercisesString[] = $value['name'];
+            }
+        }
+
+        $exercisesString = join($exercisesString, ';');
+        return $exercisesString;
+    }
 }
 

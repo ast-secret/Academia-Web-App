@@ -7,6 +7,8 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+use Cake\Event\Event;
+
 /**
  * Cards Model
  *
@@ -45,7 +47,25 @@ class CardsTable extends Table
     public function beforeSave($event, $entity)
     {
         if ($entity->exercises) {
-            $this->Exercises->deleteAll(['card_id' => $entity->id]);
+            $this->Exercises->deleteAll([
+                'card_id' => $entity->id,
+                'exercise_column' => $entity->column
+            ]);
+        }
+    }
+
+    public function beforeMarshal(Event $event, $data)
+    {
+        if (isset($data['exercises_string'])) {
+            $exercisesArray = explode(';', $data['exercises_string']);
+            foreach ($exercisesArray as $exercise) {
+                if ($exercise) {
+                    $data['exercises'][] = [
+                        'name' => $exercise,
+                        'exercise_column' => $data['column']
+                    ];
+                }
+            }
         }
     }
 

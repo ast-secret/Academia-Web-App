@@ -61,15 +61,15 @@ class CardsController extends AppController
 
     public function exercisesEdit()
     {
-
         $columns = $this->Cards->Exercises->columns;
 
         $card = $this->Cards->find('all', [
             'contain' => [
                 'Customers',
                 'Exercises' => function($q){
-                    return $q
-                        ->where(['exercise_column' => $this->request['column']]);
+                    return $q->where([
+                        'Exercises.exercise_column' => $this->request['column']
+                    ]);
                 }
             ],
             'conditions' => [
@@ -80,6 +80,26 @@ class CardsController extends AppController
 
         if ($card->customer->gym_id != $this->Auth->user('gym_id')) {
             throw new NotFoundException("Página não encontrada");
+        }
+
+        if ($this->request->is(['post', 'put'])) {
+            
+            $card->accessible('*', false);
+            $card->accessible('exercises', true);
+            // É usado na hora do delete all daquela coluna
+            $card->accessible('column', true);
+
+            $card = $this->Cards->patchEntity($card, $this->request->data);
+            if ($this->Cards->save($card)) {
+                $this->Flash->success('Os exercícios foram salvos com sucesso.');
+                return $this->redirect([
+                    'action' => 'exercises',
+                    'card_id' => $this->request['card_id'],
+                    'customer_id' => $this->request['customer_id'],
+                ]);
+            } else {
+                $this->Flash->error('Ocorreu um erro ao tentar salvar os exercícios. Por favor, tente novamente.');
+            }
         }
 
         $this->set(compact('columns', 'card'));
