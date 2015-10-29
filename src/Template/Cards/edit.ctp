@@ -1,5 +1,5 @@
 <?php
-    $title = 'Editar ficha de exercícios de <strong>' . $customer->name . '</strong>';
+    $title = 'Editar Ficha';
     $this->assign('title', ' - ' . $title)
 ?>
 
@@ -21,10 +21,13 @@
 
 <?php 
     $this->Html->addCrumb('Clientes', ['controller' => 'Customers', 'action' => 'index']);
-    $this->Html->addCrumb('Fichas de exercícios', [
+    $this->Html->addCrumb($customer->name, null);
+    $this->Html->addCrumb('Fichas', [
         'controller' => 'Cards',
         'action' => 'index',
         'customer_id' => $customer->id
+    ], [
+        'escape' => false
     ]);
     $this->Html->addCrumb($title);
     echo $this->Html->getCrumbList();

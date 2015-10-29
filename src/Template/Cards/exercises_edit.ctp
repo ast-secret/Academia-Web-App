@@ -106,8 +106,7 @@
             $panelExercisesUl.html('');
 
         	if (value.length <= 1) {
-                $panelExercisesUl.parent().hide();
-            	$('#empty').html(getEmptyText());
+            	$panelExercisesUl.append($('<li/>').addClass('list-group-item').html(getEmptyText()));
             }
 
             $.each(exercisesArray, function(index, val) {
@@ -144,24 +143,7 @@
                 .append($close);
             return $element;
         }
-        // function addTag(value, $exercisesContainer)
-        // {
-        //     $tag = getTagElement(value);
-        //     $exercisesContainer.append($tag);
-        // }
-        // function getTagElement(value){
-        //     var valueEscaped = value.replace('|#|', ' ');
-        //     $close = $('<button/>')
-        //         .html('<span class="glyphicon glyphicon-remove"')
-        //         .addClass('btn btn-default btn-xs');
-        //     $element = $('<div/>')
-        //         .addClass('label label-primary tag pull-left clearfix')
-        //         .css('display', 'none')
-        //         .data({'value': valueEscaped})
-        //         .text(valueEscaped)
-        //         .append($close);
-        //     return $element;
-        // }
+
 		$(document).on('click', 'button.btn-remove', function(){
             var $this = $(this);
             
@@ -177,20 +159,22 @@
 
             $this.parent().fadeOut('fast', function(){
                 $(this).remove();
+                if (exercisesArray.length <= 1) {
+                    if (exercisesArray.length === 0 || exercisesArray[0] === "") {
+                        $panelExercisesUl
+                            .append($('<li/>').addClass('list-group-item').html(getEmptyText()));
+                    }
+                }
             });
-            if (exercisesArray.length <= 1) {
-            	if (exercisesArray.length === 0 || exercisesArray[0] === "") {
-                    $panelExercisesUl.parent().fadeOut('fast', function(){
-                        $('#empty').html(getEmptyText());    
-                    });
-            	}
-            }
         });
 	});
 </script>
 
 <?php 
-    $this->Html->addCrumb("Clientes", ['controller' => 'Customers', 'action' => 'index']);
+    $this->Html->addCrumb("Clientes", [
+        'controller' => 'Customers',
+        'action' => 'index'
+    ]);
     $this->Html->addCrumb($card->customer->name, null);
     $this->Html->addCrumb("Fichas", [
         'action' => 'index',
@@ -212,19 +196,17 @@
 ?>
 
 <br>
+<br>
 
 <?php
 	echo $this->Form->create($card, ['novalidate' => true, 'horizontal' => true]);
 		echo $this->Form->input('exercises_string', ['type' => 'hidden']);
         echo $this->Form->input('column', ['type' => 'hidden', 'value' => $this->request['column']]);
 ?>
-	<div class="form-group">
-		<div class="row">
-			<div class="col-md-2 text-right">
-				<!-- <label for="">Horários</label> -->
-			</div>
-			<div class="col-md-6">
-				<div class="form-inline">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-5">
+			<div class="row">
+                <div class="col-md-8">
                     <!-- Span para aplicar a calsse has error nos campos individuais -->
                     <span>
                         <input
@@ -244,33 +226,29 @@
                             placeholder="Repetição"
                             class="form-control">
                     </span> -->
-    	                <button type="button" id="btn-add" class="btn btn-primary">
-    	                	Adicionar
-    	                </button>
-	            </div>
-			</div>
-		</div>
-	</div>
-	<div class="form-group">
-		<div class="row">
-			<div class="col-md-2 text-right">
-				<!-- <label class="control-label">Exercícios</label> -->
-			</div>
-			<div class="col-md-6">
-                <div id="empty"></div>
-                <!-- Este .panel-exercises-containment serve para funcionar o drag quando tem apenas
-                dois itens -->
-                <div class="panel-exercises-containment" style="overflow: hidden;position: relative;">
-                    <div class="panel panel-default panel-exercises" style="margin-top: 10px; margin-bottom: 10px!important;">
-                        <div class="panel-heading">
-                            Exercícios
-                        </div>                    
-                        <ul class="list-group"></ul>
-                    </div>            
                 </div>
-			</div>
+                <div class="col-md-4">
+                    <button type="button" id="btn-add" class="btn btn-primary btn-block">
+                        Adicionar
+                    </button>
+                </div>
+            </div>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-offset-2 col-md-5">
+            <!-- Este .panel-exercises-containment serve para funcionar o drag quando tem apenas
+            dois itens -->
+            <div class="panel-exercises-containment" style="overflow: hidden;position: relative;">
+                <div class="panel panel-default panel-exercises" style="margin-top: 10px; margin-bottom: 10px!important;">
+                    <div class="panel-heading">
+                        Exercícios
+                    </div>                    
+                    <ul class="list-group"></ul>
+                </div>            
+            </div>
+		</div>
+   </div>
 	<hr>
 <?php
 		echo $this->Form->submit('Salvar Alterações');

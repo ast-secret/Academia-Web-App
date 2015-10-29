@@ -16,7 +16,7 @@ class ExercisesTable extends Table
 {
 
 
-    public $columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    public $columns = ['A', 'B', 'C', 'D', 'E', 'F'];
 
     /**
      * Initialize method
@@ -57,6 +57,12 @@ class ExercisesTable extends Table
             
         $validator
             ->add('exercise_column', 'valid', ['rule' => 'numeric'])
+            ->add('exercise_column', 'valid', [
+                'rule' => function($value){
+                    $columns = array_keys($this->columns);
+                    return (in_array($value, $columns));
+                }
+            ])
             ->requirePresence('exercise_column', 'create')
             ->notEmpty('exercise_column');
 

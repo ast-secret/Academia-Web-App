@@ -6,7 +6,10 @@
 	<title>
 		Academia <?= ucwords(str_replace('-', ' ', $this->request->params['gym_slug'])) . $this->fetch('title') ?>
 	</title>
-	<?= $this->Html->meta('icon') ?>
+	<?= $this->Html->meta('icon',
+		"/files/gyms/{$loggedinUser['gym']['folder_name']}/favicon.ico",
+		['type' => 'icon']
+	)?>
 
 	<?= $this->Html->css('../lib/bootstrap/dist/css/bootstrap.min.css') ?>
 	<?= $this->Html->css('app.css') ?>

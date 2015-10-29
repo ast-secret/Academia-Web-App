@@ -7,7 +7,8 @@
     echo $this->Html->script('Exercises/add_exercises', ['inline' => false]);
 
     $this->Html->addCrumb('Clientes', ['controller' => 'Customers', 'action' => 'index']);
-    $this->Html->addCrumb('Fichas de exercícios de <strong>' . $customer->name . '</strong>', [
+    $this->Html->addCrumb($customer->name, null);
+    $this->Html->addCrumb('Fichas', [
         'controller' => 'Cards',
         'action' => 'index',
         'customer_id' => $customer->id

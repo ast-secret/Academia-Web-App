@@ -24,11 +24,15 @@ class CardsController extends AppController
         $this->viewBuilder()->layout('print');
 
         $cardId = $this->request->param('card_id');
-        $card = $this->Cards->get($cardId, ['contain' => [
-            'Customers',
-            'Users',
-            'Exercises'
-        ]]);
+        $card = $this->Cards->get($cardId, [
+            'contain' => [
+                'Customers',
+                'Users',
+                'Exercises' => function($q){
+                return $q->order('exercise_column');
+                }
+            ],
+        ]);
 
         $collection = new Collection($card->exercises);
         $exercisesByGroup = $collection->groupBy('exercise_column')->toArray();
@@ -62,6 +66,11 @@ class CardsController extends AppController
     public function exercisesEdit()
     {
         $columns = $this->Cards->Exercises->columns;
+        $requestColumn = (int)$this->request['column'];
+
+        if (($requestColumn + 1) > count($columns) || $requestColumn < 0) {
+            throw new NotFoundException("Página não encontrada");
+        }
 
         $card = $this->Cards->find('all', [
             'contain' => [

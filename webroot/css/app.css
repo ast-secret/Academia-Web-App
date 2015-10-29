@@ -37,11 +37,20 @@ body{
 .page-wrap{
 	min-height: 100%;
 }
-
+/*Menu top mesma cor do menu lateral*/
+.navbar-default, .col-left{
+	background-color: #F5F5F5;
+}
+.sidemenu-brand, .navbar-brand{
+	color: #333!important;
+	font-weight: bold;
+}
+.navbar-default, {
+	border-color: EEE;
+}
 .col-left{
 	position: fixed;
 	height: 100%;
-	background-color: #F5F5F5;
 	width: 18%;
 	overflow: auto;
 }

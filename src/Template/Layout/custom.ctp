@@ -6,7 +6,10 @@
 	<title>
 		<?= ucwords(str_replace('-', ' ', $this->request->params['gym_slug'])) . $this->fetch('title') ?>
 	</title>
-	<?= $this->Html->meta('icon') ?>
+	<?= $this->Html->meta('icon',
+		"/files/gyms/{$loggedinUser['gym']['folder_name']}/favicon.ico",
+		['type' => 'icon']
+	)?>
 
 	<!-- <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'> -->

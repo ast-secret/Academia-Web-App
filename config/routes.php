@@ -109,7 +109,10 @@ Router::scope('/:gym_slug/fichas-de-exercicios', function ($routes) {
     $routes->connect('/deletar/:card_id', ['controller' => 'Cards', 'action' => 'delete']);
 
     $routes->connect('/exercicios/:customer_id/:card_id', ['controller' => 'Cards', 'action' => 'exercises']);
-    $routes->connect('/exercicios/editar/:customer_id/:card_id/:column', ['controller' => 'Cards', 'action' => 'exercisesEdit']);
+    $routes->connect('/exercicios/editar/:customer_id/:card_id/:column', [
+        'controller' => 'Cards',
+        'action' => 'exercisesEdit'
+    ]);
 
     $routes->connect('/configurar/exercicios/:card_id', ['controller' => 'Cards', 'action' => 'addExercises']);
 });

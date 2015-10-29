@@ -6,7 +6,13 @@
 	<title>
 		<?= $this->fetch('title') ?>
 	</title>
-	<?= $this->Html->meta('icon') ?>
+	</title>
+	<?= $this
+		->Html
+		->meta('icon',
+			"/files/gyms/{$gym->folder_name}/favicon.ico",
+			['type' => 'icon']
+	) ?>
 
 	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
