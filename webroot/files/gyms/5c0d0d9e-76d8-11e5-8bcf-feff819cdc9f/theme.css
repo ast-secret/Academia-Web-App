@@ -1,5 +1,5 @@
-.sidemenu-brand{
-	color: #e74c3c;
+.sidemenu-brand, .navbar-brand{
+	color: #e74c3c!important;
 }
 /*.sidemenu-brand, .side-menu li a, .sidemenu-name-display{
 	color: #FFF;

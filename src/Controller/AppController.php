@@ -89,6 +89,7 @@ class AppController extends Controller
         $this->set(compact('menuItems'));
 
         $this->loadComponent('Auth', [
+            'authorize' => 'Controller',
             'loginAction' => [
                 'controller' => 'Users',
                 'action' => 'login'
@@ -162,5 +163,75 @@ class AppController extends Controller
         }
 
         return $condition;
+    }
+
+    public function isAuthorized($user = null)
+    {
+        if ($this->request->param('controller') == 'Users' && $this->request->param('action') == 'logout') {
+            return true;
+        }
+        // 2 = Instrutor
+        $authorizations = [
+            '1' => [
+                'allowed' => ['*']
+            ],
+            '2' => [
+                'notAllowed' => ['*'],
+                'allowed' => [
+                    'Cards',
+                    'Customers' => [
+                        'notAllowed' => ['*'],
+                        'allowed' => ['index']
+                    ],
+                    'Users' => [
+                        'notAllowed' => ['*'],
+                        'allowed' => ['mySettings', 'myPasswordSettings']
+                    ]
+                ],
+            ],
+            '3' => [
+                'allowed' => [
+                    'Users' => [
+                        'notAllowed' => ['*'],
+                        'allowed' => ['mySettings', 'myPasswordSettings']
+                    ],
+                    '*'
+                ],
+                'notAllowed' => [
+                    'Cards'
+                ]
+            ]
+        ];
+
+        return $this->myAuth($authorizations[$user['role_id']], 'controller');
+    }
+    protected function myAuth($array, $type)
+    {
+        $out = false;
+        foreach ($array as $key => $values) {
+            if ($key == 'allowed') {
+                $tempOut = true;
+            } else {
+                $tempOut = false;
+            }
+            foreach ($values as $k => $v) {
+                if ($v == '*') {
+                    $out = $tempOut;
+                    break;
+                }
+                $compair = '';
+                if (is_array($v)) {
+                    if ($this->request->param($type) == $k) {
+                        return $this->myAuth($v, 'action');
+                    }
+                } else {
+                    if ($this->request->param($type) == $v) {
+                        $out = $tempOut;
+                        break;
+                    }
+                }
+            }
+        }
+        return $out;
     }
 }
