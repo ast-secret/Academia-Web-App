@@ -7,9 +7,14 @@
         
         var $panelExercisesUl = $('.panel-exercises ul');
 
+        var $exercisesString = $('input#exercises-string');
+
         $('.panel-exercises ul').sortable({
             axis: 'y',
-            containment: '.panel-exercises-containment'
+            containment: '.panel-exercises-containment',
+            update: function(){
+                createStringFromTags();
+            }
         });
 
         var autocompleteUrl = $('input#exercise').data('autocomplete-url');
@@ -97,6 +102,15 @@
             $exercise.val('');
             $exercise.focus();
 		}
+        function createStringFromTags()
+        {
+            var $lis = $panelExercisesUl.children('li');
+            var exercises = [];
+            $lis.each(function(key, value){
+                exercises.push($(value).text());
+            });
+            $exercisesString.val(exercises.join(';'));
+        }
         function createTagsFromString()
         {
             var value = $('input#exercises-string').val();
@@ -148,8 +162,6 @@
             var $this = $(this);
             
             var value = $this.parent().data('value');
-
-            var $exercisesString = $('input#exercises-string');
 
             var exercisesArray = $exercisesString.val().split(';');
             var index = exercisesArray.indexOf(value);

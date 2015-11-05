@@ -100,12 +100,12 @@ class AppController extends Controller
             ],
             'authError' => 'Você deve fazer o login para acessar esta área.',
             'authenticate' => [
-                'Form' => [
-                    'finder' => 'auth',
+                'MyAuth' => [
+                    'contain' => ['Gyms', 'Roles'],
+                    'scope' => ['deleted' => 0, 'is_active' => 1]
                 ]
             ]
         ]);
-
         $this->loadComponent('Flash');
     }
 
