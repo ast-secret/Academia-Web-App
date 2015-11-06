@@ -16,10 +16,6 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-
-
-
-
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opções <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -35,7 +31,12 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $loggedinUser['short_name'] ?> <span class="caret"></span></a>
+                    <a
+                        href="#"
+                        class="dropdown-toggle"
+                        data-toggle="dropdown"
+                        role="button">
+                        <?= $loggedinUser['short_name'] ?> <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-right" role="menu">
                         <li role="presentation" class="dropdown-header">
                             <?= $loggedinUser['username'] ?>

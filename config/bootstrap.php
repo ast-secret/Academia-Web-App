@@ -161,7 +161,6 @@ Request::addDetector('tablet', function ($request) {
  *
  */
 
-Plugin::load('Chocolate');
 Plugin::load('Bootstrap');
 Plugin::load('Migrations');
 

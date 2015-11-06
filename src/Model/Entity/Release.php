@@ -18,4 +18,9 @@ class Release extends Entity
         '*' => true,
         'id' => false,
     ];
+
+    protected function _setTitle($title)
+    {
+    	return ucfirst(strtolower($title));
+    }
 }

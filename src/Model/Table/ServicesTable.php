@@ -30,7 +30,10 @@ class ServicesTable extends Table
         $this->table('services');
         $this->displayField('name');
         $this->primaryKey('id');
+
         $this->addBehavior('Timestamp');
+        $this->addBehavior('NormalizeFullName', ['fields' => ['name']]);
+
         $this->belongsTo('Gyms', [
             'foreignKey' => 'gym_id',
             'joinType' => 'INNER'

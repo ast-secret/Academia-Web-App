@@ -33,6 +33,9 @@ class CustomersTable extends Table
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('NormalizeFullName', [
+            'fields' => ['name']
+        ]);
 
         $this->belongsTo('Gyms', [
             'foreignKey' => 'gym_id',

@@ -26,7 +26,9 @@ class ReleasesTable extends Table
         $this->table('releases');
         $this->displayField('text');
         $this->primaryKey('id');
+        
         $this->addBehavior('Timestamp');
+
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'

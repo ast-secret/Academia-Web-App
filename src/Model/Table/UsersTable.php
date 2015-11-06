@@ -31,7 +31,10 @@ class UsersTable extends Table
         $this->table('users');
         $this->displayField('name');
         $this->primaryKey('id');
+        
         $this->addBehavior('Timestamp');
+        $this->addBehavior('NormalizefullName', ['fields' => ['name']]);
+
         $this->belongsTo('Gyms', [
             'foreignKey' => 'gym_id',
             'joinType' => 'INNER'

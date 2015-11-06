@@ -30,6 +30,9 @@ msgid_plural "{0} weeks"
 msgstr[0] "{0} semana"
 msgstr[1] "{0} semanas"
 
+msgid "just now"
+msgstr "agora"
+
 #: I18n/Time.php:254
 msgid "%s ago"
 msgstr "%s atrás"
