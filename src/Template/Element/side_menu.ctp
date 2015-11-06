@@ -66,9 +66,18 @@
 		<div class="col-md-12">
 			<ul class="side-menu nav nav-pills nav-stacked">
 				<?php foreach ($menuItems as $item): ?>
-					<li class="<?= ($this->request->controller == $item['controller']) ? 'active' : '' ?>">
-						<?= $this->Html->link($item['label'], ['controller' => $item['controller'], 'action' => $item['action']]) ?>
-					</li>
+					<?php if (!in_array($item['controller'], $menuNotAllowedAuthorizations)): ?>
+						<li
+							class="<?= ($this->request->controller == $item['controller']) ? 'active' : '' ?>">
+							<?= $this->Html->link(
+								$item['label'],
+								[
+									'controller' => $item['controller'],
+									'action' => $item['action']
+								]
+							)?>
+						</li>
+					<?php endif ?>
 				<?php endforeach ?>
 			</ul>
 		</div>

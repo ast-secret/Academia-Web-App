@@ -24,9 +24,11 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opções <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <?php foreach ($menuItems as $item): ?>
-                            <li class="<?= ($this->request->controller == $item['controller']) ? 'active' : '' ?>">
-                                <?= $this->Html->link($item['label'], ['controller' => $item['controller'], 'action' => $item['action']]) ?>
-                            </li>
+                            <?php if (!in_array($item['controller'], $menuNotAllowedAuthorizations)): ?>
+                                <li class="<?= ($this->request->controller == $item['controller']) ? 'active' : '' ?>">
+                                    <?= $this->Html->link($item['label'], ['controller' => $item['controller'], 'action' => $item['action']]) ?>
+                                </li>
+                            <?php endif ?>
                         <?php endforeach ?>
                     </ul>
                 </li>

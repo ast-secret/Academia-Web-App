@@ -45,6 +45,44 @@ class AppController extends Controller
         ]
     ];
 
+    public $menuNotAllowedAuthorizations = [
+        '1' => [],
+        '2' => ['Users', 'Suggestions', 'Releases', 'Services'],
+        '3' => ['Users', '']
+    ];
+
+    public $authorizations = [
+            '1' => [
+                'allowed' => ['*']
+            ],
+            '2' => [
+                'notAllowed' => ['*'],
+                'allowed' => [
+                    'Cards',
+                    'Customers' => [
+                        'notAllowed' => ['*'],
+                        'allowed' => ['index']
+                    ],
+                    'Users' => [
+                        'notAllowed' => ['*'],
+                        'allowed' => ['mySettings', 'myPasswordSettings']
+                    ]
+                ],
+            ],
+            '3' => [
+                'allowed' => [
+                    'Users' => [
+                        'notAllowed' => ['*'],
+                        'allowed' => ['mySettings', 'myPasswordSettings']
+                    ],
+                    '*'
+                ],
+                'notAllowed' => [
+                    'Cards'
+                ]
+            ]
+        ];
+
     /**
      * Initialization hook method.
      *
@@ -86,6 +124,7 @@ class AppController extends Controller
                 'action' => 'index',
             ],
         ];
+
         $this->set(compact('menuItems'));
 
         $this->loadComponent('Auth', [
@@ -106,6 +145,7 @@ class AppController extends Controller
                 ]
             ]
         ]);
+
         $this->loadComponent('Flash');
     }
 
@@ -123,6 +163,8 @@ class AppController extends Controller
             $loggedinUser['short_name'] = ($total > 1) ? $shortName[0] . ' ' . $shortName[$total - 1] : $shortName[0];
 
             $this->set(compact('loggedinUser'));
+
+            $this->set('menuNotAllowedAuthorizations', $this->menuNotAllowedAuthorizations[$loggedinUser['role']['id']]);
         }
         // Evita que ele vá para a tela de login já logado
         if (
@@ -170,40 +212,8 @@ class AppController extends Controller
         if ($this->request->param('controller') == 'Users' && $this->request->param('action') == 'logout') {
             return true;
         }
-        // 2 = Instrutor
-        $authorizations = [
-            '1' => [
-                'allowed' => ['*']
-            ],
-            '2' => [
-                'notAllowed' => ['*'],
-                'allowed' => [
-                    'Cards',
-                    'Customers' => [
-                        'notAllowed' => ['*'],
-                        'allowed' => ['index']
-                    ],
-                    'Users' => [
-                        'notAllowed' => ['*'],
-                        'allowed' => ['mySettings', 'myPasswordSettings']
-                    ]
-                ],
-            ],
-            '3' => [
-                'allowed' => [
-                    'Users' => [
-                        'notAllowed' => ['*'],
-                        'allowed' => ['mySettings', 'myPasswordSettings']
-                    ],
-                    '*'
-                ],
-                'notAllowed' => [
-                    'Cards'
-                ]
-            ]
-        ];
 
-        return $this->myAuth($authorizations[$user['role_id']], 'controller');
+        return $this->myAuth($this->authorizations[$user['role_id']], 'controller');
     }
     protected function myAuth($array, $type)
     {

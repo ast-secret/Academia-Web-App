@@ -7,12 +7,14 @@
 
 <div class="row row-add-button">
     <div class="col-md-12">
-        <?= $this->Html->link('Criar Cliente', [
-            'action' => 'add'
-        ], [
-            'class' => 'btn btn-danger pull-right',
-            'escape' => false
-        ])?>  
+        <?php if ($loggedinUser['role']['id'] != 2): ?>
+            <?= $this->Html->link('Criar Cliente', [
+                'action' => 'add'
+            ], [
+                'class' => 'btn btn-danger pull-right',
+                'escape' => false
+            ])?>
+        <?php endif ?>
     </div>
 </div>
 
@@ -81,28 +83,32 @@
                         <?= $customer->is_active ? '<span class="label label-success">Ativo</span>': '<span class="label label-danger">Inativo</span>'; ?>
                     </td>      
                     <td class="text-center" style="vertical-align: middle;">
-                        <?= $this->Html->link(
-                            '<span class="glyphicon glyphicon-list-alt"></span>',
-                            [
-                                'controller' => 'Cards',
-                                'action' => 'index',
-                                'customer_id' => $customer->id
-                            ],
-                            [
-                                'escape' => false,
-                                'class' => 'btn btn-default btn-xs',
-                                'title' => 'Ver fichas'
-                            ])
-                        ?>
-                        <?= $this->Html->link(
-                            '<span class="glyphicon glyphicon-pencil"></span>',
-                            ['action' => 'edit', $customer->id],
-                            [
-                                'escape' => false,
-                                'class' => 'btn btn-default btn-xs',
-                                'title' => 'Editar'
-                            ])
-                        ?>
+                        <?php if ($loggedinUser['role']['id'] != 3): ?>
+                            <?= $this->Html->link(
+                                '<span class="glyphicon glyphicon-list-alt"></span>',
+                                [
+                                    'controller' => 'Cards',
+                                    'action' => 'index',
+                                    'customer_id' => $customer->id
+                                ],
+                                [
+                                    'escape' => false,
+                                    'class' => 'btn btn-default btn-xs',
+                                    'title' => 'Ver fichas'
+                                ])
+                            ?>
+                        <?php endif ?>
+                        <?php if ($loggedinUser['role']['id'] != 2): ?>
+                            <?= $this->Html->link(
+                                '<span class="glyphicon glyphicon-pencil"></span>',
+                                ['action' => 'edit', $customer->id],
+                                [
+                                    'escape' => false,
+                                    'class' => 'btn btn-default btn-xs',
+                                    'title' => 'Editar'
+                                ])
+                            ?>
+                        <?php endif ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
