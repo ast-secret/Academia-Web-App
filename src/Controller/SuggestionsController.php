@@ -89,7 +89,8 @@ class SuggestionsController extends AppController
             }],
             'conditions' => [
                 $conditions
-            ]
+            ],
+            'order' => ['created' => 'asc']
         ];
         $this->set(compact('tab'));
         $this->set('suggestions', $this->paginate($this->Suggestions));
