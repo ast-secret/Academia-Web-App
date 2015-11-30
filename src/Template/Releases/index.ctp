@@ -6,9 +6,20 @@
             var $this = $(this);
             var url = $this.data('url');
             var releaseId = $this.data('release-id');
+            var $loader = $('#push-loader-' + releaseId);
 
+            alert('Dependendo da quantidade de alunos cadastrados o envio das notificações pode demorar, não saia da página enquanto o envio não for concluído');
+
+            $loader.fadeIn('fast');
             $.post(url, {id: releaseId}, function(result){
-                console.log(result);
+                location.reload();
+            })
+            .fail(function(){
+                alert('As notificações não foram enviadas, favor tentar novamente.');
+                $loader.fadeOut('fast');
+            })
+            .always(function(){
+                // $loader.fadeOut('fast');
             });
         });
     });
@@ -103,7 +114,7 @@
                 <th style="width: 260px;" class="text-center">
                     Destaque
                 </th>
-                <th>
+                <th class="text-center">
                     Notificação Push
                 </th>
                 <th style="width: 80px;">
@@ -149,21 +160,35 @@
                                 -
                             <?php endif ?>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <?php if (!$release->dt_push): ?>
                                 <em>Ainda não enviado.</em>
                             <?php else: ?>  
-                                <?= $release->dt_push->timeAgoInWords() ?>
+                                <span class="label label-success">Enviado <?= $release->dt_push->timeAgoInWords() ?></span>
                             <?php endif ?>
-                            <div>
+                            <div style="margin-top: 10px;">
                                 <button
+                                    <?= (!$release->is_active) ? 'disabled' : '' ?>
                                     type="button"
                                     id="btn-send-push"
+                                    class="btn btn-default btn-xs"
                                     data-release-id="<?= $release->id ?>"
                                     data-url="<?= $this->Url->build(['controller' => 'PushNotification', 'action' => 'releases', '_ext' => 'json']); ?>">
                                     Enviar
                                 </button>
                             </div>
+
+                            <div
+                                class="progress"
+                                style="margin-top: 10px; display: none;"
+                                id="push-loader-<?= $release->id?>">
+                                <div
+                                    class="progress-bar progress-bar-striped active"
+                                    role="progressbar"
+                                    style="width: 100%">
+                                </div>
+                            </div>
+
                         </td>
                         <td class="text-center" style="vertical-align: middle;">
                             <?php if ($me_id == $release->user_id): ?>

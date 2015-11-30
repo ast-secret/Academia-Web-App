@@ -15,6 +15,8 @@ use Sly\NotificationPusher\PushManager,
     Sly\NotificationPusher\Model\Push
 ;
 
+use Datetime;
+
 class PushNotificationController extends AppController
 {
 
@@ -50,7 +52,8 @@ class PushNotificationController extends AppController
 		$devices = $this->_getAllDevices();
 
 		$message = new Message($release->title, [
-			'title' => 'Novo comunicado'
+			'title' => 'Novo comunicado',
+			'type' => 'releases'
 		]);
 		
 		if ($devices['android']) {
@@ -58,7 +61,16 @@ class PushNotificationController extends AppController
 			$this->_pushManager->add($push);
 			try {
 				$this->_pushManager->push();	
+				/**
+				 * Salvo a data do último envio
+				 */
+				$release->dt_push = (new Datetime)->format('Y-m-d H:i:s');
+				/**
+				 * Não importa se falhar o salvamento
+				 */
+				$this->Releases->save($release);
 			} catch (Exception $e) {
+				http_response_code(400);
 				$response = ['message' => $e->getMessage(), 'code' => 400];
 			}
 		}
