@@ -62,6 +62,11 @@ Router::scope('/:gym_slug/caixa-de-sugestoes', function ($routes) {
 	$routes->connect('/toggle-is-star', ['controller' => 'Suggestions', 'action' => 'toggleIsStar']);
 	$routes->connect('/toggle-is-read', ['controller' => 'Suggestions', 'action' => 'toggleIsRead']);
 });
+Router::scope('/:gym_slug/push-notification', function ($routes) {
+    $routes->extensions(['json']);
+    $routes->connect('/releases', ['controller' => 'PushNotification', 'action' => 'releases']);
+});
+
 
 Router::scope('/:gym_slug/autocomplete', function ($routes) {
     $routes->extensions(['json']);

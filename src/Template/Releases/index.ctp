@@ -1,5 +1,19 @@
 <?= $this->assign('title', ' - Comunicados') ?>
 
+<script>
+    $(function(){
+        $('button#btn-send-push').click(function(){
+            var $this = $(this);
+            var url = $this.data('url');
+            var releaseId = $this.data('release-id');
+
+            $.post(url, {id: releaseId}, function(result){
+                console.log(result);
+            });
+        });
+    });
+</script>
+
 <?php 
     $this->Html->addCrumb('Comunicados');
     echo $this->Html->getCrumbList();
@@ -89,6 +103,9 @@
                 <th style="width: 260px;" class="text-center">
                     Destaque
                 </th>
+                <th>
+                    Notificação Push
+                </th>
                 <th style="width: 80px;">
                     
                 </th>
@@ -131,6 +148,22 @@
                             <?php else: ?>
                                 -
                             <?php endif ?>
+                        </td>
+                        <td>
+                            <?php if (!$release->dt_push): ?>
+                                <em>Ainda não enviado.</em>
+                            <?php else: ?>  
+                                <?= $release->dt_push->timeAgoInWords() ?>
+                            <?php endif ?>
+                            <div>
+                                <button
+                                    type="button"
+                                    id="btn-send-push"
+                                    data-release-id="<?= $release->id ?>"
+                                    data-url="<?= $this->Url->build(['controller' => 'PushNotification', 'action' => 'releases', '_ext' => 'json']); ?>">
+                                    Enviar
+                                </button>
+                            </div>
                         </td>
                         <td class="text-center" style="vertical-align: middle;">
                             <?php if ($me_id == $release->user_id): ?>

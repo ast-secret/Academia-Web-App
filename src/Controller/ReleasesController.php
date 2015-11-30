@@ -63,6 +63,7 @@ class ReleasesController extends AppController
                 'destaque',
                 'dt_inicio_destaque',
                 'dt_fim_destaque',
+                'dt_push',
                 'Users.name'
             ],
             'contain' => ['Users'],
@@ -79,6 +80,7 @@ class ReleasesController extends AppController
 
         $this->set(compact('tab'));
     }
+
     /**
      * Add method
      *
