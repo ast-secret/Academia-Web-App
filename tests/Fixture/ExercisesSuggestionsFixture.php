@@ -18,10 +18,10 @@ class ExercisesSuggestionsFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
-        'nome' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
-        'is_active' => ['type' => 'integer', 'length' => 4, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'name' => ['type' => 'string', 'length' => 200, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'fixed' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
+        'is_active' => ['type' => 'integer', 'length' => 4, 'unsigned' => false, 'null' => true, 'default' => '1', 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
@@ -40,10 +40,10 @@ class ExercisesSuggestionsFixture extends TestFixture
     public $records = [
         [
             'id' => 1,
-            'nome' => 'Lorem ipsum dolor sit amet',
-            'is_active' => 1,
-            'created' => '2015-08-16 17:54:51',
-            'modified' => '2015-08-16 17:54:51'
+            'name' => 'Lorem ipsum dolor sit amet',
+            'created' => '2016-01-05 22:03:27',
+            'modified' => '2016-01-05 22:03:27',
+            'is_active' => 1
         ],
     ];
 }

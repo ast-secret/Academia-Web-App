@@ -73,6 +73,13 @@ Router::scope('/:gym_slug/autocomplete', function ($routes) {
     $routes->connect('/exercicios', ['controller' => 'ExercisesSuggestions', 'action' => 'index']);
 });
 
+Router::scope('/:gym_slug/exercicios-autocomplete', function ($routes) {
+    $routes->connect('/', ['controller' => 'ExercisesSuggestions', 'action' => 'index']);
+    $routes->connect('/criar', ['controller' => 'ExercisesSuggestions', 'action' => 'add']);
+    $routes->connect('/editar/*', ['controller' => 'ExercisesSuggestions', 'action' => 'edit']);
+    $routes->connect('/deletar/*', ['controller' => 'ExercisesSuggestions', 'action' => 'delete']);
+});
+
 Router::scope('/:gym_slug/usuarios', function ($routes) {
 	$routes->connect('/', ['controller' => 'Users', 'action' => 'index']);
 	$routes->connect('/criar', ['controller' => 'Users', 'action' => 'add']);

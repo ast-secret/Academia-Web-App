@@ -45,7 +45,7 @@ class ExercisesSuggestionsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('nome');
+            ->allowEmpty('name');
 
         $validator
             ->add('is_active', 'valid', ['rule' => 'numeric'])
