@@ -223,7 +223,7 @@
                     <span>
                         <input
                             autocomplete="off"
-                            data-autocomplete-url="<?= $this->Url->build(['controller' => 'ExercisesSuggestions','action' => 'index']) ?>"
+                            data-autocomplete-url="<?= $this->Url->build(['controller' => 'ExercisesSuggestions','action' => 'index', '_ext' => 'json']) ?>"
                             id="exercise"
                             type="text"
                             placeholder="Exercício"

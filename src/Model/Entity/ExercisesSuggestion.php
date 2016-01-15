@@ -28,4 +28,9 @@ class ExercisesSuggestion extends Entity
         '*' => true,
         'id' => false,
     ];
+
+    protected function _getLabel()
+    {
+        return $this->_properties['name'];
+    }
 }

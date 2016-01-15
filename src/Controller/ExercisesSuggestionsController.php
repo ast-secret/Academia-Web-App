@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+use Cake\Collection\Collection;
+
 /**
  * ExercisesSuggestions Controller
  *
@@ -18,8 +20,19 @@ class ExercisesSuggestionsController extends AppController
      */
     public function index()
     {
-        $this->set('exercisesSuggestions', $this->paginate($this->ExercisesSuggestions));
-        $this->set('_serialize', ['exercisesSuggestions']);
+        $q = str_replace(' ', '%', $this->request->query('term'));
+        $exercisesSuggestions = $this->ExercisesSuggestions->find('all', [
+            'conditions' => [
+                'name LIKE' => '%'.$q.'%',
+                'is_active' => true
+            ],
+            'limit' => '15'
+        ]);
+
+        $exercisesSuggestions = $exercisesSuggestions->extract('name');
+
+        echo json_encode($exercisesSuggestions);
+        $this->autoRender = false;
     }
 
     /**
